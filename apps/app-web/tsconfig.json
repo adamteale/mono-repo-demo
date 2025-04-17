@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@Presentation/*": ["../app-core/src/presentation/*"],
+      "@app-web/*": ["./*"],
+      "@app-core/*": ["../app-core/src/*"],
+      "@atomic-web/*": ["../../packages/atomic-web/*"],
+      "@atomic-core/*": ["../../packages/atomic-core/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "../app-core/src/**/*.tsx"
+  ],
+  "exclude": ["node_modules"]
+}

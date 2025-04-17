@@ -1,0 +1,11 @@
+{
+  "name": "@mono-repo-demo/app-core",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@mono-repo-demo/atomic-mobile": "1.0.0",
+    "@mono-repo-demo/atomic-web": "1.0.0",
+    "tslib": "^2.8.1",
+    "typescript": "^5.8.3"
+  }
+}

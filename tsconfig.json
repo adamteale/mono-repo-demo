@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "incremental": true,
+    "jsx": "react-jsx",
+    "lib": ["es2022", "dom"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "outDir": "dist",
+    "removeComments": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2022",
+    "baseUrl": ".",
+    "paths": {
+      "@app-web/*": ["apps/app-web/*"],
+      "@app-mobile/*": ["apps/app-mobile/*"],
+      "@app-core/*": ["apps/app-core/*"],
+      "@atomic-web/*": ["packages/atomic-web/*"],
+      "@atomic-mobile/*": ["packages/atomic-mobile/*"],
+      "@atomic-core/*": ["packages/atomic-core/*"]
+    }
+  },
+  "exclude": ["node_modules"],
+  "include": ["apps/**/*", "packages/**/*"]
+}

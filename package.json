@@ -1,0 +1,22 @@
+{
+  "name": "my-mono-repo",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "web:dev": "yarn workspace app-web dev",
+    "mobile:dev": "yarn workspace app-mobile start",
+    "build": "yarn workspaces run build",
+    "lint": "yarn workspaces run lint",
+    "test": "yarn workspaces run test"
+  },
+  "devDependencies": {
+    "lerna": "^8.0.0"
+  },
+  "resolutions": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  }
+}
