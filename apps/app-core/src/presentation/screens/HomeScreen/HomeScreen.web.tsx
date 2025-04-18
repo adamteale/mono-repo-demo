@@ -1,11 +1,8 @@
-import { AtButton } from "@mono-repo-demo/atomic-web";
 import React from "react";
 
-interface DemoScreenProps {
-  message: string;
-}
+import { AtButton } from "@mono-repo-demo/atomic-web";
 
-export const DemoScreen: React.FC<DemoScreenProps> = ({ message }) => {
+export const HomeScreen = ({ message }: DemoScreenProps) => {
   return (
     <div>
       <h1>Web Demo Screen</h1>

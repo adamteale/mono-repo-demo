@@ -10,7 +10,17 @@
     "baseUrl": ".",
     "paths": {
       "@app-core/*": ["./*"],
-      "@atomic-core/*": ["../../packages/atomic-core/*"]
+      "@atomic-core/*": ["../../packages/atomic-core/*"],
+      "@App/*": ["./src/*"],
+      "@Assets/*": ["./assets/*"],
+      "@Data/*": ["./src/data/*"],
+      "@Domain/*": ["./src/domain/*"],
+      "@Environment": ["./Environment"],
+      "@Network/*": ["src/data/network/*"],
+      "@Presentation/*": ["./src/presentation/*"],
+      "@Resources/*": ["src/resources/*"],
+      "@Storage/*": ["src/data/storage/*"],
+      "@Utils/*": ["src/utils/*"]
     },
     "jsx": "react"
   },

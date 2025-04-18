@@ -2483,7 +2483,7 @@
     invariant "^2.2.4"
     nullthrows "^1.1.1"
 
-"@react-navigation/bottom-tabs@^7.2.0":
+"@react-navigation/bottom-tabs@^7.2.0", "@react-navigation/bottom-tabs@^7.3.10":
   version "7.3.10"
   resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-7.3.10.tgz#19fa84d730d7040982edeba08542a37a50eb2a16"
   integrity sha512-qRCr7LHFpzEJFuG2Id9NNXT2GBgu+zZ7wK8UO0bRuaxXK1y6W09k6+fDcDUDR67tHIB4HvfHCj1VyeSEW8uorg==
@@ -4031,7 +4031,7 @@ axe-core@^4.10.0:
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.10.3.tgz#04145965ac7894faddbac30861e5d8f11bfd14fc"
   integrity sha512-Xm7bpRXnDSX2YE2YFfBk2FnF0ep6tmG7xPh8iHee8MIcrgq762Nkce856dYtJYLkuIoYZvGfTs/PbZhideTcEg==
 
-axios@^1.8.3:
+axios@^1.8.3, axios@^1.8.4:
   version "1.8.4"
   resolved "https://registry.yarnpkg.com/axios/-/axios-1.8.4.tgz#78990bb4bc63d2cae072952d374835950a82f447"
   integrity sha512-eBSYY4Y68NNlHbHBMdeDmKNtDgXWhQsJcGqzO3iLUM0GraQFSS9cVgPX5I9b3lbdFKyYoAEGAZF1DwhTaljNAw==

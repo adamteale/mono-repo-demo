@@ -1,16 +1,6 @@
-import { View } from "react-native";
-import { DemoScreen } from "@Presentation/DemoScreen/DemoScreen";
+import React from "react";
+import { AppNavigation } from "@Presentation/navigation/navigators/AppNavigation/AppNavigation";
 
 export default function Index() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <DemoScreen message="Hello from the mobile!" />
-    </View>
-  );
+  return <AppNavigation />;
 }
