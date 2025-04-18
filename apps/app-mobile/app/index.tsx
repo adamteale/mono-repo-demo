@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { DemoScreen } from "@Presentation/DemoScreen/DemoScreen";
 
 export default function Index() {

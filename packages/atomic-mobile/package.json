@@ -1,7 +1,6 @@
 {
   "name": "@mono-repo-demo/atomic-mobile",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
   "dependencies": {
     "@mono-repo-demo/atomic-core": "1.0.0",

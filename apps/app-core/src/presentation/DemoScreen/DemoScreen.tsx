@@ -1,3 +1,4 @@
+import { AtButton } from "@mono-repo-demo/atomic-mobile";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
@@ -10,6 +11,7 @@ export const DemoScreen: React.FC<DemoScreenProps> = ({ message }) => {
     <View style={styles.container}>
       <Text style={styles.text}>Mobile Demo Screen</Text>
       <Text>{message}</Text>
+      <AtButton onAction={() => console.log("onAction")} title="click" />
     </View>
   );
 };
