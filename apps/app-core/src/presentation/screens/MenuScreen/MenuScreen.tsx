@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 import { MenuScreenProps } from "./types";
-import { AtButton } from "@mono-repo-demo/atomic-mobile";
+import { AtButton } from "@mono-repo-demo/atomic-library";
 import { useMenuScreenViewModel } from "./useMenuScreenViewModel";
 
 export const MenuScreen = ({}: MenuScreenProps) => {

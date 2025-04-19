@@ -2,8 +2,8 @@ import React from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 
 import { useAuth } from "@Presentation/context/AuthContext";
-import { AtButton } from "@atomic-mobile/src";
-import { AtButtonVariant } from "@atomic-core/index";
+import { AtButton } from "@mono-repo-demo/atomic-library";
+import { AtButtonVariant } from "@atomic-library/src/atoms/AtButton/types";
 
 export default function LoginScreen() {
   const { login } = useAuth();

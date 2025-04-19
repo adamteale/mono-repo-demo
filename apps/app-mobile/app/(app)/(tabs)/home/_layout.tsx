@@ -4,10 +4,9 @@ import { Stack, useNavigation } from "expo-router";
 import { StatusBar, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-import { MlTextfield } from "@atomic-mobile/src";
-import { PriceSmartLogo } from "@atomic-mobile/assets";
-
 import getStyles from "./styles";
+import { PriceSmartLogo } from "@atomic-library/assets";
+import { MlTextfield } from "@atomic-library/index";
 
 export enum HomeRoutes {
   Home = "home",

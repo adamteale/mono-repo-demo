@@ -9,8 +9,8 @@ import {
   MlToast,
   OrCarousel,
   OrSection,
-} from "@mono-repo-demo/atomic-mobile";
-import FilterIcon from "@mono-repo-demo/atomic-mobile/assets/FilterIcon";
+} from "@mono-repo-demo/atomic-library";
+import FilterIcon from "@mono-repo-demo/atomic-library/assets/FilterIcon";
 
 import { useHomeViewModel } from "./useHomeViewModel";
 import { getStyles } from "./styles";

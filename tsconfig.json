@@ -22,9 +22,7 @@
       "@app-web/*": ["apps/app-web/*"],
       "@app-mobile/*": ["apps/app-mobile/*"],
       "@app-core/*": ["apps/app-core/*"],
-      "@atomic-web/*": ["packages/atomic-web/*"],
-      "@atomic-mobile/*": ["packages/atomic-mobile/*"],
-      "@atomic-core/*": ["packages/atomic-core/*"]
+      "@atomic-web/*": ["packages/atomic-web/*"]
     }
   },
   "exclude": ["node_modules"],

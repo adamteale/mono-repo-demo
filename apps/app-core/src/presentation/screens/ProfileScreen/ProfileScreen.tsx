@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 
-import { MlProfileCard, MlToast } from "@mono-repo-demo/atomic-mobile";
+import { MlProfileCard, MlToast } from "@mono-repo-demo/atomic-library";
 
 import { ProfileScreenProps } from "./types";
 

@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@mono-repo-demo/atomic-mobile": "1.0.0",
-    "@mono-repo-demo/atomic-web": "1.0.0",
-    "@react-navigation/bottom-tabs": "^7.3.10",
+    "@mono-repo-demo/atomic-library": "1.0.0",
     "axios": "^1.8.4",
     "react-native-gesture-handler": "~2.20.2",
     "react-native-reanimated": "~3.16.1",

@@ -7,8 +7,7 @@
       "@Presentation/*": ["../app-core/src/presentation/*"],
       "@app-mobile/*": ["./*"],
       "@app-core/*": ["../app-core/src/*"],
-      "@atomic-mobile/*": ["../../packages/atomic-mobile/*"],
-      "@atomic-core/*": ["../../packages/atomic-core/*"]
+      "@atomic-library/*": ["../../packages/atomic-library/*"]
     }
   },
   "include": [
@@ -16,7 +15,7 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    "../../packages/atomic-mobile/assets/**/*.tsx",
-    "../../packages/atomic-mobile/assets/**/*.ts"
+    "../../packages/atomic-library/assets/**/*.tsx",
+    "../../packages/atomic-library/assets/**/*.ts"
   ]
 }

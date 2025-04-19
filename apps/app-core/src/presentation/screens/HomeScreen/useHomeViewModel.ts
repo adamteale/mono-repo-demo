@@ -1,8 +1,8 @@
 import { Dimensions } from "react-native";
 
-import { MlProductCardProps } from "@mono-repo-demo/atomic-core";
+import { MlProductCardProps } from "@mono-repo-demo/atomic-library";
 import { useNavigationContext } from "../../context";
-import { MlBannerProps } from "@mono-repo-demo/atomic-mobile";
+import { MlBannerProps } from "@mono-repo-demo/atomic-library";
 
 const { width } = Dimensions.get("window");
 
