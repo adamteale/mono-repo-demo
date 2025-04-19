@@ -1,5 +1,6 @@
-import { MlProfileCardProps } from "@mono-repo-demo/atomic-library";
-import { Button, Dimensions, Image, Pressable, Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
+
+import { MlProfileCardProps } from "../";
 import { getStyles } from "./styles";
 import Barcode from "./Barcode";
 

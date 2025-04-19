@@ -1,5 +1,6 @@
 import { Text, View } from "react-native";
-import { MlToastProps } from "@mono-repo-demo/atomic-library";
+
+import { MlToastProps } from "../MlToast";
 
 import { getStyles } from "./styles";
 

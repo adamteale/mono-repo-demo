@@ -2,9 +2,8 @@ import React from "react";
 import { Linking, Pressable, Text, View } from "react-native";
 
 import { stylex } from "./styles";
-import { AtButton, AtImage } from "../../atoms";
+import { AtButton, AtImage, AtButtonVariant } from "../../atoms";
 import type { MlBannerProps } from "./types";
-import { AtButtonVariant } from "@mono-repo-demo/atomic-library";
 
 export const MlBanner = ({
   banner,

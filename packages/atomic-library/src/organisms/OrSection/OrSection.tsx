@@ -1,6 +1,7 @@
-import { OrSectionProps } from "@mono-repo-demo/atomic-library";
 import React from "react";
 import { View } from "react-native";
+
+import { OrSectionProps } from "../OrSection";
 
 export const OrSection = ({
   action,

@@ -10,7 +10,6 @@
     "baseUrl": ".",
     "paths": {
       "@app-core/*": ["./*"],
-      "@atomic-core/*": ["../../packages/atomic-core/*"],
       "@App/*": ["./src/*"],
       "@Assets/*": ["./assets/*"],
       "@Data/*": ["./src/data/*"],

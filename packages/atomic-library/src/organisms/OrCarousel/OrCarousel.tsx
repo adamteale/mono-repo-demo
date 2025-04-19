@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { Dimensions, FlatList, View } from "react-native";
 
-import { OrCarouselProps } from "@mono-repo-demo/atomic-library";
+import { OrCarouselProps } from "../OrCarousel";
 
 import { getStyles } from "./styles";
 

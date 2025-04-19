@@ -2,17 +2,20 @@ import React, { useEffect } from "react";
 import { ActivityIndicator, View } from "react-native";
 import { Slot, useRouter, useSegments } from "expo-router";
 
-import { NavigationProvider } from "@Presentation/context/NavigationContext";
-import { AuthProvider, useAuth } from "@Presentation/context/AuthContext";
+import styled, { ThemeProvider, useTheme } from "styled-components/native";
 
 import { useNavigationHandler } from "@app-mobile/src/presentation/navigation/useNavigationHandler";
+import { theme, ThemeType } from "@atomic-library/index";
+
+import { NavigationProvider } from "@Presentation/context/NavigationContext";
+import { AuthProvider, useAuth } from "@Presentation/context/AuthContext";
 
 // Main layout component
 function RootLayoutNav() {
   const { isLoggedIn } = useAuth();
   const router = useRouter();
   const segments = useSegments(); // Gets the current route segments
-
+  console.log;
   useEffect(() => {
     if (isLoggedIn === null) {
       return; // Still loading auth status
@@ -47,10 +50,12 @@ function RootLayoutNav() {
 
 export default function RootLayout() {
   return (
-    <NavigationProvider navigation={useNavigationHandler()}>
-      <AuthProvider>
-        <RootLayoutNav />
-      </AuthProvider>
-    </NavigationProvider>
+    <ThemeProvider theme={theme}>
+      <NavigationProvider navigation={useNavigationHandler()}>
+        <AuthProvider>
+          <RootLayoutNav />
+        </AuthProvider>
+      </NavigationProvider>
+    </ThemeProvider>
   );
 }

@@ -1,5 +1,6 @@
-import { MlProductCardProps } from "@mono-repo-demo/atomic-library";
 import { Image, Pressable, Text, View } from "react-native";
+
+import { MlProductCardProps } from "../..";
 import { getStyles } from "./styles";
 
 export const MlProductCard = ({
