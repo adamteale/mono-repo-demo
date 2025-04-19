@@ -9,21 +9,37 @@ import {
   MlToast,
   OrCarousel,
   OrSection,
+  ThemeType,
 } from "@mono-repo-demo/atomic-library";
 import FilterIcon from "@mono-repo-demo/atomic-library/assets/FilterIcon";
 
 import { useHomeViewModel } from "./useHomeViewModel";
 import { getStyles } from "./styles";
+import styled from "styled-components";
+import { useTheme as useStyledTheme } from "styled-components/native";
 
 const renderCarrouselBanner = ({ item }: { item: MlBannerProps }) => (
   <MlBanner {...item} />
 );
 
+const ResponsiveBox = styled.div<{ theme?: ThemeType }>`
+  width: 300px;
+  height: 150px;
+  background-color: red;
+  margin: 20px;
+
+  @media (max-width: 600px) {
+    background-color: blue;
+    width: 500px;
+  }
+`;
+
 export const HomeScreen = () => {
   const { bannerProps, onTapNavigateToProductDetail, productCard } =
     useHomeViewModel();
   const styles = getStyles();
-
+  const theme = useStyledTheme() as ThemeType;
+  console.log("theme", theme.breakpoints.desktop);
   const { bottom } = useSafeAreaInsets();
 
   return (
@@ -40,7 +56,12 @@ export const HomeScreen = () => {
         style={styles.scrollContainer}
         contentInset={{ bottom: bottom + 100 }}
       >
-        <OrSection>
+        <ResponsiveBox theme={theme} />
+        <View style={{ flex: 1, flexDirection: "row" }}>
+          <MlBanner {...bannerProps[0]} />
+          <MlBanner {...bannerProps[1]} />
+        </View>
+        {/* <OrSection>
           <OrCarousel<MlBannerProps>
             autoScroll={true}
             centerContent={false}
@@ -50,7 +71,7 @@ export const HomeScreen = () => {
             testID={`home.banner-carrousel`}
             renderItem={renderCarrouselBanner}
           />
-        </OrSection>
+        </OrSection> */}
         <MlProductCard {...productCard} />
         <MlProductCard {...productCard} />
         <MlProductCard {...productCard} />

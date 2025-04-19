@@ -1,11 +1,12 @@
 import React from "react";
 import { Image, Platform, StyleSheet, View } from "react-native";
-// Keep SvgUri import, but only use it conditionally for native
 import { SvgUri } from "react-native-svg";
+import styled, { useTheme } from "styled-components/native";
 
-import { AtImageProps, AtImageVariants } from "./types";
+import { AtImageProps, AtImageVariants } from "./types"; // Adjust path
+import { ThemeType } from "../../theme";
 
-// Helper function to determine if the source is a network URI object
+// --- Helper Function ---
 const isNetworkSource = (source: any): source is { uri: string } => {
   return (
     typeof source === "object" &&
@@ -14,176 +15,220 @@ const isNetworkSource = (source: any): source is { uri: string } => {
   );
 };
 
-export const AtImage = ({
+// --- Styled Components ---
+
+// Define props needed for styling the image/wrappers
+interface StyledImageVariantProps {
+  variant?: AtImageVariants;
+  theme: ThemeType;
+}
+
+// Helper function to get border radius styles from theme based on variant
+const getBorderRadiusStyles = ({ theme, variant }: StyledImageVariantProps) => {
+  const radii = theme.radii; // shorthand
+  switch (variant) {
+    case AtImageVariants.sharp:
+      return `border-radius: ${radii.sharp}px;`; // Add px for web
+    case AtImageVariants.allRounded:
+      return `border-radius: ${radii.rounded}px;`;
+    case AtImageVariants.circle:
+      return `border-radius: ${radii.circle}px;`;
+    case AtImageVariants.topRounded:
+      return `
+        border-top-left-radius: ${radii.rounded}px;
+        border-top-right-radius: ${radii.rounded}px;
+        border-bottom-left-radius: ${radii.sharp}px;
+        border-bottom-right-radius: ${radii.sharp}px;
+      `;
+    case AtImageVariants.bottomRounded:
+      return `
+        border-top-left-radius: ${radii.sharp}px;
+        border-top-right-radius: ${radii.sharp}px;
+        border-bottom-left-radius: ${radii.rounded}px;
+        border-bottom-right-radius: ${radii.rounded}px;
+      `;
+    default:
+      return `border-radius: ${radii.sharp}px;`; // Default to sharp
+  }
+};
+
+// Styled component for the regular Image
+// Needs variant and theme props for styling
+interface StyledImageProps extends StyledImageVariantProps {
+  // Inherits ImageProps implicitly via styled(Image)
+}
+const StyledImage = styled(Image)<StyledImageProps>`
+  ${(props) =>
+    getBorderRadiusStyles(
+      props
+    )}/* Add any other base styles for AtImage if needed */
+`;
+
+// Styled component for the native SVG wrapper View
+// Needs variant and theme props for styling
+interface StyledSvgWrapperProps extends StyledImageVariantProps {
+  // Inherits ViewProps implicitly
+}
+const StyledSvgWrapper = styled.View<StyledSvgWrapperProps>`
+  ${(props) => getBorderRadiusStyles(props)}
+  overflow: hidden; /* Important to clip the SVG */
+`;
+
+// Styled component for the web SVG (<img>) wrapper View/div
+// Needs variant and theme props for styling
+interface StyledWebSvgWrapperProps extends StyledImageVariantProps {
+  // Inherits ViewProps implicitly
+}
+const StyledWebSvgWrapper = styled.View<StyledWebSvgWrapperProps>`
+  ${(props) => getBorderRadiusStyles(props)}
+  overflow: hidden; /* Clip the img */
+  /* Ensure wrapper takes size from img or passed styles */
+  display: inline-block; /* Or block depending on layout needs */
+`;
+
+// Styled component for the disabled overlay
+// Now uses theme colors potentially
+const StyledDisabledOverlay = styled.View<{ theme: ThemeType }>`
+  background-color: ${({ theme }) =>
+    theme.colors.white ?? "#FFFFFF"}; /* Example theme usage */
+  opacity: 0.7; /* Could also come from theme.opacity.disabled */
+  justify-content: center;
+  align-items: center;
+  /* Use StyleSheet.absoluteFill equivalent */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+`;
+
+// --- Main Component ---
+
+export const AtImage: React.FC<AtImageProps> = ({
   alt,
   disabled = false,
-  imageContainerStyles = {},
-  imageStyles = {},
+  imageContainerStyles = {}, // Style for the outer container
+  style, // Renamed from imageStyles - applies to image/svg element
   isSvg = false,
-  onLoad, // Note: onLoad might not work reliably for web SVGs via <img>
-  resizeMode = "cover", // Note: resizeMode might not apply directly to web <img> SVGs
+  onLoad,
+  resizeMode = "cover",
   source,
   testID = "AtImage",
-  variant,
-}: AtImageProps) => {
+  variant = AtImageVariants.sharp, // Default variant
+  ...rest // Pass other ImageProps like accessibilityLabel etc.
+}) => {
+  const theme = useTheme() as ThemeType;
+
   if (!source) {
     return null;
   }
 
-  const variantStyles = variant ? getImageVariant(variant) : {};
-
-  // Combine variant styles and custom image styles
-  // Custom imageStyles will override variantStyles if properties conflict
-  const combinedImageStyles = StyleSheet.flatten([variantStyles, imageStyles]);
-
-  // --- SVG Rendering Logic ---
+  // --- SVG Rendering ---
   if (isSvg) {
     if (Platform.OS === "web") {
-      // WEB: Use standard HTML <img> tag for SVGs
-      // The bundler (Webpack/Metro) needs to be configured to handle SVG imports/paths
       let webSvgSrc: string | undefined;
       if (typeof source === "string") {
-        webSvgSrc = source; // Assume string is a direct path/URL
+        webSvgSrc = source;
       } else if (typeof source === "number") {
-        // For require('./image.svg') on web, let the bundler handle it.
-        // We pass the original require result.
-        // Need to cast as 'any' because TS might complain about assigning number to src
-        webSvgSrc = source as any;
+        webSvgSrc = source as any; // Let bundler handle require()
       } else if (isNetworkSource(source)) {
-        webSvgSrc = source.uri; // Use URI from network source
+        webSvgSrc = source.uri;
       }
 
       if (!webSvgSrc) {
         console.warn("Invalid source provided for web SVG:", source);
-        return null; // Or render a placeholder
+        return null;
       }
 
+      // Use the web wrapper for border radius
       return (
         <View testID={`${testID}.container`} style={imageContainerStyles}>
-          {/* RNW often allows using <Image> for SVGs too if configured,
-              but using <img> is more direct for web standard SVGs */}
-          <img
-            src={webSvgSrc}
-            alt={alt ?? ""}
-            // Apply combined styles directly for web <img>
-            // RNW might translate StyleSheet objects, or use inline styles
-            style={combinedImageStyles}
-            data-testid={`${testID}.image`} // Use data-testid for web standard
-            // Note: resizeMode and onLoad are less straightforward for web <img> SVGs
-          />
-          {disabled && (
-            <View
-              style={[StyleSheet.absoluteFill, overlayStyles.disabledOverlay]}
+          <StyledWebSvgWrapper variant={variant} theme={theme}>
+            {/* Apply passed 'style' prop to the img directly */}
+            <img
+              src={webSvgSrc}
+              alt={alt ?? ""}
+              style={StyleSheet.flatten(style) as React.CSSProperties} // Convert RN style for web if needed
+              data-testid={`${testID}.image`}
             />
-          )}
+          </StyledWebSvgWrapper>
+          {disabled && <StyledDisabledOverlay theme={theme} />}
         </View>
       );
     } else {
-      // NATIVE: Use SvgUri component
+      // NATIVE SVG
       let resolvedUri: string | undefined;
-      let resolvedWidth: number | undefined;
-      let resolvedHeight: number | undefined;
+      let resolvedWidth: number | string | undefined = "100%"; // Default size
+      let resolvedHeight: number | string | undefined = "100%";
 
       if (typeof source === "number") {
-        // Handle require('./image.svg') for native
         const resolvedAsset = Image.resolveAssetSource(source);
         resolvedUri = resolvedAsset?.uri;
         resolvedWidth = resolvedAsset?.width;
         resolvedHeight = resolvedAsset?.height;
       } else if (isNetworkSource(source)) {
-        // Handle { uri: '...' } for native
         resolvedUri = source.uri;
-        // We don't get width/height from network URIs automatically here
+        // Cannot resolve width/height from URI alone
       } else if (typeof source === "string") {
-        // If a plain string is passed on native for SVG, assume it's a URI
-        // This is less common than require() or {uri:...}
         resolvedUri = source;
       }
 
       if (!resolvedUri) {
         console.warn("Invalid source provided for native SVG:", source);
-        return null; // Or render a placeholder
+        return null;
       }
 
-      // Apply borderRadius styles to a wrapper View for native SVGs
-      // SvgUri itself doesn't support borderRadius directly via style prop
-      const wrapperStyles = {
-        ...variantStyles, // Apply borderRadius here
-        overflow: "hidden" as const, // Ensure content clips to border radius
-        width: combinedImageStyles.width ?? resolvedWidth, // Use dimensions from styles or resolved asset
-        height: combinedImageStyles.height ?? resolvedHeight,
-      };
+      // Extract layout styles from the passed 'style' prop to apply to wrapper if needed
+      const flattenedStyle = StyleSheet.flatten(style);
+      const {
+        width: styleWidth,
+        height: styleHeight,
+        ...restImageStyles
+      } = flattenedStyle || {};
+
+      // Prioritize explicit style dimensions, then resolved, then default
+      const finalWidth = styleWidth ?? resolvedWidth;
+      const finalHeight = styleHeight ?? resolvedHeight;
 
       return (
         <View testID={`${testID}.container`} style={imageContainerStyles}>
-          <View style={wrapperStyles}>
+          {/* Use the native wrapper for border radius */}
+          <StyledSvgWrapper
+            variant={variant}
+            theme={theme}
+            style={{ width: finalWidth, height: finalHeight }} // Apply dimensions to wrapper
+          >
             <SvgUri
               uri={resolvedUri}
-              // Apply explicit width/height, prioritize style prop, then resolved, then maybe 100%
-              width={combinedImageStyles.width ?? resolvedWidth ?? "100%"}
-              height={combinedImageStyles.height ?? resolvedHeight ?? "100%"}
-              // Pass other non-layout styles from imageStyles if needed, SvgUri style prop is limited
-              style={StyleSheet.flatten([imageStyles, { flex: 1 }])} // Ensure SVG fills wrapper if using %
+              width="100%" // SVG fills the sized wrapper
+              height="100%"
+              style={restImageStyles} // Apply non-layout styles to SvgUri
               aria-label={alt ?? ""}
-              testID={`${testID}.image`} // testID should work on SvgUri
-              // Consider if onLoad makes sense/works for SvgUri
+              testID={`${testID}.image`}
             />
-          </View>
-          {disabled && (
-            <View
-              style={[StyleSheet.absoluteFill, overlayStyles.disabledOverlay]}
-            />
-          )}
+          </StyledSvgWrapper>
+          {disabled && <StyledDisabledOverlay theme={theme} />}
         </View>
       );
     }
   } else {
-    // --- Regular Image Rendering Logic (Non-SVG) ---
+    // --- Regular Image Rendering ---
     return (
       <View testID={`${testID}.container`} style={imageContainerStyles}>
-        <Image
-          source={source} // Use the original source prop directly
-          style={combinedImageStyles} // Apply combined styles
+        <StyledImage
+          source={source}
+          variant={variant}
+          theme={theme}
+          style={style} // Pass the main style prop here
           alt={alt ?? ""} // alt prop works on web
           testID={`${testID}.image`}
           resizeMode={resizeMode}
           onLoad={onLoad}
-          accessibilityLabel={alt} // Use accessibilityLabel for native
+          accessibilityLabel={alt ?? ""} // Use accessibilityLabel for native
+          {...rest} // Pass other ImageProps
         />
-        {disabled && (
-          <View
-            style={[StyleSheet.absoluteFill, overlayStyles.disabledOverlay]}
-          />
-        )}
+        {disabled && <StyledDisabledOverlay theme={theme} />}
       </View>
     );
   }
 };
-
-// --- Helper Functions and Styles (Unchanged) ---
-
-const getImageVariant = (variant: AtImageVariants) => {
-  const availableVariants = {
-    sharp: { borderRadius: 0 },
-    allRounded: { borderRadius: 4 },
-    topRounded: { borderTopLeftRadius: 4, borderTopRightRadius: 4 },
-    bottomRounded: { borderBottomLeftRadius: 4, borderBottomRightRadius: 4 },
-    circle: { borderRadius: 10000 }, // Large value for circle effect
-  };
-
-  return availableVariants[variant] || {}; // Return empty object if variant not found
-};
-
-const overlayStyles = StyleSheet.create({
-  disabledOverlay: {
-    backgroundColor: "#FFFFFF",
-    opacity: 0.7,
-    justifyContent: "center",
-    alignItems: "center",
-    // Ensure the overlay respects the container's border radius if needed
-    // Note: This might require passing the borderRadius from combinedImageStyles
-    //       or applying it directly if the overlay *always* matches the image shape.
-    //       For simplicity, leaving it as a full overlay for now. Consider:
-    // borderRadius: combinedImageStyles.borderRadius // If overlay should match image shape
-  },
-});

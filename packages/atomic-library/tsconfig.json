@@ -11,6 +11,6 @@
     "baseUrl": ".",
     "paths": {}
   },
-  "include": ["src"],
+  "include": ["src", "./src/theme/styled.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

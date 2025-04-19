@@ -23,6 +23,6 @@
     },
     "jsx": "react"
   },
-  "include": ["src"],
+  "include": ["src", "../../packages/src/theme/styled.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

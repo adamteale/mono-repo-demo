@@ -1,5 +1,6 @@
 import {
   ImageLoadEventData,
+  ImageProps,
   ImageResizeMode,
   ImageSourcePropType,
   ImageStyle,
@@ -26,18 +27,21 @@ export type AtImageVariantsDefinition = {
   };
 };
 
-// Some properties are incompatible bewteen platforms, for example 'resizeMode', or most of them when using vector files (.svg)
-// if some property seems to not be working as intended refer to docs to verificate this
-// https://reactnative.dev/docs/image
-export interface AtImageProps {
+export interface AtImageProps
+  extends Omit<ImageProps, "source" | "style" | "resizeMode"> {
+  // Source can be complex, keep it separate for clarity
+  source: ImageProps["source"];
+  resizeMode?: ImageProps["resizeMode"];
+
   alt?: string;
   disabled?: boolean;
-  imageContainerStyles?: StyleProp<ViewStyle>;
-  imageStyles?: StyleProp<ImageStyle>;
   isSvg?: boolean;
-  resizeMode?: ImageResizeMode;
-  source: ImageSourcePropType;
+  variant?: AtImageVariants; // Use the enum/string literal union
+
+  // Style for the main container View
+  imageContainerStyles?: StyleProp<ViewStyle>;
+  // Style specifically for the Image/SVG element itself
+  style?: StyleProp<ImageStyle>; // Use ImageStyle here
+
   testID?: string;
-  variant?: AtImageVariants;
-  onLoad?: (event: NativeSyntheticEvent<ImageLoadEventData>) => void;
 }

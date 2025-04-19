@@ -6,7 +6,10 @@
     "esModuleInterop": true,
     "incremental": true,
     "jsx": "react-jsx",
-    "lib": ["es2022", "dom"],
+    "lib": [
+      "es2022",
+      "dom"
+    ],
     "module": "esnext",
     "moduleResolution": "node",
     "noImplicitAny": false,
@@ -19,12 +22,26 @@
     "target": "es2022",
     "baseUrl": ".",
     "paths": {
-      "@app-web/*": ["apps/app-web/*"],
-      "@app-mobile/*": ["apps/app-mobile/*"],
-      "@app-core/*": ["apps/app-core/*"],
-      "@atomic-web/*": ["packages/atomic-web/*"]
+      "@app-web/*": [
+        "apps/app-web/*"
+      ],
+      "@app-mobile/*": [
+        "apps/app-mobile/*"
+      ],
+      "@app-core/*": [
+        "apps/app-core/*"
+      ],
+      "@atomic-web/*": [
+        "packages/atomic-web/*"
+      ]
     }
   },
-  "exclude": ["node_modules"],
-  "include": ["apps/**/*", "packages/**/*"]
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "apps/**/*",
+    "packages/**/*"
+  ],
+  "extends": "expo/tsconfig.base"
 }

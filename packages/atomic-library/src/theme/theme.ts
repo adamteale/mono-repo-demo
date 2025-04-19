@@ -4,6 +4,13 @@ type ButtonVariantStyles<T> = Record<AtButtonVariant, T>;
 type VariantOrDefault<T> = Partial<Record<AtButtonVariant, T>> & { default: T };
 
 export interface ThemeType {
+  breakpoints: {
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+    desktop: string;
+  };
   colors: {
     button: ButtonVariantStyles<{
       background: string;
@@ -13,19 +20,41 @@ export interface ThemeType {
     white: string;
     primaryBlue: string;
     ctaOrange: string;
+    banner: {
+      background: string;
+      text: string;
+    };
   };
   // Use VariantOrDefault helper type
-  buttonBorderWidths: VariantOrDefault<number>;
+  buttonBorderWidths: VariantOrDefault<string | number>;
   buttonRadii: VariantOrDefault<number>;
   fontSizes: {
-    button: number;
+    button: number | string;
+    h3: number | string;
+    body: number | string;
   };
   fontWeights: {
     bold: string; // Or 'bold' | 'normal' | number
   };
+  radii: {
+    sharp: number;
+    rounded: number;
+    circle: number;
+  };
+  spacing: {
+    sm: number;
+    md: number;
+  };
 }
 
 export const theme: ThemeType = {
+  breakpoints: {
+    sm: "576px",
+    md: "768px",
+    lg: "992px",
+    xl: "1200px",
+    desktop: "1000px",
+  },
   colors: {
     button: {
       [AtButtonVariant.primary]: {
@@ -44,12 +73,16 @@ export const theme: ThemeType = {
         border: "#EE4124",
       },
     },
+    banner: {
+      background: "#F0F5FE",
+      text: "#182958",
+    },
     white: "#FFFFFF",
     primaryBlue: "#24386E",
     ctaOrange: "#EE4124",
   },
   buttonBorderWidths: {
-    [AtButtonVariant.primary]: 2,
+    [AtButtonVariant.primary]: "2px",
     default: 0,
   },
   buttonRadii: {
@@ -57,9 +90,20 @@ export const theme: ThemeType = {
     default: 0,
   },
   fontSizes: {
-    button: 20,
+    button: "20px",
+    h3: 28,
+    body: 20,
   },
   fontWeights: {
     bold: "bold",
+  },
+  radii: {
+    sharp: 0,
+    rounded: 4,
+    circle: 10000,
+  },
+  spacing: {
+    sm: 8,
+    md: 20,
   },
 };

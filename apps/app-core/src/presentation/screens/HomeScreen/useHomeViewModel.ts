@@ -35,8 +35,19 @@ export const useHomeViewModel = () => {
         source: {
           uri: "https://pricesmart.bloomreach.io/cdn-cgi/image/fit=scale-down,width=1920,height=900,quality=90,format=webp/https://pricesmart.bloomreach.io/delivery/resources/content/gallery/pricesmart/homepage/fy25/apr-2025/ciclob/pf-2447-wc-april-hp3-ciclo-b.jpg",
         },
-        imageStyles: { width: width, height: (width / 960) * 480 },
         resizeMode: "contain",
+        // imageContainerStyles: {
+        //   width: width,
+        //   height: (width / 960) * 480,
+        // },
+        imageContainerStyles: {
+          width: "100%",
+          height: "100%",
+        },
+        style: {
+          width: "100%",
+          height: "100%",
+        },
       },
       title: "Quality for your pet",
       description: "Find food and accesories your pet will love",
@@ -47,8 +58,15 @@ export const useHomeViewModel = () => {
         source: {
           uri: "https://pricesmart.bloomreach.io/cdn-cgi/image/fit=scale-down,width=1920,height=900,quality=90,format=webp/https://pricesmart.bloomreach.io/delivery/resources/content/gallery/pricesmart/homepage/fy25/apr-2025/ciclob/slidera_7apr25.jpg",
         },
-        imageStyles: { width: width, height: (width / 960) * 480 },
         resizeMode: "contain",
+        // imageContainerStyles: {
+        //   width: width,
+        //   height: (width / 960) * 480,
+        // },
+        style: {
+          width: "100%",
+          height: "100%",
+        },
       },
       title: "Have you seen what's new?",
       description: "You'll love it",

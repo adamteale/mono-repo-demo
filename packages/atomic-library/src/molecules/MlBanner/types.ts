@@ -5,6 +5,7 @@ import { AtImageProps } from "src/atoms/AtImage/types";
 export type MlBannerProps = {
   banner: AtImageProps;
   ctaText: string;
+  disabled?: boolean;
   deeplink?: string;
   description: string;
   height?: DimensionValue;

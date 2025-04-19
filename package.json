@@ -13,10 +13,12 @@
     "test": "yarn workspaces run test"
   },
   "devDependencies": {
+    "babel-plugin-styled-components": "^2.1.4",
     "lerna": "^8.0.0"
   },
   "resolutions": {
     "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react-dom": "18.3.1",
+    "styled-components": "^5"
   }
 }
