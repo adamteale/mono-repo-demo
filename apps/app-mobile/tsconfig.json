@@ -11,5 +11,12 @@
       "@atomic-core/*": ["../../packages/atomic-core/*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts",
+    "../../packages/atomic-mobile/assets/**/*.tsx",
+    "../../packages/atomic-mobile/assets/**/*.ts"
+  ]
 }

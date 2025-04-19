@@ -1,35 +1,60 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView, Text, SafeAreaView } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { AtButton } from "@mono-repo-demo/atomic-mobile";
+import {
+  MlBanner,
+  MlBannerProps,
+  MlProductCard,
+  MlToast,
+  OrCarousel,
+  OrSection,
+} from "@mono-repo-demo/atomic-mobile";
+import FilterIcon from "@mono-repo-demo/atomic-mobile/assets/FilterIcon";
+
 import { useHomeViewModel } from "./useHomeViewModel";
+import { getStyles } from "./styles";
 
-export const HomeScreen = ({ message }: DemoScreenProps) => {
-  const { onTapNavigateToProductDetail } = useHomeViewModel();
+const renderCarrouselBanner = ({ item }: { item: MlBannerProps }) => (
+  <MlBanner {...item} />
+);
+
+export const HomeScreen = () => {
+  const { bannerProps, onTapNavigateToProductDetail, productCard } =
+    useHomeViewModel();
+  const styles = getStyles();
+
+  const { bottom } = useSafeAreaInsets();
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Home Screen</Text>
-      <Text>{message}</Text>
-      <AtButton
-        onAction={() => {
-          console.log("onAction");
-          onTapNavigateToProductDetail();
-        }}
-        title="click"
-      />
-    </View>
+    <SafeAreaView style={styles.safeArea}>
+      <MlToast title="📍 Pickup at Club Zapote" />
+      {/* <View style={styles.breadcrumbSection}>
+        <Text>Pricesmart / donuts</Text>
+      </View> */}
+      {/* <View style={styles.filterSection}>
+        <FilterIcon size={40} />
+      </View> */}
+      <ScrollView
+        contentContainerStyle={styles.scrollContentContainer}
+        style={styles.scrollContainer}
+        contentInset={{ bottom: bottom + 100 }}
+      >
+        <OrSection>
+          <OrCarousel<MlBannerProps>
+            autoScroll={true}
+            centerContent={false}
+            data={bannerProps}
+            sideSpaces={0}
+            spacingBetween={0}
+            testID={`home.banner-carrousel`}
+            renderItem={renderCarrouselBanner}
+          />
+        </OrSection>
+        <MlProductCard {...productCard} />
+        <MlProductCard {...productCard} />
+        <MlProductCard {...productCard} />
+      </ScrollView>
+    </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  text: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-});

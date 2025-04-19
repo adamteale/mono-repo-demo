@@ -12,6 +12,10 @@
       "@atomic-core/*": ["./*"]
     }
   },
-  "include": ["src"],
+  "include": [
+    "src",
+    "../atomic-mobile/src/atoms/AtImage/types.ts",
+    "../atomic-mobile/src/atoms/AtImage"
+  ],
   "exclude": ["node_modules", "dist"]
 }

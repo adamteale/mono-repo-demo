@@ -2,7 +2,6 @@
   "name": "@mono-repo-demo/atomic-core",
   "type": "module",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.3",

@@ -1,11 +1,15 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { Text, SafeAreaView, View } from "react-native";
 import { ProductDetailScreenProps } from "./types";
+import { getStyles } from "./styles";
 
-export const ProductDetailScreen = ({}: ProductDetailScreenProps) => {
+export const ProductDetailScreen = ({ id }: ProductDetailScreenProps) => {
+  const styles = getStyles();
   return (
-    <View>
-      <Text>Product Detail Screen</Text>
-    </View>
+    <SafeAreaView>
+      <View style={styles.container}>
+        <Text>{`Product Detail Screen: ${id}`}</Text>
+      </View>
+    </SafeAreaView>
   );
 };

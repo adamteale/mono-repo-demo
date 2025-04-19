@@ -1,6 +1,6 @@
 import React from "react";
 
-import { AtButtonProps } from "@atomic-core/index";
+import { AtButtonProps } from "@mono-repo-demo/atomic-core";
 
 export const AtButton = ({ title, onAction }: AtButtonProps) => {
   console.log("AtButton", title, onAction);

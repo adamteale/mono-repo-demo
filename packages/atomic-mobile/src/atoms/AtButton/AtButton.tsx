@@ -1,7 +1,18 @@
-import { Button } from "react-native";
+import { Button, Pressable, Text } from "react-native";
 
-import { AtButtonProps } from "@atomic-core/index";
+import { AtButtonProps, AtButtonVariant } from "@mono-repo-demo/atomic-core";
+import { getStyles } from "./styles";
 
-export const AtButton = ({ title, onAction }: AtButtonProps) => {
-  return <Button title={title} onPress={onAction} />;
+export const AtButton = ({
+  compact = false,
+  title,
+  onAction,
+  variant = AtButtonVariant.primary,
+}: AtButtonProps) => {
+  const styles = getStyles(variant, compact);
+  return (
+    <Pressable onPress={onAction} style={styles.container}>
+      <Text style={styles.title}>{title}</Text>
+    </Pressable>
+  );
 };

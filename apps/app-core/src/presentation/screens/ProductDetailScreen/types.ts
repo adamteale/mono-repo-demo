@@ -1,1 +1,3 @@
-export interface ProductDetailScreenProps {}
+export type ProductDetailScreenProps = {
+  id: string;
+};

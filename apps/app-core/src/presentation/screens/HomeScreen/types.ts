@@ -1,3 +1,3 @@
-interface DemoScreenProps {
+export interface DemoScreenProps {
   message: string;
 }

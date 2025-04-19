@@ -9,10 +9,7 @@
     "strict": true,
     "jsx": "react-native",
     "baseUrl": ".",
-    "paths": {
-      "@atomic-mobile/*": ["./*"],
-      "@atomic-core/*": ["../atomic-core/*"]
-    }
+    "paths": {}
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
