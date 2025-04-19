@@ -12,7 +12,7 @@ export default function getStyles() {
       alignItems: "center",
       justifyContent: "space-between",
       height: top + 60,
-      paddingTop: top,
+      paddingTop: top + 10,
       gap: 8,
     },
     headerTitle: {
