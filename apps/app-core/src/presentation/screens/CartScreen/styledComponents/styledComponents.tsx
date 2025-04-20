@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 
 import { StyleAStyles, StyleBStyles, StyleCStyles } from "./styles";
 
-const StyledA = styled.View`
+const StyledContainerExample = styled.View`
   ${StyleAStyles}
 `;
 
@@ -14,4 +14,4 @@ const StyledC = styled.View`
   ${StyleCStyles}
 `;
 
-export { StyledA, StyledB, StyledC };
+export { StyledContainerExample, StyledB, StyledC };

@@ -13,6 +13,7 @@ import { StyledPressableProps } from "./types";
 const StyledPressable = styled.div<StyledPressableProps>`
   ${StyledPressableStyles}
 `;
+
 const StyledImageWrapper = styled.div`
   ${StyledImageWrapperStyles}
 `;
@@ -20,9 +21,11 @@ const StyledImageWrapper = styled.div`
 const StyledDetailContainer = styled.div`
   ${StyledDetailContainerStyles}
 `;
+
 const StyledTitle = styled.span`
   ${StyledTitleStyles}
 `;
+
 const StyledDescription = styled.span`
   ${StyledDescriptionStyles}
 `;

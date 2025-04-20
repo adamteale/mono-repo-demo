@@ -47,7 +47,7 @@ export const HomeScreen = () => {
         contentInset={{ bottom: bottom + 100 }}
       >
         <MlBanner {...bannerProps[0]} />
-        <OrSection>
+        {/* <OrSection>
           <OrCarousel<MlBannerProps>
             autoScroll={true}
             centerContent={false}
@@ -57,7 +57,7 @@ export const HomeScreen = () => {
             testID={`home.banner-carrousel`}
             renderItem={({ item }) => <MlBanner {...item} />}
           />
-        </OrSection>
+        </OrSection> */}
         {/* <MlProductCard {...productCard} />
         <MlProductCard {...productCard} />
         <MlProductCard {...productCard} /> */}

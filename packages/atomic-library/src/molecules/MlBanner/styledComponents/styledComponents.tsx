@@ -13,6 +13,7 @@ import { StyledPressableProps } from "./types";
 const StyledPressable = styled.View<StyledPressableProps>`
   ${StyledPressableStyles}
 `;
+
 const StyledImageWrapper = styled.View`
   ${StyledImageWrapperStyles}
 `;
@@ -20,10 +21,12 @@ const StyledImageWrapper = styled.View`
 const StyledDetailContainer = styled.View`
   ${StyledDetailContainerStyles}
 `;
+
 const StyledTitle = styled.Text`
   ${StyledTitleStyles}
 `;
-const StyledDescription = styled.View`
+
+const StyledDescription = styled.Text`
   ${StyledDescriptionStyles}
 `;
 

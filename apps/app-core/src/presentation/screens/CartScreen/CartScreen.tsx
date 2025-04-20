@@ -1,17 +1,22 @@
 import React from "react";
-import { View } from "react-native";
+import { SafeAreaView, View } from "react-native";
 
 import { CartScreenProps } from "./types";
 
-import { StyledA, StyledB, StyledC } from "./styledComponents";
+import { StyledContainerExample, StyledB, StyledC } from "./styledComponents";
+import { useTheme } from "styled-components/native";
 
-export const CartScreen = ({}: CartScreenProps) => {
+import { ThemeType } from "@mono-repo-demo/atomic-library";
+
+export const CartScreen = () => {
+  const theme = useTheme() as ThemeType;
+
   return (
-    <View style={{ width: "100%" }}>
-      <StyledA>
-        <StyledB />
-        <StyledC />
-      </StyledA>
-    </View>
+    <SafeAreaView style={{ width: "100%" }}>
+      <StyledContainerExample theme={theme}>
+        <StyledB theme={theme} />
+        <StyledC theme={theme} />
+      </StyledContainerExample>
+    </SafeAreaView>
   );
 };

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { StyleAStyles, StyleBStyles, StyleCStyles } from "./styles";
 
-const StyledA = styled.div`
+const StyledContainerExample = styled.div`
   ${StyleAStyles}
 `;
 
@@ -14,4 +14,4 @@ const StyledC = styled.div`
   ${StyleCStyles}
 `;
 
-export { StyledA, StyledB, StyledC };
+export { StyledContainerExample, StyledB, StyledC };

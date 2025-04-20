@@ -39,12 +39,8 @@ export default function TabLayout() {
         tabBarShowLabel: false,
         tabBarStyle: {},
         tabBarIconStyle: {
-          height: 50,
+          height: 40,
           width: 50,
-        },
-        tabBarItemStyle: {
-          paddingTop: 4,
-          paddingBottom: 0,
         },
       })}
     >

@@ -1,5 +1,5 @@
 import React from "react";
-import { Linking } from "react-native";
+import { Linking, Text } from "react-native";
 
 import { useTheme } from "styled-components/native";
 

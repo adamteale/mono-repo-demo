@@ -7,13 +7,14 @@ import {
   StyledPressableProps,
 } from "./types";
 
+// @media only effects web
 const StyledPressableStyles = css<StyledPressableProps>`
   display: flex;
-  flex-direction: row; /* Default to row */
+  flex-direction: column;
   overflow: hidden;
 
-  @media (max-width: 1023px) {
-    flex-direction: column;
+  @media (min-width: 1023px) {
+    flex-direction: row;
   }
 `;
 
@@ -41,7 +42,8 @@ const StyledImageWrapperStyles = css<StyledImageWrapperProps>`
 `;
 
 const StyledDetailContainerStyles = css<StyledDetailContainerProps>`
-  background-color: #f0f5fe;
+  background-color: ${({ theme }) =>
+    theme.colors.background.secondary ?? "#F0F5FE"};
   color: white;
   height: 100%;
   display: flex;
@@ -70,14 +72,15 @@ const StyledDetailContainerStyles = css<StyledDetailContainerProps>`
 
 const StyledTitleStyles = css<{ theme: ThemeType }>`
   font-size: ${({ theme }) => theme.fontSizes.h3}px;
+  font-family: "Arial";
   font-weight: ${({ theme }) => theme.fontWeights.bold};
-  color: ${({ theme }) =>
-    theme.colors.banner.text ?? "#FFFFFF"}; /* Default white */
+  color: ${({ theme }) => theme.colors.text.primary ?? "#FFFFFF"};
 `;
 
 const StyledDescriptionStyles = css<{ theme: ThemeType }>`
-  font-size: ${({ theme }) => theme.fontSizes.body}px;
-  color: ${({ theme }) => theme.colors.banner.text ?? "#FFFFFF"};
+  font-family: "Arial";
+  font-size: ${({ theme }) => theme.fontSizes.body};
+  color: ${({ theme }) => theme.colors.text.primary ?? "#FFFFFF"};
 `;
 
 export {

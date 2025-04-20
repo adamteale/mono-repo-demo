@@ -20,14 +20,20 @@ export interface ThemeType {
     white: string;
     primaryBlue: string;
     ctaOrange: string;
-    banner: {
-      background: string;
-      text: string;
+    text: {
+      primary: string;
+      secondary: string;
+    };
+    background: {
+      primary: string;
+      secondary: string;
+      tertiary: string;
     };
   };
   // Use VariantOrDefault helper type
   buttonBorderWidths: VariantOrDefault<string | number>;
   buttonRadii: VariantOrDefault<number>;
+  fontFamily: string;
   fontSizes: {
     button: number | string;
     h3: number | string;
@@ -56,6 +62,11 @@ export const theme: ThemeType = {
     desktop: "1000px",
   },
   colors: {
+    background: {
+      primary: "#182958",
+      secondary: "#f0f5fe",
+      tertiary: "#2B3859",
+    },
     button: {
       [AtButtonVariant.primary]: {
         background: "#24386E",
@@ -73,9 +84,9 @@ export const theme: ThemeType = {
         border: "#EE4124",
       },
     },
-    banner: {
-      background: "#F0F5FE",
-      text: "#182958",
+    text: {
+      primary: "#182958",
+      secondary: "#FFFFFF",
     },
     white: "#FFFFFF",
     primaryBlue: "#24386E",
@@ -89,6 +100,7 @@ export const theme: ThemeType = {
     [AtButtonVariant.cta]: 8,
     default: 0,
   },
+  fontFamily: "Arial",
   fontSizes: {
     button: "20px",
     h3: 28,

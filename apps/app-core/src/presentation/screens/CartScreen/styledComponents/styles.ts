@@ -1,18 +1,18 @@
 import { css } from "styled-components";
+import { ThemeType } from "@mono-repo-demo/atomic-library";
 
-const StyleAStyles = css`
+const StyleAStyles = css<{ theme: ThemeType }>`
   display: flex;
   flex-direction: row;
   width: 100%;
-  background-color: rgb(175, 50, 50);
 
   @media (max-width: 1023px) {
     flex-direction: column;
   }
 `;
 
-const StyleBStyles = css`
-  background-color: rgb(37, 162, 166);
+const StyleBStyles = css<{ theme: ThemeType }>`
+  background-color: ${({ theme }) => theme.colors.background.primary};
   height: 400px;
   min-width: 0;
 
@@ -22,12 +22,11 @@ const StyleBStyles = css`
     width: 100%;
     max-width: none;
     flex-basis: auto;
-    background-color: #4f4f4f;
   }
 `;
 
-const StyleCStyles = css`
-  background-color: #010101;
+const StyleCStyles = css<{ theme: ThemeType }>`
+  background-color: ${({ theme }) => theme.colors.background.tertiary};
   height: 400px;
 
   flex: 1 1 0%;
