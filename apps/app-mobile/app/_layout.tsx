@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { ActivityIndicator, View } from "react-native";
 import { Slot, useRouter, useSegments } from "expo-router";
 
-import styled, { ThemeProvider, useTheme } from "styled-components/native";
+import { ThemeProvider } from "styled-components/native";
 
 import { useNavigationHandler } from "@app-mobile/src/presentation/navigation/useNavigationHandler";
 import { theme, ThemeType } from "@atomic-library/index";

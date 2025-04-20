@@ -21,13 +21,19 @@
       "@app-core/*": ["../app-core/src/*"],
       "@atomic-web/*": ["../../packages/atomic-web/*"],
       "@atomic-core/*": ["../../packages/atomic-core/*"]
-    }
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
-    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "../app-core/src/**/*.tsx"
+    "../app-core/src/**/*.tsx",
+    "next-env.d.ts",
+    ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }

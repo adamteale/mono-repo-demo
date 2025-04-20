@@ -15,7 +15,7 @@ export const LoginScreen = () => {
   const { login } = useAuth();
   const styles = getStyles();
   const theme = useTheme() as ThemeType;
-  console.log("theme", theme.breakpoints.sm);
+
   return (
     <View style={styles.container}>
       <StyledLoginContainer theme={theme}>
