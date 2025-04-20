@@ -7,8 +7,8 @@ const LoginContainerStyles = css<{ theme: ThemeType }>`
   width: 100%;
 
   // @media only effects web
-  @media (min-width: 600px) {
-    max-width: 600px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    max-width: 576px;
   }
 `;
 

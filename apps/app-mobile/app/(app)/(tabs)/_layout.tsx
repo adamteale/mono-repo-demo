@@ -1,6 +1,8 @@
 import React from "react";
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { Platform, useWindowDimensions } from "react-native";
+import { theme } from "@atomic-library/src";
 
 enum MainTabbarRoutes {
   Cart = "cart",
@@ -11,12 +13,14 @@ enum MainTabbarRoutes {
 
 export default function TabLayout() {
   const iconSize = 40;
+  const { width } = useWindowDimensions();
+  const isLargeScreen = width >= theme.breakpoints.lg;
 
   return (
     <Tabs
       screenOptions={({ route }) => ({
-        headerShown: true, // Show headers for tab screens
-        tabBarIcon: ({ focused, color, size }) => {
+        headerShown: true,
+        tabBarIcon: ({ color }) => {
           let iconName: string | undefined;
           switch (route.name) {
             case MainTabbarRoutes.Home:
@@ -37,7 +41,9 @@ export default function TabLayout() {
         tabBarActiveTintColor: "blue",
         tabBarInactiveTintColor: "gray",
         tabBarShowLabel: false,
-        tabBarStyle: {},
+        tabBarStyle: {
+          display: Platform.OS === "web" && isLargeScreen ? "none" : "flex",
+        },
         tabBarIconStyle: {
           height: 40,
           width: 50,

@@ -5,11 +5,10 @@ type VariantOrDefault<T> = Partial<Record<AtButtonVariant, T>> & { default: T };
 
 export interface ThemeType {
   breakpoints: {
-    sm: string;
-    md: string;
-    lg: string;
-    xl: string;
-    desktop: string;
+    sm: number;
+    md: number;
+    lg: number;
+    xl: number;
   };
   colors: {
     button: ButtonVariantStyles<{
@@ -55,11 +54,10 @@ export interface ThemeType {
 
 export const theme: ThemeType = {
   breakpoints: {
-    sm: "576px",
-    md: "768px",
-    lg: "992px",
-    xl: "1200px",
-    desktop: "1000px",
+    sm: 576,
+    md: 768,
+    lg: 992,
+    xl: 1024,
   },
   colors: {
     background: {

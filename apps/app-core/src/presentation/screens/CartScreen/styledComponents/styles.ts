@@ -6,7 +6,7 @@ const StyleAStyles = css<{ theme: ThemeType }>`
   flex-direction: row;
   width: 100%;
 
-  @media (max-width: 1023px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}px) {
     flex-direction: column;
   }
 `;
@@ -18,7 +18,7 @@ const StyleBStyles = css<{ theme: ThemeType }>`
 
   flex: 1 1 0%;
 
-  @media (max-width: 1023px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}px) {
     width: 100%;
     max-width: none;
     flex-basis: auto;
@@ -32,7 +32,7 @@ const StyleCStyles = css<{ theme: ThemeType }>`
   flex: 1 1 0%;
   max-width: 960px;
 
-  @media (max-width: 1023px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}px) {
     width: 100%;
     flex-basis: auto;
   }

@@ -13,7 +13,7 @@ const StyledPressableStyles = css<StyledPressableProps>`
   flex-direction: column;
   overflow: hidden;
 
-  @media (min-width: 1023px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.xl}px) {
     flex-direction: row;
   }
 `;
@@ -26,7 +26,7 @@ const StyledImageWrapperStyles = css<StyledImageWrapperProps>`
   flex: 1 1 auto;
   order: 2;
 
-  @media (max-width: 1023px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.xl}px) {
     width: 100%;
     height: 480px;
     flex-basis: auto;
@@ -58,7 +58,7 @@ const StyledDetailContainerStyles = css<StyledDetailContainerProps>`
   max-width: 960px;
   order: 1;
 
-  @media (max-width: 1023px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.xl}px) {
     width: 100%;
     max-width: none;
     height: auto;
