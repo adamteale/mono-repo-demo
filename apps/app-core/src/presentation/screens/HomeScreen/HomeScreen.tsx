@@ -22,14 +22,13 @@ import FilterIcon from "@mono-repo-demo/atomic-library/assets/FilterIcon";
 
 import { useHomeViewModel } from "./useHomeViewModel";
 import { getStyles } from "./styles";
-import styled from "styled-components";
-import { useTheme as useStyledTheme } from "styled-components/native";
+import { useTheme } from "styled-components";
 
 export const HomeScreen = () => {
   const { bannerProps, onTapNavigateToProductDetail, productCard } =
     useHomeViewModel();
   const styles = getStyles();
-  const theme = useStyledTheme() as ThemeType;
+  const theme = useTheme() as ThemeType;
   const { bottom } = useSafeAreaInsets();
 
   return (

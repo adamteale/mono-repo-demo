@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
-import { ActivityIndicator, View } from "react-native";
-import { Slot, useRouter, useSegments } from "expo-router";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { Slot, useSegments } from "expo-router";
 
 import { ThemeProvider } from "styled-components/native";
 
+import { theme } from "@atomic-library/index";
 import { useNavigationHandler } from "@app-mobile/src/presentation/navigation/useNavigationHandler";
-import { theme, ThemeType } from "@atomic-library/index";
+import { ExpoNavigationProvider } from "@app-mobile/src/presentation/navigation/ExpoNavigationProvider";
 
-import { NavigationProvider } from "@Presentation/context/NavigationContext";
 import { AuthProvider, useAuth } from "@Presentation/context/AuthContext";
 
 // Main layout component
 function RootLayoutNav() {
   const { isLoggedIn } = useAuth();
-  const router = useRouter();
+  const navigation = useNavigationHandler();
   const segments = useSegments(); // Gets the current route segments
   console.log;
   useEffect(() => {
@@ -28,17 +28,16 @@ function RootLayoutNav() {
 
     if (isLoggedIn && !inAppGroup) {
       console.log("Redirecting to App...");
-      router.replace({ pathname: "/(app)/(tabs)/home/home" }); // Redirect to home tab
+      navigation.navigateHome();
     } else if (!isLoggedIn && !inAuthGroup) {
       console.log("Redirecting to Login...");
-      router.replace({ pathname: "/(auth)/login" }); // Redirect to login
+      navigation.navigateLogin();
     }
-  }, [isLoggedIn, segments, router]); // Re-run effect when auth state or route changes
+  }, [isLoggedIn, segments, navigation]);
 
-  // Show loading indicator while checking auth
   if (isLoggedIn === null) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" />
       </View>
     );
@@ -51,11 +50,20 @@ function RootLayoutNav() {
 export default function RootLayout() {
   return (
     <ThemeProvider theme={theme}>
-      <NavigationProvider navigation={useNavigationHandler()}>
+      <ExpoNavigationProvider>
         <AuthProvider>
           <RootLayoutNav />
         </AuthProvider>
-      </NavigationProvider>
+      </ExpoNavigationProvider>
     </ThemeProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

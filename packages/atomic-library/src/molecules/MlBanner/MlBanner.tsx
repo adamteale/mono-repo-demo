@@ -1,7 +1,7 @@
 import React from "react";
 import { Linking, Text } from "react-native";
 
-import { useTheme } from "styled-components/native";
+import { useTheme } from "styled-components";
 
 import { ThemeType } from "../../theme";
 import { AtButton, AtImage, AtButtonVariant } from "../../atoms";

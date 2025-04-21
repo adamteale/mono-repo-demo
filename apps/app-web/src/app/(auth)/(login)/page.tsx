@@ -1,18 +1,49 @@
 "use client";
 
 import React from "react";
-import { AuthProvider, useAuth } from "@Presentation/context";
-import { ThemeProvider } from "styled-components/native";
 
-import { AtButton, theme } from "@mono-repo-demo/atomic-library";
-import { LoginScreen } from "@Presentation/screens/LoginScreen/LoginScreen";
+import { AtButton } from "@mono-repo-demo/atomic-library";
 
-export default function Login() {
+import { useAuth } from "@Presentation/context/AuthContext";
+
+export default function LoginPage() {
+  const { login, isLoggedIn } = useAuth();
+
+  const handleLogin = () => {
+    console.log("Login button clicked on web");
+    login();
+  };
+
+  // Wait until the loggedIn State is determined!
+  if (isLoggedIn === null) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <ThemeProvider theme={theme}>
-      <AuthProvider>
-        <LoginScreen />
-      </AuthProvider>
-    </ThemeProvider>
+    <main>
+      <h1 style={styles.title}>Web Login</h1>
+      <div style={styles.buttonContainer}>
+        <AtButton title="Log In" onAction={handleLogin} />
+      </div>
+    </main>
   );
 }
+
+const styles = {
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    minHeight: "100vh",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "20px",
+  },
+  title: {
+    fontSize: "2rem",
+    marginBottom: "2rem",
+  },
+  buttonContainer: {
+    width: "100%",
+    maxWidth: "300px",
+  },
+};

@@ -1,10 +1,8 @@
 import React from "react";
 import { SafeAreaView, View } from "react-native";
 
-import { CartScreenProps } from "./types";
-
 import { StyledContainerExample, StyledB, StyledC } from "./styledComponents";
-import { useTheme } from "styled-components/native";
+import { useTheme } from "styled-components";
 
 import { ThemeType } from "@mono-repo-demo/atomic-library";
 

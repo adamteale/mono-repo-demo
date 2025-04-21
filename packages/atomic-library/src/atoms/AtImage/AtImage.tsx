@@ -1,7 +1,8 @@
 import React from "react";
 import { Image, Platform, StyleSheet, View } from "react-native";
 import { SvgUri } from "react-native-svg";
-import styled, { useTheme } from "styled-components/native";
+import styled from "styled-components/native";
+import { useTheme } from "styled-components";
 
 import { AtImageProps, AtImageVariants } from "./types"; // Adjust path
 import { ThemeType } from "../../theme";

@@ -5,24 +5,28 @@ import type { Configuration as WebpackConfiguration } from "webpack";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
+  compiler: {
+    styledComponents: true,
+  },
+
   transpilePackages: [
     "react-native-svg",
     "@react-native/assets-registry",
-    "styled-components", // Add this
+    "styled-components",
     "styled-components/native",
+    "@mono-repo-demo/atomic-library",
   ],
 
   webpack: (
     config: WebpackConfiguration,
     { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }
   ) => {
-    console.log("--- Running webpack function in next.config.ts ---");
-
     if (!config.resolve) config.resolve = {};
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
       "react-native$": "react-native-web",
       "react-native-svg$": "react-native-svg",
+      "styled-components/native$": "styled-components",
     };
 
     if (!config.resolve.extensions) config.resolve.extensions = [];
@@ -56,9 +60,6 @@ const nextConfig: NextConfig = {
     }
 
     config.resolve.extensions = newExtensions;
-
-    console.log("Webpack resolve.alias:", config.resolve?.alias);
-    console.log("Webpack resolve.extensions:", config.resolve?.extensions);
 
     return config;
   },

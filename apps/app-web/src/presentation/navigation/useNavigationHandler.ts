@@ -1,24 +1,25 @@
-import { useRouter } from "expo-router";
+"use client";
 
 import { NavigationService } from "@Presentation/navigation/hooks/types";
 import { ProductDetailScreenProps } from "@Presentation/screens/ProductDetailScreen";
 import { RouterHelper } from "./RouterHelper";
+import { useRouter } from "next/router";
 
 export const useNavigationHandler = (): NavigationService => {
-  const router = useRouter();
+  // const router = useRouter();
 
   return {
     navigateBack: () => {
-      router.back();
+      // router.back();
     },
     navigateToProductDetail: (props: ProductDetailScreenProps) => {
-      router.push({ pathname: RouterHelper.productDetail, params: props });
+      // router.push({ pathname: RouterHelper.productDetail, query: props });
     },
     navigateHome: () => {
-      router.replace({ pathname: "/(app)/(tabs)/home/home" });
+      // router.replace({ pathname: "/(app)/(tabs)/home/home" });
     },
     navigateLogin: () => {
-      router.replace({ pathname: "/(auth)/login" });
+      // router.replace({ pathname: "/(auth)/login" });
     },
   };
 };

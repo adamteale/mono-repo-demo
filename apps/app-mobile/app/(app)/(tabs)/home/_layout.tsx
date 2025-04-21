@@ -13,7 +13,6 @@ import { Ionicons } from "@expo/vector-icons";
 import getStyles from "./styles";
 import { PriceSmartLogo, PriceSmartLogoLarge } from "@atomic-library/assets";
 import { MlTextfield, theme, ThemeType } from "@atomic-library/index";
-import { useTheme } from "styled-components/native";
 
 export enum HomeRoutes {
   Home = "home",

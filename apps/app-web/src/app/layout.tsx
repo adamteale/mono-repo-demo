@@ -1,4 +1,9 @@
 import React from "react";
+import StyledComponentsRegistry from "../lib/styled-components-registry";
+
+import Providers from "./providers";
+
+export const metadata = { title: "Demo App" };
 
 export default function RootLayout({
   children,
@@ -10,9 +15,12 @@ export default function RootLayout({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Demo</title>
       </head>
-      <body> {children}</body>
+      <body>
+        <StyledComponentsRegistry>
+          <Providers>{children}</Providers>
+        </StyledComponentsRegistry>
+      </body>
     </html>
   );
 }

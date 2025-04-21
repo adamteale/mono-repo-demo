@@ -1,6 +1,9 @@
 import React from "react";
-import styled, { useTheme } from "styled-components/native";
 import { PressableProps, TextProps } from "react-native";
+
+import styled from "styled-components/native";
+import { useTheme } from "styled-components";
+
 import { ThemeType } from "../../theme";
 import { AtButtonProps, AtButtonVariant } from "./types";
 
