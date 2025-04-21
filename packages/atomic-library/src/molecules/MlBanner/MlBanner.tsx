@@ -1,8 +1,6 @@
 import React from "react";
 import { Linking, Text } from "react-native";
 
-import { useTheme } from "styled-components";
-
 import { ThemeType } from "../../theme";
 import { AtButton, AtImage, AtButtonVariant } from "../../atoms";
 
@@ -23,10 +21,9 @@ export const MlBanner = ({
   description,
   onPress = () => {},
   testID = "MlBanner",
+  theme,
   title,
 }: MlBannerProps) => {
-  const theme = useTheme() as ThemeType;
-
   const handlePress = () => {
     if (deeplink) {
       Linking.openURL(deeplink).catch((err) =>

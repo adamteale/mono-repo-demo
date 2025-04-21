@@ -9,13 +9,14 @@ import {
 } from "@mono-repo-demo/atomic-library";
 import { getStyles } from "./styles";
 import { StyledLoginContainer } from "./styledComponents/styledComponents";
-import { useTheme } from "styled-components";
+
+import { useTheme } from "styled-components/native";
 
 export const LoginScreen = () => {
   const { login } = useAuth();
   const styles = getStyles();
   const theme = useTheme() as ThemeType;
-
+  console.log(theme);
   return (
     <View style={styles.container}>
       <StyledLoginContainer theme={theme}>
@@ -26,12 +27,14 @@ export const LoginScreen = () => {
           <AtButton
             variant={AtButtonVariant.primary}
             onAction={login}
+            theme={theme}
             title="Buy a membership"
           />
         </View>
         <AtButton
           variant={AtButtonVariant.secondary}
           onAction={login}
+          theme={theme}
           title="Log In"
         />
       </StyledLoginContainer>

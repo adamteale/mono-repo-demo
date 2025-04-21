@@ -22,7 +22,7 @@ import FilterIcon from "@mono-repo-demo/atomic-library/assets/FilterIcon";
 
 import { useHomeViewModel } from "./useHomeViewModel";
 import { getStyles } from "./styles";
-import { useTheme } from "styled-components";
+import { useTheme } from "styled-components/native";
 
 export const HomeScreen = () => {
   const { bannerProps, onTapNavigateToProductDetail, productCard } =

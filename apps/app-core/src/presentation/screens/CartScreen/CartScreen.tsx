@@ -2,7 +2,7 @@ import React from "react";
 import { SafeAreaView, View } from "react-native";
 
 import { StyledContainerExample, StyledB, StyledC } from "./styledComponents";
-import { useTheme } from "styled-components";
+import { useTheme } from "styled-components/native";
 
 import { ThemeType } from "@mono-repo-demo/atomic-library";
 

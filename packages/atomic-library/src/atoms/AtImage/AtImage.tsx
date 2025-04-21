@@ -109,17 +109,16 @@ export const AtImage: React.FC<AtImageProps> = ({
   alt,
   disabled = false,
   imageContainerStyles = {}, // Style for the outer container
-  style, // Renamed from imageStyles - applies to image/svg element
+  style,
   isSvg = false,
   onLoad,
   resizeMode = "cover",
   source,
   testID = "AtImage",
-  variant = AtImageVariants.sharp, // Default variant
-  ...rest // Pass other ImageProps like accessibilityLabel etc.
+  theme,
+  variant = AtImageVariants.sharp,
+  ...rest
 }) => {
-  const theme = useTheme() as ThemeType;
-
   if (!source) {
     return null;
   }

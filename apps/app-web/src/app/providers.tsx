@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components/native";
 
 import { theme } from "@mono-repo-demo/atomic-library";
 

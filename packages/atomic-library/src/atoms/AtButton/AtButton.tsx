@@ -50,12 +50,12 @@ export const AtButton: React.FC<AtButtonProps> = ({
   disabled,
   onAction,
   style,
+  theme,
   title,
   variant = AtButtonVariant.primary,
   ...rest
 }) => {
-  const theme = useTheme() as ThemeType;
-
+  console.log("theme", theme);
   return (
     <StyledPressable
       onPress={onAction}
