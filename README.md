@@ -1,5 +1,3 @@
-Okay, here's a summary of the monorepo project, the apps and libraries involved, the technologies used, and what this setup achieves, based on our conversation:
-
 **Project Overview:**
 
 This project is a cross-platform application built using a **monorepo** structure (managed with **Yarn Workspaces**). The primary goal is to create a consistent user experience across **iOS, Android, and the Web**, while maximizing code reuse for core logic, data handling, and UI components. It consists of native mobile apps built with Expo/React Native and a modern web application built with Next.js, specifically targeting Server-Side Rendering (SSR).
