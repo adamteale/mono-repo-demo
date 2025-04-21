@@ -8,9 +8,9 @@ import {
   ThemeType,
 } from "@mono-repo-demo/atomic-library";
 import { getStyles } from "./styles";
-import { StyledLoginContainer } from "./styledComponents/styledComponents";
 
 import { useTheme } from "styled-components/native";
+import { StyledLoginContainer } from "./styledComponents/styledComponents";
 
 export const LoginScreen = () => {
   const { login } = useAuth();
