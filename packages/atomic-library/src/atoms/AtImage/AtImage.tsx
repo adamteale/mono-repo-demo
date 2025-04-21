@@ -59,7 +59,7 @@ interface StyledImageProps extends StyledImageVariantProps {
   // Inherits ImageProps implicitly via styled(Image)
 }
 const StyledImage = styled(Image)<StyledImageProps>`
-  ${(props) =>
+  ${(props: StyledImageProps) =>
     getBorderRadiusStyles(
       props
     )}/* Add any other base styles for AtImage if needed */
@@ -71,7 +71,7 @@ interface StyledSvgWrapperProps extends StyledImageVariantProps {
   // Inherits ViewProps implicitly
 }
 const StyledSvgWrapper = styled.View<StyledSvgWrapperProps>`
-  ${(props) => getBorderRadiusStyles(props)}
+  ${(props: StyledSvgWrapperProps) => getBorderRadiusStyles(props)}
   overflow: hidden; /* Important to clip the SVG */
 `;
 
@@ -80,8 +80,12 @@ const StyledSvgWrapper = styled.View<StyledSvgWrapperProps>`
 interface StyledWebSvgWrapperProps extends StyledImageVariantProps {
   // Inherits ViewProps implicitly
 }
+interface StyledWebSvgWrapperProps extends StyledImageVariantProps {
+  // Inherits ViewProps implicitly
+}
+
 const StyledWebSvgWrapper = styled.View<StyledWebSvgWrapperProps>`
-  ${(props) => getBorderRadiusStyles(props)}
+  ${(props: StyledWebSvgWrapperProps) => getBorderRadiusStyles(props)}
   overflow: hidden; /* Clip the img */
   /* Ensure wrapper takes size from img or passed styles */
   display: inline-block; /* Or block depending on layout needs */
@@ -90,7 +94,7 @@ const StyledWebSvgWrapper = styled.View<StyledWebSvgWrapperProps>`
 // Styled component for the disabled overlay
 // Now uses theme colors potentially
 const StyledDisabledOverlay = styled.View<{ theme: ThemeType }>`
-  background-color: ${({ theme }) =>
+  background-color: ${({ theme }: { theme: ThemeType }) =>
     theme.colors.white ?? "#FFFFFF"}; /* Example theme usage */
   opacity: 0.7; /* Could also come from theme.opacity.disabled */
   justify-content: center;

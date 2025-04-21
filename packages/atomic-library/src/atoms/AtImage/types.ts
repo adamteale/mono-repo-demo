@@ -8,7 +8,7 @@ import {
   StyleProp,
   ViewStyle,
 } from "react-native";
-import { ThemeType } from "src/theme";
+import { ThemeType } from "../../theme";
 
 export enum AtImageVariants {
   sharp = "sharp",

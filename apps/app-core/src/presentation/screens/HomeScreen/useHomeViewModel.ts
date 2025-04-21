@@ -1,6 +1,6 @@
 import { Dimensions } from "react-native";
 
-import { MlProductCardProps } from "@mono-repo-demo/atomic-library";
+import { MlProductCardProps, ThemeType } from "@mono-repo-demo/atomic-library";
 import { useNavigationContext } from "../../context";
 import { MlBannerProps } from "@mono-repo-demo/atomic-library";
 import { useTheme } from "styled-components/native";
@@ -9,7 +9,7 @@ const { width } = Dimensions.get("window");
 
 export const useHomeViewModel = () => {
   const navigate = useNavigationContext();
-  const theme = useTheme();
+  const theme = useTheme() as ThemeType;
   const onTapNavigateToProductDetail = () => {
     navigate.navigation.navigateToProductDetail({ id: "1234" });
   };
@@ -49,9 +49,10 @@ export const useHomeViewModel = () => {
           width: "100%",
           height: "100%",
         },
+        theme: theme,
       },
       title: "Quality for your pet",
-      theme,
+      theme: theme,
       description: "Find food and accesories your pet will love",
       ctaText: "Shop now!",
     },
@@ -69,8 +70,9 @@ export const useHomeViewModel = () => {
           width: "100%",
           height: "100%",
         },
+        theme: theme,
       },
-      theme,
+      theme: theme,
       title: "Have you seen what's new?",
       description: "You'll love it",
       ctaText: "Shop now!",

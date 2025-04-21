@@ -68,6 +68,7 @@ export const MlBanner = ({
             onAction={handlePress}
             variant={AtButtonVariant.cta}
             compact={true}
+            theme={theme}
           />
         )}
       </StyledDetailContainer>

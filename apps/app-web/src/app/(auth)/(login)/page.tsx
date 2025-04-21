@@ -2,12 +2,15 @@
 
 import React from "react";
 
-import { AtButton } from "@mono-repo-demo/atomic-library";
+import { useTheme } from "styled-components/native";
+
+import { AtButton, ThemeType } from "@mono-repo-demo/atomic-library";
 
 import { useAuth } from "@Presentation/context/AuthContext";
 
 export default function LoginPage() {
   const { login, isLoggedIn } = useAuth();
+  const theme = useTheme() as ThemeType;
 
   const handleLogin = () => {
     console.log("Login button clicked on web");
@@ -23,7 +26,7 @@ export default function LoginPage() {
     <main>
       <h1 style={styles.title}>Web Login</h1>
       <div style={styles.buttonContainer}>
-        <AtButton title="Log In" onAction={handleLogin} />
+        <AtButton title="Log In" onAction={handleLogin} theme={theme} />
       </div>
     </main>
   );

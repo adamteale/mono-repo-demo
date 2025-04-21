@@ -48,7 +48,6 @@ export const PriceSmartLogo = () => {
               <Use
                 fill="url(#radialGradient-1)"
                 xlinkHref="#path-2"
-                style={{ fill: "url(#radialGradient-1)" }}
                 mask="url(#mask-3)"
               />
             </G>

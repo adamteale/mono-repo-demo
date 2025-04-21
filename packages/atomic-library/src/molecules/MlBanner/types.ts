@@ -1,5 +1,5 @@
-import { AtImageProps } from "src/atoms/AtImage/types";
-import { ThemeType } from "src/theme";
+import { AtImageProps } from "../../atoms/AtImage/types";
+import { ThemeType } from "../../theme";
 
 export type MlBannerProps = {
   banner: AtImageProps;
