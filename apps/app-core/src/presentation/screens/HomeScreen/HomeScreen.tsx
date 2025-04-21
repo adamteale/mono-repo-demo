@@ -1,24 +1,8 @@
 import React from "react";
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Text,
-  SafeAreaView,
-  useWindowDimensions,
-} from "react-native";
+import { View, ScrollView, Text, SafeAreaView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import {
-  MlBanner,
-  MlBannerProps,
-  MlProductCard,
-  MlToast,
-  OrCarousel,
-  OrSection,
-  ThemeType,
-} from "@mono-repo-demo/atomic-library";
-import FilterIcon from "@mono-repo-demo/atomic-library/assets/FilterIcon";
+import { MlBanner, MlToast, ThemeType } from "@mono-repo-demo/atomic-library";
 
 import { useHomeViewModel } from "./useHomeViewModel";
 import { getStyles } from "./styles";
@@ -37,29 +21,12 @@ export const HomeScreen = () => {
       <View style={styles.breadcrumbSection}>
         <Text>Pricesmart / donuts</Text>
       </View>
-      {/* <View style={styles.filterSection}>
-        <FilterIcon size={40} />
-      </View> */}
       <ScrollView
         contentContainerStyle={styles.scrollContentContainer}
         style={styles.scrollContainer}
         contentInset={{ bottom: bottom + 100 }}
       >
         <MlBanner {...bannerProps[0]} />
-        {/* <OrSection>
-          <OrCarousel<MlBannerProps>
-            autoScroll={true}
-            centerContent={false}
-            data={bannerProps}
-            sideSpaces={0}
-            spacingBetween={0}
-            testID={`home.banner-carrousel`}
-            renderItem={({ item }) => <MlBanner {...item} />}
-          />
-        </OrSection> */}
-        {/* <MlProductCard {...productCard} />
-        <MlProductCard {...productCard} />
-        <MlProductCard {...productCard} /> */}
       </ScrollView>
     </SafeAreaView>
   );
