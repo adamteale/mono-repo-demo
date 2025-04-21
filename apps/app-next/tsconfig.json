@@ -17,7 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "@Presentation/*": ["../app-core/src/presentation/*"],
-      "@app-web/*": ["./*"],
+      "@app-next/*": ["./*"],
       "@app-core/*": ["../app-core/src/*"],
       "@atomic-web/*": ["../../packages/atomic-web/*"],
       "@atomic-core/*": ["../../packages/atomic-core/*"]

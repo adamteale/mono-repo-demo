@@ -4,7 +4,7 @@ This project is a cross-platform application built using a **monorepo** structur
 
 **Architecture & Packages:**
 
-1.  **`app-mobile` (Expo / React Native App):**
+1.  **`app-expo` (Expo / React Native App):**
 
     - The native mobile application for iOS and Android.
     - Uses **Expo** for the development workflow, build services, and access to native capabilities.
@@ -13,7 +13,7 @@ This project is a cross-platform application built using a **monorepo** structur
     - Uses `styled-components/native` via `atomic-library`.
     - Requires `<SafeAreaProvider>` for handling device notches/safe areas.
 
-2.  **`app-web` (Next.js Web App):**
+2.  **`app-next` (Next.js Web App):**
 
     - The web application targeting modern browsers.
     - Built with **Next.js (App Router)**, focusing on leveraging **Server-Side Rendering (SSR)** for performance and SEO.

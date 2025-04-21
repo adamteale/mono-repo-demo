@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { ActivityIndicator, View, StyleSheet } from "react-native";
 import { useRouter } from "next/navigation";
 
-import { NextNavigationProvider } from "@app-web/src/presentation/navigation/NextNavigationProvider";
+import { NextNavigationProvider } from "@app-next/src/presentation/navigation/NextNavigationProvider";
 import { useAuth } from "@Presentation/context/AuthContext";
 
 function AuthenticatedLayoutContent({

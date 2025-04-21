@@ -5,8 +5,8 @@ import { Slot, useSegments } from "expo-router";
 import { ThemeProvider } from "styled-components/native";
 
 import { theme } from "@atomic-library/index";
-import { useNavigationHandler } from "@app-mobile/src/presentation/navigation/useNavigationHandler";
-import { ExpoNavigationProvider } from "@app-mobile/src/presentation/navigation/ExpoNavigationProvider";
+import { useNavigationHandler } from "@app-expo/src/presentation/navigation/useNavigationHandler";
+import { ExpoNavigationProvider } from "@app-expo/src/presentation/navigation/ExpoNavigationProvider";
 
 import { AuthProvider, useAuth } from "@Presentation/context/AuthContext";
 

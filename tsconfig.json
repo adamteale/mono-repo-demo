@@ -19,8 +19,8 @@
     "target": "es2022",
     "baseUrl": ".",
     "paths": {
-      "@app-web/*": ["apps/app-web-OLD/*"],
-      "@app-mobile/*": ["apps/app-mobile/*"],
+      "@app-next/*": ["apps/app-next-OLD/*"],
+      "@app-expo/*": ["apps/app-expo/*"],
       "@app-core/*": ["apps/app-core/*"],
       "@atomic-web/*": ["packages/atomic-web/*"]
     }

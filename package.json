@@ -6,8 +6,8 @@
     "packages/*"
   ],
   "scripts": {
-    "web:dev": "yarn workspace app-web dev",
-    "mobile:dev": "yarn workspace app-mobile start",
+    "expo:dev": "yarn workspace @mono-repo-demo/app-expo start",
+    "next:dev": "yarn workspace @mono-repo-demo/app-next dev",
     "build": "yarn workspaces run build",
     "lint": "yarn workspaces run lint",
     "test": "yarn workspaces run test"

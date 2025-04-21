@@ -1,5 +1,5 @@
 {
-  "name": "@mono-repo-demo/app-web",
+  "name": "@mono-repo-demo/app-next",
   "version": "1.0.0",
   "private": true,
   "scripts": {
