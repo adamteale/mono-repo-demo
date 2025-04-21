@@ -10,9 +10,12 @@ import {
 // @media only effects web
 const StyledPressableStyles = css<StyledPressableProps>`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   overflow: hidden;
 
+  @media (min-width: ${({ theme }) => theme.breakpoints.xl}px) {
+    flex-direction: row;
+  }
   @media (max-width: ${({ theme }) => theme.breakpoints.xl}px) {
     flex-direction: column;
   }
