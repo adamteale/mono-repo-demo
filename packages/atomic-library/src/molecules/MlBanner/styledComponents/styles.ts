@@ -1,40 +1,34 @@
 import { css } from "styled-components";
-import { ThemeType } from "../../../theme";
 
 import {
   StyledDetailContainerProps,
   StyledImageWrapperProps,
   StyledPressableProps,
 } from "./types";
+import { ThemeType } from "src/theme";
 
-// @media only effects web
 const StyledPressableStyles = css<StyledPressableProps>`
   display: flex;
+  width: 100%;
+  height: 100%;
   flex-direction: column;
-  overflow: hidden;
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.xl}px) {
+  max-width: 1920px;
+  align-self: center;
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}px) {
     flex-direction: row;
-  }
-  @media (max-width: ${({ theme }) => theme.breakpoints.xl}px) {
-    flex-direction: column;
+    max-height: 480px;
   }
 `;
 
 const StyledImageWrapperStyles = css<StyledImageWrapperProps>`
-  position: relative;
-  min-width: 0;
-  height: 100%;
+  flex: 1;
+  order: 1;
+  min-height: ${({ height }) => Math.min(height, 480) ?? "200px"};
+  height: ${({ height }) => Math.min(height, 480) ?? "200px"};
+  overflow: hidden;
 
-  flex: 1 1 auto;
-  order: 2;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.xl}px) {
-    width: 100%;
-    height: 480px;
-    flex-basis: auto;
-    order: 0;
-  }
+  max-width: 960px;
+  max-height: 480px;
 
   & > img {
     display: block;
@@ -42,48 +36,51 @@ const StyledImageWrapperStyles = css<StyledImageWrapperProps>`
     height: 100%;
     object-fit: cover;
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}px) {
+    order: 0;
+    flex: none;
+    width: 100%;
+    height: auto;
+    min-height: 250px; /* Using Strategy 2: Fixed min-height for stacked */
+  }
 `;
 
 const StyledDetailContainerStyles = css<StyledDetailContainerProps>`
-  background-color: ${({ theme }) =>
-    theme.colors.background.secondary ?? "#F0F5FE"};
-  color: white;
-  height: 100%;
+  flex: 1;
+  order: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   padding: 20px;
   gap: 15px;
+  background-color: ${({ theme }) =>
+    theme.colors.background.secondary ?? "#F0F5FE"};
+  color: ${({ theme }) => theme.colors.text.primary ?? "#333333"};
   min-height: 220px;
 
-  flex: 1 1 auto;
-  max-width: 960px;
-  order: 1;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.xl}px) {
-    width: 100%;
+  @media (min-width: ${({ theme }) =>
+      theme.breakpoints.xl + 1}px) and (max-width: ${({ theme }) =>
+      theme.breakpoints.xxxl}px) {
+    max-width: 350px;
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.xxxl}px) {
     max-width: none;
-    height: auto;
-    flex-basis: auto;
-    padding: 15px;
-    align-items: center;
-    text-align: center;
-    order: 0;
   }
 `;
 
 const StyledTitleStyles = css<{ theme: ThemeType }>`
   font-size: ${({ theme }) => theme.fontSizes.h3}px;
-  font-family: "Arial";
+  font-family: ${({ theme }) => theme.fontFamily};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
-  color: ${({ theme }) => theme.colors.text.primary ?? "#FFFFFF"};
+  color: ${({ theme }) => theme.colors.text.primary ?? "#333333"};
 `;
 
 const StyledDescriptionStyles = css<{ theme: ThemeType }>`
-  font-family: "Arial";
+  font-family: ${({ theme }) => theme.fontFamily};
   font-size: ${({ theme }) => theme.fontSizes.body};
-  color: ${({ theme }) => theme.colors.text.primary ?? "#FFFFFF"};
+  color: ${({ theme }) => theme.colors.text.primary ?? "#333333"};
 `;
 
 export {

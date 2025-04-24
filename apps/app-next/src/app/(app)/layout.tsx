@@ -1,45 +1,59 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { ActivityIndicator, View, StyleSheet } from "react-native";
-import { useRouter } from "next/navigation";
+import { ActivityIndicator } from "react-native";
+import styled from "styled-components";
 
-import { NextNavigationProvider } from "@app-next/src/presentation/navigation/NextNavigationProvider";
+import { useNavigationHandler } from "@app-next/src/presentation/navigation/useNavigationHandler";
 import { useAuth } from "@Presentation/context/AuthContext";
+import TabBar from "../../presentation/components/Layout/TabBar";
 
-function AuthenticatedLayoutContent({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const LoadingContainer = styled.div`
+  flex: 1;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
+
+const ContentArea = styled.main`
+  flex: 1;
+`;
+
+function AuthenticatedContent({ children }: { children: React.ReactNode }) {
   const { isLoggedIn } = useAuth();
-  const router = useRouter();
-
+  const navigation = useNavigationHandler();
   useEffect(() => {
-    console.log("Auth Check inside (app) layout:", isLoggedIn);
-    if (isLoggedIn === null) {
-      return;
-    }
+    if (isLoggedIn === null) return;
     if (!isLoggedIn) {
-      console.log("Redirecting to Login from (app) layout...");
-      router.replace("/login");
+      navigation.navigateLogin();
     }
-  }, [isLoggedIn, router]);
+  }, [isLoggedIn, navigation]);
 
   if (isLoggedIn === null) {
     return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#0000ff" /> {/* Example color */}
-      </View>
+      <LoadingContainer>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </LoadingContainer>
     );
   }
 
   if (!isLoggedIn) {
-    return null;
+    return null; // Render nothing while redirecting
   }
 
-  console.log("User logged in, rendering app children.");
-  return <>{children}</>;
+  return (
+    <AppContainer>
+      <ContentArea>{children}</ContentArea>
+      <TabBar />
+    </AppContainer>
+  );
 }
 
 export default function AppGroupLayout({
@@ -47,18 +61,5 @@ export default function AppGroupLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <NextNavigationProvider>
-      <AuthenticatedLayoutContent>{children}</AuthenticatedLayoutContent>
-    </NextNavigationProvider>
-  );
+  return <AuthenticatedContent>{children}</AuthenticatedContent>;
 }
-
-const styles = StyleSheet.create({
-  loadingContainer: {
-    flex: 1,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});

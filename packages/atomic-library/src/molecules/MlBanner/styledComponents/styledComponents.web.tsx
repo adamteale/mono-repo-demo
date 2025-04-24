@@ -8,25 +8,30 @@ import {
   StyledDescriptionStyles,
 } from "./styles";
 
-import { StyledPressableProps } from "./types";
+import {
+  StyledDetailContainerProps,
+  StyledImageWrapperProps,
+  StyledPressableProps,
+} from "./types";
+import { ThemeType } from "src/theme";
 
 const StyledPressable = styled.div<StyledPressableProps>`
   ${StyledPressableStyles}
 `;
 
-const StyledImageWrapper = styled.div`
+const StyledImageWrapper = styled.div<StyledImageWrapperProps>`
   ${StyledImageWrapperStyles}
 `;
 
-const StyledDetailContainer = styled.div`
+const StyledDetailContainer = styled.div<StyledDetailContainerProps>`
   ${StyledDetailContainerStyles}
 `;
 
-const StyledTitle = styled.span`
+const StyledTitle = styled.div<{ theme: ThemeType }>`
   ${StyledTitleStyles}
 `;
 
-const StyledDescription = styled.span`
+const StyledDescription = styled.div<{ theme: ThemeType }>`
   ${StyledDescriptionStyles}
 `;
 

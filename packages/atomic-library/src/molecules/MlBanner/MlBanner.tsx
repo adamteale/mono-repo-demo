@@ -1,7 +1,6 @@
 import React from "react";
-import { Linking, Text } from "react-native";
+import { Linking } from "react-native";
 
-import { ThemeType } from "../../theme";
 import { AtButton, AtImage, AtButtonVariant } from "../../atoms";
 
 import type { MlBannerProps } from "./types";
@@ -16,6 +15,7 @@ import {
 
 export const MlBanner = ({
   banner,
+  containerWidth,
   ctaText,
   deeplink,
   description,
@@ -33,31 +33,44 @@ export const MlBanner = ({
     onPress();
   };
 
+  // Calculate height based on container width
+  const height = Math.floor(containerWidth / 2);
+
   const pressableDivProps = {
     onClick: handlePress,
     "data-testid": testID,
     role: "button",
     onKeyPress: (e: React.KeyboardEvent) => {
-      e.preventDefault(); // Prevent space scrolling the page
+      e.preventDefault();
       handlePress();
     },
   };
 
-  const combinedStyle = {
-    height: "480px",
+  const imageStyle = {
+    height: Math.min(height, 480),
+    width: containerWidth,
+    maxWidth: 960,
+    maxHeight: 480,
   };
 
   return (
-    <StyledPressable {...pressableDivProps} style={combinedStyle} theme={theme}>
-      <StyledImageWrapper theme={theme}>
+    <StyledPressable
+      {...pressableDivProps}
+      theme={theme}
+      width={containerWidth}
+    >
+      <StyledImageWrapper theme={theme} width={containerWidth} height={height}>
         <AtImage
-          {...banner}
-          resizeMode="cover"
-          alt={banner.alt || title || "Banner image"}
+          source={banner?.source}
+          style={imageStyle}
+          alt={banner?.alt || title || "Banner image"}
+          resizeMode="contain"
+          theme={theme}
+          testID={`${testID}.imageComponent`}
         />
       </StyledImageWrapper>
 
-      <StyledDetailContainer theme={theme}>
+      <StyledDetailContainer theme={theme} width={containerWidth}>
         {title && <StyledTitle theme={theme}>{title}</StyledTitle>}
         {description && (
           <StyledDescription theme={theme}>{description}</StyledDescription>

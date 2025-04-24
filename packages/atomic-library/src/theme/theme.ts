@@ -9,6 +9,8 @@ export interface ThemeType {
     md: number;
     lg: number;
     xl: number;
+    xxl: number;
+    xxxl: number;
   };
   colors: {
     button: ButtonVariantStyles<{
@@ -27,6 +29,7 @@ export interface ThemeType {
       primary: string;
       secondary: string;
       tertiary: string;
+      white: string;
     };
   };
   // Use VariantOrDefault helper type
@@ -58,12 +61,15 @@ export const theme: ThemeType = {
     md: 768,
     lg: 992,
     xl: 1024,
+    xxl: 1300,
+    xxxl: 1400,
   },
   colors: {
     background: {
       primary: "#182958",
       secondary: "#f0f5fe",
       tertiary: "#2B3859",
+      white: "#fff",
     },
     button: {
       [AtButtonVariant.primary]: {

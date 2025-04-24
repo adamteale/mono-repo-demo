@@ -8,17 +8,17 @@ import {
   StyledDescriptionStyles,
 } from "./styles";
 
-import { StyledPressableProps } from "./types";
+import { StyledImageWrapperProps, StyledPressableProps } from "./types";
 
 const StyledPressable = styled.View<StyledPressableProps>`
   ${StyledPressableStyles}
 `;
 
-const StyledImageWrapper = styled.View`
+const StyledImageWrapper = styled.View<StyledPressableProps>`
   ${StyledImageWrapperStyles}
 `;
 
-const StyledDetailContainer = styled.View`
+const StyledDetailContainer = styled.View<StyledImageWrapperProps>`
   ${StyledDetailContainerStyles}
 `;
 

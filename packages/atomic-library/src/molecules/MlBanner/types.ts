@@ -3,6 +3,7 @@ import { ThemeType } from "../../theme";
 
 export type MlBannerProps = {
   banner: AtImageProps;
+  containerWidth: number;
   ctaText: string;
   deeplink?: string;
   description: string;

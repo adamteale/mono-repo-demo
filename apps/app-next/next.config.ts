@@ -15,7 +15,21 @@ const nextConfig: NextConfig = {
     "styled-components",
     "styled-components/native",
     "@mono-repo-demo/atomic-library",
+    "@expo/vector-icons",
+    "react-native-vector-icons",
+    "expo-modules-core",
+    "expo-font",
   ],
+
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/home",
+        permanent: false,
+      },
+    ];
+  },
 
   webpack: (
     config: WebpackConfiguration,
@@ -60,6 +74,27 @@ const nextConfig: NextConfig = {
     }
 
     config.resolve.extensions = newExtensions;
+
+    if (!config.module) config.module = {};
+    if (!config.module.rules) config.module.rules = [];
+
+    config.module.rules.push({
+      test: /\.ttf$/,
+      type: "asset/resource",
+      generator: {
+        filename: "static/media/[name].[hash][ext]",
+      },
+    });
+
+    if (!config.plugins) {
+      config.plugins = [];
+    }
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        // Define __DEV__ based on the build mode (dev server vs production build)
+        __DEV__: dev,
+      })
+    );
 
     return config;
   },

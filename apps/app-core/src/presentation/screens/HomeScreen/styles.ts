@@ -6,8 +6,7 @@ export const getStyles = () => {
       height: "100%",
       flexDirection: "column",
     },
-    scrollContentContainer: {},
-    scrollContainer: {},
+
     text: {
       fontSize: 20,
       fontWeight: "bold",

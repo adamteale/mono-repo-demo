@@ -3,7 +3,11 @@ import { Pressable, Text, TextInput, View } from "react-native";
 import { MlTextfieldProps } from "..";
 import SearchIcon from "@mono-repo-demo/atomic-library/assets/SearchIcon";
 
-export const MlTextfield = ({ value, onChange }: MlTextfieldProps) => {
+export const MlTextfield = ({
+  placeholder,
+  value,
+  onChange,
+}: MlTextfieldProps) => {
   return (
     <View
       style={{
@@ -16,7 +20,11 @@ export const MlTextfield = ({ value, onChange }: MlTextfieldProps) => {
         justifyContent: "space-between",
       }}
     >
-      <TextInput value={value} onChangeText={onChange} />
+      <TextInput
+        value={value}
+        onChangeText={onChange}
+        placeholder={placeholder}
+      />
       <Pressable>
         <SearchIcon color="#BDC6CF" />
       </Pressable>
