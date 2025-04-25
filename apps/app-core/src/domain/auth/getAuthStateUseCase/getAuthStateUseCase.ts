@@ -1,4 +1,4 @@
-import { authRepository } from "@app-core/src/data/auth/authRepository";
+import { authRepository } from "../../../data";
 import { AsyncUseCase } from "../../asyncUseCase";
 
 export const getAuthStateUseCase: AsyncUseCase<boolean | null> = {

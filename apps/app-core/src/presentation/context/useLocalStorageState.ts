@@ -1,129 +1,104 @@
 "use client";
 
-import {
-  useState,
-  useEffect,
-  useCallback,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { getAuthStateUseCase, updateAuthStateUseCase } from "@Domain/auth";
+import { useState, useEffect, useCallback } from "react";
 
-// Helper to safely parse JSON from localStorage
-function safelyParseJson<T>(jsonString: string | null, defaultValue: T): T {
-  if (jsonString === null) return defaultValue;
-  try {
-    return JSON.parse(jsonString) as T;
-  } catch (e) {
-    console.error("Error parsing JSON from localStorage", e);
-    return defaultValue;
-  }
-}
+/**
+ * Custom hook to manage and synchronize the user's authentication state
+ * using dedicated use cases.
+ *
+ * @returns A tuple containing:
+ *          - The current authentication state (`boolean | null`). `null` indicates the initial loading state or an error during fetch.
+ *          - A function to update the authentication state (`(newState: boolean) => Promise<void>`).
+ *          - A boolean indicating if the initial state is still loading (`boolean`).
+ */
+export function useLocalStorageState(): [
+  authState: boolean | null,
+  setAuthState: (newState: boolean) => Promise<void>,
+  isLoading: boolean
+] {
+  // State to hold the authentication status. null means initially unknown/loading.
+  const [authState, setAuthStateInternal] = useState<boolean | null>(null);
+  // State to track if the initial fetch is in progress
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-function useLocalStorageState<S>(
-  key: string,
-  initialValue: S | (() => S)
-): [S, Dispatch<SetStateAction<S>>] {
-  // --- Server-Side Rendering Handling ---
-  // On the server, localStorage doesn't exist. We need a placeholder state
-  // until the client hydrates. We use a flag to track hydration.
-  const [isHydrated, setIsHydrated] = useState(false);
-
-  // --- State Initialization ---
-  // Initialize state lazily ONLY ONCE using the function form of useState
-  const [storedValue, setStoredValue] = useState<S>(() => {
-    // This function runs only on initial mount.
-    // Don't access localStorage directly here if code runs on server initially.
-    // We'll read from storage in the useEffect after hydration.
-    return typeof initialValue === "function"
-      ? (initialValue as () => S)()
-      : initialValue;
-  });
-
-  // --- Effect for Client-Side Hydration & Storage Reading ---
+  // --- Effect for Fetching Initial State ---
   useEffect(() => {
-    // This effect runs only on the client after mounting
-    try {
-      const item = window.localStorage.getItem(key);
-      // Use initialValue if nothing is stored OR if item is literally 'null'/'undefined' string
-      const valueToSet =
-        item && item !== "null" && item !== "undefined"
-          ? safelyParseJson(item, initialValue) // Parse existing value
-          : initialValue; // Use initial value
+    let isMounted = true; // Flag to prevent state update on unmounted component
 
-      setStoredValue(valueToSet); // Update state with value from storage or initial
-    } catch (error) {
-      console.error(`Error reading localStorage key “${key}”:`, error);
-      // Keep initialValue if error occurs
-      setStoredValue(
-        typeof initialValue === "function"
-          ? (initialValue as () => S)()
-          : initialValue
-      );
-    } finally {
-      setIsHydrated(true); // Mark hydration as complete
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [key]); // Run only once on mount based on key
-
-  // --- Effect for Storage Event Syncing (Optional but Recommended) ---
-  useEffect(() => {
-    // Only run this effect on the client after hydration
-    if (!isHydrated) return;
-
-    const handleStorageChange = (event: StorageEvent) => {
-      if (event.key === key && event.storageArea === window.localStorage) {
-        console.log(`localStorage key ${key} changed in another tab.`);
-        try {
-          const newValue = event.newValue
-            ? safelyParseJson(event.newValue, initialValue)
-            : initialValue;
-          setStoredValue(newValue);
-        } catch (error) {
-          console.error(
-            `Error parsing updated localStorage key “${key}”:`,
-            error
-          );
-          setStoredValue(
-            typeof initialValue === "function"
-              ? (initialValue as () => S)()
-              : initialValue
-          );
-        }
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [key, initialValue, isHydrated]); // Re-run if key/initialValue changes or after hydration
-
-  // --- Wrapped Updater Function ---
-  const setValue: Dispatch<SetStateAction<S>> = useCallback(
-    (value) => {
+    const fetchInitialAuthState = async () => {
+      console.log("useAuthState: Fetching initial auth state...");
+      setIsLoading(true);
       try {
-        // Allow value to be a function so we have the same API as useState
-        const valueToStore =
-          value instanceof Function ? value(storedValue) : value;
-        // Save state
-        setStoredValue(valueToStore);
-        // Save to localStorage
-        if (typeof window !== "undefined") {
-          window.localStorage.setItem(key, JSON.stringify(valueToStore));
+        const initialState = await getAuthStateUseCase.execute();
+        if (isMounted) {
+          console.log(
+            "useAuthState: Initial auth state received:",
+            initialState,
+            initialState === null ? false : initialState
+          );
+          // Set the initial state based on the fetched value - if null set to false
+          setAuthStateInternal(initialState === null ? false : initialState);
         }
       } catch (error) {
-        console.error(`Error setting localStorage key “${key}”:`, error);
+        console.error(
+          "useAuthState: Error fetching initial auth state:",
+          error
+        );
+        if (isMounted) {
+          // Keep state as null or set to false on error, depending on desired behavior
+          setAuthStateInternal(null); // Or potentially `false`
+        }
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    // Execute the fetch only on the client side after mount
+    fetchInitialAuthState();
+
+    // Cleanup function to set isMounted to false when the component unmounts
+    return () => {
+      isMounted = false;
+      console.log("useAuthState: Unmounting or effect re-running.");
+    };
+  }, []); // Empty dependency array ensures this runs only once on mount
+
+  // --- Updater Function ---
+  const updateAuthState = useCallback(
+    async (newState: boolean) => {
+      console.log(
+        "useAuthState: Attempting to update auth state to:",
+        newState
+      );
+      // --- Optional: Optimistic Update ---
+      // Store previous state for potential rollback on error
+      const previousState = authState;
+      setAuthStateInternal(newState);
+      // Set loading to true during the update? Maybe not necessary for updates.
+      // setIsLoading(true); // Consider if loading state needed during updates
+
+      try {
+        // Call the use case to persist the change
+        await updateAuthStateUseCase.execute(newState);
+        console.log("useAuthState: Auth state updated successfully.");
+        // State is already set optimistically
+      } catch (error) {
+        console.error("useAuthState: Error updating auth state:", error);
+        // --- Rollback on Error ---
+        console.log("useAuthState: Rolling back state to:", previousState);
+        setAuthStateInternal(previousState);
+        // Optional: Rethrow or handle the error further
+        // throw error;
+      } finally {
+        // setIsLoading(false); // Set loading to false if it was set true above
       }
     },
-    [key, storedValue] // Include storedValue in dependencies for the function variant
+    [authState] // Include authState if needed for rollback logic
   );
 
   // --- Return Value ---
-  // Return the currently stored value and the setter function.
-  // During SSR and before hydration, it might return the initialValue.
-  // After hydration, it returns the value from localStorage or the updated value.
-  return [storedValue, setValue];
+  return [authState, updateAuthState, isLoading];
 }
-
-export default useLocalStorageState;
