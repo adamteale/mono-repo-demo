@@ -11,7 +11,16 @@ import styled from "styled-components";
 
 import { theme } from "@mono-repo-demo/atomic-library";
 
-const tabRoutes = [
+type IoniconName = React.ComponentProps<typeof Ionicons>["name"];
+
+type TabItemProps = {
+  name: string;
+  path: string;
+  icon: IoniconName;
+  activeIcon: IoniconName;
+};
+
+const tabRoutes: TabItemProps[] = [
   { name: "Home", path: "/home", icon: "home-outline", activeIcon: "home" },
   { name: "Cart", path: "/cart", icon: "cart-outline", activeIcon: "cart" },
   {
@@ -67,13 +76,13 @@ export default function TabBar() {
       {tabRoutes.map((route) => {
         const isActive =
           pathname === route.path || pathname.startsWith(route.path + "/");
-        const iconName = isActive ? route.activeIcon : route.icon;
+        const iconName: IoniconName = isActive ? route.activeIcon : route.icon;
         const color = isActive ? "#173FAB" : "gray";
 
         return (
           <TabItemLink key={route.name} href={route.path}>
             <TabItemPressable>
-              <Ionicons name={iconName as any} size={iconSize} color={color} />
+              <Ionicons name={iconName} size={iconSize} color={color} />
               {/* <TabLabel style={{ color: color }}>{route.name}</TabLabel> */}
             </TabItemPressable>
           </TabItemLink>

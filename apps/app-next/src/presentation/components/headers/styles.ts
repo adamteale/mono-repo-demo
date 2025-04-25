@@ -1,8 +1,6 @@
 import { StyleSheet } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-export default function getStyles() {
-  const { top } = useSafeAreaInsets();
+export default function getStyles(top: number) {
   return StyleSheet.create({
     customHeader: {
       backgroundColor: "#182958",

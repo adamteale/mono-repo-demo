@@ -7,6 +7,7 @@ import {
   useWindowDimensions,
   View,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 
 import {
@@ -20,7 +21,8 @@ import getStyles from "./styles";
 import { useNavigationHandler } from "../../navigation/useNavigationHandler";
 
 export function CustomHeader() {
-  const styles = getStyles();
+  const { top } = useSafeAreaInsets();
+  const styles = getStyles(top);
   const navigation = useNavigationHandler();
   const width = useWindowDimensions().width;
 

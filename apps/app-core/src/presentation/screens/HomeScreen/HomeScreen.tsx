@@ -2,22 +2,15 @@ import React from "react";
 import {
   View,
   ScrollView,
-  Text,
-  SafeAreaView,
-  FlatList,
   Dimensions,
   useWindowDimensions,
-  ListRenderItem,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import {
   MlBanner,
   MlBannerProps,
-  MlProductCard,
   MlToast,
-  OrCarousel,
-  OrSection,
   ThemeType,
 } from "@mono-repo-demo/atomic-library";
 
@@ -25,9 +18,7 @@ import { useHomeViewModel } from "./useHomeViewModel";
 import { getStyles } from "./styles";
 import { useTheme } from "styled-components/native";
 import FilterIcon from "@mono-repo-demo/atomic-library/assets/FilterIcon";
-import { StyledFlatList } from "./components/StyledFlatList";
 import { StyledNativeFlatList } from "./components/StyledFlatList.web";
-import { StyledFlatListItemStyles } from "./components/styles";
 
 export const HomeScreen = () => {
   const { bannerProps, onTapNavigateToProductDetail, productCard } =
@@ -42,7 +33,7 @@ export const HomeScreen = () => {
   const renderItem = ({ item }: { item: MlBannerProps }) => {
     const bannerHeight = Math.floor(windowWidth / 2);
     return (
-      <View style={[StyledFlatListItemStyles, { width: windowWidth }]}>
+      <View style={[{ width: windowWidth }]}>
         <MlBanner {...item} theme={theme} containerWidth={windowWidth} />
       </View>
     );
