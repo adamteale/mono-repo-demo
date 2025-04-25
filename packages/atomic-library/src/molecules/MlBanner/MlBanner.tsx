@@ -12,7 +12,6 @@ import {
   StyledPressable,
   StyledTitle,
 } from "./styledComponents/styledComponents";
-import { useTheme } from "styled-components";
 
 export const MlBanner = ({
   banner,
@@ -71,6 +70,7 @@ export const MlBanner = ({
           alt={banner?.alt || title || "Banner image"}
           resizeMode="contain"
           testID={`${testID}.imageComponent`}
+          theme={theme}
         />
       </StyledImageWrapper>
 

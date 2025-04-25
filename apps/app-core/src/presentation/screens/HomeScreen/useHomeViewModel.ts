@@ -13,6 +13,7 @@ export const useHomeViewModel = () => {
   const onTapNavigateToProductDetail = () => {
     navigate.navigation.navigateToProductDetail({ id: "1234" });
   };
+  const initialWidth = Dimensions.get("window").width;
 
   const productCard: MlProductCardProps = {
     availabilityLabel: "Available",
@@ -45,11 +46,14 @@ export const useHomeViewModel = () => {
           width: "100%",
           height: "100%",
         },
+        theme: theme,
       },
+      containerWidth: initialWidth,
       title: "Premium mattresses and better sleep ",
       description:
         "Discover top comfort with advanced sleep technology from Serta. Give your home the upgrade it deserves",
       ctaText: "Shop now!",
+      theme: theme,
     },
     {
       banner: {
@@ -61,11 +65,14 @@ export const useHomeViewModel = () => {
           width: "100%",
           height: "100%",
         },
+        theme: theme,
       },
+      containerWidth: initialWidth,
       title: "Where will your tires take you on your next adventure?",
       description:
         "Buy 4 matching tires and save RD$6,250 Brands: Bridgestone, Firestone From March 28th to April 27th Restrictions apply",
       ctaText: "Shop now!",
+      theme: theme,
     },
   ];
 

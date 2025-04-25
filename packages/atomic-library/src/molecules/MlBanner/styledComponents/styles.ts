@@ -1,11 +1,11 @@
 import { css } from "styled-components";
+import { ThemeType } from "@mono-repo-demo/atomic-library";
 
 import {
   StyledDetailContainerProps,
   StyledImageWrapperProps,
   StyledPressableProps,
 } from "./types";
-import { ThemeType } from "src/theme";
 
 const StyledPressableStyles = css<StyledPressableProps>`
   display: flex;
