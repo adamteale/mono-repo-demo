@@ -12,6 +12,7 @@ import {
   StyledPressable,
   StyledTitle,
 } from "./styledComponents/styledComponents";
+import { useTheme } from "styled-components";
 
 export const MlBanner = ({
   banner,
@@ -34,7 +35,11 @@ export const MlBanner = ({
   };
 
   // Calculate height based on container width
-  const height = Math.floor(containerWidth / 2);
+  const validContainerWidth =
+    typeof containerWidth === "number" && !isNaN(containerWidth)
+      ? containerWidth
+      : 0;
+  const height = Math.floor(validContainerWidth / 2);
 
   const pressableDivProps = {
     onClick: handlePress,
@@ -65,7 +70,6 @@ export const MlBanner = ({
           style={imageStyle}
           alt={banner?.alt || title || "Banner image"}
           resizeMode="contain"
-          theme={theme}
           testID={`${testID}.imageComponent`}
         />
       </StyledImageWrapper>
@@ -78,10 +82,10 @@ export const MlBanner = ({
         {ctaText && (
           <AtButton
             title={ctaText}
+            theme={theme}
             onAction={handlePress}
             variant={AtButtonVariant.cta}
             compact={true}
-            theme={theme}
           />
         )}
       </StyledDetailContainer>

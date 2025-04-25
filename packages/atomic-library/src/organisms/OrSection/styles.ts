@@ -1,22 +1,19 @@
-import { StyleSheet } from 'react-native';
-import { Theme } from "@embonor/atomic-core";
+import { StyleSheet } from "react-native";
 
-export const stylex = (theme: Theme, headerPaddingHorizontal?: number) => {
-  const { spacing } = theme;
-
+export const stylex = (headerPaddingHorizontal?: number) => {
   return StyleSheet.create({
     header: {
-      width: '100%',
-      paddingBottom: spacing[2],
+      width: "100%",
+      paddingBottom: 8,
     },
     headerContent: {
-      width: '100%',
-      display: 'flex',
-      alignItems: 'center',
-      flexDirection: 'row',
-      paddingVertical: spacing[1.5],
-      justifyContent: 'space-between',
-      paddingHorizontal: headerPaddingHorizontal ?? spacing[4],
+      width: "100%",
+      display: "flex",
+      alignItems: "center",
+      flexDirection: "row",
+      paddingVertical: 4,
+      justifyContent: "space-between",
+      paddingHorizontal: headerPaddingHorizontal ?? 8,
     },
   });
 };

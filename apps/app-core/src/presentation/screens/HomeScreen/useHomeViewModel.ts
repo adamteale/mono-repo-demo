@@ -45,10 +45,8 @@ export const useHomeViewModel = () => {
           width: "100%",
           height: "100%",
         },
-        theme: theme,
       },
       title: "Premium mattresses and better sleep ",
-      theme: theme,
       description:
         "Discover top comfort with advanced sleep technology from Serta. Give your home the upgrade it deserves",
       ctaText: "Shop now!",
@@ -63,9 +61,7 @@ export const useHomeViewModel = () => {
           width: "100%",
           height: "100%",
         },
-        theme: theme,
       },
-      theme: theme,
       title: "Where will your tires take you on your next adventure?",
       description:
         "Buy 4 matching tires and save RD$6,250 Brands: Bridgestone, Firestone From March 28th to April 27th Restrictions apply",

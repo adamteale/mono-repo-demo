@@ -30,20 +30,18 @@ export type AtImageVariantsDefinition = {
 
 export interface AtImageProps
   extends Omit<ImageProps, "source" | "style" | "resizeMode"> {
-  // Source can be complex, keep it separate for clarity
   source: ImageProps["source"];
   resizeMode?: ImageProps["resizeMode"];
 
   alt?: string;
   disabled?: boolean;
   isSvg?: boolean;
-  variant?: AtImageVariants; // Use the enum/string literal union
+  variant?: AtImageVariants;
 
   // Style for the main container View
   imageContainerStyles?: StyleProp<ViewStyle>;
   // Style specifically for the Image/SVG element itself
   style?: StyleProp<ImageStyle>; // Use ImageStyle here
-
   theme: ThemeType;
   testID?: string;
 }

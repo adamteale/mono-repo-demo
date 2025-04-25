@@ -1,12 +1,20 @@
-import React from "react";
-import { Image, Platform, StyleSheet, View } from "react-native";
+import React, { FC } from "react";
+import {
+  Image,
+  Platform,
+  StyleSheet,
+  View,
+  ImageSourcePropType,
+  ImageStyle,
+  ViewStyle,
+  StyleProp,
+} from "react-native";
 import { SvgUri } from "react-native-svg";
-import styled from "styled-components/native";
+import styled, { useTheme } from "styled-components/native";
 
 import { AtImageProps, AtImageVariants } from "./types";
 import { ThemeType } from "../../theme";
 
-// --- Helper Function ---
 const isNetworkSource = (source: any): source is { uri: string } => {
   return (
     typeof source === "object" &&
@@ -53,10 +61,7 @@ const getBorderRadiusStyles = ({ theme, variant }: StyledImageVariantProps) => {
 interface StyledImageProps extends StyledImageVariantProps {}
 
 const StyledImage = styled(Image)<StyledImageProps>`
-  ${(props: StyledImageProps) =>
-    getBorderRadiusStyles(
-      props
-    )}/* Add any other base styles for AtImage if needed */
+  ${(props: StyledImageProps) => getBorderRadiusStyles(props)}
 `;
 
 interface StyledSvgWrapperProps extends StyledImageVariantProps {}
@@ -85,10 +90,8 @@ const StyledDisabledOverlay = styled.View<{ theme: ThemeType }>`
   right: 0;
   bottom: 0;
 `;
-
 // --- Main Component ---
-
-export const AtImage: React.FC<AtImageProps> = ({
+export const AtImage: FC<AtImageProps> = ({
   alt,
   disabled = false,
   imageContainerStyles = {},
@@ -102,91 +105,108 @@ export const AtImage: React.FC<AtImageProps> = ({
   variant = AtImageVariants.sharp,
   ...rest
 }) => {
-  if (!source) {
+  const typedSource = source as ImageSourcePropType | string | undefined;
+
+  if (!typedSource) {
     return null;
   }
+
+  const imageFillStyle: StyleProp<ImageStyle> = {
+    // Type the style
+    width: "100%",
+    height: "100%",
+  };
+  const combinedImageStyle = StyleSheet.compose(imageFillStyle, style);
 
   // --- SVG Rendering ---
   if (isSvg) {
     if (Platform.OS === "web") {
       let webSvgSrc: string | undefined;
-      if (typeof source === "string") {
-        webSvgSrc = source;
-      } else if (typeof source === "number") {
-        webSvgSrc = source as any; // Let bundler handle require()
-      } else if (isNetworkSource(source)) {
-        webSvgSrc = source.uri;
+      if (typeof typedSource === "string") {
+        webSvgSrc = typedSource;
+      } else if (typeof typedSource === "number") {
+        // require() returns a number ID, handle differently if needed
+        // For web, often better to import SVGs as components or use URLs
+        console.warn(
+          "Direct require() for SVG source might not work as expected on web. Use import or URI."
+        );
+        // Attempt to resolve - This might not work reliably without bundler magic
+        const resolved = Image.resolveAssetSource(typedSource);
+        webSvgSrc = resolved?.uri;
+      } else if (isNetworkSource(typedSource)) {
+        webSvgSrc = typedSource.uri;
       }
 
       if (!webSvgSrc) {
-        console.warn("Invalid source provided for web SVG:", source);
+        console.warn("Invalid source provided for web SVG:", typedSource);
         return null;
       }
 
-      // Use the web wrapper for border radius
+      // Flatten style for React.CSSProperties type assertion
+      const flatWebStyle = StyleSheet.flatten(combinedImageStyle);
+
       return (
         <View testID={`${testID}.container`} style={imageContainerStyles}>
-          <StyledWebSvgWrapper variant={variant} theme={theme}>
-            {/* Apply passed 'style' prop to the img directly */}
+          <StyledWebSvgWrapper
+            variant={variant}
+            theme={theme}
+            style={imageFillStyle}
+          >
             <img
               src={webSvgSrc}
               alt={alt ?? ""}
-              style={StyleSheet.flatten(style) as React.CSSProperties}
+              style={flatWebStyle as React.CSSProperties}
               data-testid={`${testID}.image`}
             />
           </StyledWebSvgWrapper>
-          {disabled && <StyledDisabledOverlay theme={theme} />}
+          {disabled && (
+            <StyledDisabledOverlay theme={theme} variant={variant} />
+          )}
         </View>
       );
     } else {
       // NATIVE SVG
       let resolvedUri: string | undefined;
-      let resolvedWidth: number | string | undefined = "100%";
-      let resolvedHeight: number | string | undefined = "100%";
-
-      if (typeof source === "number") {
-        const resolvedAsset = Image.resolveAssetSource(source);
-        resolvedUri = resolvedAsset?.uri;
-        resolvedWidth = resolvedAsset?.width;
-        resolvedHeight = resolvedAsset?.height;
-      } else if (isNetworkSource(source)) {
-        resolvedUri = source.uri;
-      } else if (typeof source === "string") {
-        resolvedUri = source;
+      if (typeof typedSource === "number") {
+        resolvedUri = Image.resolveAssetSource(typedSource)?.uri;
+      } else if (isNetworkSource(typedSource)) {
+        resolvedUri = typedSource.uri;
+      } else if (typeof typedSource === "string") {
+        // Assuming string is a URI for native SVG
+        resolvedUri = typedSource;
       }
 
       if (!resolvedUri) {
-        console.warn("Invalid source provided for native SVG:", source);
+        console.warn("Invalid source provided for native SVG:", typedSource);
         return null;
       }
 
-      const flattenedStyle = StyleSheet.flatten(style);
-      const {
-        width: styleWidth,
-        height: styleHeight,
-        ...restImageStyles
-      } = flattenedStyle || {};
-
-      const finalWidth = styleWidth ?? resolvedWidth;
-      const finalHeight = styleHeight ?? resolvedHeight;
+      const { width, height, ...restContainerStyle } =
+        StyleSheet.flatten(imageContainerStyles);
 
       return (
-        <View testID={`${testID}.container`} style={imageContainerStyles}>
+        <View
+          testID={`${testID}.container`}
+          style={[{ width, height }, restContainerStyle]}
+        >
           <StyledSvgWrapper
             variant={variant}
             theme={theme}
-            style={{ width: finalWidth, height: finalHeight }}
+            // Make wrapper fill container using absolute positioning
+            style={StyleSheet.absoluteFillObject}
           >
             <SvgUri
               uri={resolvedUri}
               width="100%"
               height="100%"
-              style={restImageStyles}
+              style={style as StyleProp<ViewStyle>}
               aria-label={alt ?? ""}
               testID={`${testID}.image`}
             />
           </StyledSvgWrapper>
-          {disabled && <StyledDisabledOverlay theme={theme} />}
+          {disabled && (
+            <StyledDisabledOverlay theme={theme} variant={variant} />
+          )}
         </View>
       );
     }
@@ -195,10 +215,11 @@ export const AtImage: React.FC<AtImageProps> = ({
     return (
       <View testID={`${testID}.container`} style={imageContainerStyles}>
         <StyledImage
-          source={source}
+          // Source needs to be ImageSourcePropType for <Image>
+          source={typedSource as ImageSourcePropType}
           variant={variant}
           theme={theme}
-          style={style}
+          style={combinedImageStyle}
           alt={alt ?? ""}
           testID={`${testID}.image`}
           resizeMode={resizeMode}
@@ -206,7 +227,7 @@ export const AtImage: React.FC<AtImageProps> = ({
           accessibilityLabel={alt ?? ""}
           {...rest}
         />
-        {disabled && <StyledDisabledOverlay theme={theme} />}
+        {disabled && <StyledDisabledOverlay theme={theme} variant={variant} />}
       </View>
     );
   }

@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@atomic-library/*": ["../../packages/atomic-library/src/*"]
+    }
+  },
+  "extends": "expo/tsconfig.base",
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "../../packages/atomic-library/assets/**/*.tsx",
+    "../../packages/atomic-library/assets/**/*.ts"
+  ]
+}
