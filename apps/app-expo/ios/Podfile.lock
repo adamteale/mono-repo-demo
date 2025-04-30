@@ -256,6 +256,28 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - ExpoScreenOrientation (8.0.4):
+    - DoubleConversion
+    - ExpoModulesCore
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.10.14.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - ExpoSplashScreen (0.29.24):
     - ExpoModulesCore
   - ExpoSymbols (0.2.2):
@@ -2159,6 +2181,7 @@ DEPENDENCIES:
   - ExpoKeepAwake (from `../../../node_modules/expo-keep-awake/ios`)
   - ExpoLinking (from `../../../node_modules/expo-linking/ios`)
   - ExpoModulesCore (from `../../../node_modules/expo-modules-core`)
+  - ExpoScreenOrientation (from `../../../node_modules/expo-screen-orientation/ios`)
   - ExpoSplashScreen (from `../../../node_modules/expo-splash-screen/ios`)
   - ExpoSymbols (from `../../../node_modules/expo-symbols/ios`)
   - ExpoSystemUI (from `../../../node_modules/expo-system-ui/ios`)
@@ -2232,7 +2255,7 @@ DEPENDENCIES:
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../../../node_modules/react-native/ReactCommon`)
   - RNGestureHandler (from `../../../node_modules/react-native-gesture-handler`)
-  - RNReanimated (from `../node_modules/react-native-reanimated`)
+  - RNReanimated (from `../../../node_modules/react-native-reanimated`)
   - RNScreens (from `../../../node_modules/react-native-screens`)
   - RNSVG (from `../../../node_modules/react-native-svg`)
   - Yoga (from `../../../node_modules/react-native/ReactCommon/yoga`)
@@ -2283,6 +2306,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/expo-linking/ios"
   ExpoModulesCore:
     :path: "../../../node_modules/expo-modules-core"
+  ExpoScreenOrientation:
+    :path: "../../../node_modules/expo-screen-orientation/ios"
   ExpoSplashScreen:
     :path: "../../../node_modules/expo-splash-screen/ios"
   ExpoSymbols:
@@ -2427,7 +2452,7 @@ EXTERNAL SOURCES:
   RNGestureHandler:
     :path: "../../../node_modules/react-native-gesture-handler"
   RNReanimated:
-    :path: "../node_modules/react-native-reanimated"
+    :path: "../../../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../../../node_modules/react-native-screens"
   RNSVG:
@@ -2456,6 +2481,7 @@ SPEC CHECKSUMS:
   ExpoKeepAwake: 2a5f15dd4964cba8002c9a36676319a3394c85c7
   ExpoLinking: 0381341519ca7180a3a057d20edb1cf6a908aaf4
   ExpoModulesCore: dd965804a882f1dbb6036fceea4d912461aeaa0d
+  ExpoScreenOrientation: 4f1479023d703dd6f09088297696c39a9b14fab2
   ExpoSplashScreen: 0e176e85073dfb9686c100c7f9637975d00608dd
   ExpoSymbols: b9f255ce49868d46a73f30e12859efeb8117bcad
   ExpoSystemUI: fb8213e39d19e0861320fa69eb60cad7a839c080
@@ -2528,7 +2554,7 @@ SPEC CHECKSUMS:
   ReactCodegen: a044839eb002996e1830338f998bc9654c306b34
   ReactCommon: bfd3600989d79bc3acbe7704161b171a1480b9fd
   RNGestureHandler: 3e17c0c9ceb401041b0e64c8e4c8a057da978a9d
-  RNReanimated: 85dc4e9b23f4a981c26e12a3299929f664302afb
+  RNReanimated: d54a520cb90d633af77a65bf72d48aaac0203b2f
   RNScreens: 2856a2abe759a5a56946874f76372c9f033af19a
   RNSVG: 81d52481cde97ce0dcc81a55b0310723817088d0
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748

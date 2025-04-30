@@ -1,7 +1,13 @@
 import React from "react";
-import { StatusBar, Text, TouchableOpacity, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import {
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Ionicons } from "@expo/vector-icons";
 
 import {
   MlTextfield,
@@ -9,80 +15,89 @@ import {
   PriceSmartLogoLarge,
 } from "@mono-repo-demo/atomic-library";
 
-import { useNavigationContext } from "../../../../../app-core/src/presentation/context";
+import { useNavigationHandler } from "../../navigation/useNavigationHandler";
+import resolveConfig from "tailwindcss/resolveConfig";
+import tailwindConfig from "../../../../tailwind.config.js";
 
-type CustomHeaderProps = {
-  topInset: number;
-};
+const fullConfig = resolveConfig(tailwindConfig);
 
-export function CustomHeader({ topInset }: CustomHeaderProps) {
-  const navigation = useNavigationContext();
+export function CustomHeader() {
+  const { top } = useSafeAreaInsets();
+  const navigation = useNavigationHandler();
+  const { width } = useWindowDimensions();
 
-  const customHeaderHeight = topInset + 60; // Calculate header height
+  const lgBreakpoint = parseInt(fullConfig.theme.screens.lg, 10);
+  const isLargeScreen = width >= lgBreakpoint;
+
+  const headerStyle = {
+    height: top + 80,
+    paddingTop: top + 10,
+  };
 
   return (
     <View
-      className="bg-[#182958] py-3 px-5 flex-row items-center justify-between gap-2"
-      style={{ height: customHeaderHeight, paddingTop: topInset + 10 }}
+      className="bg-backgroundPrimary py-4 px-5 flex-row items-center justify-between gap-2"
+      style={headerStyle}
     >
-      <StatusBar barStyle="light-content" backgroundColor="#000" />
+      <StatusBar barStyle="light-content" backgroundColor="#182958" />
 
-      {/* Large Screen Logo */}
-      <PriceSmartLogoLarge className="hidden lg:flex" />
-
-      {/* Small Screen Logo and Back Button */}
-      <View className="lg:hidden flex-row items-center">
-        <TouchableOpacity
-          onPress={() => navigation.navigation.navigateBack()}
-          className="p-1"
-        >
-          <Ionicons name="apps-sharp" size={40} color="white" />
-        </TouchableOpacity>
-        <PriceSmartLogo />
-      </View>
+      {isLargeScreen ? (
+        <PriceSmartLogoLarge />
+      ) : (
+        <View className="flex-row items-center">
+          <TouchableOpacity
+            onPress={() => navigation.navigateBack()}
+            className="p-[5px]"
+          >
+            <Ionicons name="apps-sharp" size={40} color="white" />
+          </TouchableOpacity>
+          <PriceSmartLogo />
+        </View>
+      )}
 
       <MlTextfield
         value=""
         onChange={(value) => console.log(value)}
-        placeholder="Serach for..."
+        placeholder="Search for..."
       />
 
-      {/* Large Screen Menu Items */}
-      <View className="hidden lg:flex flex-row gap-2.5 px-10 items-center justify-center">
-        <View className="flex-col items-center">
-          <Text style={{ fontSize: 40 }}>🇨🇷</Text>
-          <Text className="text-white top--2.5">Costa Rica</Text>
-        </View>
-
-        <View className="pl-5 flex-row gap-2.5 items-center">
-          <Ionicons name="globe-outline" size={30} color="white" />
-
-          <View className="flex-row">
+      {isLargeScreen && (
+        <View className="flex flex-row items-center gap-2.5 px-10">
+          {/* Country */}
+          <View className="flex-col items-center">
+            <Text className="text-[40px]">🇨🇷</Text>
+            <Text className="text-white -mt-[10px]">Costa Rica</Text>
+          </View>
+          {/* Language */}
+          <View className="pl-5 flex-row items-center gap-2.5">
+            <Ionicons name="globe-outline" size={30} color="white" />
             <View className="flex-col">
               <Text className="text-white">Language</Text>
-              <View className="flex-row">
+              <View className="flex-row items-center">
                 <Text className="text-white">English</Text>
                 <Ionicons
                   name="chevron-down-outline"
                   size={20}
                   color="white"
-                  className="ml-1"
+                  className="ml-[5px]"
                 />
               </View>
             </View>
           </View>
-        </View>
-        <View className="pl-5 flex-row gap-2.5 items-center">
-          <Ionicons name="person-circle-outline" size={30} color="white" />
-          <View>
-            <Text className="text-white">{"Account\nLog In"}</Text>
+          {/* Account */}
+          <View className="pl-5 flex-row items-center gap-2.5">
+            <Ionicons name="person-circle-outline" size={30} color="white" />
+            <View>
+              <Text className="text-white">{"Account\nLog In"}</Text>
+            </View>
+          </View>
+          {/* Cart */}
+          <View className="pl-5 flex-row items-center gap-2.5">
+            <Text className="text-white">Cart</Text>
+            <Ionicons name="cart-outline" size={30} color="white" />
           </View>
         </View>
-        <View className="pl-5 flex-row gap-2.5 items-center">
-          <Text className="text-white">Cart</Text>
-          <Ionicons name="cart-outline" size={30} color="white" />
-        </View>
-      </View>
+      )}
     </View>
   );
 }
