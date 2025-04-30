@@ -24,11 +24,7 @@ import FilterIcon from "@mono-repo-demo/atomic-library/src/assets/FilterIcon";
 export const HomeScreen = () => {
   const { bannerProps, onTapNavigateToProductDetail, productCard } =
     useHomeViewModel();
-  const styles = getStyles();
-  const width = useWindowDimensions().width;
-
-  const { bottom } = useSafeAreaInsets();
-  const windowWidth = Dimensions.get("window").width;
+  const windowWidth = useWindowDimensions().width;
 
   let dynamicHeight: number | undefined;
   if (Platform.OS !== "web") {
@@ -36,7 +32,6 @@ export const HomeScreen = () => {
   }
 
   const renderItem = ({ item }: { item: MlBannerProps }) => {
-    const bannerHeight = Math.floor(windowWidth / 2);
     return (
       <View style={[{ width: windowWidth }]}>
         <MlBanner {...item} containerWidth={windowWidth} />
@@ -57,7 +52,7 @@ export const HomeScreen = () => {
         <ScrollView horizontal={false} showsVerticalScrollIndicator={false}>
           <FlatList
             className="w-full bg-white"
-            style={{ height: dynamicHeight }}
+            contentContainerStyle={{ minHeight: windowWidth }}
             pagingEnabled={true}
             scrollEnabled={true}
             bounces={false}
