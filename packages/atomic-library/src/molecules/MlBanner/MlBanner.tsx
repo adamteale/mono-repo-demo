@@ -1,19 +1,10 @@
 import React from "react";
-import { Linking } from "react-native";
-
-import { AtButton, AtImage, AtButtonVariant } from "../../atoms";
+import { Linking, Pressable, View, Text, Image } from "react-native"; // Correct imports
+import { AtButton, AtButtonVariant, AtImage } from "../../atoms";
 
 import type { MlBannerProps } from "./types";
 
-import {
-  StyledDescription,
-  StyledDetailContainer,
-  StyledImageWrapper,
-  StyledPressable,
-  StyledTitle,
-} from "./styledComponents/styledComponents";
-
-export const MlBanner = ({
+export function MlBanner({
   banner,
   containerWidth,
   ctaText,
@@ -21,9 +12,8 @@ export const MlBanner = ({
   description,
   onPress = () => {},
   testID = "MlBanner",
-  theme,
   title,
-}: MlBannerProps) => {
+}: MlBannerProps) {
   const handlePress = () => {
     if (deeplink) {
       Linking.openURL(deeplink).catch((err) =>
@@ -40,16 +30,6 @@ export const MlBanner = ({
       : 0;
   const height = Math.floor(validContainerWidth / 2);
 
-  const pressableDivProps = {
-    onClick: handlePress,
-    "data-testid": testID,
-    role: "button",
-    onKeyPress: (e: React.KeyboardEvent) => {
-      e.preventDefault();
-      handlePress();
-    },
-  };
-
   const imageStyle = {
     height: Math.min(height, 480),
     width: containerWidth,
@@ -58,37 +38,45 @@ export const MlBanner = ({
   };
 
   return (
-    <StyledPressable
-      {...pressableDivProps}
-      theme={theme}
-      width={containerWidth}
+    <Pressable
+      onPress={handlePress} // Use onPress directly
+      testID={testID} // Use testID directly
+      className="flex flex-col w-full max-w-[1920px] self-center lg:flex-row lg:max-h-[480px]"
     >
-      <StyledImageWrapper theme={theme} width={containerWidth} height={height}>
+      <View
+        className="order-0 overflow-hidden lg:order-1 lg:w-1/2"
+        style={{
+          minHeight: Math.min(height, 480),
+          height: Math.min(height, 480),
+          maxWidth: 960,
+          maxHeight: 480,
+        }}
+      >
         <AtImage
           source={banner?.source}
           style={imageStyle}
           alt={banner?.alt || title || "Banner image"}
           resizeMode="contain"
           testID={`${testID}.imageComponent`}
-          theme={theme}
         />
-      </StyledImageWrapper>
+      </View>
 
-      <StyledDetailContainer theme={theme} width={containerWidth}>
-        {title && <StyledTitle theme={theme}>{title}</StyledTitle>}
+      <View className="w-full lg:w-1/2 flex flex-col justify-center items-start p-5 gap-3 bg-backgroundSecondary text-textPrimary min-h-[220px]">
+        {title && (
+          <Text className="text-h3 font-bold text-textPrimary">{title}</Text>
+        )}
         {description && (
-          <StyledDescription theme={theme}>{description}</StyledDescription>
+          <Text className="text-body text-textPrimary">{description}</Text>
         )}
         {ctaText && (
           <AtButton
             title={ctaText}
-            theme={theme}
             onAction={handlePress}
             variant={AtButtonVariant.cta}
             compact={true}
           />
         )}
-      </StyledDetailContainer>
-    </StyledPressable>
+      </View>
+    </Pressable>
   );
-};
+}

@@ -1,9 +1,8 @@
+import "../global.css";
 import React, { useEffect } from "react";
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import { Slot, useSegments } from "expo-router";
-import { ThemeProvider } from "styled-components/native";
-
-import { theme } from "@atomic-library/index";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { useAuth } from "@Presentation/context/AuthContext";
 import { useNavigationHandler } from "@app-expo/src/presentation/navigation/useNavigationHandler";
@@ -72,18 +71,19 @@ function RootLayoutNav() {
   // If auth state is resolved (true or false), render the Slot.
   // The useEffect above will handle the redirect IF necessary AND if nav is ready.
   console.log("Render: Auth resolved, rendering Slot. isLoggedIn:", isLoggedIn);
+
   return <Slot />;
 }
 
 export default function RootLayout() {
   return (
-    <ThemeProvider theme={theme}>
-      <ExpoNavigationProvider>
-        <AuthProvider>
+    <ExpoNavigationProvider>
+      <AuthProvider>
+        <SafeAreaProvider>
           <RootLayoutNav />
-        </AuthProvider>
-      </ExpoNavigationProvider>
-    </ThemeProvider>
+        </SafeAreaProvider>
+      </AuthProvider>
+    </ExpoNavigationProvider>
   );
 }
 

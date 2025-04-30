@@ -1,15 +1,13 @@
 import { Dimensions } from "react-native";
 
-import { MlProductCardProps, ThemeType } from "@mono-repo-demo/atomic-library";
+import { MlProductCardProps } from "@mono-repo-demo/atomic-library";
 import { useNavigationContext } from "../../context";
 import { MlBannerProps } from "@mono-repo-demo/atomic-library";
-import { useTheme } from "styled-components/native";
 
 const { width } = Dimensions.get("window");
 
 export const useHomeViewModel = () => {
   const navigate = useNavigationContext();
-  const theme = useTheme() as ThemeType;
   const onTapNavigateToProductDetail = () => {
     navigate.navigation.navigateToProductDetail({ id: "1234" });
   };
@@ -46,14 +44,12 @@ export const useHomeViewModel = () => {
           width: "100%",
           height: "100%",
         },
-        theme: theme,
       },
       containerWidth: initialWidth,
       title: "Premium mattresses and better sleep ",
       description:
         "Discover top comfort with advanced sleep technology from Serta. Give your home the upgrade it deserves",
       ctaText: "Shop now!",
-      theme: theme,
     },
     {
       banner: {
@@ -65,14 +61,12 @@ export const useHomeViewModel = () => {
           width: "100%",
           height: "100%",
         },
-        theme: theme,
       },
       containerWidth: initialWidth,
       title: "Where will your tires take you on your next adventure?",
       description:
         "Buy 4 matching tires and save RD$6,250 Brands: Bridgestone, Firestone From March 28th to April 27th Restrictions apply",
       ctaText: "Shop now!",
-      theme: theme,
     },
   ];
 

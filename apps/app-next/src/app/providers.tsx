@@ -1,28 +1,14 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import { useRouter, usePathname } from "next/navigation";
-import { ThemeProvider } from "styled-components/native";
 import { SafeAreaProvider } from "react-native-safe-area-context"; // Keep this provider
 
-import { theme } from "@mono-repo-demo/atomic-library";
 import { useAuth } from "@Presentation/context/AuthContext";
 import TabBar from "../presentation/components/Layout/TabBar";
-import styled from "styled-components";
 import { NextNavigationProvider } from "../presentation/navigation/NextNavigationProvider";
 import { AuthProvider } from "../presentation/context/AppProvider";
-
-// Styled components...
-const AppContainer = styled.div`
-  /* ... */
-`;
-const ContentArea = styled.main`
-  /* ... */
-`;
-const LoadingContainer = styled.div`
-  /* ... */
-`;
 
 // Component that handles auth logic AND renders layout
 function AuthAwareLayout({ children }: { children: React.ReactNode }) {
@@ -40,9 +26,9 @@ function AuthAwareLayout({ children }: { children: React.ReactNode }) {
 
   if (isLoggedIn === null) {
     return (
-      <LoadingContainer>
+      <View>
         <ActivityIndicator size="large" color="#0000ff" />
-      </LoadingContainer>
+      </View>
     );
   }
 
@@ -57,10 +43,10 @@ function AuthAwareLayout({ children }: { children: React.ReactNode }) {
   if (showAppLayout) {
     return <>{children}</>;
     return (
-      <AppContainer>
-        <ContentArea>{children}</ContentArea>
+      <View>
+        <View>{children}</View>
         <TabBar />
-      </AppContainer>
+      </View>
     );
   } else {
     // Render children directly for login page (or other non-app layouts)
@@ -71,23 +57,13 @@ function AuthAwareLayout({ children }: { children: React.ReactNode }) {
 
 // Main Providers Component
 export default function Providers({ children }: { children: React.ReactNode }) {
-  // const webNavigationHandler = useWebNavigationHandler(); // Create handler if needed by NavProvider
-
-  console.log("Rendering Providers component setup");
   return (
-    // Providers needed by ALL routes go here
     <SafeAreaProvider>
-      <ThemeProvider theme={theme}>
-        {/* Navigation and Auth might only be needed by protected routes,
-            but putting AuthProvider here is common to check status early */}
-        <AuthProvider>
-          {/* NavigationProvider might be needed by AuthAwareLayout if it navigates */}
-          <NextNavigationProvider>
-            {/* AuthAwareLayout now decides layout structure */}
-            <AuthAwareLayout>{children}</AuthAwareLayout>
-          </NextNavigationProvider>
-        </AuthProvider>
-      </ThemeProvider>
+      <AuthProvider>
+        <NextNavigationProvider>
+          <AuthAwareLayout>{children}</AuthAwareLayout>
+        </NextNavigationProvider>
+      </AuthProvider>
     </SafeAreaProvider>
   );
 }

@@ -10,7 +10,7 @@ This project is a cross-platform application built using a **monorepo** structur
     - Uses **Expo** for the development workflow, build services, and access to native capabilities.
     - Employs **Expo Router** for file-based routing and navigation (including tab bars and nested stacks).
     - Renders UI components shared from `atomic-library` and `app-core`.
-    - Uses `styled-components/native` via `atomic-library`.
+    - Uses **NativeWind** to apply **Tailwind CSS** classes for styling.
     - Requires `<SafeAreaProvider>` for handling device notches/safe areas.
 
 2.  **`app-next` (Next.js Web App):**
@@ -18,27 +18,27 @@ This project is a cross-platform application built using a **monorepo** structur
     - The web application targeting modern browsers.
     - Built with **Next.js (App Router)**, focusing on leveraging **Server-Side Rendering (SSR)** for performance and SEO.
     - Uses **Turbopack** (during development, configured via `next.config.ts`) or Webpack (if `--turbo` is omitted) as the bundler.
-    - Renders shared UI components by utilizing **`react-native-web`**. This requires specific configuration in `next.config.ts` (`resolveAlias` for `react-native` and potentially others like `react-native-svg`, `styled-components/native`; `transpilePackages`; `nohoist` in root `package.json`) to bridge the gap between native component expectations and web rendering.
-    - Uses the web version of **`styled-components`** via its own `ThemeProvider`.
-    - Implements routing using Next.js's file-based App Router (`app/layout.tsx`, `app/page.tsx`, etc.).
-    - Deployed easily using **Vercel**.
+    - Renders shared UI components by utilizing **`react-native-web`**. This requires specific configuration in `next.config.ts` (`resolveAlias` for `react-native` and potentially others like `react-native-svg`; `transpilePackages`; `nohoist` in root `package.json`) to bridge the gap between native component expectations and web rendering.
+    - Uses **NativeWind** to apply **Tailwind CSS** classes for styling.
 
 3.  **`app-core` (Shared Core Logic):**
 
-    - A shared library containing the application's core business logic, data fetching (repositories, data sources), domain models, and potentially shared presentation logic (ViewModels, context providers).
+    - A shared library containing the application's core business logic, data fetching (repositories, data sources), domain models, and potentially shared presentation logic (ViewModels, context providers) that might include React Native components.
     - Follows **MVVM (Model-View-ViewModel) + Clean Architecture** principles.
     - Contains the abstract `NavigationService` interface, defining platform-agnostic navigation actions.
     - Contains shared context providers like `AuthProvider` and `NavigationProvider`.
+    - Uses **NativeWind** to apply **Tailwind CSS** classes for styling React Native components (if any) that are shared in this package.
 
 4.  **`atomic-library` (Shared UI Components):**
-    - A shared library containing reusable, low-level UI components (like `AtButton`) built using **React Native primitives** (`View`, `Text`, `Pressable`) and styled with **`styled-components/native`**.
-    - These components are designed to be rendered correctly on both native (via React Native) and web (via React Native Web). Requires careful implementation to ensure theme context (`useTheme`) and base component resolution works across platforms.
+
+    - A shared library containing reusable, low-level UI components (like `AtButton`) built using **React Native primitives** (`View`, `Text`, `Pressable`) and styled with **Tailwind CSS classes via NativeWind**.
+    - These components are designed to be rendered correctly on both native (via React Native) and web (via React Native Web). Requires careful attention to the `tailwind.config.js` to ensure theme consistency and accurate `content` paths.
 
 **Key Technologies & Concepts:**
 
 - **Monorepo:** Yarn Workspaces for managing multiple packages.
 - **Cross-Platform:** React Native, Expo, Next.js, React Native Web.
-- **UI & Styling:** React Native primitives, `styled-components`, `styled-components/native`.
+- **UI & Styling:** React Native primitives, **NativeWind**, **Tailwind CSS**.
 - **Routing:** Expo Router (mobile), Next.js App Router (web).
 - **Navigation Abstraction:** A custom `NavigationService` interface in `app-core` with platform-specific implementations (`useMobileNavigationHandler`, `useWebNavigationHandler`) in each app using the respective router's hooks (`useRouter` from expo-router / next/navigation).
 - **State Management:** React Context (`AuthProvider`, `NavigationProvider`, potentially others).
@@ -46,6 +46,16 @@ This project is a cross-platform application built using a **monorepo** structur
 - **Language:** TypeScript.
 - **Build/Bundling:** Expo CLI (Metro), Next.js CLI (Turbopack/Webpack).
 - **Deployment (Web):** Vercel.
+
+**Key Changes and Considerations with NativeWind/Tailwind CSS:**
+
+- **`tailwind.config.js`:** A central `tailwind.config.js` file at the root of the monorepo defines the shared Tailwind CSS configuration. It's crucial to maintain accurate `content` paths in this file to ensure that _all_ components in _all_ packages are correctly styled.
+- **NativeWind:** NativeWind is used throughout the monorepo.
+- **CSS Files and `input.css`:** You should no longer be using the `input.css` files in NativeWind v4, and the `tailwind` script should not be used either.
+- **Web Implementation:** The `app-next` project relies on React Native Web and Nativewind for cross-platform code sharing.
+- **Dynamic Styles:** For dynamic styles that cannot be directly expressed with Tailwind CSS classes (e.g., styles that depend on runtime values), you can use inline styles in components.
+- **Theme Consistency:** It's essential to maintain theme consistency between your React Native and web projects. You can customize your Tailwind CSS theme to match your existing design tokens.
+- **`.babelrc.js`:** With NativeWind v4, special babel configuration is no longer required.
 
 **What it Achieves:**
 

@@ -1,5 +1,4 @@
 import { AtImageProps } from "../../atoms/AtImage/types";
-import { ThemeType } from "../../theme";
 
 export type MlBannerProps = {
   banner: AtImageProps;
@@ -9,6 +8,5 @@ export type MlBannerProps = {
   description: string;
   onPress?: () => void;
   testID?: string;
-  theme: ThemeType;
   title: string;
 };

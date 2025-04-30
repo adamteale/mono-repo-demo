@@ -52,9 +52,7 @@
       }
     },
     "owner": "adam.teale",
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
+    "runtimeVersion": "1.0.0",
     "updates": {
       "url": "https://u.expo.dev/c341ecc2-0b28-490c-a09d-9ea72c7f75d3"
     }

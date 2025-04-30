@@ -2,33 +2,15 @@
 
 import React, { useEffect } from "react";
 import { ActivityIndicator } from "react-native";
-import styled from "styled-components";
 
 import { useNavigationHandler } from "@app-next/src/presentation/navigation/useNavigationHandler";
 import { useAuth } from "@Presentation/context/AuthContext";
 import TabBar from "../../presentation/components/Layout/TabBar";
 
-const LoadingContainer = styled.div`
-  flex: 1;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const AppContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-`;
-
-const ContentArea = styled.main`
-  flex: 1;
-`;
-
 function AuthenticatedContent({ children }: { children: React.ReactNode }) {
   const { isLoggedIn } = useAuth();
   const navigation = useNavigationHandler();
+
   useEffect(() => {
     if (isLoggedIn === null) return;
     if (!isLoggedIn) {
@@ -38,9 +20,9 @@ function AuthenticatedContent({ children }: { children: React.ReactNode }) {
 
   if (isLoggedIn === null) {
     return (
-      <LoadingContainer>
+      <div className="flex-1 min-h-screen flex justify-center items-center">
         <ActivityIndicator size="large" color="#0000ff" />
-      </LoadingContainer>
+      </div>
     );
   }
 
@@ -49,10 +31,10 @@ function AuthenticatedContent({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <AppContainer>
-      <ContentArea>{children}</ContentArea>
+    <div className="flex flex-col min-h-screen">
+      <main className="flex-1">{children}</main>
       <TabBar />
-    </AppContainer>
+    </div>
   );
 }
 

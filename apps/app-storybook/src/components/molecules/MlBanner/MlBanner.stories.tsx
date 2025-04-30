@@ -4,7 +4,6 @@ import { action } from "@storybook/addon-actions";
 import { Dimensions, Platform, View } from "react-native";
 import { MlBanner, theme } from "@atomic-library/index";
 import { CenterStory } from "src/components/utils/CenterStory";
-import { ThemeProvider } from "styled-components/native";
 
 interface ResponsiveBannerWrapperProps {
   children: (width: number) => ReactNode;
@@ -57,14 +56,12 @@ const MlBannerMeta: Meta<typeof MlBanner> = {
   },
   decorators: [
     (Story, context: StoryContext<Args>) => (
-      <ThemeProvider theme={theme}>
-        <ResponsiveBannerWrapper>
-          {(width) => (
-            // Render the story, merging original args with dynamic width
-            <Story args={{ ...context.args, containerWidth: width }} />
-          )}
-        </ResponsiveBannerWrapper>
-      </ThemeProvider>
+      <ResponsiveBannerWrapper>
+        {(width) => (
+          // Render the story, merging original args with dynamic width
+          <Story args={{ ...context.args, containerWidth: width }} />
+        )}
+      </ResponsiveBannerWrapper>
     ),
     // Inner decorator: Centers the responsive banner
     (Story) => <CenterStory style={{ width: "100%" }} story={Story} />,
@@ -83,9 +80,7 @@ export const Default: Story = {
       source: {
         uri: "https://pricesmart.bloomreach.io/cdn-cgi/image/fit=scale-down,width=1920,height=900,quality=90,format=webp/https://pricesmart.bloomreach.io/delivery/resources/content/gallery/pricesmart/homepage/fy25/may-2025/ciclo-a/pf-2830-slider-banner-tu.png",
       },
-      theme: theme,
     },
-    theme: theme,
     title: "Premium mattresses and better sleep ",
     description:
       "Discover top comfort with advanced sleep technology from Serta. Give your home the upgrade it deserves",
@@ -103,7 +98,6 @@ export const NoDescription: Story = {
     banner: {
       source: { uri: "https://via.placeholder.com/960x480" },
       alt: "Banner image",
-      theme: theme,
     },
     description: undefined,
     onPress: action("Banner Pressed"),

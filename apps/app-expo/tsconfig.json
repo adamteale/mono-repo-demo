@@ -15,7 +15,8 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    "../../packages/atomic-library/assets/**/*.tsx",
-    "../../packages/atomic-library/assets/**/*.ts"
+    "../../packages/atomic-library/src/assets/**/*.tsx",
+    "../../packages/atomic-library/src/assets/**/*.ts",
+    "nativewind-env.d.ts"
   ]
 }

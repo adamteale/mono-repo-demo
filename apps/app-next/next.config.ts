@@ -5,20 +5,17 @@ import type { Configuration as WebpackConfiguration } from "webpack";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
-  compiler: {
-    styledComponents: true,
-  },
-
   transpilePackages: [
     "react-native-svg",
     "@react-native/assets-registry",
-    "styled-components",
-    "styled-components/native",
     "@mono-repo-demo/atomic-library",
+    "@mono-repo-demo/app-core",
     "@expo/vector-icons",
     "react-native-vector-icons",
     "expo-modules-core",
     "expo-font",
+    "nativewind",
+    "react-native-css-interop",
   ],
 
   async redirects() {
@@ -40,7 +37,6 @@ const nextConfig: NextConfig = {
       ...(config.resolve.alias || {}),
       "react-native$": "react-native-web",
       "react-native-svg$": "react-native-svg",
-      "styled-components/native$": "styled-components",
     };
 
     if (!config.resolve.extensions) config.resolve.extensions = [];

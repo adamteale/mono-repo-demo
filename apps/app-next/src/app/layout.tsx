@@ -1,5 +1,6 @@
+import "../styles/global.css";
+
 import React from "react";
-import StyledComponentsRegistry from "../lib/styled-components-registry";
 
 import Providers from "./providers";
 
@@ -17,9 +18,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body>
-        <StyledComponentsRegistry>
-          <Providers>{children}</Providers>
-        </StyledComponentsRegistry>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

@@ -11,6 +11,14 @@
     "baseUrl": ".",
     "paths": {}
   },
-  "include": ["src", "./src/theme/styled.d.ts"],
+  "include": [
+    "src",
+    "**/*.ts",
+    "**/*.tsx",
+    "./src/theme/styled.d.ts",
+    "nativewind-env.d.ts",
+    "../../packages/atomic-library/src/assets/**/*.tsx",
+    "../../packages/atomic-library/src/assets/**/*.ts"
+  ],
   "exclude": ["node_modules", "dist"]
 }

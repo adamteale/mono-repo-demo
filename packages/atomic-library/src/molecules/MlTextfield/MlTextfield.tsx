@@ -1,8 +1,9 @@
 import { Pressable, Text, TextInput, View } from "react-native";
 
 import { MlTextfieldProps } from "..";
-import SearchIcon from "@mono-repo-demo/atomic-library/assets/SearchIcon";
+
 import { useState } from "react";
+import SearchIcon from "../../assets/SearchIcon";
 
 export const MlTextfield = ({
   placeholder,

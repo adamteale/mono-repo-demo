@@ -1,21 +1,9 @@
 "use client";
 
 import React from "react";
-import styled from "styled-components";
 
-// Define the styled wrapper component
-const AuthLayoutWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  /* align-items: center; */
-  /* justify-content: center; */
-`;
-
-export default function AuthLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return <AuthLayoutWrapper>{children}</AuthLayoutWrapper>;
+function AuthLayout({ children }: { children: React.ReactNode }) {
+  return <div className="flex flex-col min-h-screen">{children}</div>;
 }
+
+export default AuthLayout;

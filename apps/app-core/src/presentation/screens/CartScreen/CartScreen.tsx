@@ -1,20 +1,13 @@
 import React from "react";
 import { SafeAreaView, View } from "react-native";
 
-import { StyledContainerExample, StyledB, StyledC } from "./styledComponents";
-import { useTheme } from "styled-components/native";
-
-import { ThemeType } from "@mono-repo-demo/atomic-library";
-
 export const CartScreen = () => {
-  const theme = useTheme() as ThemeType;
-
   return (
-    <SafeAreaView style={{ width: "100%" }}>
-      <StyledContainerExample theme={theme}>
-        <StyledB theme={theme} />
-        <StyledC theme={theme} />
-      </StyledContainerExample>
+    <SafeAreaView className="w-full">
+      <View className="flex flex-row w-full md:flex-col">
+        <View className="bg-backgroundPrimary h-[400px] min-w-0 flex-1 md:w-full md:max-w-none md:flex-none" />
+        <View className="bg-backgroundTertiary h-[400px] flex-1 max-w-[960px] md:w-full md:flex-none" />
+      </View>
     </SafeAreaView>
   );
 };

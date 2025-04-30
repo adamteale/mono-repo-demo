@@ -5,6 +5,7 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "jsxImportSource": "nativewind",
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -34,7 +35,10 @@
     "**/*.tsx",
     "../app-core/src/**/*.tsx",
     "next-env.d.ts",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "../../packages/atomic-library/src/assets/**/*.tsx",
+    "../../packages/atomic-library/src/assets/**/*.ts",
+    "nativewind-env.d.ts"
   ],
   "exclude": ["node_modules"]
 }

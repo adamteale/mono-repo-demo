@@ -6,14 +6,12 @@ import {
   View,
   ImageSourcePropType,
   ImageStyle,
-  ViewStyle,
   StyleProp,
+  ViewStyle,
 } from "react-native";
 import { SvgUri } from "react-native-svg";
-import styled, { useTheme } from "styled-components/native";
 
 import { AtImageProps, AtImageVariants } from "./types";
-import { ThemeType } from "../../theme";
 
 const isNetworkSource = (source: any): source is { uri: string } => {
   return (
@@ -23,73 +21,6 @@ const isNetworkSource = (source: any): source is { uri: string } => {
   );
 };
 
-// --- Styled Components ---
-
-interface StyledImageVariantProps {
-  variant?: AtImageVariants;
-  theme: ThemeType;
-}
-
-const getBorderRadiusStyles = ({ theme, variant }: StyledImageVariantProps) => {
-  const radii = theme.radii;
-  switch (variant) {
-    case AtImageVariants.sharp:
-      return `border-radius: ${radii.sharp}px;`;
-    case AtImageVariants.allRounded:
-      return `border-radius: ${radii.rounded}px;`;
-    case AtImageVariants.circle:
-      return `border-radius: ${radii.circle}px;`;
-    case AtImageVariants.topRounded:
-      return `
-        border-top-left-radius: ${radii.rounded}px;
-        border-top-right-radius: ${radii.rounded}px;
-        border-bottom-left-radius: ${radii.sharp}px;
-        border-bottom-right-radius: ${radii.sharp}px;
-      `;
-    case AtImageVariants.bottomRounded:
-      return `
-        border-top-left-radius: ${radii.sharp}px;
-        border-top-right-radius: ${radii.sharp}px;
-        border-bottom-left-radius: ${radii.rounded}px;
-        border-bottom-right-radius: ${radii.rounded}px;
-      `;
-    default:
-      return `border-radius: ${radii.sharp}px;`;
-  }
-};
-
-interface StyledImageProps extends StyledImageVariantProps {}
-
-const StyledImage = styled(Image)<StyledImageProps>`
-  ${(props: StyledImageProps) => getBorderRadiusStyles(props)}
-`;
-
-interface StyledSvgWrapperProps extends StyledImageVariantProps {}
-const StyledSvgWrapper = styled.View<StyledSvgWrapperProps>`
-  ${(props: StyledSvgWrapperProps) => getBorderRadiusStyles(props)}
-  overflow: hidden; /* Important to clip the SVG */
-`;
-
-interface StyledWebSvgWrapperProps extends StyledImageVariantProps {}
-
-const StyledWebSvgWrapper = styled.View<StyledWebSvgWrapperProps>`
-  ${(props: StyledWebSvgWrapperProps) => getBorderRadiusStyles(props)}
-  overflow: hidden;
-  display: inline-block;
-`;
-
-const StyledDisabledOverlay = styled.View<{ theme: ThemeType }>`
-  background-color: ${({ theme }: { theme: ThemeType }) =>
-    theme.colors.white ?? "#FFFFFF"};
-  opacity: 0.7;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-`;
 // --- Main Component ---
 export const AtImage: FC<AtImageProps> = ({
   alt,
@@ -101,7 +32,6 @@ export const AtImage: FC<AtImageProps> = ({
   resizeMode = "cover",
   source,
   testID = "AtImage",
-  theme,
   variant = AtImageVariants.sharp,
   ...rest
 }) => {
@@ -117,6 +47,16 @@ export const AtImage: FC<AtImageProps> = ({
     height: "100%",
   };
   const combinedImageStyle = StyleSheet.compose(imageFillStyle, style);
+
+  const borderRadiusMap = {
+    [AtImageVariants.sharp]: "rounded-none",
+    [AtImageVariants.circle]: "rounded-full",
+    [AtImageVariants.allRounded]: "rounded-md",
+    [AtImageVariants.bottomRounded]: "rounded-b-md",
+    [AtImageVariants.topRounded]: "rounded-t-md",
+  };
+
+  const borderRadiusStyle = borderRadiusMap[variant] || "rounded-none";
 
   // --- SVG Rendering ---
   if (isSvg) {
@@ -147,20 +87,16 @@ export const AtImage: FC<AtImageProps> = ({
 
       return (
         <View testID={`${testID}.container`} style={imageContainerStyles}>
-          <StyledWebSvgWrapper
-            variant={variant}
-            theme={theme}
-            style={imageFillStyle}
-          >
+          <View className={`overflow-hidden ${borderRadiusStyle}`}>
             <img
               src={webSvgSrc}
               alt={alt ?? ""}
               style={flatWebStyle as React.CSSProperties}
               data-testid={`${testID}.image`}
             />
-          </StyledWebSvgWrapper>
+          </View>
           {disabled && (
-            <StyledDisabledOverlay theme={theme} variant={variant} />
+            <View className="bg-white opacity-70 justify-center items-center absolute top-0 left-0 right-0 bottom-0" />
           )}
         </View>
       );
@@ -189,10 +125,8 @@ export const AtImage: FC<AtImageProps> = ({
           testID={`${testID}.container`}
           style={[{ width, height }, restContainerStyle]}
         >
-          <StyledSvgWrapper
-            variant={variant}
-            theme={theme}
-            // Make wrapper fill container using absolute positioning
+          <View
+            className={`overflow-hidden ${borderRadiusStyle}`}
             style={StyleSheet.absoluteFillObject}
           >
             <SvgUri
@@ -203,9 +137,9 @@ export const AtImage: FC<AtImageProps> = ({
               aria-label={alt ?? ""}
               testID={`${testID}.image`}
             />
-          </StyledSvgWrapper>
+          </View>
           {disabled && (
-            <StyledDisabledOverlay theme={theme} variant={variant} />
+            <View className="bg-white opacity-70 justify-center items-center absolute top-0 left-0 right-0 bottom-0" />
           )}
         </View>
       );
@@ -214,11 +148,10 @@ export const AtImage: FC<AtImageProps> = ({
     // --- Regular Image Rendering ---
     return (
       <View testID={`${testID}.container`} style={imageContainerStyles}>
-        <StyledImage
+        <Image
           // Source needs to be ImageSourcePropType for <Image>
           source={typedSource as ImageSourcePropType}
-          variant={variant}
-          theme={theme}
+          className={borderRadiusStyle}
           style={combinedImageStyle}
           alt={alt ?? ""}
           testID={`${testID}.image`}
@@ -227,7 +160,9 @@ export const AtImage: FC<AtImageProps> = ({
           accessibilityLabel={alt ?? ""}
           {...rest}
         />
-        {disabled && <StyledDisabledOverlay theme={theme} variant={variant} />}
+        {disabled && (
+          <View className="bg-white opacity-70 justify-center items-center absolute top-0 left-0 right-0 bottom-0" />
+        )}
       </View>
     );
   }

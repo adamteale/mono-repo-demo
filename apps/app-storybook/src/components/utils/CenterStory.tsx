@@ -1,7 +1,5 @@
 import React from "react";
 import { View, type StyleProp, type ViewStyle } from "react-native";
-import { ThemeProvider } from "styled-components";
-import { theme } from "@atomic-library/theme";
 
 type Props = {
   onlyVertical?: boolean;
@@ -14,20 +12,18 @@ export const CenterStory = ({
   style,
   onlyVertical = false,
 }: Props) => (
-  <ThemeProvider theme={theme}>
-    <View style={{ flex: 1, justifyContent: "center" }}>
-      <View
-        style={[
-          {
-            justifyContent: "center",
-            alignItems: onlyVertical ? undefined : "center",
-            alignSelf: "center",
-          },
-          style,
-        ]}
-      >
-        <Story />
-      </View>
+  <View style={{ flex: 1, justifyContent: "center" }}>
+    <View
+      style={[
+        {
+          justifyContent: "center",
+          alignItems: onlyVertical ? undefined : "center",
+          alignSelf: "center",
+        },
+        style,
+      ]}
+    >
+      <Story />
     </View>
-  </ThemeProvider>
+  </View>
 );

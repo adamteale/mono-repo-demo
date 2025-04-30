@@ -23,6 +23,10 @@
     },
     "jsx": "react"
   },
-  "include": ["src", "../../packages/src/theme/styled.d.ts"],
+  "include": [
+    "src",
+    "../../packages/src/theme/styled.d.ts",
+    "nativewind-env.d.ts"
+  ],
   "exclude": ["node_modules", "dist"]
 }

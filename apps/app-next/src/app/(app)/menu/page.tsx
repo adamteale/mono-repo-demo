@@ -1,18 +1,15 @@
 "use client";
 
 import React from "react";
-import styled from "styled-components";
 
 import { MenuScreen } from "@Presentation/screens/MenuScreen/MenuScreen";
 
-const MenuLayoutWrapper = styled.div`
-  flex: 1;
-`;
-
-export default function MenuTabPage() {
+function MenuTabPage() {
   return (
-    <MenuLayoutWrapper>
+    <div className="flex-1">
       <MenuScreen />
-    </MenuLayoutWrapper>
+    </div>
   );
 }
+
+export default MenuTabPage;

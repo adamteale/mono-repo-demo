@@ -5,6 +5,7 @@ import {
   CustomHeader,
   CustomHeaderB,
 } from "@app-expo/src/presentation/components";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export enum HomeRoutes {
   Home = "home",
@@ -12,10 +13,12 @@ export enum HomeRoutes {
 }
 
 export default function HomeStackLayout() {
+  const { top } = useSafeAreaInsets();
+
   return (
     <Stack
       screenOptions={{
-        header: () => <CustomHeader />,
+        header: () => <CustomHeader topInset={top} />,
       }}
     >
       <Stack.Screen name={HomeRoutes.Home} />

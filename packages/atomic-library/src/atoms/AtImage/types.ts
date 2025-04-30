@@ -1,14 +1,4 @@
-import {
-  ImageLoadEventData,
-  ImageProps,
-  ImageResizeMode,
-  ImageSourcePropType,
-  ImageStyle,
-  NativeSyntheticEvent,
-  StyleProp,
-  ViewStyle,
-} from "react-native";
-import { ThemeType } from "../../theme";
+import { ImageProps, ImageStyle, StyleProp, ViewStyle } from "react-native";
 
 export enum AtImageVariants {
   sharp = "sharp",
@@ -42,6 +32,5 @@ export interface AtImageProps
   imageContainerStyles?: StyleProp<ViewStyle>;
   // Style specifically for the Image/SVG element itself
   style?: StyleProp<ImageStyle>; // Use ImageStyle here
-  theme: ThemeType;
   testID?: string;
 }

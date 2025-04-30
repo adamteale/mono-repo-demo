@@ -1,5 +1,4 @@
 import { StyleProp, ViewStyle } from "react-native";
-import { ThemeType } from "../../theme";
 
 export enum AtButtonVariant {
   primary,
@@ -12,7 +11,6 @@ export type AtButtonProps = {
   disabled?: boolean;
   onAction: () => void;
   style?: StyleProp<ViewStyle>;
-  theme: ThemeType;
   title: string;
   variant?: AtButtonVariant;
 };
