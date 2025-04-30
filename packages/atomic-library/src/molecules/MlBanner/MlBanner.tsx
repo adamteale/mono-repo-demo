@@ -1,6 +1,6 @@
 import React from "react";
-import { Linking, Pressable, View, Text, Image } from "react-native"; // Correct imports
-import { AtButton, AtButtonVariant, AtImage } from "../../atoms"; // Make sure AtImage is imported
+import { Linking, Pressable, View, Text } from "react-native";
+import { AtButton, AtButtonVariant, AtImage } from "../../atoms";
 
 import type { MlBannerProps } from "./types";
 
@@ -28,55 +28,61 @@ export function MlBanner({
     typeof containerWidth === "number" && !isNaN(containerWidth)
       ? containerWidth
       : 0;
-  const height = Math.floor(validContainerWidth / 2);
+  const calculatedHeight = Math.floor(validContainerWidth / 2);
+  const finalImageHeight = Math.min(calculatedHeight, 480);
 
   // Define the style for the AtImage component itself
   const imageStyle = {
-    // NOTE: These dimensions define the BOUNDS of the AtImage component.
-    // resizeMode="contain" will fit the image within these bounds.
-    // The parent View's flex properties will center *this* component.
-    height: Math.min(height, 480),
-    width: validContainerWidth, // Use valid width
+    height: finalImageHeight,
+    width: validContainerWidth,
     maxWidth: 960,
     maxHeight: 480,
   };
 
+  // Define the style for the image container View
+  const imageContainerStyle = {
+    height: finalImageHeight,
+    maxHeight: 480,
+    maxWidth: 960,
+  };
+
   return (
     <Pressable
-      onPress={handlePress} // Use onPress directly
-      testID={testID} // Use testID directly
-      className="flex flex-col w-full max-w-[1920px] self-center lg:flex-row lg:max-h-[480px]"
+      onPress={handlePress}
+      testID={testID}
+      className="
+        flex flex-col w-full max-w-[1920px] self-center {/* Base styles */}
+        lg:flex-row                                     {/* Switch to row on large screens */}
+      "
+      style={{ backgroundColor: "red" }}
     >
       {/* Image Wrapper View */}
       <View
         className="
           order-0 overflow-hidden           {/* Base styles */}
           lg:order-1 lg:w-1/2             {/* Responsive styles */}
-          flex items-center justify-center {/* Added flex centering */}
+          flex items-center justify-center {/* Centering styles */}
         "
-        style={{
-          // These styles define the size of the container *around* the image
-          minHeight: Math.min(height, 480),
-          height: Math.min(height, 480),
-          maxWidth: 960,
-          maxHeight: 480,
-        }}
+        style={imageContainerStyle}
       >
         {/* The Actual Image Component */}
         <AtImage
           source={banner?.source}
-          // Apply the calculated dimensions to the AtImage itself
           style={imageStyle}
           alt={banner?.alt || title || "Banner image"}
-          // 'contain' fits the image inside the style dimensions, maintaining aspect ratio
           resizeMode="contain"
           testID={`${testID}.imageComponent`}
-          // theme prop might not be needed if AtImage doesn't use styled-components anymore
         />
       </View>
 
       {/* Detail Container View */}
-      <View className="w-full lg:w-1/2 flex flex-col justify-center items-start p-5 gap-3 bg-backgroundSecondary text-textPrimary min-h-[220px]">
+      <View
+        className="
+        w-full flex flex-col justify-center items-start {/* Base styles */}
+        p-5 gap-3 bg-backgroundSecondary text-textPrimary min-h-[220px] {/* Padding, gap, color, min-height */}
+        lg:w-1/2 lg:self-stretch lg:order-0                 {/* Responsive styles + stretch */}
+      "
+      >
         {title && (
           <Text className="text-h3 font-bold text-textPrimary">{title}</Text>
         )}
@@ -89,7 +95,6 @@ export function MlBanner({
             onAction={handlePress}
             variant={AtButtonVariant.cta}
             compact={true}
-            // theme prop might not be needed if AtButton is converted
           />
         )}
       </View>
