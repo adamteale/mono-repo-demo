@@ -5,6 +5,7 @@ interface AtButtonPressableContainerProps extends PressableProps {
   variant: AtButtonVariant;
   compact: boolean;
   onPress?: () => void;
+  accesibilityRole?: string;
 }
 
 export default function ButtonPressableContainer({
@@ -56,6 +57,7 @@ export default function ButtonPressableContainer({
       `}
       onPress={onPress}
       disabled={disabled}
+      accessibilityRole="button"
     >
       {children}
     </Pressable>

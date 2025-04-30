@@ -23,7 +23,7 @@ export interface AtImageProps
   source: ImageProps["source"];
   resizeMode?: ImageProps["resizeMode"];
 
-  alt?: string;
+  alt: string;
   disabled?: boolean;
   isSvg?: boolean;
   variant?: AtImageVariants;

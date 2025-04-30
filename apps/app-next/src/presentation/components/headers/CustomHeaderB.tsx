@@ -20,7 +20,11 @@ export function CustomHeaderB() {
     >
       <StatusBar barStyle="light-content" backgroundColor="#182958" />
 
-      <TouchableOpacity onPress={() => navigation.goBack()} className="p-[5px]">
+      <TouchableOpacity
+        accessibilityRole="button"
+        onPress={navigation.goBack}
+        className="p-[5px]"
+      >
         <Ionicons name="arrow-back" size={40} color="white" />
       </TouchableOpacity>
     </View>

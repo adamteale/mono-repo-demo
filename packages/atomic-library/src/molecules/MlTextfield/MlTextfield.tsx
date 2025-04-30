@@ -9,6 +9,9 @@ export const MlTextfield = ({
   placeholder,
   value,
   onChange,
+  accessibilityLabel,
+  accessibilityRole,
+  testID,
 }: MlTextfieldProps) => {
   const [currentText, setCurrentText] = useState(value);
 
@@ -37,8 +40,11 @@ export const MlTextfield = ({
           flex: 1,
           marginHorizontal: 8,
         }}
+        accessibilityRole={accessibilityRole}
+        accessibilityLabel={accessibilityLabel}
+        testID={testID}
       />
-      <Pressable>
+      <Pressable accessibilityRole="button">
         <SearchIcon color="#BDC6CF" />
       </Pressable>
     </View>

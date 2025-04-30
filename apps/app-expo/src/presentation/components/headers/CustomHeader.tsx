@@ -48,6 +48,7 @@ export function CustomHeader() {
           <TouchableOpacity
             onPress={() => navigation.navigateBack()}
             className="p-[5px]"
+            accessibilityRole="button"
           >
             <Ionicons name="apps-sharp" size={40} color="white" />
           </TouchableOpacity>
@@ -59,6 +60,9 @@ export function CustomHeader() {
         value=""
         onChange={(value) => console.log(value)}
         placeholder="Search for..."
+        accessibilityLabel="Search"
+        accessibilityRole="search"
+        testID="search-input"
       />
 
       {isLargeScreen && (

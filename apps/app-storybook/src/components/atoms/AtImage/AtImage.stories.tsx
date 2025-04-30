@@ -2,7 +2,6 @@ import React from "react";
 import { AtImage, AtImageVariants } from "@atomic-library/atoms";
 import type { Meta, StoryObj } from "@storybook/react";
 import { CenterStory } from "../../utils/CenterStory";
-import { theme } from "@atomic-library/theme";
 
 type Story = StoryObj<typeof AtImage>;
 
@@ -33,9 +32,8 @@ export const Default: Story = {
       width: 960,
       height: 480,
     },
-    resizeMode: "contain",
+    resizeMode: "center",
     variant: AtImageVariants.sharp,
-    theme: theme,
     style: {
       width: 1000,
       height: 1000,

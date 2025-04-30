@@ -9,7 +9,9 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
+    "./.storybook/**/*",
     "../../packages/atomic-library/assets/**/*.tsx",
-    "../../packages/atomic-library/assets/**/*.ts"
+    "../../packages/atomic-library/assets/**/*.ts",
+    "nativewind-env.d.ts"
   ]
 }

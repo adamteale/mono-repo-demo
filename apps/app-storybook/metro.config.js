@@ -1,6 +1,8 @@
-// metro.config.js
 const path = require('path');
+
 const { getDefaultConfig } = require('expo/metro-config');
+const { withNativeWind } = require('nativewind/metro');
+
 const { generate } = require('@storybook/react-native/scripts/generate');
 
 generate({
@@ -36,22 +38,8 @@ if (process.env.PLATFORM === 'web') {
   if (!defaultSourceExts.includes('mjs')) {
       config.resolver.sourceExts.push('mjs');
   }
-  // No change needed for native priority, defaults handle it
 }
 
-// Ensure uniqueness
 config.resolver.sourceExts = [...new Set(config.resolver.sourceExts)];
 
-
-// --- Optional: Add mjs back if filtered out and not building for web ---
-// Or ensure it's always present regardless of platform if needed globally
-// if (!config.resolver.sourceExts.includes('mjs')) {
-//    config.resolver.sourceExts.push('mjs');
-// }
-
-
-// Log the final sourceExts order for debugging (optional)
-console.log(`Metro sourceExts for platform '${process.env.PLATFORM || 'native'}':`, config.resolver.sourceExts);
-
-
-module.exports = config;
+module.exports = withNativeWind(config, { input: './global.css' })

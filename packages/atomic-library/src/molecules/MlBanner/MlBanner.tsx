@@ -48,6 +48,7 @@ export function MlBanner({
 
   return (
     <Pressable
+      accessibilityRole="button"
       onPress={handlePress}
       testID={testID}
       className="

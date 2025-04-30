@@ -14,12 +14,18 @@ export const MlProductCard = ({
   const styles = getStyles();
 
   return (
-    <Pressable onPress={onTap} style={styles.container}>
+    <Pressable
+      onPress={onTap}
+      style={styles.container}
+      accessibilityRole="button"
+    >
       <View>
         <Image source={{ uri: imgUrl }} style={styles.image} />
       </View>
       <View style={styles.detailContainer}>
-        <Text style={styles.title}>{titleLabel}</Text>
+        <Text style={styles.title} accessibilityLabel="heading">
+          {titleLabel}
+        </Text>
         <Text style={[styles.status]}>Available</Text>
         <View
           style={{
@@ -31,6 +37,7 @@ export const MlProductCard = ({
         >
           <Text style={styles.price}>${priceLabel}</Text>
           <Pressable
+            accessibilityRole="button"
             onPress={onTapAddToCart}
             style={{
               width: 60,
