@@ -52,7 +52,7 @@ export const HomeScreen = () => {
         <ScrollView horizontal={false} showsVerticalScrollIndicator={false}>
           <FlatList
             className="w-full bg-white"
-            contentContainerStyle={{ minHeight: windowWidth }}
+            style={{ minHeight: windowWidth }}
             pagingEnabled={true}
             scrollEnabled={true}
             bounces={false}

@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import {
   Image,
   Platform,
-  StyleSheet,
+  // Remove StyleSheet
   View,
   ImageSourcePropType,
   ImageStyle,
@@ -21,12 +21,24 @@ const isNetworkSource = (source: any): source is { uri: string } => {
   );
 };
 
+// Helper to handle potential style arrays (mimics basic flatten)
+// Note: This is a simplified version. StyleSheet.flatten is more robust.
+const flattenStyle = (style: StyleProp<any>): object | null => {
+  if (!style) {
+    return null;
+  }
+  if (Array.isArray(style)) {
+    return style.reduce((acc, item) => ({ ...acc, ...(item || {}) }), {});
+  }
+  return style as object; // Assume it's an object if not array
+};
+
 // --- Main Component ---
 export const AtImage: FC<AtImageProps> = ({
   alt,
   disabled = false,
-  imageContainerStyles = {},
-  style,
+  imageContainerStyles: incomingContainerStyle = {}, // Rename for clarity
+  style: incomingImageStyle = {}, // Rename for clarity
   isSvg = false,
   onLoad,
   resizeMode = "cover",
@@ -41,22 +53,26 @@ export const AtImage: FC<AtImageProps> = ({
     return null;
   }
 
-  const imageFillStyle: StyleProp<ImageStyle> = {
-    // Type the style
-    width: "100%",
-    height: "100%",
-  };
-  const combinedImageStyle = StyleSheet.compose(imageFillStyle, style);
-
+  // Define borderRadius classes based on variant
   const borderRadiusMap = {
     [AtImageVariants.sharp]: "rounded-none",
     [AtImageVariants.circle]: "rounded-full",
-    [AtImageVariants.allRounded]: "rounded-md",
-    [AtImageVariants.bottomRounded]: "rounded-b-md",
-    [AtImageVariants.topRounded]: "rounded-t-md",
+    [AtImageVariants.allRounded]: "rounded-md", // Or another Tailwind radius like rounded-lg
+    [AtImageVariants.bottomRounded]: "rounded-b-md", // Or rounded-b-lg
+    [AtImageVariants.topRounded]: "rounded-t-md", // Or rounded-t-lg
   };
+  const borderRadiusClass = borderRadiusMap[variant] || "rounded-none";
 
-  const borderRadiusStyle = borderRadiusMap[variant] || "rounded-none";
+  // Define fill classes (used multiple times)
+  const imageFillClasses = "w-full h-full";
+
+  // Define disabled overlay classes (used multiple times)
+  const disabledOverlayClasses =
+    "bg-white opacity-70 justify-center items-center absolute inset-0"; // Replaced absoluteFillObject with inset-0
+
+  // Flatten incoming style objects (basic implementation)
+  const flatContainerStyle = flattenStyle(incomingContainerStyle) as ViewStyle;
+  const flatImageStyle = flattenStyle(incomingImageStyle);
 
   // --- SVG Rendering ---
   if (isSvg) {
@@ -65,12 +81,9 @@ export const AtImage: FC<AtImageProps> = ({
       if (typeof typedSource === "string") {
         webSvgSrc = typedSource;
       } else if (typeof typedSource === "number") {
-        // require() returns a number ID, handle differently if needed
-        // For web, often better to import SVGs as components or use URLs
         console.warn(
           "Direct require() for SVG source might not work as expected on web. Use import or URI."
         );
-        // Attempt to resolve - This might not work reliably without bundler magic
         const resolved = Image.resolveAssetSource(typedSource);
         webSvgSrc = resolved?.uri;
       } else if (isNetworkSource(typedSource)) {
@@ -82,22 +95,28 @@ export const AtImage: FC<AtImageProps> = ({
         return null;
       }
 
-      // Flatten style for React.CSSProperties type assertion
-      const flatWebStyle = StyleSheet.flatten(combinedImageStyle);
-
+      // Apply container styles (passed as object)
+      // Apply wrapper styles with className
+      // Apply image styles (passed as object) to img tag
       return (
-        <View testID={`${testID}.container`} style={imageContainerStyles}>
-          <View className={`overflow-hidden ${borderRadiusStyle}`}>
+        <View testID={`${testID}.container`} style={flatContainerStyle}>
+          <View className={`inline-block overflow-hidden ${borderRadiusClass}`}>
+            {/* Apply w-full h-full potentially via style if needed for img */}
             <img
               src={webSvgSrc}
               alt={alt ?? ""}
-              style={flatWebStyle as React.CSSProperties}
+              // Combine intrinsic fill style with passed-in image style
+              style={
+                {
+                  width: "100%",
+                  height: "100%",
+                  ...(flatImageStyle || {}),
+                } as React.CSSProperties
+              }
               data-testid={`${testID}.image`}
             />
           </View>
-          {disabled && (
-            <View className="bg-white opacity-70 justify-center items-center absolute top-0 left-0 right-0 bottom-0" />
-          )}
+          {disabled && <View className={disabledOverlayClasses} />}
         </View>
       );
     } else {
@@ -108,7 +127,6 @@ export const AtImage: FC<AtImageProps> = ({
       } else if (isNetworkSource(typedSource)) {
         resolvedUri = typedSource.uri;
       } else if (typeof typedSource === "string") {
-        // Assuming string is a URI for native SVG
         resolvedUri = typedSource;
       }
 
@@ -117,42 +135,42 @@ export const AtImage: FC<AtImageProps> = ({
         return null;
       }
 
-      const { width, height, ...restContainerStyle } =
-        StyleSheet.flatten(imageContainerStyles);
+      // Extract width/height from flattened container style for the outer View
+      const { width, height, ...restContainerStyle } = flatContainerStyle || {};
 
       return (
         <View
           testID={`${testID}.container`}
-          style={[{ width, height }, restContainerStyle]}
+          style={[{ width, height }, restContainerStyle]} // Apply extracted dimensions and rest
         >
+          {/* Apply border radius and absolute fill via className */}
           <View
-            className={`overflow-hidden ${borderRadiusStyle}`}
-            style={StyleSheet.absoluteFillObject}
+            className={`overflow-hidden ${borderRadiusClass} absolute inset-0`}
           >
             <SvgUri
               uri={resolvedUri}
-              width="100%"
-              height="100%"
-              style={style as StyleProp<ViewStyle>}
+              width="100%" // SvgUri specific props
+              height="100%" // SvgUri specific props
+              style={flatImageStyle as StyleProp<ViewStyle>} // Apply flattened image style
               aria-label={alt ?? ""}
               testID={`${testID}.image`}
             />
           </View>
-          {disabled && (
-            <View className="bg-white opacity-70 justify-center items-center absolute top-0 left-0 right-0 bottom-0" />
-          )}
+          {disabled && <View className={disabledOverlayClasses} />}
         </View>
       );
     }
   } else {
     // --- Regular Image Rendering ---
     return (
-      <View testID={`${testID}.container`} style={imageContainerStyles}>
+      // Apply container styles (passed as object)
+      <View testID={`${testID}.container`} style={flatContainerStyle}>
         <Image
-          // Source needs to be ImageSourcePropType for <Image>
           source={typedSource as ImageSourcePropType}
-          className={borderRadiusStyle}
-          style={combinedImageStyle}
+          // Apply borderRadius and fill via className
+          className={`${imageFillClasses} ${borderRadiusClass}`}
+          // Apply passed-in image style object
+          style={flatImageStyle}
           alt={alt ?? ""}
           testID={`${testID}.image`}
           resizeMode={resizeMode}
@@ -160,9 +178,7 @@ export const AtImage: FC<AtImageProps> = ({
           accessibilityLabel={alt ?? ""}
           {...rest}
         />
-        {disabled && (
-          <View className="bg-white opacity-70 justify-center items-center absolute top-0 left-0 right-0 bottom-0" />
-        )}
+        {disabled && <View className={disabledOverlayClasses} />}
       </View>
     );
   }
