@@ -40,7 +40,7 @@ function TabBar() {
   const { width } = useWindowDimensions();
 
   // Access the breakpoint value directly from the resolved Tailwind config
-  const lgBreakpoint = parseInt(fullConfig.theme.screens.lg, 10); // Assuming lg is defined in pixels
+  const lgBreakpoint = parseInt(fullConfig.theme.screens.lg, 10);
   const isLargeScreen = width >= lgBreakpoint;
 
   const isHidden = Platform.OS === "web" && isLargeScreen;
@@ -59,10 +59,7 @@ function TabBar() {
         const isActive =
           pathname === route.path || pathname.startsWith(route.path + "/");
         const iconName: IoniconName = isActive ? route.activeIcon : route.icon;
-        // Use Tailwind color names or hex codes directly
-        const color = isActive
-          ? fullConfig.theme.colors.primaryBlue || "#173FAB"
-          : "gray"; // Example using theme color
+        const color = isActive ? "#173FAB" : "gray";
 
         return (
           <Link
