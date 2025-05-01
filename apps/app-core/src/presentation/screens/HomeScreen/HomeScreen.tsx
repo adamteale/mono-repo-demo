@@ -9,12 +9,14 @@ import {
   FlatList,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { SafeAreaProvider } from "react-native-safe-area-context"; // Keep this provider
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import {
   MlBanner,
   MlBannerProps,
   MlToast,
+  PgPage,
+  TmFlex,
 } from "@mono-repo-demo/atomic-library";
 
 import { useHomeViewModel } from "./useHomeViewModel";
@@ -22,7 +24,7 @@ import { getStyles } from "./styles";
 import FilterIcon from "@mono-repo-demo/atomic-library/src/assets/FilterIcon";
 
 export const HomeScreen = () => {
-  const { bannerProps, onTapNavigateToProductDetail, productCard } =
+  const { bannerProps, page, onTapNavigateToProductDetail } =
     useHomeViewModel();
   const windowWidth = useWindowDimensions().width;
 

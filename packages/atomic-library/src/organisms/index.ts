@@ -1,2 +1,2 @@
-export * from "./OrCarousel";
-export * from "./OrSection";
+export * from "./or-carousel";
+export * from "./or-section";

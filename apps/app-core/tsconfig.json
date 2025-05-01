@@ -14,7 +14,7 @@
       "@Assets/*": ["./assets/*"],
       "@Data/*": ["./src/data/*"],
       "@Domain/*": ["./src/domain/*"],
-      "@Environment": ["./Environment"],
+      "@environment": ["./Environment"],
       "@Network/*": ["src/data/network/*"],
       "@Presentation/*": ["./src/presentation/*"],
       "@Resources/*": ["src/resources/*"],

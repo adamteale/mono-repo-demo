@@ -1,0 +1,31 @@
+import { IconDirection, IconWithDirectionProps } from '../at-icon.types'
+
+export const iconDirectionClassName: Record<IconDirection, string> = {
+  up: 'rotate-0',
+  down: 'rotate-180',
+  left: 'rotate-270',
+  right: 'rotate-90',
+}
+
+export const AngleIcon = ({
+  className,
+  dataTestId,
+  fill,
+  size,
+  direction = 'up',
+  ariaHidden,
+}: IconWithDirectionProps) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      className={`${className} ${iconDirectionClassName[direction]} ${fill}`}
+      data-testid={dataTestId}
+      aria-hidden={ariaHidden}
+    >
+      <path d="M11.2629 8.47558L5.61289 14.1356C5.51916 14.2285 5.44477 14.3391 5.394 14.461C5.34323 14.5829 5.31709 14.7136 5.31709 14.8456C5.31709 14.9776 5.34323 15.1083 5.394 15.2302C5.44477 15.352 5.51916 15.4626 5.61289 15.5556C5.80025 15.7418 6.05371 15.8464 6.31789 15.8464C6.58208 15.8464 6.83553 15.7418 7.02289 15.5556L12.0229 10.6056L16.9729 15.5556C17.1603 15.7418 17.4137 15.8464 17.6779 15.8464C17.9421 15.8464 18.1955 15.7418 18.3829 15.5556C18.4774 15.463 18.5526 15.3525 18.604 15.2306C18.6555 15.1088 18.6823 14.9779 18.6829 14.8456C18.6823 14.7133 18.6555 14.5824 18.604 14.4605C18.5526 14.3386 18.4774 14.2282 18.3829 14.1356L12.7329 8.47558C12.6393 8.37408 12.5256 8.29307 12.3991 8.23766C12.2726 8.18225 12.136 8.15365 11.9979 8.15365C11.8598 8.15365 11.7232 8.18225 11.5967 8.23766C11.4702 8.29307 11.3565 8.37408 11.2629 8.47558Z" />
+    </svg>
+  )
+}

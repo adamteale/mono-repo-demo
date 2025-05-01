@@ -1,14 +1,14 @@
 import "../global.css";
 import React, { useEffect } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
-import { Slot, useSegments } from "expo-router";
+import { Slot, useSegments, useRootNavigationState } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { useAuth } from "@Presentation/context/AuthContext";
 import { useNavigationHandler } from "@app-expo/src/presentation/navigation/useNavigationHandler";
 import { ExpoNavigationProvider } from "@app-expo/src/presentation/navigation/ExpoNavigationProvider";
 import { AuthProvider } from "@app-expo/src/presentation/context/AuthProvider";
-import { useRootNavigationState } from "expo-router";
+import { ExpoEnvironmentProvider } from "@app-expo/ExpoEnvironmentProvider";
 
 function RootLayoutNav() {
   const { isLoggedIn } = useAuth();
@@ -22,55 +22,31 @@ function RootLayoutNav() {
     </View>
   );
 
-  // Check readiness primarily for the effect's *action*
   const isNavigationReady = !!navigationState?.key;
 
   useEffect(() => {
-    // --- Effect Guard ---
-    // Still check if navigation is ready *before* attempting redirects
     if (!isNavigationReady) {
-      console.log(
-        "Effect: Router not ready yet (no key), skipping navigation action."
-      );
       return;
     }
-    // --- Redirect Logic (only if nav is ready) ---
+
     if (isLoggedIn === null) {
-      console.log("Effect: Auth state null, skipping redirect.");
       return;
     }
     const inAuthGroup = segments[0] === "(auth)";
     const inAppGroup = segments[0] === "(app)";
-    console.log(
-      "Effect: Auth State:",
-      isLoggedIn,
-      "Segments:",
-      segments,
-      "NavReady:",
-      isNavigationReady
-    );
 
     if (isLoggedIn && !inAppGroup) {
-      console.log("Effect: Redirecting to App...");
       navigation.navigateHome();
     } else if (!isLoggedIn && !inAuthGroup) {
-      console.log("Effect: Redirecting to Login...");
       navigation.navigateLogin();
-    } else {
-      console.log("Effect: No redirect needed.");
     }
-  }, [isLoggedIn, segments, navigation, isNavigationReady]); // Dependencies are important
+  }, [isLoggedIn, segments, navigation, isNavigationReady]);
 
   // --- Render Guard ---
   // ONLY wait for auth state to be determined (not null) before rendering Slot
   if (isLoggedIn === null) {
-    console.log("Render: Auth loading...");
     return loader;
   }
-
-  // If auth state is resolved (true or false), render the Slot.
-  // The useEffect above will handle the redirect IF necessary AND if nav is ready.
-  console.log("Render: Auth resolved, rendering Slot. isLoggedIn:", isLoggedIn);
 
   return <Slot />;
 }
@@ -80,7 +56,9 @@ export default function RootLayout() {
     <ExpoNavigationProvider>
       <AuthProvider>
         <SafeAreaProvider>
-          <RootLayoutNav />
+          <ExpoEnvironmentProvider>
+            <RootLayoutNav />
+          </ExpoEnvironmentProvider>
         </SafeAreaProvider>
       </AuthProvider>
     </ExpoNavigationProvider>

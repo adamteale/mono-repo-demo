@@ -1,0 +1,38 @@
+import { IconProps } from '../at-icon.types'
+
+export const GlobalFavIcon = ({ className, size = 16, dataTestId, ariaHidden }: IconProps) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 16 16"
+      className={className}
+      fill="#EFEDF3"
+      data-testid={dataTestId}
+      aria-hidden={ariaHidden}
+    >
+      <path
+        d="M0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8Z"
+        fill="#EFEDF3"
+      />
+      <path
+        d="M8 1.5C4.41031 1.5 1.5 4.41031 1.5 8C1.5 11.5897 4.41031 14.5 8 14.5C11.5897 14.5 14.5 11.5897 14.5 8C14.5 4.41031 11.5897 1.5 8 1.5Z"
+        stroke="#8F8F8F"
+        stroke-miterlimit="10"
+      />
+      <path
+        d="M8 1.5C6.18531 1.5 4.47906 4.41031 4.47906 8C4.47906 11.5897 6.18531 14.5 8 14.5C9.81469 14.5 11.5209 11.5897 11.5209 8C11.5209 4.41031 9.81469 1.5 8 1.5Z"
+        stroke="#8F8F8F"
+        stroke-miterlimit="10"
+      />
+      <path
+        d="M3.66656 3.6665C4.86156 4.51494 6.36594 5.02088 8 5.02088C9.63406 5.02088 11.1384 4.51494 12.3334 3.6665M12.3334 12.3334C11.1384 11.4849 9.63406 10.979 8 10.979C6.36594 10.979 4.86156 11.4849 3.66656 12.3334"
+        stroke="#8F8F8F"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path d="M8 1.5V14.5M14.5 8H1.5" stroke="#8F8F8F" stroke-miterlimit="10" />
+    </svg>
+  )
+}

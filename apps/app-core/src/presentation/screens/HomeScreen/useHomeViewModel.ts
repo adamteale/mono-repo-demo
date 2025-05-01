@@ -1,10 +1,11 @@
+import { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
 
-import { MlProductCardProps } from "@mono-repo-demo/atomic-library";
-import { useNavigationContext } from "../../context";
 import { MlBannerProps } from "@mono-repo-demo/atomic-library";
 
-const { width } = Dimensions.get("window");
+import { useNavigationContext } from "../../context";
+import { getPageBySlugUseCase } from "../../../domain/contentful/getPageBySlug/getPageBySlugUseCase";
+import { Page } from "../../../domain/contentful/types";
 
 export const useHomeViewModel = () => {
   const navigate = useNavigationContext();
@@ -13,20 +14,7 @@ export const useHomeViewModel = () => {
   };
   const initialWidth = Dimensions.get("window").width;
 
-  const productCard: MlProductCardProps = {
-    availabilityLabel: "Available",
-    imgUrl:
-      "https://piratesoftware.wiki/w/images/piratesoftware/thumb/a/ad/Dognut.jpg/300px-Dognut.jpg",
-    priceLabel: "3495,00",
-    titleLabel: "Member's Selection Freshly Made Assorted Doughnuts 12 Units",
-    onTap: () => {
-      console.log("onTap");
-      onTapNavigateToProductDetail();
-    },
-    onTapAddToCart: () => {
-      console.log("onTapAddToCart");
-    },
-  };
+  const [page, setPage] = useState<Page | null>();
 
   // Fake data for the banner
   const bannerProps: MlBannerProps[] = [
@@ -44,6 +32,7 @@ export const useHomeViewModel = () => {
           width: "100%",
           height: "100%",
         },
+        alt: "Banner image",
       },
       containerWidth: initialWidth,
       title: "Premium mattresses and better sleep ",
@@ -61,6 +50,7 @@ export const useHomeViewModel = () => {
           width: "100%",
           height: "100%",
         },
+        alt: "Banner image",
       },
       containerWidth: initialWidth,
       title: "Where will your tires take you on your next adventure?",
@@ -70,9 +60,20 @@ export const useHomeViewModel = () => {
     },
   ];
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const result = await getPageBySlugUseCase.execute("/");
+        setPage(result);
+      } catch (error) {
+        console.log("Error fetching page:", error);
+      }
+    })();
+  }, []);
+
   return {
     bannerProps,
-    productCard,
+    page,
     onTapNavigateToProductDetail,
   };
 };
