@@ -1,8 +1,14 @@
-import { AtTagProps } from './at-tag.types'
+import React from "react";
+import { View, Text } from "react-native";
+import { AtTagProps } from "./at-tag.types";
 
-export const AtTag = ({ text, textClassName = '', className = '' }: AtTagProps) => {
+export const AtTag: React.FC<AtTagProps> = ({
+  text,
+  textClassName = "",
+  className = "",
+}) => {
   return (
-    <div
+    <View
       className={`
         flex justify-center items-center
         text-center rounded max-w-fit
@@ -10,9 +16,9 @@ export const AtTag = ({ text, textClassName = '', className = '' }: AtTagProps) 
         md:px-3 md:py-2
         bg-surface-tertiary
         ${className}`}
-      data-testid="tag-container"
+      testID="tag-container"
     >
-      <span
+      <Text
         className={`
         text-cta-content-primary
         font-normal
@@ -20,10 +26,10 @@ export const AtTag = ({ text, textClassName = '', className = '' }: AtTagProps) 
         leading-4 tracking-[0.125]
         md:text-base
         ${textClassName}`}
-        data-testid="tag-label"
+        testID="tag-label"
       >
         {text}
-      </span>
-    </div>
-  )
-}
+      </Text>
+    </View>
+  );
+};

@@ -1,66 +1,76 @@
-import { useEffect, useState } from 'react'
-import { AtImage } from '../../atoms'
-import { ImageFormat, MlMediaFit, MlMediaProps } from './ml-media.types'
-import { useIsMobile, useIsTablet } from '../../utils'
-import { backgroundImageClasses, imageClasses } from './ml-media.variants'
-import { transformImageFormat } from './transform-image-format'
+import React, { useEffect, useState } from "react";
+import { View, Image, Platform } from "react-native"; // React Native Image component
+import { AtImage } from "../../atoms"; // Ensure this is RN compatible
+import { ImageFormat, MlMediaFit, MlMediaProps } from "./ml-media.types";
+import { useIsMobile, useIsTablet } from "../../utils"; // Adapt these to React Native if needed or replace with Platform API
+import { backgroundImageClasses, imageClasses } from "./ml-media.variants"; // Adapt these to return Tailwind strings
+import { transformImageFormat } from "./transform-image-format"; // This might need adaptation
 
-export const MlMedia = ({
-  dataTestId = 'ml-media',
+export const MlMedia: React.FC<MlMediaProps> = ({
+  dataTestId = "ml-media",
   imageDesktop,
   imageTablet,
   imageMobile,
   onErrorSrc,
-  wrapperClassName = '',
+  wrapperClassName = "",
   fit = MlMediaFit.COVER,
   asBackground = false,
-  imageFormat = ImageFormat.WEBP,
-}: MlMediaProps) => {
+  imageFormat = Platform.OS === "web" ? ImageFormat.WEBP : ImageFormat.JPG,
+}) => {
   const [image, setImage] = useState({
     src: imageDesktop.src,
-    alt: imageDesktop.alt ?? '',
-  })
-  const isMobile = useIsMobile()
-  const isTablet = useIsTablet()
+    alt: imageDesktop.alt ?? "",
+  });
+  const isMobile = useIsMobile(); // Replace with RN specific method if needed
+  const isTablet = useIsTablet(); // Replace with RN specific method if needed
 
   useEffect(() => {
-    let selectedImage = imageDesktop
+    let selectedImage = imageDesktop;
 
     if (isMobile && imageMobile?.src) {
-      selectedImage = imageMobile
+      selectedImage = imageMobile;
     } else if (isTablet && imageTablet?.src) {
-      selectedImage = imageTablet
+      selectedImage = imageTablet;
     }
 
     if (selectedImage.src !== image.src) {
       setImage({
         src: selectedImage.src,
-        alt: selectedImage.alt ?? '',
-      })
+        alt: selectedImage.alt ?? "",
+      });
     }
-  }, [isMobile, isTablet])
+  }, [
+    isMobile,
+    isTablet,
+    image.src,
+    image.alt,
+    imageDesktop,
+    imageMobile,
+    imageTablet,
+  ]); //Added imageDesktop, imageMobile, imageTablet to the dependency array
 
   if (asBackground) {
     return (
-      <div data-testid={dataTestId} className={`w-full h-full ${wrapperClassName}`}>
-        <div
-          style={{ backgroundImage: `url(${transformImageFormat(image.src, imageFormat)})` }}
+      <View testID={dataTestId} className={`w-full h-full ${wrapperClassName}`}>
+        <Image
+          source={{ uri: transformImageFormat(image.src, imageFormat) }}
+          style={{ resizeMode: fit }} //Use inline styles for the resizemode.
           className={backgroundImageClasses({ fit })}
-          data-testid={`${dataTestId}-bg-image`}
-        ></div>
-      </div>
-    )
+          testID={`${dataTestId}-bg-image`}
+        />
+      </View>
+    );
   }
 
   return (
-    <div data-testid={dataTestId} className={`w-full h-full ${wrapperClassName}`}>
+    <View testID={dataTestId} className={`w-full h-full ${wrapperClassName}`}>
       <AtImage
         className={imageClasses({ fit })}
         src={transformImageFormat(image.src, imageFormat)}
         alt={image.alt}
         onErrorSrc={onErrorSrc}
-        dataTestId={`${dataTestId}-at-image`}
+        testID={`${dataTestId}-at-image`}
       />
-    </div>
-  )
-}
+    </View>
+  );
+};

@@ -1,10 +1,10 @@
-import { useCallback, useRef, useState } from 'react'
-import { AtTextAreaProps } from './at-text-area.types'
-import { useClickOutside } from '../../utils'
-import { containerClasses } from './at-text-area.variants'
+import { useCallback, useRef, useState } from "react";
+import { AtTextAreaProps } from "./at-text-area.types";
+import { useClickOutside } from "../../utils";
+import { containerClasses } from "./at-text-area.variants";
 
 export const AtTextArea = ({
-  className = '',
+  className = "",
   disabled,
   placeholder,
   readOnly,
@@ -18,32 +18,32 @@ export const AtTextArea = ({
   id,
   inputMode,
   label,
-  dataTestId = 'text-area',
+  dataTestId = "text-area",
   helpText,
   errorText,
 }: AtTextAreaProps) => {
-  const [isActive, setIsActive] = useState(false)
-  const textAreaRef = useRef<HTMLDivElement>(null)
+  const [isActive, setIsActive] = useState(false);
+  const textAreaRef = useRef<HTMLDivElement>(null);
 
   const onChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    handleChange?.(event.target.value)
-  }
+    handleChange?.(event.target.value);
+  };
 
-  useClickOutside(textAreaRef, () => setIsActive(false))
+  useClickOutside(textAreaRef, () => setIsActive(false));
 
   const getContainerClasses = useCallback(() => {
-    return containerClasses({ active: isActive, error, disabled })
+    return containerClasses({ active: isActive, error, disabled });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [error, value, disabled, isActive])
+  }, [error, value, disabled, isActive]);
 
   return (
     <label className="flex flex-col">
       {label && (
-        <span className="mb-3 text-sm text-primary">
-          {label} {required && <span className="text-feedback-error">*</span>}
-        </span>
+        <Text className="mb-3 text-sm text-primary">
+          {label} {required && <Text className="text-feedback-error">*</Text>}
+        </Text>
       )}
-      <div
+      <View
         className={getContainerClasses()}
         onFocus={() => setIsActive(true)}
         ref={textAreaRef}
@@ -70,9 +70,13 @@ export const AtTextArea = ({
           id={id}
           data-testid={dataTestId}
         />
-      </div>
-      {!error && helpText && <span className={`mt-1 text-sm text-tertiary`}>{helpText}</span>}
-      {error && errorText && <span className={`mt-1 text-sm text-feedback-error`}>{errorText}</span>}
+      </View>
+      {!error && helpText && (
+        <Text className={`mt-1 text-sm text-tertiary`}>{helpText}</Text>
+      )}
+      {error && errorText && (
+        <Text className={`mt-1 text-sm text-feedback-error`}>{errorText}</Text>
+      )}
     </label>
-  )
-}
+  );
+};

@@ -1,19 +1,23 @@
-import { useEffect, useState } from 'react'
-import { AtBadgeProps } from './at-badge.types'
+import { useEffect, useState } from "react";
+import { AtBadgeProps } from "./at-badge.types";
 
-export const AtBadge = ({ quantity, className = '', ...props }: AtBadgeProps) => {
-  const [badgeQuantity, setBadgeQuantity] = useState<number | string>(0)
+export const AtBadge = ({
+  quantity,
+  className = "",
+  ...props
+}: AtBadgeProps) => {
+  const [badgeQuantity, setBadgeQuantity] = useState<number | string>(0);
 
   useEffect(() => {
-    const nDigits = quantity.toString().length
+    const nDigits = quantity.toString().length;
 
-    const displayValue = nDigits <= 2 ? quantity : '+99'
+    const displayValue = nDigits <= 2 ? quantity : "+99";
 
-    setBadgeQuantity(displayValue)
-  }, [quantity])
+    setBadgeQuantity(displayValue);
+  }, [quantity]);
 
   return (
-    <div
+    <View
       data-testid={props.dataTestId}
       className={`
         ${className}
@@ -24,6 +28,6 @@ export const AtBadge = ({ quantity, className = '', ...props }: AtBadgeProps) =>
       `}
     >
       {badgeQuantity}
-    </div>
-  )
-}
+    </View>
+  );
+};

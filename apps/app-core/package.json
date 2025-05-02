@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@components-library/ecommerce": "1.15.1",
     "@mono-repo-demo/atomic-library": "1.0.0",
     "axios": "^1.8.4",
     "contentful": "^11.5.18",
     "react-native-gesture-handler": "~2.20.2",
-    "react-native-reanimated": "~3.16.1",
+    "react-native-svg": "^15.11.2",
+    "react-native-svg-transformer": "^1.5.1",
     "react-native-web": "~0.19.13",
     "tslib": "^2.8.1",
     "typescript": "^5.8.3"

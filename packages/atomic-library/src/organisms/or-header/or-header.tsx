@@ -32,7 +32,7 @@ export const OrHeader = ({
   return (
     <header className="relative" ref={ref}>
       {stickBarContent && (
-        <div
+        <View
           className={`absolute w-full transition duration-1000 top-0 right-0 z-50 ${
             !!isHidden ? "-translate-y-full" : "-translate-y-0"
           }`}
@@ -44,17 +44,17 @@ export const OrHeader = ({
             hidden={isHidden}
             onClose={handleCloseStickBar}
           />
-        </div>
+        </View>
       )}
 
-      <div
+      <View
         className={`relative transition-all duration-1000`}
         style={{
           marginTop: isHidden || !stickBarContent ? "0px" : getStickBarHeight(),
         }}
       >
         {/* Top Links */}
-        <div className="bg-neutral-200">
+        <View className="bg-neutral-200">
           <nav
             id="Courtesy Navigation"
             className="container hidden xl:flex justify-end items-center py-3"
@@ -84,35 +84,35 @@ export const OrHeader = ({
               showIcon={true} 
             /> */}
           </nav>
-        </div>
+        </View>
         {/* Top Links end */}
 
         {/* Logo, Items and Search */}
-        <div className="bg-surface-secondary">
-          <div className="container mx-auto py-5 flex justify-between items-center">
-            <div className={brandContainerClasses({ isMobileMenuOpen })}>
+        <View className="bg-surface-secondary">
+          <View className="container mx-auto py-5 flex justify-between items-center">
+            <View className={brandContainerClasses({ isMobileMenuOpen })}>
               <AtLink
                 className=" cursor-pointer !text-icon-active !hover:text-icon-active"
                 iconProps={{ type: isMobileMenuOpen ? "cancel" : "bars" }}
                 onClick={() => setMobielMenuOpen(!isMobileMenuOpen)}
               />
               {brand?.link && brand.image && (
-                <div className="flex w-fit">
+                <View className="flex w-fit">
                   <AtLink
                     {...brand.link}
                     onClick={() => setMobielMenuOpen(false)}
                   >
                     <MlMedia {...brand.image} fit={MlMediaFit.CONTAIN} />
                   </AtLink>
-                </div>
+                </View>
               )}
-            </div>
+            </View>
             {brand?.link && brand.image && (
-              <div className="xl:flex hidden w-fit">
+              <View className="xl:flex hidden w-fit">
                 <AtLink {...brand.link}>
                   <MlMedia {...brand.image} fit={MlMediaFit.CONTAIN} />
                 </AtLink>
-              </div>
+              </View>
             )}
             <HeaderItems
               setActiveItem={setActiveItem}
@@ -120,9 +120,9 @@ export const OrHeader = ({
               className="hidden xl:flex py-4 justify-center gap-10"
               menuItems={menuItems}
             />
-            <div />
-          </div>
-        </div>
+            <View />
+          </View>
+        </View>
         {/* Logo and Search End */}
 
         <HamburgerMenuWrapper
@@ -133,7 +133,7 @@ export const OrHeader = ({
           isMobileMenuOpen={isMobileMenuOpen}
           handleCloseMenu={() => setMobielMenuOpen(false)}
         />
-      </div>
+      </View>
     </header>
   );
 };

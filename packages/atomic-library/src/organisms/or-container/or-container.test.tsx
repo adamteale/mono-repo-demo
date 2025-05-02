@@ -1,0 +1,178 @@
+import { describe, expect, it } from "vitest";
+import {
+  OrContainerColumn,
+  OrContainerParagraphLayout,
+  OrContainerProps,
+  OrContainerTitleAlignment,
+} from "./or-container.types";
+import { render } from "@testing-library/react";
+import { OrContainer } from "./or-container";
+
+const defaultProps: Omit<OrContainerProps, "children"> = {
+  columns: OrContainerColumn.FOUR,
+  columnsTablet: OrContainerColumn.THREE,
+  columnsSmallMobile: OrContainerColumn.TWO,
+  columnsMobile: OrContainerColumn.TWO,
+  hasParagraphs: false,
+};
+
+describe("organisms/or-container", () => {
+  describe("when the component is created", () => {
+    it("should render correctly", () => {
+      const { getAllByText, getByTestId } = render(
+        <OrContainer {...defaultProps}>
+          <Text>dummy</Text>
+          <Text>dummy</Text>
+          <Text>dummy</Text>
+        </OrContainer>
+      );
+
+      expect(getAllByText("dummy").length).toBe(3);
+      expect(
+        getByTestId("or-container-div").classList.contains("grid")
+      ).toBeTruthy();
+    });
+  });
+
+  describe("when or-container has a title", () => {
+    it("should render correctly", () => {
+      const title = "dummy title";
+      const { getAllByText, getByTestId } = render(
+        <OrContainer {...defaultProps} title={title}>
+          <Text>dummy</Text>
+          <Text>dummy</Text>
+          <Text>dummy</Text>
+        </OrContainer>
+      );
+
+      expect(getAllByText("dummy").length).toBe(3);
+      expect(getByTestId("or-container-header")).toBeInTheDocument();
+      expect(getAllByText(title).length).toBe(1);
+    });
+  });
+  describe("when or-container has a subHeading", () => {
+    it("should render subHeading correctly", () => {
+      const subHeading = "dummy subHeading";
+      const { getByText } = render(
+        <OrContainer {...defaultProps} subHeading={subHeading}>
+          <Text>dummy</Text>
+          <Text>dummy</Text>
+          <Text>dummy</Text>
+        </OrContainer>
+      );
+
+      expect(getByText(subHeading)).toBeInTheDocument();
+    });
+  });
+
+  describe("when or-container has supportingText", () => {
+    it("should render supportingText correctly", () => {
+      const supportingText = "dummy supportingText";
+      const { getByText } = render(
+        <OrContainer {...defaultProps} supportingText={supportingText}>
+          <Text>dummy</Text>
+          <Text>dummy</Text>
+          <Text>dummy</Text>
+        </OrContainer>
+      );
+
+      expect(getByText(supportingText)).toBeInTheDocument();
+    });
+  });
+
+  describe("when titleAlign is set to center", () => {
+    it("should apply the correct classes", () => {
+      const title = "dummy title";
+      const { getByTestId } = render(
+        <OrContainer
+          {...defaultProps}
+          title={title}
+          titleAlign={OrContainerTitleAlignment.CENTER}
+        >
+          <Text>dummy</Text>
+          <Text>dummy</Text>
+          <Text>dummy</Text>
+        </OrContainer>
+      );
+
+      expect(
+        getByTestId("or-container-header").classList.contains("text-center")
+      ).toBeTruthy();
+    });
+  });
+
+  describe("when titleAlign is set to start", () => {
+    it("should apply the correct classes", () => {
+      const title = "dummy title";
+      const { getByTestId } = render(
+        <OrContainer
+          {...defaultProps}
+          title={title}
+          titleAlign={OrContainerTitleAlignment.START}
+        >
+          <Text>dummy</Text>
+          <Text>dummy</Text>
+          <Text>dummy</Text>
+        </OrContainer>
+      );
+
+      expect(
+        getByTestId("or-container-header").classList.contains("text-start")
+      ).toBeTruthy();
+    });
+  });
+
+  describe("when hasParagraphs is true", () => {
+    it("should apply the correct gap classes", () => {
+      const { getByTestId } = render(
+        <OrContainer {...defaultProps} hasParagraphs={true}>
+          <Text>dummy</Text>
+          <Text>dummy</Text>
+          <Text>dummy</Text>
+        </OrContainer>
+      );
+
+      expect(
+        getByTestId("or-container-div").classList.contains("md:gap-x-10")
+      ).toBeTruthy();
+    });
+  });
+
+  describe("when paragraphLayout has horizontal or vertical value", () => {
+    it("should apply the correct classes if it has vertical value", () => {
+      const { getByTestId } = render(
+        <OrContainer
+          {...defaultProps}
+          hasParagraphs={true}
+          paragraphLayout={OrContainerParagraphLayout.VERTICAL}
+        >
+          <Text>dummy</Text>
+          <Text>dummy</Text>
+          <Text>dummy</Text>
+        </OrContainer>
+      );
+
+      expect(
+        getByTestId("or-container-div").classList.contains("!grid-cols-1")
+      ).toBeTruthy();
+    });
+
+    it("should apply the correct classes if it has horizontal value", () => {
+      const { getByTestId } = render(
+        <OrContainer
+          {...defaultProps}
+          hasParagraphs={true}
+          paragraphLayout={OrContainerParagraphLayout.HORIZONTAL}
+        >
+          <Text>dummy</Text>
+          <Text>dummy</Text>
+          <Text>dummy</Text>
+        </OrContainer>
+      );
+
+      expect(
+        getByTestId("or-container-div").classList.contains("!grid-cols-1")
+      ).not.toBeTruthy();
+    });
+  });
+});

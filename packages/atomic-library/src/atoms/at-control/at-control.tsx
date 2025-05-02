@@ -1,25 +1,34 @@
-import { AtIcon, IconType } from '../at-icon'
-import { AtControlProps, ControlIconProps, AtControlIcon } from './at-control.types'
-import { controlArrow } from './at-control.variants'
+import { AtIcon, IconType } from "../at-icon";
+import {
+  AtControlProps,
+  ControlIconProps,
+  AtControlIcon,
+} from "./at-control.types";
+import { controlArrow } from "./at-control.variants";
 
 const Icon = ({ icon }: { icon: AtControlIcon }) => {
-  const iconType = /^less|plus$/i.test(icon) ? icon : `angle-${icon}`
+  const iconType = /^less|plus$/i.test(icon) ? icon : `angle-${icon}`;
 
-  return <AtIcon type={iconType as IconType} color="text-primary" />
-}
+  return <AtIcon type={iconType as IconType} color="text-primary" />;
+};
 
-export const ControlIcon = ({ className = '', icon = 'left', size = 'medium', style }: ControlIconProps) => {
+export const ControlIcon = ({
+  className = "",
+  icon = "left",
+  size = "medium",
+  style,
+}: ControlIconProps) => {
   return (
-    <span style={style} className={`${controlArrow({ size })} ${className}`}>
+    <Text style={style} className={`${controlArrow({ size })} ${className}`}>
       <Icon icon={icon} />
-    </span>
-  )
-}
+    </Text>
+  );
+};
 
 export const AtControl = ({
-  className = '',
-  size = 'medium',
-  icon = 'left',
+  className = "",
+  size = "medium",
+  icon = "left",
   dataTestId,
   label,
   onClick,
@@ -34,5 +43,5 @@ export const AtControl = ({
     >
       <Icon icon={icon} />
     </button>
-  )
-}
+  );
+};

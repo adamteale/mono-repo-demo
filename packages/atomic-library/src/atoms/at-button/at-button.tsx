@@ -1,65 +1,131 @@
-import { AtIcon } from '../at-icon'
-import { AtButtonIconPosition, AtButtonActionType, AtButtonProps } from './at-button.types'
-import { buttonHandlers } from './handlers'
-import { buttonVariants } from './at-button.variants'
-export { AtButtonIconPosition, AtButtonActionType }
+import React from "react";
+import { TouchableOpacity, Text, View, ActivityIndicator } from "react-native";
+import { AtIcon } from "../at-icon"; // Assuming a NativeWind-compatible AtIcon
+import {
+  AtButtonIconPosition,
+  AtButtonActionType,
+  AtButtonProps,
+  AtButtonVariants,
+  AtButtonSize,
+} from "./at-button.types";
+
+export { AtButtonIconPosition, AtButtonActionType };
+
+const buttonVariants = (size: AtButtonProps["size"], isLoading: boolean) => {
+  const base =
+    "flex-row items-center justify-center rounded-md font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-primary";
+  const disabledStyles = "opacity-50 cursor-not-allowed";
+  const loadingStyles = "cursor-wait";
+
+  const sizeStyles = () => {
+    switch (size) {
+      case "small":
+        return "px-3 py-1 text-sm";
+      case "medium":
+        return "px-4 py-2 text-base";
+      case "large":
+        return "px-5 py-3 text-lg";
+      default:
+        return "px-4 py-2 text-base";
+    }
+  };
+
+  const variantStyles = (variant: AtButtonProps["variant"]) => {
+    switch (variant) {
+      case "primary":
+        return "bg-primary text-white";
+      case "secondary":
+        return "bg-secondary text-primary border border-primary";
+      case "tertiary":
+        return "bg-transparent text-primary underline";
+      default:
+        return "bg-primary text-white";
+    }
+  };
+
+  return ({ variant }: { variant: AtButtonProps["variant"] }) =>
+    `${base} ${sizeStyles()} ${variantStyles(variant)} ${
+      isLoading ? loadingStyles : ""
+    } ${disabledStyles}`;
+};
 
 export const AtButton = ({
-  target,
   actionType,
   actionValue,
   children,
-  dataTestId = '',
+  dataTestId = "",
   gtmData,
   icon,
   iconType,
-  iconPosition,
+  iconPosition = AtButtonIconPosition.LEFT,
   onClick,
   isLoading,
-  className = '',
-  buttonType,
+  className = "",
   disabled,
   variant,
   size,
-  form,
-}: AtButtonProps) => {
-  const hasIcon = !!icon || !!iconType
+}: // React Native doesn't directly support 'form' or 'buttonType' like web
+Omit<AtButtonProps, "buttonType" | "form" | "target"> & {
+  target?: string;
+}) => {
+  const hasIcon = !!icon || !!iconType;
+  const buttonClasses = buttonVariants(size, isLoading ?? false)({ variant });
 
-  const handleOnClick = onClick
-    ? (e: React.MouseEvent<HTMLButtonElement>) => onClick(e, { gtmData, actionType, actionValue })
-    : (e: React.MouseEvent<HTMLButtonElement>) =>
-        buttonHandlers[actionType ?? AtButtonActionType.OPEN_URL](e, { actionValue, target })
-
-  const buttonVariant = buttonVariants(size, isLoading)
+  const handlePress = (e: any) => {
+    if (onClick) {
+      onClick(e, { gtmData, actionType, actionValue });
+    } else if (actionType === AtButtonActionType.OPEN_URL && actionValue) {
+      // Implement your URL opening logic here using Linking API
+      // Example: Linking.openURL(actionValue).catch((err) => console.error('An error occurred: ', err));
+      console.warn(
+        "OPEN_URL actionType is not directly handled. Implement Linking.openURL."
+      );
+    } else {
+      // Handle other action types or default behavior
+      console.warn(`Unhandled actionType: ${actionType}`);
+    }
+  };
 
   return (
-    <button
-      type={buttonType ?? 'button'}
+    <TouchableOpacity
       data-testid={dataTestId}
-      onClick={handleOnClick}
-      className={`${buttonVariant({ variant })} ${className}`}
+      onPress={handlePress}
+      className={`${buttonClasses} ${className}`}
       disabled={disabled || isLoading}
-      form={form}
     >
-      <span>{children}</span>
+      <View className="flex-row items-center justify-center">
+        {hasIcon &&
+          !isLoading &&
+          iconPosition === AtButtonIconPosition.LEFT && (
+            <AtIcon
+              className="mr-2 text-current"
+              src={icon}
+              type={iconType}
+              size={24}
+            />
+          )}
 
-      {hasIcon && !isLoading && (
-        <AtIcon
-          className={iconPosition === AtButtonIconPosition.LEFT ? 'order-first mr-2' : 'ml-2'}
-          src={icon}
-          type={iconType}
-          color="currentColor"
-          size={24}
-        />
-      )}
+        <Text className={"text-current"}>{children}</Text>
 
-      {isLoading && (
-        <AtIcon
-          className={`animate-spin ${iconPosition === AtButtonIconPosition.LEFT ? 'order-first mr-2' : 'ml-2'}`}
-          type="spinner"
-          color="currentColor"
-        />
-      )}
-    </button>
-  )
-}
+        {hasIcon &&
+          !isLoading &&
+          iconPosition === AtButtonIconPosition.RIGHT && (
+            <AtIcon
+              className="ml-2 text-current"
+              src={icon}
+              type={iconType}
+              size={24}
+            />
+          )}
+
+        {isLoading && (
+          <ActivityIndicator
+            className={`ml-2 ${
+              iconPosition === AtButtonIconPosition.LEFT ? "mr-2" : "ml-2"
+            } "text-current"`}
+          />
+        )}
+      </View>
+    </TouchableOpacity>
+  );
+};

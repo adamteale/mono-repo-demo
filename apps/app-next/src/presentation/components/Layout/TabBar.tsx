@@ -46,7 +46,7 @@ function TabBar() {
   const isHidden = Platform.OS === "web" && isLargeScreen;
 
   return (
-    <div
+    <View
       className={`
       ${isHidden ? "hidden" : "flex"} {/* Conditionally hide or show */}
       flex-row
@@ -75,7 +75,7 @@ function TabBar() {
           </Link>
         );
       })}
-    </div>
+    </View>
   );
 }
 

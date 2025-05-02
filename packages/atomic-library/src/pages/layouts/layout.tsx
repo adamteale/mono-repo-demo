@@ -1,12 +1,15 @@
-import { OrHeader, OrFooter } from '../../organisms'
-import { LayoutProps } from './layout.types'
+import { View } from "react-native";
+import { OrHeader, OrFooter } from "../../organisms";
+import { LayoutProps } from "./layout.types";
 
 export const Layout = ({ header, footer, children }: LayoutProps) => {
   return (
-    <div className="flex flex-col min-h-screen">
-      <OrHeader {...header} />
-      <main className="w-full flex-1">{children}</main>
-      <OrFooter {...footer} />
-    </div>
-  )
-}
+    <View className="flex flex-col min-h-screen">
+      {/* <OrHeader {...header} /> */}
+      <View accessibilityRole="main" className="w-full flex-1">
+        {children}
+      </View>
+      {/* <OrFooter {...footer} /> */}
+    </View>
+  );
+};

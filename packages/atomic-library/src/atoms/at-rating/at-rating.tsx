@@ -1,93 +1,111 @@
-import { KeyboardEvent, RefObject, createRef, useRef, useState } from 'react'
-import { AtRatingProps, Rating } from './at-rating.types'
-import { AtIcon } from '../at-icon'
+import { KeyboardEvent, RefObject, createRef, useRef, useState } from "react";
+import { AtRatingProps, Rating } from "./at-rating.types";
+import { AtIcon } from "../at-icon";
 
 enum KeyboardEventCodes {
-  ARROW_DOWN = 'ArrowDown',
-  ARROW_RIGHT = 'ArrowRight',
-  ARROW_UP = 'ArrowUp',
-  ARROW_LEFT = 'ArrowLeft',
-  SPACE = ' ',
-  ENTER = 'Enter',
+  ARROW_DOWN = "ArrowDown",
+  ARROW_RIGHT = "ArrowRight",
+  ARROW_UP = "ArrowUp",
+  ARROW_LEFT = "ArrowLeft",
+  SPACE = " ",
+  ENTER = "Enter",
 }
 
-export const AtRating = ({ stars = 5, initialRating = 0, onChange }: AtRatingProps) => {
-  const [hoveredRating, setHoveredRating] = useState(-1)
-  const [selectedRatingIndex, setSelectedRatingIndex] = useState(initialRating - 1)
+export const AtRating = ({
+  stars = 5,
+  initialRating = 0,
+  onChange,
+}: AtRatingProps) => {
+  const [hoveredRating, setHoveredRating] = useState(-1);
+  const [selectedRatingIndex, setSelectedRatingIndex] = useState(
+    initialRating - 1
+  );
 
-  const containerRef = useRef<HTMLDivElement>(null)
-  const starRefs = useRef<Array<RefObject<HTMLButtonElement>>>([])
+  const containerRef = useRef<HTMLDivElement>(null);
+  const starRefs = useRef<Array<RefObject<HTMLButtonElement>>>([]);
   starRefs.current = Array(stars)
     .fill(null)
-    .map((_, i) => starRefs.current[i] || createRef())
+    .map((_, i) => starRefs.current[i] || createRef());
 
   const handleRatingSelected = (index: number) => {
-    let selectedRating
+    let selectedRating;
 
     if (index === selectedRatingIndex) {
-      setSelectedRatingIndex(-1)
-      selectedRating = 0
+      setSelectedRatingIndex(-1);
+      selectedRating = 0;
     } else {
-      setSelectedRatingIndex(index)
-      selectedRating = index + 1
+      setSelectedRatingIndex(index);
+      selectedRating = index + 1;
     }
 
     if (index === -1 && containerRef.current) {
-      containerRef.current.focus()
+      containerRef.current.focus();
     } else if (index >= 0 && starRefs.current[index].current) {
-      starRefs.current[index].current?.focus()
+      starRefs.current[index].current?.focus();
     }
 
     if (onChange) {
-      onChange({ selectedRating: selectedRating as Rating })
+      onChange({ selectedRating: selectedRating as Rating });
     }
-  }
+  };
 
   const selectNextElement = () => {
-    let nextOption
+    let nextOption;
 
     if (selectedRatingIndex === stars - 1) {
-      nextOption = -1
+      nextOption = -1;
     } else {
-      nextOption = selectedRatingIndex + 1
+      nextOption = selectedRatingIndex + 1;
     }
 
-    handleRatingSelected(nextOption)
-  }
+    handleRatingSelected(nextOption);
+  };
 
   const selectPreviousElement = () => {
-    let nextOption
+    let nextOption;
 
     if (selectedRatingIndex === -1) {
-      nextOption = stars - 1
+      nextOption = stars - 1;
     } else {
-      nextOption = selectedRatingIndex - 1
+      nextOption = selectedRatingIndex - 1;
     }
 
-    handleRatingSelected(nextOption)
-  }
+    handleRatingSelected(nextOption);
+  };
 
   const preventDefaultActions = (event: KeyboardEvent<HTMLElement>) => {
-    event.stopPropagation()
-    event.preventDefault()
-  }
+    event.stopPropagation();
+    event.preventDefault();
+  };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
-    if (Object.values(KeyboardEventCodes).includes(event.key as KeyboardEventCodes)) {
-      preventDefaultActions(event)
+    if (
+      Object.values(KeyboardEventCodes).includes(
+        event.key as KeyboardEventCodes
+      )
+    ) {
+      preventDefaultActions(event);
     }
 
-    if ([KeyboardEventCodes.ARROW_DOWN, KeyboardEventCodes.ARROW_RIGHT].includes(event.key as KeyboardEventCodes)) {
-      selectNextElement()
-    } else if ([KeyboardEventCodes.ARROW_UP, KeyboardEventCodes.ARROW_LEFT].includes(event.key as KeyboardEventCodes)) {
-      selectPreviousElement()
+    if (
+      [KeyboardEventCodes.ARROW_DOWN, KeyboardEventCodes.ARROW_RIGHT].includes(
+        event.key as KeyboardEventCodes
+      )
+    ) {
+      selectNextElement();
+    } else if (
+      [KeyboardEventCodes.ARROW_UP, KeyboardEventCodes.ARROW_LEFT].includes(
+        event.key as KeyboardEventCodes
+      )
+    ) {
+      selectPreviousElement();
     }
-  }
+  };
 
-  const ratingStars = Array(stars).fill(0)
+  const ratingStars = Array(stars).fill(0);
 
   return (
-    <div
+    <View
       className="flex justify-items-center gap-0.5 w-fit"
       ref={containerRef}
       tabIndex={selectedRatingIndex === -1 ? 0 : -1}
@@ -105,7 +123,8 @@ export const AtRating = ({ stars = 5, initialRating = 0, onChange }: AtRatingPro
           tabIndex={selectedRatingIndex === index ? 0 : -1}
         >
           <AtIcon type="rating" color="tertiary" dataTestId="rating-icon" />
-          {((hoveredRating === -1 && index <= selectedRatingIndex) || index <= hoveredRating) && (
+          {((hoveredRating === -1 && index <= selectedRatingIndex) ||
+            index <= hoveredRating) && (
             <AtIcon
               type="rating-full"
               color="tertiary"
@@ -115,6 +134,6 @@ export const AtRating = ({ stars = 5, initialRating = 0, onChange }: AtRatingPro
           )}
         </button>
       ))}
-    </div>
-  )
-}
+    </View>
+  );
+};

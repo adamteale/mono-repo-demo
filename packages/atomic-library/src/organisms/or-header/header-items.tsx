@@ -1,51 +1,54 @@
-import { HeaderMenuItem } from './or-header.types'
-import { MlMenuItem } from '../../molecules'
-import { HeaderSubItems } from './header.sub-items'
-import { menuItemClasses } from './or-header.variants'
+import { HeaderMenuItem } from "./or-header.types";
+import { MlMenuItem } from "../../molecules";
+import { HeaderSubItems } from "./header.sub-items";
+import { menuItemClasses } from "./or-header.variants";
 
 interface HeaderItemsProps {
-  menuItems?: HeaderMenuItem[]
-  isDesktop?: boolean
-  className?: string
-  handleCloseMenu?: () => void
-  activeItem: number
-  setActiveItem: (index: number) => void
+  menuItems?: HeaderMenuItem[];
+  isDesktop?: boolean;
+  className?: string;
+  handleCloseMenu?: () => void;
+  activeItem: number;
+  setActiveItem: (index: number) => void;
 }
 
 export const HeaderItems = ({
   menuItems,
   activeItem,
   setActiveItem,
-  className = '',
+  className = "",
   isDesktop = true,
   handleCloseMenu,
 }: HeaderItemsProps) => {
-  if (!menuItems) return null
+  if (!menuItems) return null;
 
   const handleItemClick = (index: number) => {
-    setActiveItem(activeItem === index ? -1 : index)
-  }
+    setActiveItem(activeItem === index ? -1 : index);
+  };
 
   return (
     <nav aria-label="Global Navigation" className={`${className}`}>
       {menuItems.map((item, idx) => {
-        const isMenuOpen = activeItem === idx
-        let onClick
-        let showIcon = false
-        let linkProps = item.linkProps
+        const isMenuOpen = activeItem === idx;
+        let onClick;
+        let showIcon = false;
+        let linkProps = item.linkProps;
 
         if (!!item.children) {
-          onClick = () => handleItemClick(idx)
-          showIcon = true
-          linkProps = undefined
+          onClick = () => handleItemClick(idx);
+          showIcon = true;
+          linkProps = undefined;
         } else if (!!linkProps?.href) {
-          onClick = handleCloseMenu
+          onClick = handleCloseMenu;
         }
 
         return (
-          <div key={`header-item-${idx}`}>
+          <View key={`header-item-${idx}`}>
             <MlMenuItem
-              className={menuItemClasses({ isMenuOpenDesktop: isMenuOpen && isDesktop, isIndexZero: idx === 0 })}
+              className={menuItemClasses({
+                isMenuOpenDesktop: isMenuOpen && isDesktop,
+                isIndexZero: idx === 0,
+              })}
               label={item.label}
               labelClassName="font-bold xl:font-normal"
               linkProps={linkProps}
@@ -55,10 +58,14 @@ export const HeaderItems = ({
               ariaControls={`header-subitem-${idx}`}
               size="medium"
             />
-            <HeaderSubItems isActive={isMenuOpen} items={item.children} handleCloseMenu={handleCloseMenu} />
-          </div>
-        )
+            <HeaderSubItems
+              isActive={isMenuOpen}
+              items={item.children}
+              handleCloseMenu={handleCloseMenu}
+            />
+          </View>
+        );
       })}
     </nav>
-  )
-}
+  );
+};

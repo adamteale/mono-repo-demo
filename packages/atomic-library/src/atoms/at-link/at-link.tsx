@@ -1,19 +1,41 @@
-import { MouseEventHandler } from 'react'
-import { Target } from '../../types'
-import { AtIcon } from '../at-icon'
-import { AtLinkProps, IconPositions } from './at-link.types'
-import { buttonVariants } from '../at-button/at-button.variants'
-import { linkVariant } from './at-link.variants'
+import React from "react";
+import {
+  TouchableOpacity,
+  Text,
+  Linking,
+  View,
+  StyleProp,
+  ViewStyle,
+  NativeSyntheticEvent,
+  TargetedEvent,
+} from "react-native";
+import { Target } from "../../types"; // Assuming you have a RN version of this
+import { AtIcon } from "../at-icon"; // Assuming this is a RN compatible component
+import { AtLinkProps, IconPositions } from "./at-link.types";
+import { AtButtonVariants, AtButtonSize } from "../at-button/at-button.types";
+import { buttonVariants } from "../at-button/at-button.variants"; //Adapt this to RN with Tailwind
+import { linkVariant } from "./at-link.variants"; //Adapt this to RN with Tailwind
+import { AtButtonProps } from "../at-button";
 
-export const AtLink = ({
+interface AtLinkPropsModified
+  extends Omit<
+    AtLinkProps,
+    "style" | "tabIndex" | "onBlur" | "onFocus" | "aria-busy"
+  > {
+  style?: StyleProp<ViewStyle>;
+  buttonStyleProps?: Pick<AtButtonProps, "variant" | "size">;
+  disabled?: boolean; // Add disabled property
+}
+
+export const AtLink: React.FC<AtLinkPropsModified> = ({
   children,
   iconProps,
   iconPosition = IconPositions.RIGHT,
   target,
   href,
   onClick,
-  className = '',
-  textClasses = '',
+  className = "",
+  textClasses = "",
   gtmData,
   label,
   linkWrapper,
@@ -21,44 +43,63 @@ export const AtLink = ({
   dataTestId,
   ariaCurrent,
   role,
-  buttonStyleProps = {},
-  tabIndex,
+  buttonStyleProps,
   ...props
-}: AtLinkProps) => {
+}) => {
   const iconExtraClass =
     iconPosition === IconPositions.LEFT
-      ? `order-first self-center ${label ? 'mr-1' : ''}`
-      : `${label ? 'self-center ml-1' : ''}`
+      ? `order-first self-center ${label ? "mr-1" : ""}`
+      : `${label ? "self-center ml-1" : ""}`;
 
-  const handleOnClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
-    onClick?.(e, { gtmData })
-  }
-  const Link = linkWrapper ? linkWrapper : 'a'
+  const handleOnClick = () => {
+    onClick?.(undefined, { gtmData });
+    if (href) {
+      Linking.openURL(href).catch((err) =>
+        console.error("An error occurred: ", err)
+      );
+    }
+  };
 
-  const { variant, size } = buttonStyleProps
+  const { variant, size } = buttonStyleProps || {}; // Ensure buttonStyleProps is not undefined
 
-  const buttonVariant = buttonVariants(size)
+  //This is the only thing that has been added for this fix
+  const buttonVariantSize: AtButtonSize | undefined =
+    size === undefined ? undefined : size;
+
+  const buttonVariantStyle = variant
+    ? buttonVariants(buttonVariantSize)({ variant })
+    : ""; // Pass an empty size string when size is undefined
+  const linkVariantStyle = linkVariant(); // Get the linkVariant styles
+
+  const isExternalLink = href?.startsWith("http");
 
   return (
-    <Link
-      href={href}
-      rel={target === Target.BLANK ? 'noopener noreferrer' : ''}
-      data-testid={dataTestId}
-      onClick={handleOnClick}
-      target={target}
-      aria-current={ariaCurrent}
+    <TouchableOpacity
+      testID={dataTestId}
+      onPress={handleOnClick}
+      accessible={true} // Make it accessible
+      accessibilityRole={role === "button" ? "button" : "link"} // Define the role
+      accessibilityState={{ disabled: props.disabled }} // Handle disabled state
       style={style}
-      role={role}
-      className={`${variant ? buttonVariant({ variant }) : linkVariant()} cursor-pointer ${className}`}
-      tabIndex={tabIndex}
-      {...props}
+      className={className}
+      {...Object.fromEntries(
+        Object.entries(props).filter(([key]) => !key.startsWith("aria-"))
+      )} // Filter out unsupported ARIA attributes
     >
-      {children ?? (
-        <>
-          {label && <span className={`flex items-center ${textClasses}`}>{label}</span>}
-          {iconProps && <AtIcon className={iconExtraClass} {...iconProps} color="currentColor" />}
-        </>
+      {children ? (
+        children
+      ) : (
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          {label && <Text className={textClasses}>{label}</Text>}
+          {iconProps && (
+            <AtIcon
+              className={iconExtraClass}
+              {...iconProps}
+              color="currentColor"
+            />
+          )}
+        </View>
       )}
-    </Link>
-  )
-}
+    </TouchableOpacity>
+  );
+};

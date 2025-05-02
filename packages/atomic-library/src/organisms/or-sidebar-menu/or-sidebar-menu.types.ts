@@ -1,0 +1,11 @@
+import { AtLinkProps } from '../../atoms'
+
+export interface OrSidebarMenuItem extends AtLinkProps {
+  isActive: boolean
+}
+
+export interface OrSidebarMenuProps {
+  title: string
+  menuItems: OrSidebarMenuItem[]
+  className?: string
+}

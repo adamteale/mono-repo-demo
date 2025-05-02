@@ -9,7 +9,7 @@ describe("atoms/at-tooltip", () => {
     it("should render correctly", () => {
       const { container } = render(
         <AtTooltip id="id" content="Lorem ipsum">
-          {<p>Shipping</p>}
+          {<Text>Shipping</Text>}
         </AtTooltip>
       );
 

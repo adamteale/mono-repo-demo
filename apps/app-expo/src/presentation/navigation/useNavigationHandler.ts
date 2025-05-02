@@ -1,4 +1,4 @@
-import { useRouter } from "expo-router";
+import { usePathname, useRouter } from "expo-router";
 
 import { NavigationService } from "@Presentation/navigation/hooks/types";
 import { ProductDetailScreenProps } from "@Presentation/screens/ProductDetailScreen";
@@ -8,6 +8,7 @@ export const useNavigationHandler = (): NavigationService => {
   const router = useRouter();
 
   return {
+    currentRoute: usePathname(),
     navigateBack: () => {
       router.back();
     },

@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 
 import { useAuth } from "@Presentation/context/AuthContext";
-import { AtButton, AtButtonVariant } from "@mono-repo-demo/atomic-library";
+import { AtButton, AtButtonVariants } from "@mono-repo-demo/atomic-library";
 
 export const LoginScreen = () => {
   const { login } = useAuth();
@@ -15,15 +15,15 @@ export const LoginScreen = () => {
         </Text>
         <View style={{ paddingBottom: 20 }}>
           <AtButton
-            variant={AtButtonVariant.primary}
-            onAction={login}
-            title="Buy a membership"
+            variant={AtButtonVariants.PRIMARY}
+            onClick={login}
+            children="Buy a membership"
           />
         </View>
         <AtButton
-          variant={AtButtonVariant.secondary}
-          onAction={login}
-          title="Log In"
+          variant={AtButtonVariants.SECONDARY}
+          onClick={login}
+          children="Log In"
         />
       </View>
     </View>

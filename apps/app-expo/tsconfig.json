@@ -20,6 +20,7 @@
     "expo-env.d.ts",
     "../../packages/atomic-library/src/assets/**/*.tsx",
     "../../packages/atomic-library/src/assets/**/*.ts",
-    "nativewind-env.d.ts"
+    "nativewind-env.d.ts",
+    "*.svg"
   ]
 }

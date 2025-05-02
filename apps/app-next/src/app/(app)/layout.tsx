@@ -20,9 +20,9 @@ function AuthenticatedContent({ children }: { children: React.ReactNode }) {
 
   if (isLoggedIn === null) {
     return (
-      <div className="flex-1 min-h-screen flex justify-center items-center">
+      <View className="flex-1 min-h-screen flex justify-center items-center">
         <ActivityIndicator size="large" color="#0000ff" />
-      </div>
+      </View>
     );
   }
 
@@ -31,10 +31,10 @@ function AuthenticatedContent({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <View className="flex flex-col min-h-screen">
       <main className="flex-1">{children}</main>
       <TabBar />
-    </div>
+    </View>
   );
 }
 

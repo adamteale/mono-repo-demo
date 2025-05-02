@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, [isLoggedIn]);
 
   if (isLoading) {
-    return <div>Loading authentication status...</div>;
+    return <View>Loading authentication status...</View>;
   }
 
   const handleLogin = () => {

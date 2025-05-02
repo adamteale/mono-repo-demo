@@ -1,63 +1,63 @@
-import { IconType } from './at-icon.types'
-import { AlertIcon } from './icons/alert'
-import { AngleIcon } from './icons/angle'
-import { ApproveIcon } from './icons/approve'
-import { ArrowIcon } from './icons/arrow'
-import { BarsIcon } from './icons/bars'
-import { BookmarkIcon } from './icons/bookmark'
-import { BookmarkFullIcon } from './icons/bookmark-full'
-import { CancelIcon } from './icons/cancel'
-import { CancelCircleIcon } from './icons/cancel-circle'
-import { CheckIcon } from './icons/check'
-import { ClockIcon } from './icons/clock'
-import { CopyrightIcon } from './icons/copyright'
-import { CvvIcon } from './icons/cvv'
-import { EnvelopeIcon } from './icons/envelope'
-import { FilterIcon } from './icons/filter'
-import { GitHubIcon } from './icons/github'
-import { GlobalFavIcon } from './icons/global-favicon'
-import { GoogleIcon } from './icons/google'
-import { HeartIcon } from './icons/heart'
-import { HeartBigIcon } from './icons/heart-big'
-import { HeartFullIcon } from './icons/heart-full'
-import { InfoIcon } from './icons/info'
-import { InstagramIcon } from './icons/instagram'
-import { LessIcon } from './icons/less'
-import { LinkedInIcon } from './icons/linkedin'
-import { LocationIcon } from './icons/location'
-import { LogoFavIcon } from './icons/logo-favicon'
-import { MessageIcon } from './icons/message'
-import { NotifyIcon } from './icons/notify'
-import { NotifySmallIcon } from './icons/notify-small'
-import { PauseIcon } from './icons/pause'
-import { PhoneIcon } from './icons/phone'
-import { PlaneIcon } from './icons/plane'
-import { PlayIcon } from './icons/play'
-import { PlayPauseIcon } from './icons/play-pause'
-import { PlusIcon } from './icons/plus'
-import { QuestionMarkIcon } from './icons/question-mark'
-import { RatingIcon } from './icons/rating'
-import { RatingFullIcon } from './icons/rating-full'
-import { ReloadIcon } from './icons/reload'
-import { SearchIcon } from './icons/search'
-import { ShippingTruckIcon } from './icons/shipping-truck'
-import { ShopFavIcon } from './icons/shop-favicon'
-import { ShoppingCartIcon } from './icons/shopping-cart'
-import { SizeIcon } from './icons/size'
-import { SmallCvvIcon } from './icons/small-cvv'
-import { SpinnerIcon } from './icons/spinner'
-import { SquareIcon } from './icons/square'
-import { SquareCheckedIcon } from './icons/square-checked'
-import { TrashIcon } from './icons/trash'
-import { TwitterIcon } from './icons/twitter'
-import { UserIcon } from './icons/user'
-import { VisibilityIcon } from './icons/visibility'
-import { VisibilityOffIcon } from './icons/visibility-off'
-import { CheckCircleIcon } from './icons/check-circle'
-import { FacebookIcon } from './icons/facebook'
-import { InstagramFullIcon } from './icons/instagram-full'
-import { BadgeIcon } from './icons/badge'
-import { ShoppingBagIcon } from './icons/shopping-bag'
+import { IconType } from "./at-icon.types";
+import { AlertIcon } from "./icons/alert";
+import { AngleIcon } from "./icons/angle";
+import { ApproveIcon } from "./icons/approve";
+import { ArrowIcon } from "./icons/arrow";
+import { BarsIcon } from "./icons/bars";
+import { BookmarkIcon } from "./icons/bookmark";
+import { BookmarkFullIcon } from "./icons/bookmark-full";
+import { CancelIcon } from "./icons/cancel";
+import { CancelCircleIcon } from "./icons/cancel-circle";
+import { CheckIcon } from "./icons/check";
+import { ClockIcon } from "./icons/clock";
+import { CopyrightIcon } from "./icons/copyright";
+import { CvvIcon } from "./icons/cvv";
+import { EnvelopeIcon } from "./icons/envelope";
+import { FilterIcon } from "./icons/filter";
+import { GitHubIcon } from "./icons/github";
+import { GlobalFavIcon } from "./icons/global-favicon";
+import { GoogleIcon } from "./icons/google";
+import { HeartIcon } from "./icons/heart";
+import { HeartBigIcon } from "./icons/heart-big";
+import { HeartFullIcon } from "./icons/heart-full";
+import { InfoIcon } from "./icons/info";
+import { InstagramIcon } from "./icons/instagram";
+import { LessIcon } from "./icons/less";
+import { LinkedInIcon } from "./icons/linkedin";
+import { LocationIcon } from "./icons/location";
+import { LogoFavIcon } from "./icons/logo-favicon";
+import { MessageIcon } from "./icons/message";
+import { NotifyIcon } from "./icons/notify";
+import { NotifySmallIcon } from "./icons/notify-small";
+import { PauseIcon } from "./icons/pause";
+import { PhoneIcon } from "./icons/phone";
+import { PlaneIcon } from "./icons/plane";
+import { PlayIcon } from "./icons/play";
+import { PlayPauseIcon } from "./icons/play-pause";
+import { PlusIcon } from "./icons/plus";
+import { QuestionMarkIcon } from "./icons/question-mark";
+import { RatingIcon } from "./icons/rating";
+import { RatingFullIcon } from "./icons/rating-full";
+import { ReloadIcon } from "./icons/reload";
+import { SearchIcon } from "./icons/search";
+import { ShippingTruckIcon } from "./icons/shipping-truck";
+import { ShopFavIcon } from "./icons/shop-favicon";
+import { ShoppingCartIcon } from "./icons/shopping-cart";
+import { SizeIcon } from "./icons/size";
+import { SmallCvvIcon } from "./icons/small-cvv";
+import { SpinnerIcon } from "./icons/spinner";
+import { SquareIcon } from "./icons/square";
+import { SquareCheckedIcon } from "./icons/square-checked";
+import { TrashIcon } from "./icons/trash";
+import { TwitterIcon } from "./icons/twitter";
+import { UserIcon } from "./icons/user";
+import { VisibilityIcon } from "./icons/visibility";
+import { VisibilityOffIcon } from "./icons/visibility-off";
+import { CheckCircleIcon } from "./icons/check-circle";
+import { FacebookIcon } from "./icons/facebook";
+import { InstagramFullIcon } from "./icons/instagram-full";
+import { BadgeIcon } from "./icons/badge";
+import { ShoppingBagIcon } from "./icons/shopping-bag";
 
 export const getIcon = (
   type: IconType,
@@ -65,14 +65,20 @@ export const getIcon = (
   size?: number,
   className?: string,
   dataTestId?: string,
-  ariaHidden?: 'true' | 'false',
+  ariaHidden?: "true" | "false"
 ) => {
   switch (type) {
-    case 'alert':
+    case "alert":
       return (
-        <AlertIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'angle-down':
+        <AlertIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "angle-down":
       return (
         <AngleIcon
           fill={color}
@@ -82,8 +88,8 @@ export const getIcon = (
           dataTestId={dataTestId}
           ariaHidden={ariaHidden}
         />
-      )
-    case 'angle-left':
+      );
+    case "angle-left":
       return (
         <AngleIcon
           fill={color}
@@ -93,8 +99,8 @@ export const getIcon = (
           dataTestId={dataTestId}
           ariaHidden={ariaHidden}
         />
-      )
-    case 'angle-right':
+      );
+    case "angle-right":
       return (
         <AngleIcon
           fill={color}
@@ -104,20 +110,38 @@ export const getIcon = (
           dataTestId={dataTestId}
           ariaHidden={ariaHidden}
         />
-      )
-    case 'angle-up':
+      );
+    case "angle-up":
       return (
-        <AngleIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'approve':
+        <AngleIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "approve":
       return (
-        <ApproveIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'arrow-right':
+        <ApproveIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "arrow-right":
       return (
-        <ArrowIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'arrow-left':
+        <ArrowIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "arrow-left":
       return (
         <ArrowIcon
           fill={color}
@@ -127,18 +151,38 @@ export const getIcon = (
           dataTestId={dataTestId}
           ariaHidden={ariaHidden}
         />
-      )
-    case 'badge':
+      );
+    case "badge":
       return (
-        <BadgeIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'bars':
-      return <BarsIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-    case 'bookmark':
+        <BadgeIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "bars":
       return (
-        <BookmarkIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'bookmark-full':
+        <BarsIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "bookmark":
+      return (
+        <BookmarkIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "bookmark-full":
       return (
         <BookmarkFullIcon
           fill={color}
@@ -147,12 +191,18 @@ export const getIcon = (
           dataTestId={dataTestId}
           ariaHidden={ariaHidden}
         />
-      )
-    case 'cancel':
+      );
+    case "cancel":
       return (
-        <CancelIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'cancel-circle':
+        <CancelIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "cancel-circle":
       return (
         <CancelCircleIcon
           fill={color}
@@ -161,26 +211,58 @@ export const getIcon = (
           dataTestId={dataTestId}
           ariaHidden={ariaHidden}
         />
-      )
-    case 'check':
+      );
+    case "check":
       return (
-        <CheckIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'clock':
+        <CheckIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "clock":
       return (
-        <ClockIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'copyright':
+        <ClockIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "copyright":
       return (
-        <CopyrightIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'cvv':
-      return <CvvIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-    case 'envelope':
+        <CopyrightIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "cvv":
       return (
-        <EnvelopeIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'check-circle':
+        <CvvIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "envelope":
+      return (
+        <EnvelopeIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "check-circle":
       return (
         <CheckCircleIcon
           fill={color}
@@ -189,44 +271,107 @@ export const getIcon = (
           dataTestId={dataTestId}
           ariaHidden={ariaHidden}
         />
-      )
-    case 'facebook':
+      );
+    case "facebook":
       return (
-        <FacebookIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'filter':
+        <FacebookIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "filter":
       return (
-        <FilterIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'github':
+        <FilterIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "github":
       return (
-        <GitHubIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'global-favicon':
-      return <GlobalFavIcon size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-    case 'google':
+        <GitHubIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "global-favicon":
       return (
-        <GoogleIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'heart-big':
+        <GlobalFavIcon
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "google":
       return (
-        <HeartBigIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'heart-full':
+        <GoogleIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "heart-big":
       return (
-        <HeartFullIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'heart':
+        <HeartBigIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "heart-full":
       return (
-        <HeartIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'info':
-      return <InfoIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-    case 'instagram':
+        <HeartFullIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "heart":
       return (
-        <InstagramIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'instagram-full':
+        <HeartIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "info":
+      return (
+        <InfoIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "instagram":
+      return (
+        <InstagramIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "instagram-full":
       return (
         <InstagramFullIcon
           fill={color}
@@ -235,28 +380,67 @@ export const getIcon = (
           dataTestId={dataTestId}
           ariaHidden={ariaHidden}
         />
-      )
-    case 'linkedin':
+      );
+    case "linkedin":
       return (
-        <LinkedInIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'less':
-      return <LessIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-    case 'location':
+        <LinkedInIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "less":
       return (
-        <LocationIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'logo-favicon':
-      return <LogoFavIcon size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-    case 'message':
+        <LessIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "location":
       return (
-        <MessageIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'notify':
+        <LocationIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "logo-favicon":
       return (
-        <NotifyIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'notify-small':
+        <LogoFavIcon
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "message":
+      return (
+        <MessageIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "notify":
+      return (
+        <NotifyIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "notify-small":
       return (
         <NotifySmallIcon
           fill={color}
@@ -265,28 +449,68 @@ export const getIcon = (
           dataTestId={dataTestId}
           ariaHidden={ariaHidden}
         />
-      )
-    case 'pause':
+      );
+    case "pause":
       return (
-        <PauseIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'phone':
+        <PauseIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "phone":
       return (
-        <PhoneIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'plane':
+        <PhoneIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "plane":
       return (
-        <PlaneIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'play':
-      return <PlayIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-    case 'play-pause':
+        <PlaneIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "play":
       return (
-        <PlayPauseIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'plus':
-      return <PlusIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-    case 'question-mark':
+        <PlayIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "play-pause":
+      return (
+        <PlayPauseIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "plus":
+      return (
+        <PlusIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "question-mark":
       return (
         <QuestionMarkIcon
           fill={color}
@@ -295,12 +519,18 @@ export const getIcon = (
           dataTestId={dataTestId}
           ariaHidden={ariaHidden}
         />
-      )
-    case 'rating':
+      );
+    case "rating":
       return (
-        <RatingIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'rating-full':
+        <RatingIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "rating-full":
       return (
         <RatingFullIcon
           fill={color}
@@ -309,16 +539,28 @@ export const getIcon = (
           dataTestId={dataTestId}
           ariaHidden={ariaHidden}
         />
-      )
-    case 'reload':
+      );
+    case "reload":
       return (
-        <ReloadIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'search':
+        <ReloadIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "search":
       return (
-        <SearchIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'shipping-truck':
+        <SearchIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "shipping-truck":
       return (
         <ShippingTruckIcon
           fill={color}
@@ -327,8 +569,8 @@ export const getIcon = (
           dataTestId={dataTestId}
           ariaHidden={ariaHidden}
         />
-      )
-    case 'shopping-bag':
+      );
+    case "shopping-bag":
       return (
         <ShoppingBagIcon
           fill={color}
@@ -337,8 +579,8 @@ export const getIcon = (
           dataTestId={dataTestId}
           ariaHidden={ariaHidden}
         />
-      )
-    case 'shopping-cart':
+      );
+    case "shopping-cart":
       return (
         <ShoppingCartIcon
           fill={color}
@@ -347,20 +589,47 @@ export const getIcon = (
           dataTestId={dataTestId}
           ariaHidden={ariaHidden}
         />
-      )
-    case 'shop-favicon':
-      return <ShopFavIcon size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-    case 'size':
-      return <SizeIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-    case 'spinner':
+      );
+    case "shop-favicon":
       return (
-        <SpinnerIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'small-cvv':
+        <ShopFavIcon
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "size":
       return (
-        <SmallCvvIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'square-checked':
+        <SizeIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "spinner":
+      return (
+        <SpinnerIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "small-cvv":
+      return (
+        <SmallCvvIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "square-checked":
       return (
         <SquareCheckedIcon
           fill={color}
@@ -369,22 +638,48 @@ export const getIcon = (
           dataTestId={dataTestId}
           ariaHidden={ariaHidden}
         />
-      )
-    case 'square':
+      );
+    case "square":
       return (
-        <SquareIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'trash':
+        <SquareIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "trash":
       return (
-        <TrashIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'twitter':
+        <TrashIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "twitter":
       return (
-        <TwitterIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-      )
-    case 'user':
-      return <UserIcon fill={color} size={size} className={className} dataTestId={dataTestId} ariaHidden={ariaHidden} />
-    case 'visibility':
+        <TwitterIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "user":
+      return (
+        <UserIcon
+          fill={color}
+          size={size}
+          className={className}
+          dataTestId={dataTestId}
+          ariaHidden={ariaHidden}
+        />
+      );
+    case "visibility":
       return (
         <VisibilityIcon
           fill={color}
@@ -393,8 +688,8 @@ export const getIcon = (
           dataTestId={dataTestId}
           ariaHidden={ariaHidden}
         />
-      )
-    case 'visibility-off':
+      );
+    case "visibility-off":
       return (
         <VisibilityOffIcon
           fill={color}
@@ -403,8 +698,8 @@ export const getIcon = (
           dataTestId={dataTestId}
           ariaHidden={ariaHidden}
         />
-      )
+      );
     default:
-      return null
+      return null;
   }
-}
+};

@@ -14,7 +14,7 @@ export const AtTooltip = ({
   ariaDescribedBy,
 }: AtTooltipProps) => {
   return (
-    <div
+    <View
       className="tooltip-container"
       id={id}
       data-tooltip-delay-show={delayShow}
@@ -32,6 +32,6 @@ export const AtTooltip = ({
         hidden={hidden}
         openOnClick={openOnClick}
       />
-    </div>
+    </View>
   );
 };

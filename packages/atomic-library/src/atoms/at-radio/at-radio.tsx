@@ -4,8 +4,8 @@ import {
   titleClasses,
   radioInputClasses,
   radioContainerClasses,
-} from './at-radio.variants'
-import { AtRadioProps } from './at-radio.types'
+} from "./at-radio.variants";
+import { AtRadioProps } from "./at-radio.types";
 
 export const AtRadio = ({
   title,
@@ -14,10 +14,10 @@ export const AtRadio = ({
   checked = false,
   disabled = false,
   onChange,
-  className = '',
+  className = "",
   inputName,
   ariaLabelAddOn,
-  dataTestId = 'at-radio',
+  dataTestId = "at-radio",
 }: AtRadioProps) => {
   return (
     <label className={`${radioContainerClasses({ disabled })} ${className}`}>
@@ -31,16 +31,27 @@ export const AtRadio = ({
         data-testid={dataTestId}
         className={`${radioInputClasses({ disabled, checked })}`}
         aria-checked={checked}
-        aria-label={`${title ? title : ''}${title && description ? ': ' : ''}${description ? description : ''}${
-          ariaLabelAddOn ? `, ${ariaLabelAddOn}` : ''
-        }`}
+        aria-label={`${title ? title : ""}${title && description ? ": " : ""}${
+          description ? description : ""
+        }${ariaLabelAddOn ? `, ${ariaLabelAddOn}` : ""}`}
       />
 
-      <div className={`${radioTextContainerClasses({ disabled })}`} aria-hidden>
-        {title && <span className={`${titleClasses({ disabled })} ${titleClassName}`}>{title}</span>}
+      <View
+        className={`${radioTextContainerClasses({ disabled })}`}
+        aria-hidden
+      >
+        {title && (
+          <Text className={`${titleClasses({ disabled })} ${titleClassName}`}>
+            {title}
+          </Text>
+        )}
 
-        {description && <span className={descriptionClasses({ disabled })}>{description}</span>}
-      </div>
+        {description && (
+          <Text className={descriptionClasses({ disabled })}>
+            {description}
+          </Text>
+        )}
+      </View>
     </label>
-  )
-}
+  );
+};

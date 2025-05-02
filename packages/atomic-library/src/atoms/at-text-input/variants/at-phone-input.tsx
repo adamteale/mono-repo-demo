@@ -1,7 +1,7 @@
-import React from 'react'
-import { AtTextInputProps } from '../at-text-input.types'
-import { AtTextInput } from '../at-text-input'
-import { phoneFormatter } from '../formatters'
+import React from "react";
+import { AtTextInputProps } from "../at-text-input.types";
+import { AtTextInput } from "../at-text-input";
+import { phoneFormatter } from "../formatters";
 
 export const AtPhoneInput = ({
   label,
@@ -13,35 +13,38 @@ export const AtPhoneInput = ({
   required,
   defaultValue,
   readOnly,
-  className = '',
+  className = "",
   error,
   disabled,
   icon,
-  value = '',
+  value = "",
   onClearInputClick,
   showSuccessIcon,
   errorText,
 }: AtTextInputProps) => {
   const onHandleChange = (value: string) => {
-    const formattedValue = phoneFormatter(value)
-    handleChange?.(formattedValue)
-  }
+    const formattedValue = phoneFormatter(value);
+    handleChange?.(formattedValue);
+  };
 
-  const placeholderClassName = !value ? 'placeholder:pl-11' : ''
+  const placeholderClassName = !value ? "placeholder:pl-11" : "";
 
   return (
-    <div>
+    <View>
       {/* 
         This is so the country code "shows"
         while also showing the input native
         placeholder
       */}
       {!value && (
-        <div className="relative">
-          <span aria-hidden={true} className="absolute z-10 left-[0.8125rem] top-[2.5625rem]">
+        <View className="relative">
+          <Text
+            aria-hidden={true}
+            className="absolute z-10 left-[0.8125rem] top-[2.5625rem]"
+          >
             (+56)
-          </span>
-        </div>
+          </Text>
+        </View>
       )}
       <AtTextInput
         readOnly={readOnly}
@@ -62,6 +65,6 @@ export const AtPhoneInput = ({
         onClearInputClick={onClearInputClick}
         showSuccessIcon={showSuccessIcon}
       />
-    </div>
-  )
-}
+    </View>
+  );
+};

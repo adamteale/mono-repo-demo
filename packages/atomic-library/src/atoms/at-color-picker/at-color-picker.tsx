@@ -1,6 +1,6 @@
-import { AtColorPickerProps } from './at-color-picker.types'
-import { buttonClasses, ringClasses } from './at-color-picker.variants'
-import { colorMappingClasses } from './color-mapping'
+import { AtColorPickerProps } from "./at-color-picker.types";
+import { buttonClasses, ringClasses } from "./at-color-picker.variants";
+import { colorMappingClasses } from "./color-mapping";
 
 export const AtColorPicker = ({
   color,
@@ -8,7 +8,7 @@ export const AtColorPicker = ({
   onClick,
   title,
   isSoldOut = false,
-  className = '',
+  className = "",
 }: AtColorPickerProps) => {
   return (
     <button
@@ -19,10 +19,12 @@ export const AtColorPicker = ({
       data-testid="at-color-picker"
       aria-pressed={isSelected}
     >
-      <div
-        className={`${colorMappingClasses[color]} ${ringClasses({ isSoldOut })} ${className}`}
+      <View
+        className={`${colorMappingClasses[color]} ${ringClasses({
+          isSoldOut,
+        })} ${className}`}
         data-testid="at-color-picker-ring"
       />
     </button>
-  )
-}
+  );
+};

@@ -1,16 +1,29 @@
-import { AtStepperItemProps } from './at-stepper-item.types'
-import { ringClasses, dividerClasses, labelTextClasses, stepTextClasses } from './at-stepper.variants'
+import { AtStepperItemProps } from "./at-stepper-item.types";
+import {
+  ringClasses,
+  dividerClasses,
+  labelTextClasses,
+  stepTextClasses,
+} from "./at-stepper.variants";
 
-export const AtStepperItem = ({ label, step, isActive = true }: AtStepperItemProps) => {
+export const AtStepperItem = ({
+  label,
+  step,
+  isActive = true,
+}: AtStepperItemProps) => {
   return (
-    <div className="flex items-center flex-col gap-y-4" role="stepper" aria-current={isActive ? 'step' : 'false'}>
-      <div className="flex flex-col items-center gap-y-2">
-        <div className={ringClasses({ isActive })}>
-          <p className={stepTextClasses({ isActive })}>{step}</p>
-        </div>
-        <p className={labelTextClasses({ isActive })}>{label}</p>
-      </div>
+    <View
+      className="flex items-center flex-col gap-y-4"
+      role="stepper"
+      aria-current={isActive ? "step" : "false"}
+    >
+      <View className="flex flex-col items-center gap-y-2">
+        <View className={ringClasses({ isActive })}>
+          <Text className={stepTextClasses({ isActive })}>{step}</Text>
+        </View>
+        <Text className={labelTextClasses({ isActive })}>{label}</Text>
+      </View>
       <hr className={dividerClasses({ isActive })} role="divider" />
-    </div>
-  )
-}
+    </View>
+  );
+};
