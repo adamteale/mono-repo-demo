@@ -6,7 +6,7 @@ import { OrBrandsContainerRendererProps } from "../renderer.types";
 export const OrBrandsContainerRenderer = ({
   block,
 }: OrBrandsContainerRendererProps) => {
-  const { title, seeMoreLabel, showLink, background } = block;
+  const { contentTypeId, title, seeMoreLabel, showLink, background } = block;
   return (
     <OrBrandsContainer
       title={title}

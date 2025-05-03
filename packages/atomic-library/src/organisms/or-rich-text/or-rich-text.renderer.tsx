@@ -1,3 +1,4 @@
+import { View } from "react-native";
 import { AtIcon, AtLink, AtLinkProps, IconColor, IconType } from "../../atoms";
 import {
   DefaultNodes,

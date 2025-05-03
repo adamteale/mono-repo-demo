@@ -1,3 +1,4 @@
+import { Text } from "react-native";
 import { IconType } from "../../../atoms";
 import { getMarksClasses, RichTextIcon } from "../or-rich-text.renderer";
 import { DefaultNodes } from "./default";

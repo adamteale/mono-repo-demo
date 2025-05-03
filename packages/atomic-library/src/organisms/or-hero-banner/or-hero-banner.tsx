@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import { BannerImage, BannerSplitImage } from "./components";
 import {
   OrHeroBannerContentAlignment,
@@ -36,10 +36,7 @@ export const OrHeroBanner: React.FC<OrHeroBannerProps> = ({
 
   return (
     <View className="flex justify-center">
-      <View
-        testID={dataTestId} // Renamed to testID for React Native
-        className={`${containerClasses} ${className}`}
-      >
+      <View testID={dataTestId} className={`${containerClasses} ${className}`}>
         <BannerImage variant={variant} image={image} />
 
         <BannerContent

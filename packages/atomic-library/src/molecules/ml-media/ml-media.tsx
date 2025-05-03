@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Image, Platform } from "react-native"; // React Native Image component
-import { AtImage } from "../../atoms"; // Ensure this is RN compatible
+import { View, Image, Platform } from "react-native";
+
+import { AtImage } from "../../atoms";
 import { ImageFormat, MlMediaFit, MlMediaProps } from "./ml-media.types";
-import { useIsMobile, useIsTablet } from "../../utils"; // Adapt these to React Native if needed or replace with Platform API
-import { backgroundImageClasses, imageClasses } from "./ml-media.variants"; // Adapt these to return Tailwind strings
-import { transformImageFormat } from "./transform-image-format"; // This might need adaptation
+import { useIsMobile, useIsTablet } from "../../utils";
+import { backgroundImageClasses, imageClasses } from "./ml-media.variants";
+import { transformImageFormat } from "./transform-image-format";
 
 export const MlMedia: React.FC<MlMediaProps> = ({
   dataTestId = "ml-media",
@@ -21,8 +22,8 @@ export const MlMedia: React.FC<MlMediaProps> = ({
     src: imageDesktop.src,
     alt: imageDesktop.alt ?? "",
   });
-  const isMobile = useIsMobile(); // Replace with RN specific method if needed
-  const isTablet = useIsTablet(); // Replace with RN specific method if needed
+  const isMobile = useIsMobile();
+  const isTablet = useIsTablet();
 
   useEffect(() => {
     let selectedImage = imageDesktop;
@@ -47,7 +48,7 @@ export const MlMedia: React.FC<MlMediaProps> = ({
     imageDesktop,
     imageMobile,
     imageTablet,
-  ]); //Added imageDesktop, imageMobile, imageTablet to the dependency array
+  ]);
 
   if (asBackground) {
     return (

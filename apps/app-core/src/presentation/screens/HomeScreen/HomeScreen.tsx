@@ -4,16 +4,19 @@ import {
   useWindowDimensions,
   Platform,
   ActivityIndicator,
+  View,
+  Image,
+  Text,
 } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import { PgPage } from "@mono-repo-demo/atomic-library";
+import { AtImage, PgPage } from "@mono-repo-demo/atomic-library";
 
 import { useHomeViewModel } from "./useHomeViewModel";
 import { useContentfulPageToProps } from "../../components/use-page-to-props";
 
 export const HomeScreen = () => {
-  const { pageProps, onTapNavigateToProductDetail } = useHomeViewModel();
+  const { pageProps } = useHomeViewModel();
   const windowWidth = useWindowDimensions().width;
 
   let dynamicHeight: number | undefined;
@@ -22,16 +25,30 @@ export const HomeScreen = () => {
   }
 
   const props = pageProps ? useContentfulPageToProps(pageProps) : null;
+
   let page: React.ReactNode = null;
+
   if (props) {
     const { children, head, ...rest } = props;
-    page = <PgPage {...rest}>{children}</PgPage>;
+    page = (
+      <ScrollView horizontal={false}>
+        <PgPage {...rest}>{children}</PgPage>
+      </ScrollView>
+    );
   } else {
-    page = <ActivityIndicator size="large" color="#0000ff" />;
+    page = (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
+        <ActivityIndicator size="large" color="#0000ff" />;
+      </View>
+    );
   }
-  return (
-    <SafeAreaProvider>
-      <ScrollView>{page}</ScrollView>
-    </SafeAreaProvider>
-  );
+
+  return <SafeAreaProvider>{page}</SafeAreaProvider>;
 };

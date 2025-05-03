@@ -3,7 +3,10 @@
   "private": true,
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages/*",
+    "packages/search/algolia",
+    "packages/cms-types/contentful",
+    "packages/cms-types/common"
   ],
   "scripts": {
     "expo:dev": "yarn workspace @mono-repo-demo/app-expo start",

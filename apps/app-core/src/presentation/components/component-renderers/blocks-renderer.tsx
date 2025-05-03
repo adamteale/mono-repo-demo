@@ -1,5 +1,7 @@
 import React, { lazy } from "react";
-import { v4 as uuid } from "uuid";
+
+import { View } from "react-native";
+
 import { BlocksRendererProps } from "./renderer.types";
 import { MlMediaRenderer } from "./renderers/ml-media.renderer";
 import { MlCardRenderer } from "./renderers/ml-card.renderer";
@@ -49,10 +51,8 @@ const LazyOrCarouselRenderer = lazy(
 );
 
 export const BlocksRenderer = ({ blocks }: BlocksRendererProps) => {
-  console.log("----BlocksRenderer", blocks?.length);
-
   return (
-    <>
+    <View>
       {blocks
         ?.map((block, idx) => {
           console.log("----BlocksRenderer", block?.contentTypeId);
@@ -162,6 +162,6 @@ export const BlocksRenderer = ({ blocks }: BlocksRendererProps) => {
           }
         })
         .filter(Boolean)}
-    </>
+    </View>
   );
 };

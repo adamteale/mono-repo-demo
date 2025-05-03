@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   AtButton,
   AtTag,
@@ -9,6 +11,7 @@ import { MlColorPicker, MlColorPickerType } from "..";
 import { MlProductCardProps } from "./ml-product-card.types";
 import { useMemo, useState } from "react";
 import { tagClasses } from "./ml-product-card.variants";
+import { Text, View } from "react-native";
 
 export const MlProductCard = ({
   tagLabel,
@@ -33,8 +36,8 @@ export const MlProductCard = ({
 }: MlProductCardProps) => {
   const [addingToBasket, setAddingToBasket] = useState(false);
   const [addButtonLabel, setAddButtonLabel] = useState(addToBasketLabel);
-  const [addedToBasketTimeoutId, setAddedToBasketTimeoutId] =
-    useState<NodeJS.Timeout>();
+  // const [addedToBasketTimeoutId, setAddedToBasketTimeoutId] =
+  //   useState<NodeJS.Timeout>();
 
   const sizesLength = sizes ? sizes.options.length : 0;
 
@@ -45,21 +48,19 @@ export const MlProductCard = ({
   }, [tagLabel, outOfStock, outOfStockLabel]);
 
   const handleAddToBasket = async () => {
-    setAddingToBasket(true);
-    setAddButtonLabel(loadingLabel);
-
-    const added = await addToBasketOnClick?.();
-
-    setAddingToBasket(false);
-    if (added) {
-      setAddButtonLabel(addedToBasketLabel);
-      if (addedToBasketTimeoutId) clearTimeout(addedToBasketTimeoutId);
-      const id = setTimeout(() => {
-        setAddButtonLabel(addToBasketLabel);
-        setAddedToBasketTimeoutId(undefined);
-      }, 4000);
-      setAddedToBasketTimeoutId(id);
-    } else setAddButtonLabel(addToBasketLabel);
+    // setAddingToBasket(true);
+    // setAddButtonLabel(loadingLabel);
+    // const added = await addToBasketOnClick?.();
+    // setAddingToBasket(false);
+    // if (added) {
+    //   setAddButtonLabel(addedToBasketLabel);
+    //   if (addedToBasketTimeoutId) clearTimeout(addedToBasketTimeoutId);
+    //   const id = setTimeout(() => {
+    //     setAddButtonLabel(addToBasketLabel);
+    //     setAddedToBasketTimeoutId(undefined);
+    //   }, 4000);
+    //   setAddedToBasketTimeoutId(id);
+    // } else setAddButtonLabel(addToBasketLabel);
   };
 
   return (

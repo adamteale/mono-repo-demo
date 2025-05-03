@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   HeaderMenuItem,
   OrHeaderProps,
@@ -16,6 +18,11 @@ import { OrRichTextRenderer } from "../component-renderers/renderers/or-rich-tex
 import { AtLinkProps, CMSHeader, Target } from "@mono-repo-demo/atomic-library";
 import { PRODUCT_VARIATIONS_KEY } from "../types";
 import { SearchQueryDto } from "@app-core/src/domain/contentful/types/search-query.dto";
+import {
+  normalizeSearchResult,
+  normalizeSearchSuggestion,
+  SearchState,
+} from "@search/algolia";
 
 export const BASKET_TEXT_PLACEHOLDERS = {
   singleItemLabel: "{itemValue}",
@@ -25,6 +32,7 @@ export const BASKET_TEXT_PLACEHOLDERS = {
 export const normalizeHeader = (
   header: CMSHeader,
   basketState: BasketState,
+  searchState: SearchState,
   {
     search,
     updateBasket,
@@ -104,7 +112,15 @@ export const normalizeHeader = (
       },
     },
     basketTotalItems: basketState.basket?.totalItems ?? 0,
-    stickBarContent: undefined,
+    stickBarContent: header.stickBarContent ? (
+      <OrRichTextRenderer
+        block={{
+          content: header.stickBarContent,
+          textAlignment: "center",
+          variant: "header-sticky-bar",
+        }}
+      />
+    ) : undefined,
     popUpBasket: header.popUpBasket
       ? {
           leftButton: {
@@ -124,10 +140,50 @@ export const normalizeHeader = (
             header.popUpBasket?.subTotalPriceLabel ?? "SUBTOTAL: ",
           subtotalPrice: basketState.basket?.totalPrice?.formatted ?? "$0.00",
           itemsLabel: basketItemsLabel,
-          items: [],
+          items: basketState.basket?.items?.map((item) =>
+            normalizeBasketItem({
+              item,
+              showInputQuantity: false,
+              onDeleteItem: () => deleteItemFromBasket(item.basketItemId),
+              onQuantityChange: ({ quantity }) => {
+                item.quantity !== quantity &&
+                  updateBasket(item.basketItemId, quantity, false);
+              },
+              isDeleteButtonDisabled: basketState.isPending,
+              isQuantityInputDisabled: basketState.isPending,
+            })
+          ),
         }
       : undefined,
-    searchBox: undefined,
+    searchBox: {
+      onSubmit: searchOnSubmit,
+      onChange: (query: any) => search({ text: query }),
+      onClearButtonClick: () => search({}),
+      placeholder: header?.searchbox?.placeholder ?? "",
+      currentQuery: searchState.query ?? "",
+      resultsTitle: header?.searchbox?.resultsTitle,
+      resultsDisplayVariant: header?.searchbox
+        ?.resultsDisplayVariant as SearchItemDisplayVariants,
+      seeMoreResultsLinkProps: {
+        href: getSearchUrl(searchState.query),
+        linkWrapper: Link,
+      },
+      seeMoreResultsLabel: header?.searchbox?.seeMoreResultsLabel,
+      totalAmountOfResults: searchState.results?.totalCount ?? 0,
+      noResultsFoundLabel: header?.searchbox?.noResultsFoundLabel,
+      suggestionsTitle: "Featured Products",
+      totalAmountOfSuggestions: searchState.results?.suggestions?.length ?? 0,
+      suggestions:
+        normalizeSearchSuggestion(
+          searchState.results?.suggestions as any,
+          SLUG_KEY.PRODUCTS,
+          PLACEHOLDER_IMAGE_PATH
+        ) ?? [],
+      suggestionsDisplayVariant: SearchItemDisplayVariants.CARD,
+      showMoreSuggestions: false,
+      results: [],
+      showResults,
+    },
     menuItems: header.menuItems
       ?.map(normalizeMenuItem)
       .filter((el): el is HeaderMenuItem => !!el),

@@ -17,6 +17,7 @@ export const OrContainerRenderer = ({ block }: OrContainerRendererProps) => {
     hasParagraphs,
     paragraphLayout,
     background,
+    contentTypeId,
   } = block;
 
   const titleAlignment = titleAlign as OrContainerProps["titleAlign"];

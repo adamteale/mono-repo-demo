@@ -6,7 +6,7 @@ export const Layout = ({ header, footer, children }: LayoutProps) => {
   return (
     <View className="flex flex-col min-h-screen">
       {/* <OrHeader {...header} /> */}
-      <View accessibilityRole="main" className="w-full flex-1">
+      <View className="w-full flex-1" aria-label="main-content">
         {children}
       </View>
       {/* <OrFooter {...footer} /> */}

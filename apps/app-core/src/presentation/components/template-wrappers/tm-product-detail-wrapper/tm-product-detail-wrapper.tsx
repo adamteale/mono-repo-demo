@@ -1,14 +1,18 @@
+import React, { useMemo } from "react";
+
+// import Link from "next/link";
+
 import {
   MlBreadcrumbProps,
   OrCarouselProps,
   Rating,
 } from "@mono-repo-demo/atomic-library";
+
 import {
   OrProductDetailsProps,
   TmProductDetail,
 } from "@components-library/ecommerce";
-import { useMemo } from "react";
-import Link from "next/link";
+
 import { useBasket } from "../../../context/basket/use-basket";
 import { useGlobalContext } from "../../../context/global";
 import { SLUG_KEY } from "../../../utils";
@@ -20,7 +24,8 @@ import { getAttributeProperties } from "../../../utils/product/get-attribute-pro
 import { ProductJsonLd } from "../../../utils/json-ld-scripts/product";
 import { defaultHomeLabel } from "../../search-service";
 
-const BASE_CATALOG_URL = `/${SLUG_KEY.CATALOG}`;
+// const BASE_CATALOG_URL = `/${SLUG_KEY.CATALOG}`;
+const BASE_CATALOG_URL = `/`;
 
 export const TmProductDetailWrapper = ({
   product,
@@ -41,6 +46,7 @@ export const TmProductDetailWrapper = ({
     linkWrapper: reviewsLinkWrapper,
   } = {},
 }: TmProductDetailWrapperProps) => {
+  return <></>;
   const { addProductToBasket } = useBasket();
   const { catalogLabels } = useGlobalContext();
   const breadcrumbFirstElementLabel =

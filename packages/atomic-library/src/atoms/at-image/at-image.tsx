@@ -2,8 +2,6 @@ import React, { forwardRef, SyntheticEvent } from "react";
 import {
   Image,
   ImageProps,
-  StyleProp,
-  ImageStyle,
   NativeSyntheticEvent,
   ImageErrorEventData,
 } from "react-native";
@@ -39,17 +37,13 @@ export const AtImage = forwardRef<Image, CombinedProps>(
 
     const handleLoad = (event: NativeSyntheticEvent<any>) => {
       if (onLoad) {
-        console.log("Image loaded successfully");
         onLoad({ ...event, currentTarget: null } as unknown as SyntheticEvent<
           HTMLImageElement,
           Event
         >); // Ensure correct type
-      } else {
-        console.log(
-          "Image loaded successfully, but no onLoad handler provided"
-        );
       }
     };
+
     return (
       <Image
         source={{ uri: src }}
@@ -59,10 +53,7 @@ export const AtImage = forwardRef<Image, CombinedProps>(
         onLoad={handleLoad}
         className={className}
         ref={ref}
-        onLayout={(event) =>
-          console.log("Image layout:", event.nativeEvent.layout)
-        }
-        style={{ backgroundColor: "red" }}
+        onError={onError}
       />
     );
   }

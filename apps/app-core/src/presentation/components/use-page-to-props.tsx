@@ -17,13 +17,6 @@ import {
   CMSStepper,
 } from "@mono-repo-demo/atomic-library";
 
-// import {
-//   SHOW_SEARCH_RESULTS_IN_CATALOG_PAGE,
-//   TmCatalogWrapper,
-//   cardRenderer,
-//   useSearchBoxResults,
-//   useSearchBox,
-// } from "./search-service";
 import { normalizeFooter } from "./normalization/footer";
 import { useBasket } from "../context/basket/use-basket";
 import {
@@ -33,24 +26,35 @@ import {
   // setStorageState,
 } from "../utils";
 
-import { normalizeHead } from "./normalization/head";
-// import { TmBasketWrapper } from "./template-wrappers/tm-basket-wrapper/tm-basket-wrapper";
-import { TmFlexWrapper } from "./template-wrappers/tm-flex-wrapper/tm-flex-wrapper";
 import { PageProps, ProductPageProps, SearchPageProps } from "./page-types";
+import { TmFlexWrapper } from "./template-wrappers/tm-flex-wrapper/tm-flex-wrapper";
 import { TmProductDetailWrapper } from "./template-wrappers/tm-product-detail-wrapper/tm-product-detail-wrapper";
-import { TmStepperWrapper } from "./template-wrappers/tm-stepper-wrapper/tm-stepper-wrapper";
-import { TmLoginWrapper } from "./template-wrappers/tm-login-wrapper/tm-login-wrapper";
-import { TmContactUsWrapper } from "./template-wrappers/tm-contact-us-wrapper/tm-contact-us-wrapper";
-import { TmCheckoutCompletedWrapper } from "./template-wrappers/tm-checkout-completed-wrapper/tm-checkout-completed-wrapper";
-import { TmLegalSupportWrapper } from "./template-wrappers/tm-legal-support-wrapper/tm-legal-support-wrapper";
-// import { resolveAccessToken } from "../utils/services";
-import { useGlobalContext } from "../context/global";
+// import { TmBasketWrapper } from "./template-wrappers/tm-basket-wrapper/tm-basket-wrapper";
+// import { TmStepperWrapper } from "./template-wrappers/tm-stepper-wrapper/tm-stepper-wrapper";
+// import { TmLoginWrapper } from "./template-wrappers/tm-login-wrapper/tm-login-wrapper";
+// import { TmContactUsWrapper } from "./template-wrappers/tm-contact-us-wrapper/tm-contact-us-wrapper";
+// import { TmCheckoutCompletedWrapper } from "./template-wrappers/tm-checkout-completed-wrapper/tm-checkout-completed-wrapper";
+// import { TmLegalSupportWrapper } from "./template-wrappers/tm-legal-support-wrapper/tm-legal-support-wrapper";
 // import { PLACEHOLDER_IMAGE_PATH } from "../utils/normalization/files/constants";
 // import { TmBlogArticleWrapper } from "./template-wrappers/tm-blog-article-wrapper/tm-blog-article-wrapper";
+import { resolveAccessToken } from "../../utils/services/customer";
+
 import { useNavigationContext } from "../context";
+import { normalizeHead } from "./normalization/head";
 import { normalizeHeader } from "./normalization/header";
+import { useGlobalContext } from "../context/global";
+import {
+  // TmCatalogWrapper,
+  cardRenderer,
+  useSearchBoxResults,
+  SearchState,
+  SearchContextStatus,
+  SearchQueryDto,
+} from "./search-service";
 
 export const STICKBAR_KEY = "stick-bar";
+
+const SHOW_SEARCH_RESULTS_IN_CATALOG_PAGE = false;
 
 const Template = (page: PageProps) => {
   const router = useNavigationContext().navigation;
@@ -164,12 +168,25 @@ const Template = (page: PageProps) => {
   // }
 };
 
+const resolveAccessTokenMock = (): Promise<string> => {
+  return Promise.resolve("");
+};
+
 export const useContentfulPageToProps = (
   pageProps: PageProps
 ): (PgPageProps & { head: HeadProps }) | null => {
-  // const { state: searchState, search } = useSearchBox(resolveAccessToken);
-  // const results = useSearchBoxResults();
+  // const { state: searchState, search } = useSearchBox(resolveAccessTokenMock);
+  const results = useSearchBoxResults();
   const router = useNavigationContext().navigation;
+  const { state, updateBasket, deleteItemFromBasket } = useBasket();
+
+  const basketState = {
+    basket: undefined,
+    notificationItem: undefined,
+    isPending: undefined,
+    availableShippingMethods: undefined,
+    order: undefined,
+  };
   // const {
   //   state: basketState,
   //   updateBasket,
@@ -178,11 +195,10 @@ export const useContentfulPageToProps = (
   /**
    * Shows search results in catalog or search page
    */
-  // const showResults =
-  //   SHOW_SEARCH_RESULTS_IN_CATALOG_PAGE ||
-  //   (!router.currentRoute.includes(`/${SLUG_KEY.SEARCH}`) &&
-  //     !router.currentRoute.includes(`/${SLUG_KEY.CATALOG}`));
-  const showResults = false;
+  const showResults =
+    SHOW_SEARCH_RESULTS_IN_CATALOG_PAGE ||
+    (!router.currentRoute.includes(`/${SLUG_KEY.SEARCH}`) &&
+      !router.currentRoute.includes(`/${SLUG_KEY.CATALOG}`));
 
   const searchOnSubmit = (
     event:
@@ -217,27 +233,11 @@ export const useContentfulPageToProps = (
     return slugs.some((slug) => path.startsWith(`/${SLUG_KEY[slug]}`));
   };
 
-  const basketState = {
-    basket: undefined,
-    notificationItem: undefined,
-    isPending: undefined,
-    availableShippingMethods: undefined,
-    order: undefined,
-  };
-
   const searchState = {
-    status: "INITIAL",
-    results: undefined,
-    isResolved: true,
-    error: undefined,
-    autocomplete: undefined,
-    autocompleteState: undefined,
-    query: undefined,
+    status: SearchContextStatus.INITIAL,
+    isResolved: false,
   };
-
-  const search = () => {};
-  const updateBasket = () => {};
-  const deleteItemFromBasket = () => {};
+  const search: (query: SearchQueryDto) => Promise<void> = async (query) => {};
 
   const props: PgPageProps & { head: HeadProps } = {
     // head: normalizeHead(pageProps, environment.baseUrl),
@@ -245,16 +245,10 @@ export const useContentfulPageToProps = (
     header: {
       ...normalizeHeader(
         pageProps.fields?.header,
-        {
-          basket: undefined,
-          notificationItem: undefined,
-          isPending: undefined,
-          availableShippingMethods: undefined,
-          order: undefined,
-        },
+        basketState,
         {
           ...searchState,
-          results: [],
+          results,
         },
         {
           search,

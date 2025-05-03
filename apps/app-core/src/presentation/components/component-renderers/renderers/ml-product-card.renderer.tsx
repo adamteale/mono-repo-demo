@@ -1,7 +1,7 @@
 import { MlProductCard } from "@components-library/ecommerce";
 import { useBasket } from "../../../context/basket/use-basket";
 import { useGlobalContext } from "../../../context/global";
-import { Product, ProductSearchResult } from "../../../types";
+import { Product, ProductSearchResult } from "../../../../types";
 import { normalizeProductToCard } from "../../../utils/normalization/product/product-to-card";
 import { useProductVariant } from "../../template-wrappers/tm-product-detail-wrapper/use-product-variant/use-product-variant";
 
