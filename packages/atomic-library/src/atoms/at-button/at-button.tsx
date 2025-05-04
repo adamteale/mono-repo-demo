@@ -1,53 +1,14 @@
 import React from "react";
 import { TouchableOpacity, Text, View, ActivityIndicator } from "react-native";
-import { AtIcon } from "../at-icon"; // Assuming a NativeWind-compatible AtIcon
+import { AtIcon } from "../at-icon";
 import {
   AtButtonIconPosition,
   AtButtonActionType,
   AtButtonProps,
-  AtButtonVariants,
-  AtButtonSize,
 } from "./at-button.types";
+import { buttonVariants } from "./at-button.variants";
 
 export { AtButtonIconPosition, AtButtonActionType };
-
-const buttonVariants = (size: AtButtonProps["size"], isLoading: boolean) => {
-  const base =
-    "flex-row items-center justify-center rounded-md font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-primary";
-  const disabledStyles = "opacity-50 cursor-not-allowed";
-  const loadingStyles = "cursor-wait";
-
-  const sizeStyles = () => {
-    switch (size) {
-      case "small":
-        return "px-3 py-1 text-sm";
-      case "medium":
-        return "px-4 py-2 text-base";
-      case "large":
-        return "px-5 py-3 text-lg";
-      default:
-        return "px-4 py-2 text-base";
-    }
-  };
-
-  const variantStyles = (variant: AtButtonProps["variant"]) => {
-    switch (variant) {
-      case "primary":
-        return "bg-primary text-white";
-      case "secondary":
-        return "bg-secondary text-primary border border-primary";
-      case "tertiary":
-        return "bg-transparent text-primary underline";
-      default:
-        return "bg-primary text-white";
-    }
-  };
-
-  return ({ variant }: { variant: AtButtonProps["variant"] }) =>
-    `${base} ${sizeStyles()} ${variantStyles(variant)} ${
-      isLoading ? loadingStyles : ""
-    } ${disabledStyles}`;
-};
 
 export const AtButton = ({
   actionType,
@@ -60,16 +21,17 @@ export const AtButton = ({
   iconPosition = AtButtonIconPosition.LEFT,
   onClick,
   isLoading,
-  className = "",
+  className,
   disabled,
   variant,
   size,
-}: // React Native doesn't directly support 'form' or 'buttonType' like web
-Omit<AtButtonProps, "buttonType" | "form" | "target"> & {
+}: Omit<AtButtonProps, "buttonType" | "form" | "target"> & {
   target?: string;
 }) => {
   const hasIcon = !!icon || !!iconType;
-  const buttonClasses = buttonVariants(size, isLoading ?? false)({ variant });
+  const buttonClasses = className
+    ? className
+    : buttonVariants(size, isLoading ?? false)({ variant });
 
   const handlePress = (e: any) => {
     if (onClick) {
@@ -90,7 +52,7 @@ Omit<AtButtonProps, "buttonType" | "form" | "target"> & {
     <TouchableOpacity
       data-testid={dataTestId}
       onPress={handlePress}
-      className={`${buttonClasses} ${className}`}
+      className={buttonClasses}
       disabled={disabled || isLoading}
     >
       <View className="flex-row items-center justify-center">
@@ -105,13 +67,13 @@ Omit<AtButtonProps, "buttonType" | "form" | "target"> & {
             />
           )}
 
-        <Text className={"text-current"}>{children}</Text>
+        {children}
 
         {hasIcon &&
           !isLoading &&
           iconPosition === AtButtonIconPosition.RIGHT && (
             <AtIcon
-              className="ml-2 text-current"
+              className="ml-2 text-inherit"
               src={icon}
               type={iconType}
               size={24}

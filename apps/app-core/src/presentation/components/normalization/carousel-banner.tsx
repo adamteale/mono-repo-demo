@@ -1,9 +1,12 @@
+import React from "react";
+import { Text, TouchableOpacity } from "react-native";
+
 import {
   OrHeroBannerProps,
   OrCarouselBannerProps,
 } from "@mono-repo-demo/atomic-library";
 import { normalizeMedia } from "./media";
-import Link from "next/link";
+// import Link from "next/link";
 import { CMSHeroBanner, CMSCarousel } from "@mono-repo-demo/atomic-library";
 import { normalizeFile } from "./file";
 
@@ -49,7 +52,7 @@ export const normalizeCarouselBanner = (
               href: btn.actionUrl,
               label: btn.label,
               buttonStyleProps: { variant: btn.variant ?? "secondary" },
-              linkWrapper: Link,
+              // linkWrapper: Link,
             }))
             .filter(Boolean),
           image: image && normalizeMedia(image),

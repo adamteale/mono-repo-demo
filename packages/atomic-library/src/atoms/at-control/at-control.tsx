@@ -1,4 +1,4 @@
-import { Text } from "react-native";
+import { Pressable, Text } from "react-native";
 
 import { AtIcon, IconType } from "../at-icon";
 import {
@@ -10,7 +10,6 @@ import { controlArrow } from "./at-control.variants";
 
 const Icon = ({ icon }: { icon: AtControlIcon }) => {
   const iconType = /^less|plus$/i.test(icon) ? icon : `angle-${icon}`;
-
   return <AtIcon type={iconType as IconType} color="text-primary" />;
 };
 
@@ -36,14 +35,14 @@ export const AtControl = ({
   onClick,
 }: AtControlProps) => {
   return (
-    <button
+    <Pressable
       className={`${controlArrow({ size })} ${className}`}
-      type="button"
-      onClick={onClick}
+      accessibilityRole="button"
+      onPress={onClick}
       aria-label={label}
       data-testid={dataTestId}
     >
       <Icon icon={icon} />
-    </button>
+    </Pressable>
   );
 };

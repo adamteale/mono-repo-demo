@@ -35,14 +35,14 @@ const BannerContent: React.FC<BannerContentProps> = ({
   showDivider,
   showTextBackground,
 }) => {
-  const containerClassnames = getContainerClassnames(variant!, align!); // Consider directly using style strings
+  const containerClassnames = getContainerClassnames(variant!, align!);
   const contentClassnames = getContentClassnames(
     variant!,
     align!,
     showTextBackground!,
     buttons!,
     mobileAlign
-  ); // Consider directly using style strings
+  );
 
   const titleClasses = () => {
     switch (variant) {
@@ -71,8 +71,8 @@ const BannerContent: React.FC<BannerContentProps> = ({
       <View className={contentClassnames}>
         {variant === OrHeroBannerVariant.CONTENT_BANNER && tagLabel && (
           <AtTag
-            className="!px-3 !py-2"
-            textClassName="!text-base"
+            className="!px-3 !py-2 bg-[#172554] text-white"
+            textClassName="!text-base text-white"
             text={tagLabel}
           />
         )}
@@ -104,13 +104,13 @@ const BannerContent: React.FC<BannerContentProps> = ({
                 <AtLink
                   key={idx}
                   tabIndex={isActive ? 0 : -1}
-                  textClasses="whitespace-nowrap"
+                  textClasses="whitespace-nowrap  text-white font-bold text-xl"
                   {...btn}
-                  className={
+                  className={`bg-[#D01D1D] rounded-lg ${
                     variant === OrHeroBannerVariant.CONTENT_BANNER
                       ? "w-full md:!w-fit"
                       : "!w-fit"
-                  }
+                  }`}
                 />
               ) : null
             )}
