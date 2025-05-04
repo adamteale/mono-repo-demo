@@ -1,3 +1,5 @@
+import { Text } from "react-native";
+
 import { AtIcon, IconType } from "../at-icon";
 import {
   AtControlProps,

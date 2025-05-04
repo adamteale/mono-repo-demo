@@ -71,7 +71,7 @@ const BannerContent: React.FC<BannerContentProps> = ({
       <View className={contentClassnames}>
         {variant === OrHeroBannerVariant.CONTENT_BANNER && tagLabel && (
           <AtTag
-            className="!h-8 !px-3 !py-2"
+            className="!px-3 !py-2"
             textClassName="!text-base"
             text={tagLabel}
           />

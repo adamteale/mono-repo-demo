@@ -1,94 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-  ScrollView,
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  TouchableOpacity,
-} from "react-native";
+import { View, ScrollView, Text, TouchableOpacity } from "react-native";
+import { getNavigationArrowConfig } from "../../utils";
+import { OrCarouselProps } from "./or-carousel.types";
+import { getBreakpoints } from "./or-carousel.breakpoints"; // Assuming this returns screen widths
+import { AtButtonSize, AtButtonVariants, AtControl, AtLink } from "../../atoms"; // Make sure these work with react-native and have correct tailwind imports
+import { arrowClasses } from "./or-carousel.variants"; // Make sure these work with react-native and have correct tailwind imports
 
-import { MlBannerProps } from "@mono-repo-demo/atomic-library"; // Assuming this exists in your React Native context
-import { AtButton, AtLink } from "../../atoms"; // Assuming these have React Native implementations
+// Swiper isn't available, so we will emulate with a scroll view
+// import { Swiper, SwiperSlide } from 'swiper/react'
+// import SwiperCore from 'swiper'
+// import { Grid, Pagination, Mousewheel } from 'swiper/modules'
 
-const { width: screenWidth } = Dimensions.get("window");
-
-interface OrCarouselProps {
-  title?: string;
-  link?: {
-    label: string;
-    onPress: () => void;
-    dataTestId?: string;
-  };
-  dataTestId?: string;
-  className?: string;
-  wrapperClassName?: string;
-  children?: React.ReactNode[];
-  titleContainerClassName?: string;
-}
-
-const CARD_WIDTH = 280; // Adjust as needed
-const CARD_MARGIN_HORIZONTAL = 16;
-
-const styles = StyleSheet.create({
-  wrapper: {
-    paddingVertical: 24,
-  },
-  titleContainer: {
-    paddingHorizontal: 16,
-  },
-  titleRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 12,
-  },
-  title: {
-    flex: 1,
-    color: "#007bff", // Example primary color
-    fontSize: 18,
-    fontWeight: "bold",
-    letterSpacing: 0.1,
-  },
-  linkContainer: {
-    width: "auto",
-  },
-  carouselContainer: {
-    marginTop: 14,
-  },
-  itemContainer: {
-    width: CARD_WIDTH,
-    marginHorizontal: CARD_MARGIN_HORIZONTAL,
-  },
-  arrowContainer: {
-    position: "absolute",
-    top: "50%",
-    transform: [{ translateY: -20 }],
-    zIndex: 10,
-    padding: 8,
-  },
-  arrowLeft: {
-    left: 8,
-  },
-  arrowRight: {
-    right: 8,
-  },
-  arrowButton: {
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    borderRadius: 20,
-    width: 40,
-    height: 40,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  arrowText: {
-    color: "white",
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-});
-
-export const OrCarousel = ({
+const OrCarousel = ({
   title,
   link,
   dataTestId = "carousel",
@@ -97,121 +20,152 @@ export const OrCarousel = ({
   children,
   titleContainerClassName = "",
 }: OrCarouselProps) => {
-  const scrollViewRef = useRef<ScrollView>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const breakpoints = getBreakpoints();
+  const [controlledScrollIndex, setControlledScrollIndex] = useState(0);
   const [showArrows, setShowArrows] = useState(false);
-  const [contentWidth, setContentWidth] = useState(0);
+  const [isPrevArrowActive, setIsPrevArrowActive] = useState(false);
+  const [isNextArrowActive, setIsNextArrowActive] = useState(false);
+  const scrollViewRef = useRef<ScrollView>(null);
+  const [containerWidth, setContainerWidth] = useState(300); // setting this default
+
+  const prevArrow = getNavigationArrowConfig(
+    false,
+    "prev",
+    () => slidePrev(),
+    "left",
+    "big"
+  );
+  const nextArrow = getNavigationArrowConfig(
+    false,
+    "next",
+    () => slideNext(),
+    "right",
+    "big"
+  );
 
   useEffect(() => {
-    if (children && scrollViewRef.current) {
-      scrollViewRef.current.scrollTo({ x: 0, animated: false });
-      setCurrentIndex(0);
+    revalidateActivateArrows(controlledScrollIndex);
+  }, [controlledScrollIndex]);
+
+  useEffect(() => {
+    if (children && children.length) {
+      revalidateActivateArrows(controlledScrollIndex);
     }
   }, [children]);
 
-  const handleScroll = (event: any) => {
-    const offsetX = event.nativeEvent.contentOffset.x;
-    const index = Math.round(
-      offsetX / (CARD_WIDTH + CARD_MARGIN_HORIZONTAL * 2)
-    );
-    setCurrentIndex(index);
-  };
-
-  const goToPrevious = () => {
-    if (scrollViewRef.current && currentIndex > 0) {
-      scrollViewRef.current.scrollTo({
-        x: (currentIndex - 1) * (CARD_WIDTH + CARD_MARGIN_HORIZONTAL * 2),
-        animated: true,
+  const slidePrev = () => {
+    if (controlledScrollIndex > 0) {
+      setControlledScrollIndex(controlledScrollIndex - 1);
+      scrollViewRef.current?.scrollTo({
+        x: (controlledScrollIndex - 1) * containerWidth,
       });
     }
   };
 
-  const goToNext = () => {
-    if (scrollViewRef.current && currentIndex < (children?.length || 0) - 1) {
-      scrollViewRef.current.scrollTo({
-        x: (currentIndex + 1) * (CARD_WIDTH + CARD_MARGIN_HORIZONTAL * 2),
-        animated: true,
+  const slideNext = () => {
+    if (controlledScrollIndex < (children?.length || 0) - 1) {
+      setControlledScrollIndex(controlledScrollIndex + 1);
+      scrollViewRef.current?.scrollTo({
+        x: (controlledScrollIndex + 1) * containerWidth,
       });
     }
   };
 
-  const onContentSizeChange = (w: number) => {
-    setContentWidth(w);
+  const revalidateActivateArrows = (index: number) => {
+    setIsPrevArrowActive(index > 0);
+    setIsNextArrowActive(index < (children?.length || 0) - 1);
   };
 
-  if (!children || children.length === 0) {
-    return null;
-  }
-
-  const showLeftArrow = showArrows && currentIndex > 0;
-  const showRightArrow = showArrows && currentIndex < children.length - 1;
+  if (!children) return null;
 
   return (
     <View
-      style={[styles.wrapper, wrapperClassName]}
+      className={`py-12 md:py-16 ${wrapperClassName}`}
       data-testid={`${dataTestId}-container`}
     >
-      <View style={[styles.titleContainer, titleContainerClassName]}>
-        <View style={styles.titleRow}>
-          {title && <Text style={styles.title}>{title}</Text>}
+      <View className={titleContainerClassName}>
+        <View className="flex flex-row justify-between items-center xl:max-w-[74rem]">
+          {title && (
+            <Text className="flex-1 text-primary text-lgx md:text-xl font-bold tracking-0.1">
+              {title}
+            </Text>
+          )}
           {link && (
-            <View style={styles.linkContainer}>
+            <View className="w-fit">
               <AtLink
-                label={link.label}
-                onPress={link.onPress}
-                buttonStyle="tertiary" // Assuming a React Native style mapping
-                buttonSize="large" // Assuming a React Native size mapping
-                textStyle={{ paddingRight: 8 }} // Example style
+                {...link}
+                buttonStyleProps={{
+                  variant: AtButtonVariants.TERTIARY,
+                  size: AtButtonSize.LARGE,
+                }}
+                textClasses="pr-1"
                 dataTestId={`${dataTestId}-link`}
               />
             </View>
           )}
         </View>
       </View>
+
       <View
-        style={styles.carouselContainer}
+        data-testid={`${dataTestId}-items`}
+        className={`relative pt-7 lg:pt-9 xl:pt-11 ${className}`}
         onMouseEnter={() => setShowArrows(true)}
         onMouseLeave={() => setShowArrows(false)}
+        onLayout={(event) => {
+          setContainerWidth(event.nativeEvent.layout.width);
+        }}
       >
-        {showLeftArrow && (
-          <TouchableOpacity
-            style={[styles.arrowContainer, styles.arrowLeft]}
-            onPress={goToPrevious}
-          >
-            <View style={styles.arrowButton}>
-              <Text style={styles.arrowText}>{"<"}</Text>
+        <View className="grid grid-cols-2 w-full">
+          {isPrevArrowActive && (
+            <View className={arrowClasses({ showArrows, position: "left" })}>
+              <AtControl
+                {...prevArrow}
+                className="hidden xl:block "
+                label="previous arrow navigation"
+              />
             </View>
-          </TouchableOpacity>
-        )}
+          )}
+          {isNextArrowActive && (
+            <View className={arrowClasses({ showArrows, position: "right" })}>
+              <AtControl
+                {...nextArrow}
+                className="hidden xl:block"
+                label="next arrow navigation"
+              />
+            </View>
+          )}
+        </View>
+
         <ScrollView
           ref={scrollViewRef}
           horizontal
+          pagingEnabled
           showsHorizontalScrollIndicator={false}
-          snapToInterval={CARD_WIDTH + CARD_MARGIN_HORIZONTAL * 2}
-          decelerationRate="fast"
-          contentContainerStyle={{ paddingHorizontal: CARD_MARGIN_HORIZONTAL }}
-          onScroll={handleScroll}
-          onContentSizeChange={onContentSizeChange}
           scrollEventThrottle={16}
-          style={{ paddingVertical: 8 }}
+          className="flex flex-row py-1 px-1 -mx-1 -mb-1"
+          onScroll={(event) => {
+            const offsetX = event.nativeEvent.contentOffset.x;
+            const index = Math.round(offsetX / containerWidth);
+            setControlledScrollIndex(index);
+          }}
+          onMomentumScrollEnd={(event) => {
+            const offsetX = event.nativeEvent.contentOffset.x;
+            const index = Math.round(offsetX / containerWidth);
+            setControlledScrollIndex(index);
+          }}
         >
-          {children.map((child, index) => (
-            <View key={`carousel-item-${index}`} style={styles.itemContainer}>
+          {children?.map((child, index) => (
+            <View
+              key={`carousel-item-${index}`}
+              className="max-w-[17.375rem] lg:max-w-[20rem] px-1"
+            >
               {child}
             </View>
           ))}
         </ScrollView>
-        {showRightArrow && (
-          <TouchableOpacity
-            style={[styles.arrowContainer, styles.arrowRight]}
-            onPress={goToNext}
-          >
-            <View style={styles.arrowButton}>
-              <Text style={styles.arrowText}>{">"}</Text>
-            </View>
-          </TouchableOpacity>
-        )}
       </View>
     </View>
   );
 };
+
+export default OrCarousel;

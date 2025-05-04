@@ -7,7 +7,7 @@ import {
 } from "./or-hero-banner.types";
 
 //HERO BANNER
-const heroBannerContainerBaseClass = "flex relative bg-surface-primary w-full"; // Changed here
+const heroBannerContainerBaseClass = "flex relative bg-surface-primary w-full";
 export const heroBannerContainerClasses = cva(heroBannerContainerBaseClass, {
   variants: {
     variant: {
@@ -20,7 +20,7 @@ export const heroBannerContainerClasses = cva(heroBannerContainerBaseClass, {
       [OrHeroBannerContentAlignment.RIGHT]: "xl:flex-row-reverse",
     },
     layoutType: {
-      [OrHeroBannerLayoutType.CONTAINED]: "mx-auto max-w-[90rem]", // Keep max-w
+      [OrHeroBannerLayoutType.CONTAINED]: "mx-auto max-w-[90rem]",
       [OrHeroBannerLayoutType.FLUID]: "",
     },
   },
@@ -28,22 +28,22 @@ export const heroBannerContainerClasses = cva(heroBannerContainerBaseClass, {
     {
       variant: OrHeroBannerVariant.IMAGE_BANNER,
       layoutType: OrHeroBannerLayoutType.FLUID,
-      class: "", // removed `w-full`, already in base
+      class: "w-full",
     },
     {
       variant: OrHeroBannerVariant.IMAGE_BANNER,
       layoutType: OrHeroBannerLayoutType.CONTAINED,
-      class: "", // removed `w-[90rem]`
+      class: "w-[90rem]",
     },
     {
       variant: OrHeroBannerVariant.CONTENT_BANNER,
       layoutType: OrHeroBannerLayoutType.FLUID,
-      class: "", // removed `w-[90rem]`
+      class: "w-[90rem]",
     },
     {
       variant: OrHeroBannerVariant.CONTENT_BANNER,
       layoutType: OrHeroBannerLayoutType.CONTAINED,
-      class: "", // removed `w-[90rem]`
+      class: "w-[90rem]",
     },
   ],
   defaultVariants: {

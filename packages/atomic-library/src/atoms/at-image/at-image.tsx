@@ -44,11 +44,9 @@ export const AtImage = forwardRef<Image, CombinedProps>(
       }
     };
 
-    console.log("AtImage rendered with src:", src);
     return (
       <Image
         source={{ uri: src }}
-        src={src}
         alt={alt}
         testID={dataTestId}
         onLoad={handleLoad}

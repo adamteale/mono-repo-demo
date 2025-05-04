@@ -15,6 +15,7 @@ export const AtTag: React.FC<AtTagProps> = ({
         px-2 py-1
         md:px-3 md:py-2
         bg-surface-tertiary
+        h-auto
         ${className}`}
       testID="tag-container"
     >

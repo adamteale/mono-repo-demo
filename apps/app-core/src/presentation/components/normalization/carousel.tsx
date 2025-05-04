@@ -1,4 +1,9 @@
-import { OrCarouselProps, Target } from "@mono-repo-demo/atomic-library";
+import React from "react";
+import {
+  CMSCarousel,
+  OrCarouselProps,
+  Target,
+} from "@mono-repo-demo/atomic-library";
 // import Link from "next/link";
 import { useState, useEffect } from "react";
 // import { resolveAccessToken } from "../../utils/services/customer";
