@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { View, Image, Platform } from "react-native";
+import React, { SyntheticEvent, useEffect, useState } from "react";
+import { View, Image, Platform, NativeSyntheticEvent } from "react-native";
 
 import { AtImage } from "../../atoms";
 import { ImageFormat, MlMediaFit, MlMediaProps } from "./ml-media.types";

@@ -43,6 +43,8 @@ export const AtImage = forwardRef<Image, CombinedProps>(
         >);
       }
     };
+
+    console.log("AtImage rendered with src:", src);
     return (
       <Image
         src={src}
