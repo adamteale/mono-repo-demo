@@ -19,19 +19,19 @@ export const AtImage = forwardRef<Image, CombinedProps>(
       src,
       onErrorSrc,
       onLoad,
-      style, // Capture the style prop
-      className = "", //Capture className
+      style,
+      width,
+      height,
+      className = "",
       ...props
     },
     ref
   ) => {
     const onError = (error: NativeSyntheticEvent<ImageErrorEventData>) => {
-      // Handle the error and set the onErrorSrc if provided
       if (onErrorSrc) {
         console.warn(
           "onErrorSrc is defined, but needs to be handled by the parent component."
-        ); // Added console.warn
-        // You would likely update the `source` in the parent component based on this error.
+        );
       }
     };
 
@@ -40,14 +40,14 @@ export const AtImage = forwardRef<Image, CombinedProps>(
         onLoad({ ...event, currentTarget: null } as unknown as SyntheticEvent<
           HTMLImageElement,
           Event
-        >); // Ensure correct type
+        >);
       }
     };
-
     return (
       <Image
-        source={{ uri: src }}
         src={src}
+        width={typeof width === "string" ? parseInt(width, 10) : width}
+        height={typeof height === "string" ? parseInt(height, 10) : height}
         alt={alt}
         testID={dataTestId}
         onLoad={handleLoad}

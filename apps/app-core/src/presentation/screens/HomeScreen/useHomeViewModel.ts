@@ -16,7 +16,6 @@ export const useHomeViewModel = () => {
     (async () => {
       try {
         const result = await getPageBySlugUseCase.execute("/");
-        console.log("Page props:", JSON.stringify(result, null, 2));
         setPageProps(result);
       } catch (error) {
         console.log("Error fetching page:", error);

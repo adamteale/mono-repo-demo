@@ -55,7 +55,6 @@ export const BlocksRenderer = ({ blocks }: BlocksRendererProps) => {
     <View>
       {blocks
         ?.map((block, idx) => {
-          console.log("----BlocksRenderer", block?.contentTypeId);
           if (!block) return null;
           switch (block.contentTypeId) {
             case "mlBrand":

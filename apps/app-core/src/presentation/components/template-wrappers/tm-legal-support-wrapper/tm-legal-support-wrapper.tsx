@@ -1,3 +1,6 @@
+import React from "react";
+import { View } from "react-native";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
