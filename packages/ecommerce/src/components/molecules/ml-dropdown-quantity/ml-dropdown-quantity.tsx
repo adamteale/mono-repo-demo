@@ -1,5 +1,7 @@
 import React from "react";
 import { useMemo, useRef, useState } from "react";
+import { View, Text } from "react-native";
+
 import { AtIcon } from "@mono-repo-demo/atomic-library";
 import { MlDropdownQuantityProps } from "./ml-dropdown-quantity.types";
 import { useClickOutside } from "../../utils";

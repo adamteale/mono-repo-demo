@@ -1,4 +1,5 @@
 import React from "react";
+import { View } from "react-native";
 
 import {
   AtButtonVariants,
@@ -10,7 +11,7 @@ import { OrHeroBannerRendererProps } from "../renderer.types";
 import { normalizeMedia } from "../../normalization/media";
 import { normalizeFile } from "../../normalization/file";
 import { CMSLink } from "@mono-repo-demo/atomic-library";
-import Link from "next/link";
+// import Link from "next/link";
 
 export const OrHeroBannerRenderer = ({
   block,
@@ -46,7 +47,7 @@ export const OrHeroBannerRenderer = ({
 
   const normalizedButtons = buttons?.map((item: CMSLink) => ({
     href: item?.actionUrl,
-    linkWrapper: Link,
+    // linkWrapper: Link,
     label: item?.label,
     ...(item?.variant &&
       item.variant !== "default" && {
@@ -58,26 +59,30 @@ export const OrHeroBannerRenderer = ({
   }));
 
   return (
-    <OrHeroBanner
-      variant={bannerVariant}
-      layoutType={widthMode}
-      author={{
-        authorName: authorName,
-        authorPicture: authorPicture ? normalizeFile(authorPicture) : undefined,
-        authorTextColor: blogAuthorTextColor,
-        publicationDate: publicationDate,
-      }}
-      pretitle={pretitle}
-      title={title}
-      subtitle={subtitle}
-      image={normalizeMedia(image)}
-      buttons={normalizedButtons}
-      showTextBackground={showTextBackground}
-      align={distribution}
-      mobileAlign={mobileDistribution}
-      showDivider={showDivider}
-      tagLabel={tagLabel}
-      className={className}
-    />
+    <View className="w-screen max-w-[1440px]">
+      <OrHeroBanner
+        variant={bannerVariant}
+        layoutType={widthMode}
+        author={{
+          authorName: authorName,
+          authorPicture: authorPicture
+            ? normalizeFile(authorPicture)
+            : undefined,
+          authorTextColor: blogAuthorTextColor,
+          publicationDate: publicationDate,
+        }}
+        pretitle={pretitle}
+        title={title}
+        subtitle={subtitle}
+        image={normalizeMedia(image)}
+        buttons={normalizedButtons}
+        showTextBackground={showTextBackground}
+        align={distribution}
+        mobileAlign={mobileDistribution}
+        showDivider={showDivider}
+        tagLabel={tagLabel}
+        className={className}
+      />
+    </View>
   );
 };

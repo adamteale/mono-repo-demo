@@ -16,7 +16,7 @@ export const useNavigationHandler = (): NavigationService => {
       router.push({ pathname: RouterHelper.productDetail, params: props });
     },
     navigateHome: () => {
-      router.replace({ pathname: "/(app)/(tabs)/home/home" });
+      router.replace({ pathname: "/(app)/(tabs)/home" });
     },
     navigateLogin: () => {
       router.replace({ pathname: "/(auth)/login" });

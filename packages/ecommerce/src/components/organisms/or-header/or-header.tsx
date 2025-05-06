@@ -1,4 +1,6 @@
 import React, { useRef, useState } from "react";
+import { View } from "react-native";
+
 import {
   AtLink,
   AtStickBar,
@@ -8,6 +10,7 @@ import {
   MlMedia,
   MlMediaFit,
 } from "@mono-repo-demo/atomic-library";
+
 import { HeaderIcons } from "./icons/header-icons";
 import { SearchButton } from "./searchbox/search-button";
 import { HamburgerMenuWrapper } from "./hamburger/hamburger-menu";

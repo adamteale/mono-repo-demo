@@ -1,4 +1,7 @@
+import React from "react";
+import { View, Text } from "react-native";
 import { AtColorPickerProps } from "./at-color-picker.types";
+
 import { buttonClasses, ringClasses } from "./at-color-picker.variants";
 import { colorMappingClasses } from "./color-mapping";
 

@@ -57,22 +57,23 @@ export const STICKBAR_KEY = "stick-bar";
 const SHOW_SEARCH_RESULTS_IN_CATALOG_PAGE = false;
 
 const Template = (page: PageProps) => {
-  const router = useNavigationContext().navigation;
+  // const router = useNavigationContext().navigation;
   const global = useGlobalContext();
 
-  if (router.currentRoute.startsWith(`/${SLUG_KEY.PRODUCTS}`)) {
-    const props = page as ProductPageProps;
-    // key is needed for the page to render correctly with new states when navigation
-    // occurs between dynamic pages /products/[id]
-    return (
-      <TmProductDetailWrapper
-        product={props?.product}
-        mayLikeProducts={props.mayLikeProducts}
-        breadcrumbCatalogLabel={page.fields.title}
-        key={props?.product?.id}
-      />
-    );
-  }
+  // console.log("page", router.currentRoute);
+  // if (router.currentRoute.startsWith(`/${SLUG_KEY.PRODUCTS}`)) {
+  //   const props = page as ProductPageProps;
+  //   // key is needed for the page to render correctly with new states when navigation
+  //   // occurs between dynamic pages /products/[id]
+  //   return (
+  //     <TmProductDetailWrapper
+  //       product={props?.product}
+  //       mayLikeProducts={props.mayLikeProducts}
+  //       breadcrumbCatalogLabel={page.fields.title}
+  //       key={props?.product?.id}
+  //     />
+  //   );
+  // }
 
   // // TODO: we should create a tm-search in CMS
   // if (router.asPath.startsWith(`/${SLUG_KEY.SEARCH}`)) {
@@ -177,7 +178,7 @@ export const useContentfulPageToProps = (
 ): (PgPageProps & { head: HeadProps }) | null => {
   // const { state: searchState, search } = useSearchBox(resolveAccessTokenMock);
   const results = useSearchBoxResults();
-  const router = useNavigationContext().navigation;
+  // const router = useNavigationContext().navigation;
   const { state, updateBasket, deleteItemFromBasket } = useBasket();
 
   const basketState = {
@@ -195,10 +196,10 @@ export const useContentfulPageToProps = (
   /**
    * Shows search results in catalog or search page
    */
-  const showResults =
-    SHOW_SEARCH_RESULTS_IN_CATALOG_PAGE ||
-    (!router.currentRoute.includes(`/${SLUG_KEY.SEARCH}`) &&
-      !router.currentRoute.includes(`/${SLUG_KEY.CATALOG}`));
+  // const showResults =
+  //   SHOW_SEARCH_RESULTS_IN_CATALOG_PAGE ||
+  //   (!router.currentRoute.includes(`/${SLUG_KEY.SEARCH}`) &&
+  //     !router.currentRoute.includes(`/${SLUG_KEY.CATALOG}`));
 
   const searchOnSubmit = (
     event:
@@ -256,17 +257,19 @@ export const useContentfulPageToProps = (
           deleteItemFromBasket,
           searchOnSubmit,
         },
-        showResults
+        // showResults
+        false
       ),
       isStickBarHidden,
       onCloseStickbar,
-      variant: isPathStartingWithSlugs(router.currentRoute, [
-        "CHECKOUT",
-        "LOGIN",
-      ])
-        ? "compact"
-        : "default",
-      onArrowButtonClick: router.navigateBack,
+      // variant: isPathStartingWithSlugs(router.currentRoute, [
+      //   "CHECKOUT",
+      //   "LOGIN",
+      // ])
+      variant: false ? "compact" : "default",
+      onArrowButtonClick: () => {
+        console.log("arrow button clicked");
+      },
     },
     children: <Template {...pageProps} />,
     footer: normalizeFooter(pageProps.fields.footer),

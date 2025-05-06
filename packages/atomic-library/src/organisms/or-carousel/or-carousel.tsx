@@ -11,7 +11,7 @@ import { arrowClasses } from "./or-carousel.variants"; // Make sure these work w
 // import SwiperCore from 'swiper'
 // import { Grid, Pagination, Mousewheel } from 'swiper/modules'
 
-const OrCarousel = ({
+export const OrCarousel = ({
   title,
   link,
   dataTestId = "carousel",

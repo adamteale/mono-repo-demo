@@ -24,6 +24,12 @@ function RootLayoutNav() {
 
   const isNavigationReady = !!navigationState?.key;
 
+  const onNavigateToHome = () => {
+    navigation.navigateHome();
+  };
+  const onNavigateToLogin = () => {
+    navigation.navigateLogin();
+  };
   useEffect(() => {
     if (!isNavigationReady) {
       return;
@@ -36,9 +42,9 @@ function RootLayoutNav() {
     const inAppGroup = segments[0] === "(app)";
 
     if (isLoggedIn && !inAppGroup) {
-      navigation.navigateHome();
+      onNavigateToHome();
     } else if (!isLoggedIn && !inAuthGroup) {
-      navigation.navigateLogin();
+      onNavigateToLogin();
     }
   }, [isLoggedIn, segments, navigation, isNavigationReady]);
 

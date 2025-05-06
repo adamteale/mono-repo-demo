@@ -1,4 +1,6 @@
 import React from "react";
+import { Text } from "react-native";
+
 import { AtIcon } from "@mono-repo-demo/atomic-library";
 import { AtSizeSelectorProps } from "./at-size-selector.types";
 import { sizeSelector } from "./at-size-selector.variants";

@@ -1,6 +1,5 @@
-import React, { lazy } from "react";
-
-import { View } from "react-native";
+import React, { lazy, useCallback } from "react";
+import { FlatList, View } from "react-native";
 
 import { BlocksRendererProps } from "./renderer.types";
 import { MlMediaRenderer } from "./renderers/ml-media.renderer";
@@ -50,117 +49,99 @@ const LazyOrCarouselRenderer = lazy(
   () => import("./renderers/or-carousel.renderer")
 );
 
-export const BlocksRenderer = ({ blocks }: BlocksRendererProps) => {
+export const BlocksRenderer = ({ blocks, id }: BlocksRendererProps) => {
+  const renderItem = useCallback(({ item, index }) => {
+    if (!item) return null;
+
+    switch (item.contentTypeId) {
+      case "mlBrand":
+        return <MlBrandRenderer block={item as CMSBrand} key={index} />;
+      case "mlMedia":
+        return <MlMediaRenderer block={item as CMSMedia} key={index} />;
+      case "mlCard":
+        return <MlCardRenderer block={item as CMSCard} key={index} />;
+      case "mlQuote":
+        return <MlQuoteRenderer block={item as CMSQuote} key={index} />;
+      case "mlCardBlog":
+        return <MlCardBlogRenderer block={item as CMSCardBlog} key={index} />;
+      case "orRichText":
+        return <OrRichTextRenderer block={item as CMSRichText} key={index} />;
+      case "mlVertical":
+        return <MlVerticalRenderer block={item as CMSVertical} key={index} />;
+      case "mlVerticalTeam":
+        return (
+          <MlVerticalTeamRenderer block={item as CMSVerticalTeam} key={index} />
+        );
+      case "mlVideoPlayer":
+        return (
+          <MlVideoPlayerRenderer block={item as CMSVideoPlayer} key={index} />
+        );
+      case "orCarousel": {
+        return <LazyOrCarouselRenderer block={item as CMSCarousel} />;
+      }
+      case "orHeroBanner":
+        return (
+          <OrHeroBannerRenderer
+            block={item as CMSHeroBanner}
+            key={index}
+            className=" w-screen"
+          />
+        );
+      case "orContainer":
+        return <OrContainerRenderer block={item as CMSContainer} key={index} />;
+      case "orContentStrip":
+        return (
+          <OrContentStripRenderer
+            block={item as CMSContentStrip}
+            key={`${index}+${item.contentTypeId}`}
+          />
+        );
+      case "orListing":
+        return <OrListingRenderer block={item as CMSListing} key={index} />;
+      case "orBrandsContainer":
+        return (
+          <OrBrandsContainerRenderer
+            block={item as CMSBrandsContainer}
+            key={index}
+          />
+        );
+      case "orImageInteractiveBlock":
+        return (
+          <OrImageInteractiveBlockRenderer
+            block={item as CmsImageInteractiveBlock}
+            key={index}
+          />
+        );
+      case "orMetrics":
+        return <OrMetricsRenderer block={item as CMSMetrics} key={index} />;
+      case "orTeamSection":
+        return (
+          <OrTeamSectionRenderer block={item as CMSTeamSection} key={index} />
+        );
+      case "orImageBlock":
+        return (
+          <OrImageBlockRenderer block={item as CMSImageBlock} key={index} />
+        );
+      case "mlCollapse":
+        return <MlCollapseRenderer block={item as CMSCollapse} key={index} />;
+      default:
+        return null;
+    }
+  }, []);
+
+  const keyExtractor = useCallback((item, index) => {
+    // Choose a unique key, prefer an ID from the data
+    return item?.id ? item.id.toString() : index.toString();
+  }, []);
+
   return (
-    <View>
-      {blocks
-        ?.map((block, idx) => {
-          if (!block) return null;
-          switch (block.contentTypeId) {
-            case "mlBrand":
-              return <MlBrandRenderer block={block as CMSBrand} key={idx} />;
-            case "mlMedia":
-              return <MlMediaRenderer block={block as CMSMedia} key={idx} />;
-            case "mlCard":
-              return <MlCardRenderer block={block as CMSCard} key={idx} />;
-            case "mlQuote":
-              return <MlQuoteRenderer block={block as CMSQuote} key={idx} />;
-            case "mlCardBlog":
-              return (
-                <MlCardBlogRenderer block={block as CMSCardBlog} key={idx} />
-              );
-            case "orRichText":
-              return (
-                <OrRichTextRenderer block={block as CMSRichText} key={idx} />
-              );
-            case "mlVertical":
-              return (
-                <MlVerticalRenderer block={block as CMSVertical} key={idx} />
-              );
-            case "mlVerticalTeam":
-              return (
-                <MlVerticalTeamRenderer
-                  block={block as CMSVerticalTeam}
-                  key={idx}
-                />
-              );
-            case "mlVideoPlayer":
-              return (
-                <MlVideoPlayerRenderer
-                  block={block as CMSVideoPlayer}
-                  key={idx}
-                />
-              );
-            case "orCarousel": {
-              return (
-                <LazyRenderer>
-                  <LazyOrCarouselRenderer block={block as CMSCarousel} />
-                </LazyRenderer>
-              );
-            }
-            case "orHeroBanner":
-              return (
-                <OrHeroBannerRenderer
-                  block={block as CMSHeroBanner}
-                  key={idx}
-                />
-              );
-            case "orContainer":
-              return (
-                <OrContainerRenderer block={block as CMSContainer} key={idx} />
-              );
-            case "orContentStrip":
-              return (
-                <OrContentStripRenderer
-                  block={block as CMSContentStrip}
-                  key={idx}
-                />
-              );
-            case "orListing":
-              return (
-                <OrListingRenderer block={block as CMSListing} key={idx} />
-              );
-            case "orBrandsContainer":
-              return (
-                <OrBrandsContainerRenderer
-                  block={block as CMSBrandsContainer}
-                  key={idx}
-                />
-              );
-            case "orImageInteractiveBlock":
-              return (
-                <OrImageInteractiveBlockRenderer
-                  block={block as CmsImageInteractiveBlock}
-                  key={idx}
-                />
-              );
-            case "orMetrics":
-              return (
-                <OrMetricsRenderer block={block as CMSMetrics} key={idx} />
-              );
-            case "orTeamSection":
-              return (
-                <OrTeamSectionRenderer
-                  block={block as CMSTeamSection}
-                  key={idx}
-                />
-              );
-            case "orImageBlock":
-              return (
-                <OrImageBlockRenderer
-                  block={block as CMSImageBlock}
-                  key={idx}
-                />
-              );
-            case "mlCollapse":
-              return (
-                <MlCollapseRenderer block={block as CMSCollapse} key={idx} />
-              );
-            default:
-              return null;
-          }
-        })
-        .filter(Boolean)}
-    </View>
+    <FlatList
+      data={blocks || []} // Provide an empty array as a default
+      renderItem={renderItem}
+      keyExtractor={keyExtractor}
+      horizontal={false}
+      scrollEnabled={false}
+      contentContainerClassName="lg:max-w-[90rem] lg:mx-auto"
+    />
   );
 };

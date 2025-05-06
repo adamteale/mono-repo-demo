@@ -15,7 +15,7 @@ import { useContentfulPageToProps } from "../../components/use-page-to-props";
 
 export const HomeScreen = () => {
   const { pageProps } = useHomeViewModel();
-  const { width: windowWidth } = Dimensions.get("window");
+
   const props = pageProps ? useContentfulPageToProps(pageProps) : null;
 
   let page: React.ReactNode = null;
@@ -23,7 +23,7 @@ export const HomeScreen = () => {
   if (props) {
     const { children, head, ...rest } = props;
     page = (
-      <ScrollView horizontal={false} className="bg-white">
+      <ScrollView horizontal={false}>
         <View className="lg:max-w-[90rem] lg:mx-auto">
           <PgPage {...rest}>{children}</PgPage>
         </View>

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { View } from "react-native";
+
 import { InlineColorPickerProps } from "./ml-color-picker.types";
 import { AtColorPicker, AtIcon, AtLink } from "@mono-repo-demo/atomic-library";
 

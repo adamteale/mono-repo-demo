@@ -41,6 +41,7 @@ export interface BlocksRendererProps {
     | CMSCollapse
     | CMSRichText
   >;
+  id?: string;
 }
 
 export interface RendererMethodProps<T> {

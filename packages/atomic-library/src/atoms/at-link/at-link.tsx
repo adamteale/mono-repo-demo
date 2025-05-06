@@ -46,12 +46,6 @@ export const AtLink = ({
 
   const { variant, size } = buttonStyleProps;
   const buttonVariant = buttonVariants(size);
-  console.log("variant", variant);
-  console.log(
-    `${
-      variant ? buttonVariant({ variant }) : linkVariant()
-    } cursor-pointer ${className}`
-  );
 
   return (
     <TouchableOpacity
@@ -65,7 +59,7 @@ export const AtLink = ({
       } cursor-pointer ${className}`}
     >
       {children ?? (
-        <View className="flex items-center">
+        <View className="flex items-center flex-row">
           {iconProps && iconPosition === IconPositions.LEFT && (
             <AtIcon
               className={`${iconLeftClasses}`}

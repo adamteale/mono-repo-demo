@@ -7,4 +7,9 @@ export const PgPage = ({ header, footer, children }: PgPageProps) => {
       {children}
     </Layout>
   );
+  // return (
+  //   <Layout header={header} footer={footer}>
+  //     {children}
+  //   </Layout>
+  // );
 };

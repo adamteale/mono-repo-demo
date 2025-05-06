@@ -1,3 +1,4 @@
+import { View } from "react-native";
 import { paginationClasses } from "./at-pagination.variants";
 import { AtPaginationProps } from "./at-pagination.types";
 

@@ -33,32 +33,28 @@ export const OrHeroBanner: React.FC<OrHeroBannerProps> = ({
     contentAlignment: align,
     layoutType: layoutType,
   });
-
   return (
-    <View className="flex justify-center">
-      <View testID={dataTestId} className={`${containerClasses} ${className}`}>
-        <BannerImage variant={variant} image={image} />
+    <View testID={dataTestId} className={`${containerClasses} ${className}`}>
+      <BannerImage variant={variant} image={image} />
 
-        <BannerContent
-          {...{
-            tagLabel,
-            variant,
-            align,
-            mobileAlign,
-            pretitle,
-            title,
-            subtitle,
-            buttons,
-            isActive,
-            showDivider,
-            showTextBackground,
-          }}
-        />
-
-        {variant === OrHeroBannerVariant.CONTENT_BANNER && (
-          <BannerSplitImage {...{ image, author }} />
-        )}
-      </View>
+      <BannerContent
+        {...{
+          tagLabel,
+          variant,
+          align,
+          mobileAlign,
+          pretitle,
+          title,
+          subtitle,
+          buttons,
+          isActive,
+          showDivider,
+          showTextBackground,
+        }}
+      />
+      {variant === OrHeroBannerVariant.CONTENT_BANNER && (
+        <BannerSplitImage {...{ image, author }} />
+      )}
     </View>
   );
 };
