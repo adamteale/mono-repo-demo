@@ -13,8 +13,6 @@ export enum HomeRoutes {
 }
 
 export default function HomeStackLayout() {
-  const { top } = useSafeAreaInsets();
-
   return (
     <Stack
       screenOptions={{
