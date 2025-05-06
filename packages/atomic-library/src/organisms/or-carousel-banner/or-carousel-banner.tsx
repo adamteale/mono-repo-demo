@@ -114,8 +114,8 @@ export const OrCarouselBanner = ({
         keyExtractor={keyExtractor}
         initialScrollIndex={0}
         decelerationRate="fast"
-        contentContainerClassName="w-screen"
         data-testid={dataTestId}
+        className="bg-white"
       />
 
       {/* <View className="flex justify-between w-full min-h-full absolute top-0 items-center container">
