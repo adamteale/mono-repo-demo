@@ -84,7 +84,7 @@ export const BlocksRenderer = ({ blocks, id }: BlocksRendererProps) => {
           <OrHeroBannerRenderer
             block={item as CMSHeroBanner}
             key={index}
-            className=" w-screen"
+            className="w-screen"
           />
         );
       case "orContainer":

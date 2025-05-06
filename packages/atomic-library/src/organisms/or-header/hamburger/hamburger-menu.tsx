@@ -4,6 +4,7 @@ import { HeaderMenuItem } from "../or-header.types";
 import { AtDivider, AtLink, AtLinkProps } from "../../../atoms";
 import { MlMediaProps } from "../../../molecules";
 import { containerClasses } from "./hamburguer-menu.variants";
+import { View } from "react-native";
 
 export interface HamburgerMenuProps {
   menuItems?: HeaderMenuItem[];

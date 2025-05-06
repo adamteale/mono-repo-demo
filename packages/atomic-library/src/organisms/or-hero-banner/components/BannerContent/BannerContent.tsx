@@ -93,7 +93,7 @@ const BannerContent: React.FC<BannerContentProps> = ({
 
         {!!buttons?.length && (
           <View
-            className={`flex flex-col md:flex-row items-center md:items-start gap-4 ${
+            className={`flex flex-col [760px]:flex-row items-center [760px]:items-start gap-4 ${
               variant === OrHeroBannerVariant.IMAGE_BANNER && showTextBackground
                 ? "w-fit"
                 : "w-full md:w-fit"

@@ -2,6 +2,7 @@ import { HeaderMenuItem } from "./or-header.types";
 import { MlMenuItem } from "../../molecules";
 import { HeaderSubItems } from "./header.sub-items";
 import { menuItemClasses } from "./or-header.variants";
+import { View } from "react-native";
 
 interface HeaderItemsProps {
   menuItems?: HeaderMenuItem[];
@@ -27,7 +28,7 @@ export const HeaderItems = ({
   };
 
   return (
-    <nav aria-label="Global Navigation" className={`${className}`}>
+    <View aria-label="Global Navigation" className={`${className}`}>
       {menuItems.map((item, idx) => {
         const isMenuOpen = activeItem === idx;
         let onClick;
@@ -66,6 +67,6 @@ export const HeaderItems = ({
           </View>
         );
       })}
-    </nav>
+    </View>
   );
 };

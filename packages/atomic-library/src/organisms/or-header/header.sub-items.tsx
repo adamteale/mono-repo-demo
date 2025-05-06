@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { HeaderMenuSubItem } from "./or-header.types";
 import { MlMenuItem } from "../../molecules";
+import { View } from "react-native";
 
 interface HeaderSubItemsProps {
   isActive: boolean;
@@ -12,7 +13,7 @@ const verticalPaddingRem = 3;
 
 export const HeaderSubItems = ({ isActive, items }: HeaderSubItemsProps) => {
   const [contentHeight, setContentHeight] = useState<null | number>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<View>(null);
 
   useEffect(() => {
     if (isActive && contentRef.current) {

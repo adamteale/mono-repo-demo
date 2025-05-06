@@ -1,5 +1,6 @@
 import { AtStickBarProps } from "./at-stick-bar.types";
 import { AtIcon } from "../at-icon";
+import { Text, View } from "react-native";
 
 export const AtStickBar = ({
   text,
@@ -16,7 +17,7 @@ export const AtStickBar = ({
       <View className="container flex items-center justify-between">
         <View className="h-4 w-4" />
         <View className="px-2 text-center text-secondary text-xs md:text-sm tracking-wide">
-          {text}
+          <Text>{text}</Text>
         </View>
         <View
           className="cursor-pointer"

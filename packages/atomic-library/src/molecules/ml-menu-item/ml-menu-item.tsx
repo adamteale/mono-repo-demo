@@ -1,3 +1,4 @@
+import { Text } from "react-native";
 import { AtLink, IconType } from "../../atoms";
 import { AtIcon } from "../../atoms/at-icon/at-icon";
 import { MlMenuItemProps } from "./ml-menu-item.types";

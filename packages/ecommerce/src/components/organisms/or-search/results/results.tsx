@@ -163,7 +163,7 @@ export const Results = ({
           text-base text-primary
           leading-5 w-full`}
         >
-          {noResultsFoundLabel}{" "}
+          {noResultsFoundLabel}
           <Text className="font-bold">&ldquo;{query}&rdquo;</Text>
         </Text>
       )}

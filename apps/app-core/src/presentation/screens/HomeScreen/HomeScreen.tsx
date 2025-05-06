@@ -5,6 +5,8 @@ import {
   Platform,
   ActivityIndicator,
   View,
+  StatusBar,
+  SafeAreaView,
 } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
@@ -22,18 +24,19 @@ export const HomeScreen = () => {
 
   if (props) {
     const { children, head, ...rest } = props;
-    page = (
-      <ScrollView horizontal={false} className="bg-white">
-        <View className="lg:max-w-[90rem] lg:mx-auto">
-          <PgPage {...rest}>{children}</PgPage>
-        </View>
-      </ScrollView>
-    );
+    page = <PgPage {...rest}>{children}</PgPage>;
+    // page = (
+    //   <ScrollView horizontal={false} className="bg-white">
+    //     <View className="lg:max-w-[90rem] lg:mx-auto">
+    //       <PgPage {...rest}>{children}</PgPage>
+    //     </View>
+    //   </ScrollView>
+    // );
   } else {
     page = (
-      <View className="flex-1 justify-center items-center h-full">
+      <SafeAreaView className="flex-1 justify-center items-center h-full">
         <ActivityIndicator size="large" color="#0000ff" />
-      </View>
+      </SafeAreaView>
     );
   }
 
