@@ -14,7 +14,7 @@
       "@Assets/*": ["./assets/*"],
       "@Data/*": ["./src/data/*"],
       "@Domain/*": ["./src/domain/*"],
-      "@Environment": ["./Environment"],
+      "@environment": ["./Environment"],
       "@Network/*": ["src/data/network/*"],
       "@Presentation/*": ["./src/presentation/*"],
       "@Resources/*": ["src/resources/*"],
@@ -26,6 +26,7 @@
   "include": [
     "src",
     "../../packages/src/theme/styled.d.ts",
+    "../../packages/search/algolia",
     "nativewind-env.d.ts"
   ],
   "exclude": ["node_modules", "dist"]

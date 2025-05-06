@@ -1,0 +1,23 @@
+import { cva } from 'class-variance-authority'
+
+const desktopLinkBaseClass = 'text-lg text-primary'
+export const desktopLinkClasses = cva(desktopLinkBaseClass, {
+  variants: {
+    menuItemActive: {
+      true: 'font-bold',
+      false: 'font-normal leading-6',
+    },
+  },
+  defaultVariants: { menuItemActive: false },
+})
+
+const mobileLinkBaseClass = 'text-base text-primary md:text-lg'
+export const mobileLinkClasses = cva(mobileLinkBaseClass, {
+  variants: {
+    menuItemActive: {
+      true: 'font-bold',
+      false: 'font-normal',
+    },
+  },
+  defaultVariants: { menuItemActive: false },
+})

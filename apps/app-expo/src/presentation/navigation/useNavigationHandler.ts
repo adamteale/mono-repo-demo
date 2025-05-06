@@ -1,4 +1,4 @@
-import { useRouter } from "expo-router";
+import { usePathname, useRouter } from "expo-router";
 
 import { NavigationService } from "@Presentation/navigation/hooks/types";
 import { ProductDetailScreenProps } from "@Presentation/screens/ProductDetailScreen";
@@ -8,6 +8,7 @@ export const useNavigationHandler = (): NavigationService => {
   const router = useRouter();
 
   return {
+    currentRoute: usePathname(),
     navigateBack: () => {
       router.back();
     },
@@ -15,7 +16,7 @@ export const useNavigationHandler = (): NavigationService => {
       router.push({ pathname: RouterHelper.productDetail, params: props });
     },
     navigateHome: () => {
-      router.replace({ pathname: "/(app)/(tabs)/home/home" });
+      router.replace({ pathname: "/(app)/(tabs)/home" });
     },
     navigateLogin: () => {
       router.replace({ pathname: "/(auth)/login" });

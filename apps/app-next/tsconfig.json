@@ -17,7 +17,9 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
+      "@Data/*": ["../app-core/src/data/*"],
       "@Domain/*": ["../app-core/src/domain/*"],
+      "@environment": ["../app-core/Environment"],
       "@Presentation/*": ["../app-core/src/presentation/*"],
       "@app-next/*": ["./*"],
       "@app-core/*": ["../app-core/src/*"],

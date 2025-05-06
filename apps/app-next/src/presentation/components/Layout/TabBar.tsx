@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Platform, useWindowDimensions } from "react-native";
+import { Platform, Pressable, useWindowDimensions, View } from "react-native";
 
 import { usePathname } from "next/navigation";
 import { Ionicons } from "@expo/vector-icons";
@@ -46,7 +46,7 @@ function TabBar() {
   const isHidden = Platform.OS === "web" && isLargeScreen;
 
   return (
-    <div
+    <View
       className={`
       ${isHidden ? "hidden" : "flex"} {/* Conditionally hide or show */}
       flex-row
@@ -67,15 +67,13 @@ function TabBar() {
             href={route.path}
             className="flex-1 no-underline flex items-center justify-center" // Combined styles for Link
           >
-            <button className="flex-1 w-full h-full flex items-center justify-center bg-transparent border-none p-0 cursor-pointer">
-              {" "}
-              {/* Combined styles for button */}
+            <Pressable className="flex-1 w-full h-full flex items-center justify-center bg-transparent border-none p-0 cursor-pointer">
               <Ionicons name={iconName} size={iconSize} color={color} />
-            </button>
+            </Pressable>
           </Link>
         );
       })}
-    </div>
+    </View>
   );
 }
 

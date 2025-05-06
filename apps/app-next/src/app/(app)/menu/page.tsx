@@ -6,9 +6,9 @@ import { MenuScreen } from "@Presentation/screens/MenuScreen/MenuScreen";
 
 function MenuTabPage() {
   return (
-    <div className="flex-1">
+    <View className="flex-1">
       <MenuScreen />
-    </div>
+    </View>
   );
 }
 

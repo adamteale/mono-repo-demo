@@ -1,0 +1,34 @@
+import { describe, expect, it } from 'vitest'
+import { render } from '@testing-library/react'
+import { OrPopupProductAdded } from './or-popup-product-added'
+import { OrPopupProductAddedProps } from './or-popup-product-added.types'
+
+const dataTestId = 'popup'
+
+const props: OrPopupProductAddedProps = {
+  dataTestId,
+  productName: 'Product name',
+  price: '$87.34',
+  productVariants: {
+    color: 'blue',
+    size: 12,
+  },
+  quantity: 5,
+  image: {
+    src: 'https://picsum.photos/200/200',
+  },
+}
+
+describe('organism/or-popup-product-added', () => {
+  it('should render correctly', () => {
+    const { getByTestId, container, getByText } = render(<OrPopupProductAdded {...props} dataTestId={dataTestId} />)
+
+    expect(container).toBeTruthy()
+
+    const popup = getByTestId(dataTestId)
+    expect(popup).toBeInTheDocument()
+
+    const productName = getByText(props.productName)
+    expect(productName).toBeInTheDocument()
+  })
+})

@@ -50,7 +50,7 @@ function AuthAwareLayout({ children }: { children: React.ReactNode }) {
     );
   } else {
     // Render children directly for login page (or other non-app layouts)
-    // This ensures LoginScreen is rendered, and ThemeProvider/SafeAreaProvider are wrapping it
+    // This ensures LoginScreen is rendered, and SafeAreaProvider are wrapping it
     return <>{children}</>;
   }
 }

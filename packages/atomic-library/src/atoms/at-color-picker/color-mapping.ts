@@ -1,0 +1,43 @@
+export const colorMappingClasses = {
+  beige: 'bg-color-picker-beige',
+  black: 'bg-secondary-black',
+  blue: 'bg-secondary-blue',
+  brown: 'bg-color-picker-brown',
+  gold: 'bg-color-picker-gold',
+  green: 'bg-secondary-green',
+  grey: 'bg-secondary-gray',
+  lightBlue: 'bg-color-picker-light-blue',
+  oliv: 'bg-color-picker-oliv',
+  orange: 'bg-color-picker-orange',
+  petrol: 'bg-color-picker-petrol',
+  pink: 'bg-secondary-pink',
+  purple: 'bg-secondary-purple',
+  red: 'bg-secondary-red',
+  silver: 'bg-color-picker-silver',
+  turquoise: 'bg-color-picker-turquoise',
+  white: 'bg-secondary-white',
+  yellow: 'bg-secondary-yellow',
+} as const
+
+// Default color naming in english. Used as default if no config comes from Web app
+export const colorMappingNames = {
+  beige: 'Beige',
+  black: 'Black',
+  blue: 'Blue',
+  brown: 'Brown',
+  gold: 'Gold',
+  green: 'Green',
+  grey: 'Grey',
+  lightBlue: 'Light Blue',
+  oliv: 'Oliv',
+  orange: 'Orange',
+  petrol: 'Petrol',
+  pink: 'Pink',
+  purple: 'Purple',
+  red: 'Red',
+  silver: 'Silver',
+  turquoise: 'Turquoise',
+  white: 'White',
+  yellow: 'Yellow',
+}
+export type Color = keyof typeof colorMappingClasses

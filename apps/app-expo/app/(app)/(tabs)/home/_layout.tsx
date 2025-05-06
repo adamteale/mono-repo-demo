@@ -13,12 +13,10 @@ export enum HomeRoutes {
 }
 
 export default function HomeStackLayout() {
-  const { top } = useSafeAreaInsets();
-
   return (
     <Stack
       screenOptions={{
-        header: () => <CustomHeader topInset={top} />,
+        header: () => <CustomHeader />,
       }}
     >
       <Stack.Screen name={HomeRoutes.Home} />

@@ -1,0 +1,14 @@
+import { AtLinkProps } from '../../atoms'
+import { MlDropDownMenuItemProps, MlMediaProps } from '../../molecules'
+import { NewsletterProps } from './newsletter'
+
+export interface OrFooterProps {
+  copyright: string
+  description: string
+  menuItems?: MlDropDownMenuItemProps[]
+  newsLetter?: NewsletterProps
+  brand?: {
+    link: Pick<AtLinkProps, 'href' | 'linkWrapper'>
+    image: MlMediaProps
+  }
+}

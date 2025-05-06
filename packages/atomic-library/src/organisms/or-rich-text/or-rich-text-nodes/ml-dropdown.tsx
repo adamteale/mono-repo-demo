@@ -1,0 +1,114 @@
+import { Text } from "react-native";
+import { IconType } from "../../../atoms";
+import { getMarksClasses, RichTextIcon } from "../or-rich-text.renderer";
+import { DefaultNodes } from "./default";
+import { NodesProps } from "./types";
+
+export const MlDropdownRichTextNodes = ({
+  node,
+  index,
+  className,
+}: NodesProps) => {
+  const markClasses = getMarksClasses(node.marks);
+
+  switch (node.type) {
+    case "paragraph": {
+      return (
+        <>
+          {node.content && node.content[0] && node.content[0].text !== "" ? (
+            <Text
+              className={`text-primary leading-8 ${markClasses} ${className}`}
+            >
+              {node.content.map((node, i) => (
+                <MlDropdownRichTextNodes
+                  node={node}
+                  index={i}
+                  key={`${node.type}-${index}-${i}`}
+                />
+              ))}
+            </Text>
+          ) : null}
+        </>
+      );
+    }
+
+    case "ordered-list": {
+      return (
+        <>
+          {node.content ? (
+            <ol className={`list-decimal list-inside ${className}`}>
+              {node.content?.map((item, i) => (
+                <MlDropdownRichTextNodes
+                  node={item}
+                  index={i}
+                  key={`${node.type}-${index}-${i}`}
+                />
+              ))}
+            </ol>
+          ) : null}
+        </>
+      );
+    }
+
+    case "unordered-list": {
+      const hasIcons = node.data?.hasIcon ?? false;
+      const extraClasses = hasIcons ? "list-none" : " list-disc";
+
+      return (
+        <>
+          {node.content ? (
+            <ul className={`pl-[1.625rem] ${extraClasses} ${className}`}>
+              {node.content?.map((item, i) => (
+                <MlDropdownRichTextNodes
+                  node={item}
+                  index={i}
+                  key={`${node.type}-${index}-${i}`}
+                />
+              ))}
+            </ul>
+          ) : null}
+        </>
+      );
+    }
+
+    case "list-item": {
+      return (
+        <>
+          {node.content ? (
+            <li className={`${markClasses} [&>p]:inline ${className}`}>
+              {node.content.map((node, i) => (
+                <MlDropdownRichTextNodes
+                  node={node}
+                  index={i}
+                  key={`${node.type}-${index}-${i}`}
+                />
+              ))}
+            </li>
+          ) : null}
+        </>
+      );
+    }
+
+    case "text": {
+      const icon = node.data?.icon ?? null;
+      const isInList = node.data?.isInlist ?? false;
+
+      return (
+        <Text
+          key={`${node.type}-${index}`}
+          className={`${markClasses} ${className}`}
+        >
+          <RichTextIcon
+            className={isInList ? "mr-4" : "mx-1"}
+            icon={icon as IconType}
+          />
+          {node.text}
+        </Text>
+      );
+    }
+
+    default: {
+      return <DefaultNodes node={node} index={index} />;
+    }
+  }
+};

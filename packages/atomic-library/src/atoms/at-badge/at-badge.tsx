@@ -1,0 +1,33 @@
+import { useEffect, useState } from "react";
+import { AtBadgeProps } from "./at-badge.types";
+
+export const AtBadge = ({
+  quantity,
+  className = "",
+  ...props
+}: AtBadgeProps) => {
+  const [badgeQuantity, setBadgeQuantity] = useState<number | string>(0);
+
+  useEffect(() => {
+    const nDigits = quantity.toString().length;
+
+    const displayValue = nDigits <= 2 ? quantity : "+99";
+
+    setBadgeQuantity(displayValue);
+  }, [quantity]);
+
+  return (
+    <View
+      data-testid={props.dataTestId}
+      className={`
+        ${className}
+        flex items-center justify-center
+        min-w-min w-3.5 h-3.5 px-1 py-0.5
+        font-normal text-xxs
+        text-secondary bg-icon-primary rounded-lg
+      `}
+    >
+      {badgeQuantity}
+    </View>
+  );
+};
