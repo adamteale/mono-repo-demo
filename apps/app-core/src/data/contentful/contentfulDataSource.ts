@@ -1,8 +1,5 @@
 import { contentfulRemoteDataSourceImpl } from "@Data/contentful/remote/contentfulRemoteDataSource";
-import {
-  EntriesDto,
-  IGetEntriesProps,
-} from "@app-core/src/domain/contentful/types";
+import { EntriesDto, IGetEntriesProps } from "@Domain/contentful/types";
 import { contentfulDataMapper } from "./mapper";
 
 export interface contentfulDataSource {

@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { HomeScreen } from "@Presentation/screens/HomeScreen/HomeScreen";
 import { CustomHeader } from "../../../presentation/components/headers/CustomHeader";
 

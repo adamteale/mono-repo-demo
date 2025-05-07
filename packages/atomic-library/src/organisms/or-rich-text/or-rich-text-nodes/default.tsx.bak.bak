@@ -1,0 +1,403 @@
+import { View } from "react-native";import { AtImage, IconType } from "../../../atoms";
+import {
+  MlTable,
+  MlTableProps,
+  TableColumn,
+  TableRow,
+} from "../../../molecules";
+import { toKebabCase } from "../../../utils";
+import { getMarksClasses, RichTextIcon } from "../or-rich-text.renderer";
+import { RichTextNode } from "../or-rich-text.types";
+import { NodesProps } from "./types";
+
+export const DefaultNodes = ({
+  node,
+  index,
+  className = "",
+  disableChildClasses = false,
+}: NodesProps) => {
+  const markClasses = getMarksClasses(node.marks);
+
+  switch (node.type) {
+    case "image": {
+      if (!node?.data?.src) return null;
+
+      const src = node.data.src as string;
+      const alt = node.data?.title ?? "";
+
+      return (
+        <AtImage
+          src={src}
+          alt={alt as string}
+          className={`w-[200px] h-[200px] sm:w-[238px] sm:h-[238px] lg:w-[264px] lg:h-[264px] object-cover object-center ${className}`}
+        />
+      );
+    }
+
+    case "h1": {
+      return (
+        <>
+          {node.content ? (
+            <h1
+              className={`text-primary text-2xl lg:text-3xl ${markClasses} ${className}`}
+            >
+              {node.content.map((node, i) => (
+                <DefaultNodes
+                  node={node}
+                  index={i}
+                  key={`${node.type}-${index}-${i}`}
+                />
+              ))}
+            </h1>
+          ) : null}
+        </>
+      );
+    }
+
+    case "h2": {
+      return (
+        <>
+          {node.content ? (
+            <Text
+              className={`text-primary text-xl lg:text-2xl ${markClasses} ${className}`}
+            >
+              {node.content.map((node, i) => (
+                <DefaultNodes
+                  node={node}
+                  index={i}
+                  key={`${node.type}-${index}-${i}`}
+                />
+              ))}
+            </Text>
+          ) : null}
+        </>
+      );
+    }
+
+    case "h3": {
+      return (
+        <>
+          {node.content ? (
+            <Text
+              className={`text-primary text-lgx leading-6 tracking-0.1 xl:text-xl xl:leading-7 ${markClasses} ${className}`}
+            >
+              {node.content.map((node, i) => (
+                <DefaultNodes
+                  node={node}
+                  index={i}
+                  disableChildClasses
+                  key={`${node.type}-${index}-${i}`}
+                />
+              ))}
+            </Text>
+          ) : null}
+        </>
+      );
+    }
+
+    case "h4": {
+      return (
+        <>
+          {node.content ? (
+            <h4
+              className={`text-primary text-lg xl:text-lgx ${markClasses} ${className}`}
+            >
+              {node.content.map((node, i) => (
+                <DefaultNodes
+                  node={node}
+                  index={i}
+                  key={`${node.type}-${index}-${i}`}
+                />
+              ))}
+            </h4>
+          ) : null}
+        </>
+      );
+    }
+
+    case "h5": {
+      return (
+        <>
+          {node.content ? (
+            <h5
+              className={`text-primary text-base lg:text-lg ${markClasses} ${className}`}
+            >
+              {node.content.map((node, i) => (
+                <DefaultNodes
+                  node={node}
+                  index={i}
+                  key={`${node.type}-${index}-${i}`}
+                />
+              ))}
+            </h5>
+          ) : null}
+        </>
+      );
+    }
+
+    case "h6": {
+      return (
+        <>
+          {node.content ? (
+            <h6
+              className={`text-primary text-base ${markClasses} ${className}`}
+            >
+              {node.content.map((node, i) => (
+                <DefaultNodes
+                  node={node}
+                  index={i}
+                  key={`${node.type}-${index}-${i}`}
+                />
+              ))}
+            </h6>
+          ) : null}
+        </>
+      );
+    }
+
+    case "paragraph": {
+      const paragraphClasses = disableChildClasses
+        ? ""
+        : "text-primary text-lg leading-8 md:leading-[2.375rem] xl:text-lgx xl:leading-10 whitespace-break-spaces";
+      return (
+        <>
+          {node.content && node.content[0] && node.content[0].text !== "" ? (
+            <Text className={`${markClasses} ${className} ${paragraphClasses}`}>
+              {node.content.map((node, i) => (
+                <DefaultNodes
+                  disableChildClasses={disableChildClasses}
+                  node={node}
+                  index={i}
+                  key={`${node.type}-${index}-${i}`}
+                />
+              ))}
+            </Text>
+          ) : null}
+        </>
+      );
+    }
+
+    case "ordered-list": {
+      return (
+        <>
+          {node.content ? (
+            <ol
+              className={`text-primary flex flex-col gap-6 list-decimal list-inside ${className}`}
+            >
+              {node.content?.map((item, i) => (
+                <DefaultNodes
+                  node={item}
+                  index={i}
+                  key={`${node.type}-${index}-${i}`}
+                />
+              ))}
+            </ol>
+          ) : null}
+        </>
+      );
+    }
+
+    case "unordered-list": {
+      const hasIcons = node.data?.hasIcon ?? false;
+      const extraClasses = hasIcons ? "list-none" : " list-disc";
+
+      return (
+        <>
+          {node.content ? (
+            <ul
+              className={`text-primary flex flex-col gap-6 list-inside ${extraClasses} ${className}`}
+            >
+              {node.content?.map((item, i) => (
+                <DefaultNodes
+                  node={item}
+                  index={i}
+                  key={`${node.type}-${index}-${i}`}
+                />
+              ))}
+            </ul>
+          ) : null}
+        </>
+      );
+    }
+
+    case "list-item": {
+      return (
+        <>
+          {node.content ? (
+            <li
+              className={`text-lg lg:text-lgx ${markClasses} [&>p]:inline ${className}`}
+            >
+              {node.content.map((node, i) => {
+                const isNestedList = [
+                  "ordered-list",
+                  "unordered-list",
+                ].includes(node.type);
+                return (
+                  <DefaultNodes
+                    node={node}
+                    index={i}
+                    key={`${node.type}-${index}-${i}`}
+                    className={isNestedList ? "pl-8" : ""}
+                  />
+                );
+              })}
+            </li>
+          ) : null}
+        </>
+      );
+    }
+
+    case "text": {
+      const icon = node.data?.icon ?? null;
+      const isInList = node.data?.isInlist ?? false;
+      const textClasses = disableChildClasses
+        ? ""
+        : "leading-8 md:leading-[2.375rem] xl:leading-10";
+      return (
+        <Text
+          key={`${node.type}-${index}`}
+          className={`${markClasses} ${className} ${textClasses}`}
+        >
+          <RichTextIcon
+            className={isInList ? "mr-4" : "mx-1"}
+            icon={icon as IconType}
+          />
+          {node.text}
+        </Text>
+      );
+    }
+
+    case "blockquote": {
+      return (
+        <>
+          {node.content ? (
+            <blockquote
+              key={`${node.type}-${index}`}
+              className={`text-primary ${markClasses} ${className}`}
+            >
+              {node.content.map((node, i) => (
+                <DefaultNodes
+                  node={node}
+                  index={i}
+                  key={`${node.type}-${index}-${i}`}
+                />
+              ))}
+            </blockquote>
+          ) : null}
+        </>
+      );
+    }
+
+    case "link": {
+      const hasSocials = node.content?.[0].type === "social";
+      return (
+        <>
+          {node.data?.url && node.content ? (
+            <a
+              href={node.data.url as string}
+              key={`${node.type}-${index}`}
+              className={`text-link ${markClasses} ${className} ${
+                hasSocials ? "mr-6" : ""
+              }`}
+            >
+              {node.content.map((node, i) => (
+                <DefaultNodes
+                  node={node}
+                  index={i}
+                  key={`${node.type}-${index}-${i}`}
+                />
+              ))}
+            </a>
+          ) : null}
+        </>
+      );
+    }
+
+    case "hr": {
+      return (
+        <hr
+          key={`${node.type}-${index}`}
+          className={`border-tertiary ${markClasses} ${className}`}
+        />
+      );
+    }
+
+    case "social": {
+      const icon = node.data?.social ?? null;
+
+      return (
+        <Text
+          key={`${node.type}-${index}`}
+          className={`${markClasses} ${className}`}
+        >
+          <RichTextIcon
+            className={
+              "w-fit !fill-cta-primary hover:!fill-original-600 disabled:!fill-neutral-300 active:!fill-neutral-800"
+            }
+            icon={icon as IconType}
+            size={36}
+          />
+        </Text>
+      );
+    }
+
+    case "table": {
+      const { content } = node;
+      if (!content?.length) return null;
+
+      const [rawHeaders, ...rawRows] = content;
+
+      const parsedHeaders: TableColumn[] =
+        (rawHeaders as RichTextNode).content?.map((headerCell) => {
+          const parsedValue =
+            (headerCell as RichTextNode).content
+              ?.map(
+                (node) =>
+                  (node as RichTextNode).content
+                    ?.map((n) => n.text)
+                    .join(" ") || ""
+              )
+              .join(" ") || "";
+
+          return { header: parsedValue, accessor: toKebabCase(parsedValue) };
+        }) ?? [];
+
+      const parsedRows: TableRow[] = (rawRows as RichTextNode[])
+        .map(({ content: rawCells }, rowIndex) => {
+          const parsedCells = rawCells?.map((node, cellIndex) => {
+            const accessor = parsedHeaders[cellIndex]?.accessor;
+            if (!accessor) return null;
+
+            const value = (node as RichTextNode).content?.map(
+              (node, contentIndex) => (
+                <DefaultNodes
+                  disableChildClasses
+                  key={`row-${rowIndex}-cell-${cellIndex}-content-${contentIndex}`}
+                  index={contentIndex}
+                  node={node}
+                />
+              )
+            );
+
+            return { value, accessor };
+          });
+
+          return parsedCells?.reduce<TableRow>((acc, cell) => {
+            if (cell) acc[cell.accessor] = cell.value;
+            return acc;
+          }, {});
+        })
+        .filter((row): row is TableRow => !!row);
+
+      const tableProps: MlTableProps = {
+        columns: parsedHeaders,
+        data: parsedRows,
+      };
+
+      return <MlTable key={`${node.type}-${index}`} {...tableProps} />;
+    }
+
+    default:
+      return null;
+  }
+};

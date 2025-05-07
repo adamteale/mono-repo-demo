@@ -1,3 +1,4 @@
+import { View } from "react-native";
 import { SelectorFilterProps } from "./selector-filter.types";
 
 export const SelectorFilter = ({ options, onClick }: SelectorFilterProps) => (

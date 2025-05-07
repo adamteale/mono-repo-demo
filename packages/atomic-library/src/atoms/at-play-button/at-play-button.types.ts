@@ -1,4 +1,4 @@
-export enum AtPlayButtonColor {
+import { View } from "react-native";export enum AtPlayButtonColor {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
 }

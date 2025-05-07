@@ -1,0 +1,104 @@
+import { View } from "react-native";import React, { useRef, useState, useEffect } from "react";
+import {
+  ScrollView,
+  View,
+  StyleSheet,
+  Dimensions,
+  Animated,
+} from "react-native";
+
+import { MlImageInteractive, MlImageInteractiveProps } from "../../molecules"; // Assuming NativeWind compatibility
+import { OrImagesCarouselProps } from "./or-images-carousel.types";
+
+const { width: screenWidth } = Dimensions.get("window");
+
+const styles = StyleSheet.create({
+  scrollViewContent: {
+    flexDirection: "row",
+    paddingBottom: 16,
+  },
+  scrollbarTrack: {
+    height: 6,
+    backgroundColor: "#e0e0e0",
+    borderRadius: 3,
+    marginTop: 8,
+    overflow: "hidden", // To contain the thumb within bounds
+  },
+  scrollbarThumb: {
+    backgroundColor: "#616161",
+    borderRadius: 3,
+    height: 6,
+  },
+});
+
+export const OrImagesCarousel = ({ images }: OrImagesCarouselProps) => {
+  const scrollViewRef = useRef<ScrollView>(null);
+  const scrollX = useRef(new Animated.Value(0)).current;
+  const [contentWidth, setContentWidth] = useState(0);
+
+  const handleScroll = Animated.event(
+    [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+    { useNativeDriver: false } // Animated.interpolate doesn't work with native driver for scrollX on iOS
+  );
+
+  useEffect(() => {
+    if (images) {
+      setContentWidth(images.length * screenWidth);
+    }
+  }, [images]);
+
+  return (
+    <View>
+      <ScrollView
+        ref={scrollViewRef}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={[
+          styles.scrollViewContent,
+          { width: contentWidth },
+        ]}
+        decelerationRate="fast"
+        snapToInterval={screenWidth}
+        className="pb-4"
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
+      >
+        {images?.map((imageProps, index) => (
+          <View key={index} style={{ width: screenWidth }}>
+            <MlImageInteractive
+              className="w-full aspect-square"
+              {...imageProps}
+              dataTestId={`carousel-image-${index}`}
+              ariaLabel={imageProps.image.alt}
+            />
+          </View>
+        ))}
+      </ScrollView>
+      {images && images.length > 1 && (
+        <View style={styles.scrollbarTrack}>
+          <Animated.View
+            style={[
+              styles.scrollbarThumb,
+              {
+                width: (screenWidth / contentWidth) * screenWidth,
+                transform: [
+                  {
+                    translateX: scrollX.interpolate({
+                      inputRange: [0, contentWidth - screenWidth],
+                      outputRange: [
+                        0,
+                        screenWidth -
+                          (screenWidth / contentWidth) * screenWidth,
+                      ],
+                      extrapolate: "clamp",
+                    }),
+                  },
+                ],
+              },
+            ]}
+          />
+        </View>
+      )}
+    </View>
+  );
+};

@@ -1,4 +1,4 @@
-export interface AtCheckboxProps {
+import { View } from "react-native";export interface AtCheckboxProps {
   /** Specifies whether the checkbox is checked or not. */
   checked?: boolean
 

@@ -1,3 +1,6 @@
+import React from "react";
+import { View } from "react-native";
+
 import { AtBadge, AtLink } from "@mono-repo-demo/atomic-library";
 import { OrPopUpBasket } from "../../or-pop-up-basket";
 import { BasketIconProps } from "../or-header.types";
@@ -18,17 +21,17 @@ export const BasketIcon = ({
     !basketProductNotification && isBasketDisplayed && popUpBasket;
   return (
     <View
-      ref={basketRef}
+      // ref={basketRef}
       className={`${basketProductNotification ? "sm:relative" : ""}`}
     >
       <View
         className={`block relative h-6 ${className}`}
-        onMouseEnter={
-          popUpBasket?.items?.length ? handleBasketMouseEnter : undefined
-        }
-        onMouseLeave={
-          popUpBasket?.items?.length ? handleBasketMouseLeave : undefined
-        }
+        // onMouseEnter={
+        //   popUpBasket?.items?.length ? handleBasketMouseEnter : undefined
+        // }
+        // onMouseLeave={
+        //   popUpBasket?.items?.length ? handleBasketMouseLeave : undefined
+        // }
         data-testid="basket-icon"
       >
         {basketTotalQuantity > 0 && (

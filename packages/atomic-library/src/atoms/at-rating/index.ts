@@ -1,2 +1,2 @@
-export * from './at-rating'
+import { View } from "react-native";export * from './at-rating'
 export * from './at-rating.types'

@@ -1,4 +1,4 @@
-export * from "./at-badge";
+import { View } from "react-native";export * from "./at-badge";
 export * from "./at-bullets";
 export * from "./at-button";
 export * from "./at-checkbox";

@@ -1,3 +1,6 @@
+import React from "react";
+import { View, Text } from "react-native";
+
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   AtButton,
@@ -44,14 +47,14 @@ export const OrProductDetails = ({
   const stock = product.stock ?? 0;
 
   const [quantity, setQuantity] = useState<number>(1);
-  const quantityOptions = useMemo(
-    () => new Array(stock).fill(0).map((_, index) => index + 1),
-    [stock]
-  );
+  // const quantityOptions = useMemo(
+  //   () => new Array(stock).fill(0).map((_, index) => index + 1),
+  //   [stock]
+  // );
 
   const [isAddingProduct, setIsAddingProduct] = useState(false);
-  const [addedToBasketTimeoutId, setAddedToBasketTimeoutId] =
-    useState<NodeJS.Timeout>();
+  // const [addedToBasketTimeoutId, setAddedToBasketTimeoutId] =
+  //   useState<NodeJS.Timeout>();
 
   const hasVariants = colors?.colorPickerProps && sizes?.sizeSelectorProps;
   const hasVariantValues =
@@ -70,31 +73,31 @@ export const OrProductDetails = ({
     setAddToBasketLabel(getAddToBasketLabel());
   }, [getAddToBasketLabel]);
 
-  const handleAddToBasketClick = async () => {
-    if (hasVariants && !hasVariantValues) return;
+  // const handleAddToBasketClick = async () => {
+  //   if (hasVariants && !hasVariantValues) return;
 
-    if (!stock) {
-      notifyMeOnClick?.();
-      return;
-    }
+  //   if (!stock) {
+  //     notifyMeOnClick?.();
+  //     return;
+  //   }
 
-    setIsAddingProduct(true);
-    setAddToBasketLabel(addProductToBasketLabel);
+  //   setIsAddingProduct(true);
+  //   setAddToBasketLabel(addProductToBasketLabel);
 
-    const itemAdded = await addProductToBasket(product.id, quantity);
-    setIsAddingProduct(false);
+  //   const itemAdded = await addProductToBasket(product.id, quantity);
+  //   setIsAddingProduct(false);
 
-    if (!itemAdded) addProductToBasketError?.();
-    else {
-      setAddToBasketLabel(addedProductToBasketLabel);
-      if (addedToBasketTimeoutId) clearTimeout(addedToBasketTimeoutId);
-      const id = setTimeout(() => {
-        setAddToBasketLabel(addProductToBasketLabel);
-        setAddedToBasketTimeoutId(undefined);
-      }, 4000);
-      setAddedToBasketTimeoutId(id);
-    }
-  };
+  //   if (!itemAdded) addProductToBasketError?.();
+  //   else {
+  //     setAddToBasketLabel(addedProductToBasketLabel);
+  //     if (addedToBasketTimeoutId) clearTimeout(addedToBasketTimeoutId);
+  //     const id = setTimeout(() => {
+  //       setAddToBasketLabel(addProductToBasketLabel);
+  //       setAddedToBasketTimeoutId(undefined);
+  //     }, 4000);
+  //     setAddedToBasketTimeoutId(id);
+  //   }
+  // };
 
   return (
     <View
@@ -194,7 +197,8 @@ export const OrProductDetails = ({
         </Text>
         <View className="flex items-center gap-x-4 mb-8 md:mb-10">
           <MlDropdownQuantity
-            optionsList={quantityOptions}
+            // optionsList={quantityOptions}
+            optionsList={[1, 2, 3, 4, 5]}
             selectedOption={quantity}
             handleChange={(qtySelected) => setQuantity(qtySelected)}
             dataTestId="dropdown-quantity"
@@ -215,7 +219,7 @@ export const OrProductDetails = ({
         <AtButton
           dataTestId="add-to-basket-btn"
           variant={AtButtonVariants.PRIMARY}
-          onClick={handleAddToBasketClick}
+          // onClick={handleAddToBasketClick}
           className="mb-12"
           isLoading={isAddingProduct}
         >

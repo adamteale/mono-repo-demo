@@ -1,8 +1,14 @@
-import { OrPaymentOptions } from '../../organisms'
-import { TmPaymentOptionsProps } from './tm-payment-options.types'
-import { TmCheckout } from '../tm-checkout'
+import React from "react";
 
-export const TmPaymentOptions = ({ orderSummaryProps, paymentOptionsProps, copyright }: TmPaymentOptionsProps) => {
+import { OrPaymentOptions } from "../../organisms";
+import { TmPaymentOptionsProps } from "./tm-payment-options.types";
+import { TmCheckout } from "../tm-checkout";
+
+export const TmPaymentOptions = ({
+  orderSummaryProps,
+  paymentOptionsProps,
+  copyright,
+}: TmPaymentOptionsProps) => {
   return (
     <TmCheckout copyright={copyright} orderSummaryProps={orderSummaryProps}>
       <OrPaymentOptions
@@ -11,5 +17,5 @@ export const TmPaymentOptions = ({ orderSummaryProps, paymentOptionsProps, copyr
         dataTestId="or-payment-options"
       />
     </TmCheckout>
-  )
-}
+  );
+};

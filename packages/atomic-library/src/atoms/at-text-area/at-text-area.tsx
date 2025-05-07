@@ -1,3 +1,4 @@
+import { Text, View } from "react-native";
 import { useCallback, useRef, useState } from "react";
 import { AtTextAreaProps } from "./at-text-area.types";
 import { useClickOutside } from "../../utils";
@@ -23,13 +24,13 @@ export const AtTextArea = ({
   errorText,
 }: AtTextAreaProps) => {
   const [isActive, setIsActive] = useState(false);
-  const textAreaRef = useRef<HTMLDivElement>(null);
+  // const textAreaRef = useRef<HTMLDivElement>(null);
 
   const onChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     handleChange?.(event.target.value);
   };
 
-  useClickOutside(textAreaRef, () => setIsActive(false));
+  // useClickOutside(textAreaRef, () => setIsActive(false));
 
   const getContainerClasses = useCallback(() => {
     return containerClasses({ active: isActive, error, disabled });
@@ -45,8 +46,8 @@ export const AtTextArea = ({
       )}
       <View
         className={getContainerClasses()}
-        onFocus={() => setIsActive(true)}
-        ref={textAreaRef}
+        // onFocus={() => setIsActive(true)}
+        // ref={textAreaRef}
         data-testid="text-area-wrapper"
       >
         <textarea

@@ -1,4 +1,7 @@
+import React from "react";
 import { useCallback, useMemo } from "react";
+import { View, Text } from "react-native";
+
 import { SearchItemDisplayVariants, ResultsProps } from "./results.types";
 import { CardSearchItem } from "./search-item-variants/card-search-item/card-search-item";
 import { AtLink } from "@mono-repo-demo/atomic-library";

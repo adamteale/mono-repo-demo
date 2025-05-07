@@ -6,9 +6,9 @@ import {
   OrderContactInformationFormFields,
   OrderShippingAddressFormFields,
 } from "@components-library/ecommerce";
-import { ShippingMethod } from "../../../types/basket/responses/shipping-method";
 import { MlFormFieldType } from "@mono-repo-demo/atomic-library";
-import { Address } from "../../../types/basket/responses/address";
+import { Address } from "../../../../types/basket/responses/address";
+import { ShippingMethod } from "../../../../types/basket/responses/shipping-method";
 
 const emailValidator = new RegExp(
   "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,18}$"

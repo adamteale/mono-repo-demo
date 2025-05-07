@@ -1,4 +1,6 @@
 import React, { useRef } from "react";
+import { View, Text } from "react-native";
+
 import {
   AtDivider,
   AtLink,
@@ -36,7 +38,7 @@ export const HamburgerMenuWrapper = ({
 
   return (
     <View
-      ref={ref}
+      // ref={ref}
       className={hamburgerMenuContainerClasses({ isMobileMenuOpen })}
     >
       <View className="flex flex-col gap-6">

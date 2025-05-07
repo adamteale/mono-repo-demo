@@ -105,13 +105,13 @@ export const Compact = ({
                   className={`flex flex-row gap-1 items-center w-fit ${
                     mobileCard === true ? "" : "md:leading-5"
                   }`}
-                  role="text"
+                  accessibilityRole="text"
                 >
                   <Text className="font-medium">{colorLabel}:</Text>
                   <Text>{colorMappingNames[color]}</Text>
                   <View
                     className={`flex h-4 w-4 items-center rounded-full ${colorMappingClasses[color]}`}
-                    aria-hidden="true"
+                    // aria-hidden="true"
                   />
                 </View>
               )}
@@ -119,7 +119,7 @@ export const Compact = ({
               {size && sizeLabel && (
                 <View
                   className="flex flex-row gap-1 items-center md:leading-5 w-fit"
-                  role="text"
+                  accessibilityRole="text"
                 >
                   <Text className="font-medium">{sizeLabel}:</Text>
                   <Text>{size}</Text>
@@ -131,7 +131,7 @@ export const Compact = ({
               {originalPrice && (
                 <Text
                   className={cva.compactOriginalPriceClasses({ mobileCard })}
-                  role="text"
+                  accessibilityRole="text"
                 >
                   <Text className="sr-only text-ellipsis">
                     Original price:&nbsp;
@@ -140,7 +140,7 @@ export const Compact = ({
                 </Text>
               )}
 
-              <View className="font-bold" role="text">
+              <View className="font-bold" accessibilityRole="text">
                 <Text className="sr-only text-ellipsis">
                   Current price:&nbsp;
                 </Text>
@@ -169,7 +169,7 @@ export const Compact = ({
                   {originalPrice && (
                     <Text
                       className="text-quaternary line-through decoration-1 text-sm font-light"
-                      role="text"
+                      accessibilityRole="text"
                     >
                       <Text className="sr-only text-ellipsis">
                         Original price:&nbsp;
@@ -178,7 +178,7 @@ export const Compact = ({
                     </Text>
                   )}
 
-                  <View className="font-bold" role="text">
+                  <View className="font-bold" accessibilityRole="text">
                     <Text className="sr-only text-ellipsis">
                       Current price:&nbsp;
                     </Text>

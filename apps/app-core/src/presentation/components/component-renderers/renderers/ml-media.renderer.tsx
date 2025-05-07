@@ -1,6 +1,5 @@
 import React from "react";
 
-// import { MlMedia } from '@mono-repo-demo/atomic-library'
 import { MlMediaRendererProps } from "../renderer.types";
 import { normalizeFile } from "../../normalization/file";
 import { MlMedia } from "@mono-repo-demo/atomic-library";

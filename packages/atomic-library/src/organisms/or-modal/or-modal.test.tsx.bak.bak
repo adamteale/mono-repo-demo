@@ -1,0 +1,100 @@
+import { View } from "react-native";import { describe, expect, it, vi } from "vitest";
+import { fireEvent, render, screen } from "@testing-library/react";
+import React from "react";
+import { OrModal } from "./or-modal";
+import { OrModalProps } from "./or-modal.types";
+
+const orModalProps: OrModalProps = {
+  dataTestId: "or-modal",
+  children: <View>Test child</View>,
+  closeButtonAriaLabel: "Close Modal",
+  className: "rounded-lg border border-secondary-light bg-white",
+  dialogRef: null,
+  handleCloseModal: () => {},
+};
+
+const FatherComponent = () => {
+  const dialogRef = React.useRef<HTMLDialogElement>(null);
+  const handleCloseModal = () => {};
+
+  return (
+    <OrModal
+      {...orModalProps}
+      dialogRef={dialogRef}
+      handleCloseModal={handleCloseModal}
+    />
+  );
+};
+
+describe("organism/or-modal", () => {
+  it("should render correctly", () => {
+    render(<FatherComponent />);
+
+    expect(screen.getByTestId(orModalProps.dataTestId!)).toBeInTheDocument();
+    expect(screen.getByText("Test child")).toBeInTheDocument();
+  });
+
+  it("should render close button when showCloseButton is true", () => {
+    const props = {
+      ...orModalProps,
+      showCloseButton: true,
+    };
+    render(<OrModal {...props} />);
+    expect(
+      screen.getByLabelText(props.closeButtonAriaLabel!)
+    ).toBeInTheDocument();
+  });
+
+  it("should not render close button when showCloseButton is false", () => {
+    const props = {
+      ...orModalProps,
+      showCloseButton: false,
+    };
+    render(<OrModal {...props} />);
+    expect(screen.queryByLabelText(props.closeButtonAriaLabel!)).toBeNull();
+  });
+
+  it("should call handleCloseModal when close button is clicked", async () => {
+    const handleCloseModal = vi.fn();
+    const props: OrModalProps = {
+      ...orModalProps,
+      handleCloseModal,
+      showCloseButton: true,
+    };
+    render(<OrModal {...props} />);
+    const closeButton = screen.getByLabelText(props.closeButtonAriaLabel!);
+    await fireEvent.click(closeButton);
+    expect(handleCloseModal).toHaveBeenCalled();
+  });
+
+  it("should close when clicking on the backdrop", async () => {
+    const dialogRef = React.createRef<HTMLDialogElement>();
+    const props: OrModalProps = {
+      ...orModalProps,
+      dialogRef: dialogRef,
+    };
+
+    render(<OrModal {...props} />);
+
+    await screen.findByTestId(orModalProps.dataTestId!);
+
+    fireEvent.mouseDown(document, { clientX: -10, clientY: -10 });
+    fireEvent.mouseUp(document, { clientX: -10, clientY: -10 });
+
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
+    expect(dialogRef.current).not.toBeVisible();
+  });
+
+  it("should have correct classes applied", () => {
+    render(<FatherComponent />);
+    const modal = screen.getByTestId(orModalProps.dataTestId!);
+    expect(modal).toHaveClass(orModalProps.className!);
+  });
+
+  it("should be accessible with proper aria attributes", () => {
+    render(<FatherComponent />);
+    const modal = screen.getByTestId("or-modal");
+    expect(modal.getAttribute("aria-labelledby")).toBeTruthy();
+  });
+});

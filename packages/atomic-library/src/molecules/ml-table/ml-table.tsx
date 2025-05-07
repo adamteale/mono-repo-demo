@@ -1,3 +1,4 @@
+import { View } from "react-native";
 import { MlTableProps } from "./ml-table.types";
 
 export const MlTable = ({

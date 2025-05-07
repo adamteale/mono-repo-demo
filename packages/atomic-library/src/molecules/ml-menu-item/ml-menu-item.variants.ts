@@ -1,24 +1,25 @@
-import { cva } from 'class-variance-authority'
-import { classes } from '../../utils/cva'
+import { cva } from "class-variance-authority";
+import { classes } from "../../utils/cva";
 
-const baseClass = 'flex items-center relative justify-between w-full text-primary active:font-bold'
+const baseClass =
+  "flex items-center relative justify-between w-full text-primary active:font-bold";
 const linkHoverClasses =
-  'hover:after:block after:content-[""] hover:after:w-full after:absolute after:-bottom-2 after:bg-navbar-content-primary after:left-0 after:rounded after:h-px'
+  'hover:after:block after:content-[""] hover:after:w-full after:absolute after:-bottom-2 after:bg-navbar-content-primary after:left-0 after:rounded after:h-px';
 
 const small = {
   base: `text-base`,
   hover: `${linkHoverClasses}`,
-}
+};
 
 const medium = {
-  base: 'text-lg',
+  base: "text-lg",
   hover: `${linkHoverClasses}`,
-}
+};
 
 const large = {
-  base: 'text-xl',
+  base: "text-xl",
   hover: `${linkHoverClasses}`,
-}
+};
 
 export const mlMenuItemVariants = cva(baseClass, {
   variants: {
@@ -29,6 +30,6 @@ export const mlMenuItemVariants = cva(baseClass, {
     },
   },
   defaultVariants: {
-    variant: 'medium',
+    variant: "medium",
   },
-})
+});

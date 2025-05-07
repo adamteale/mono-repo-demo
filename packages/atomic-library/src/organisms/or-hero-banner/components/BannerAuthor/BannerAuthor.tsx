@@ -1,3 +1,4 @@
+import { Text, View } from "react-native";
 import { AtImage } from "../../../../atoms";
 import { OrHeroBannerProps } from "../../or-hero-banner.types";
 import { authorInfoContainerClasses } from "../../or-hero-banner.variants";

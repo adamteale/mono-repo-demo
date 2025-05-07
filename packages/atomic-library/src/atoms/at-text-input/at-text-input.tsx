@@ -1,3 +1,4 @@
+import { Text, View } from "react-native";
 import { forwardRef, useCallback, useMemo, useRef, useState } from "react";
 import { AtTextInputProps } from "./at-text-input.types";
 import { AtIcon } from "../at-icon";
@@ -136,8 +137,8 @@ export const AtTextInput = forwardRef<HTMLInputElement, AtTextInputProps>(
 
         <View
           className={getWrapperClasses()}
-          onFocus={() => setIsActive(true)}
-          ref={inputRef}
+          // onFocus={() => setIsActive(true)}
+          // ref={inputRef}
           data-testid="input-wrapper"
         >
           <input

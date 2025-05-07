@@ -1,47 +1,49 @@
+import React from "react";
+import { useEffect, useId, useState } from "react";
+import { View, Text } from "react-native";
+
 import { TmCatalogProps } from "./tm-catalog.types";
 import {
   AtDivider,
   MlBreadcrumb,
-  useModalDialog,
+  // useModalDialog,
   MlPagination,
   OrListing,
-  MlDropdownFilter,
-  FilterButtons,
-  OrFilter,
-  FilterModal,
+  // MlDropdownFilter,
+  // FilterButtons,
+  // OrFilter,
+  // FilterModal,
 } from "@mono-repo-demo/atomic-library";
 import { MlProductCardSkeleton } from "../../molecules";
-import { useEffect, useId, useState } from "react";
 import {
   containerClasses,
   desktopFilterContainerClasses,
 } from "./tm-catalog.variants";
-import {
-  EcommerceFilter,
-  EcommerceFilterSelector,
-} from "../../molecules/ml-filter-selector";
+import // EcommerceFilter,
+// EcommerceFilterSelector,
+"../../molecules/ml-filter-selector";
 
 export const resultFetchAmount = 9;
 
 export const TmCatalog = ({
   title,
   query,
-  filters = [],
+  // filters = [],
   breadcrumb,
-  filterModalCloseIconLabel,
-  filterModalOpenFiltersLabel,
-  filterModalShowResultsLabel,
-  filterModalTitle,
-  filterTitle = "Filter by",
-  sortByLabel = "Sort by",
+  // filterModalCloseIconLabel,
+  // filterModalOpenFiltersLabel,
+  // filterModalShowResultsLabel,
+  // filterModalTitle,
+  // filterTitle = "Filter by",
+  // sortByLabel = "Sort by",
   noResultLabel = "No products found with your search",
-  clearAllFiltersLabel = "Clear All",
+  // clearAllFiltersLabel = "Clear All",
   isLoading,
   hasResults,
   onChangePage,
   handleFilter,
   onClearFilters,
-  sortByProps,
+  // sortByProps,
   onSortChange,
   currentPage,
   totalPages,
@@ -49,7 +51,7 @@ export const TmCatalog = ({
   resultCountsText,
 }: TmCatalogProps) => {
   const headingId = useId();
-  const { dialog, handleOpenModal, handleCloseModal } = useModalDialog();
+  // const { dialog, handleOpenModal, handleCloseModal } = useModalDialog();
 
   const [internalTotalPages, setInternalTotalPages] = useState(0);
 
@@ -80,14 +82,14 @@ export const TmCatalog = ({
             </Text>
 
             {/* For Tablet */}
-            <View className="hidden lg:flex lg:flex-row-reverse xl:hidden flex-row items-end justify-between self-stretch gap-4">
+            {/* <View className="hidden lg:flex lg:flex-row-reverse xl:hidden flex-row items-end justify-between self-stretch gap-4">
               <FilterButtons
                 onClearFilters={onClearFilters}
                 clearAllFiltersLabel={clearAllFiltersLabel}
                 handleOpenModal={handleOpenModal}
                 filterModalOpenFiltersLabel={filterModalOpenFiltersLabel}
               />
-            </View>
+            </View> */}
 
             {/* <View className="items-center gap-6 hidden xl:flex">
               <Text className="text-lgx font-bold py-4">{sortByLabel}</Text>
@@ -112,7 +114,7 @@ export const TmCatalog = ({
           </View>
         </View>
         {/* For Mobile */}
-        <View className="lg:hidden flex flex-col sm:flex-row self-stretch justify-center sm:justify-start gap-4 sm:gap-2 items-start">
+        {/* <View className="lg:hidden flex flex-col sm:flex-row self-stretch justify-center sm:justify-start gap-4 sm:gap-2 items-start">
           <FilterButtons
             onClearFilters={onClearFilters}
             clearAllFiltersLabel={clearAllFiltersLabel}
@@ -120,7 +122,7 @@ export const TmCatalog = ({
             filterModalOpenFiltersLabel={filterModalOpenFiltersLabel}
             filterButtonClassName="w-full sm:w-auto"
           />
-        </View>
+        </View> */}
       </View>
 
       <AtDivider />

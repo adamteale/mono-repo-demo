@@ -1,4 +1,4 @@
-export type Rating = 0 | 1 | 2 | 3 | 4 | 5
+import { View } from "react-native";export type Rating = 0 | 1 | 2 | 3 | 4 | 5
 
 export interface AtRatingProps {
   /** The initial rating value when the component is first rendered. This prop is useful for setting a default rating that users can adjust. */

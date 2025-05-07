@@ -1,7 +1,11 @@
-import { useMemo, useState } from 'react'
-import { AtTextInput } from '../at-text-input'
-import { AtTextInputProps } from '../at-text-input.types'
-import { creditNumberFormatter, cvvFormatter, expirationDateFormatter } from '../formatters'
+import { useMemo, useState } from "react";
+import { AtTextInput } from "../at-text-input";
+import { AtTextInputProps } from "../at-text-input.types";
+import {
+  creditNumberFormatter,
+  cvvFormatter,
+  expirationDateFormatter,
+} from "../formatters";
 
 export const AtPasswordInput = ({
   label,
@@ -12,7 +16,7 @@ export const AtPasswordInput = ({
   required,
   defaultValue,
   readOnly,
-  className = '',
+  className = "",
   value,
   error,
   disabled,
@@ -26,27 +30,33 @@ export const AtPasswordInput = ({
   isCreditCard = false,
   isCvv = false,
 }: AtTextInputProps) => {
-  const [showPassword, setShowPassword] = useState(false)
-  const inputType = useMemo(() => (showPassword ? 'text' : 'password'), [showPassword])
-  const passwordIcon = useMemo(() => (showPassword ? 'visibility-off' : 'visibility'), [showPassword])
+  const [showPassword, setShowPassword] = useState(false);
+  const inputType = useMemo(
+    () => (showPassword ? "text" : "password"),
+    [showPassword]
+  );
+  const passwordIcon = useMemo(
+    () => (showPassword ? "visibility-off" : "visibility"),
+    [showPassword]
+  );
 
   const handlePasswordToggle = () => {
-    setShowPassword((showPassword) => !showPassword)
-  }
+    setShowPassword((showPassword) => !showPassword);
+  };
 
   const onHandleChange = (value: string) => {
-    let formattedValue = value
+    let formattedValue = value;
 
     if (isExpirationDate) {
-      formattedValue = expirationDateFormatter(value)
+      formattedValue = expirationDateFormatter(value);
     } else if (isCreditCard) {
-      formattedValue = creditNumberFormatter(value)
+      formattedValue = creditNumberFormatter(value);
     } else if (isCvv) {
-      formattedValue = cvvFormatter(value)
+      formattedValue = cvvFormatter(value);
     }
 
-    handleChange?.(formattedValue)
-  }
+    handleChange?.(formattedValue);
+  };
 
   return (
     <AtTextInput
@@ -74,5 +84,5 @@ export const AtPasswordInput = ({
       errorText={errorText}
       showSuccessIcon={false}
     />
-  )
-}
+  );
+};

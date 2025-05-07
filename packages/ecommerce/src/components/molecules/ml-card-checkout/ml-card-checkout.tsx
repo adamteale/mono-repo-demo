@@ -1,3 +1,6 @@
+import React from "react";
+import { Text, View } from "react-native";
+
 import { AtButton, AtDivider, AtIcon } from "@mono-repo-demo/atomic-library";
 import { MlCardCheckoutProps } from "./ml-card-checkout.types";
 

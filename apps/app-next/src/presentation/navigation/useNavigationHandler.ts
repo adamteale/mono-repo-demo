@@ -1,5 +1,5 @@
 import { NavigationService } from "@Presentation/navigation/hooks/types";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { WebPaths } from "./WebPaths";
 import { ProductDetailScreenProps } from "@Presentation/screens/ProductDetailScreen";
@@ -28,6 +28,7 @@ export const useNavigationHandler = (): NavigationService => {
   }, [router]);
 
   return {
+    currentRoute: usePathname(),
     navigateBack,
     navigateToProductDetail,
     navigateHome,

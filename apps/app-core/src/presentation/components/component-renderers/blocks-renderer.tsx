@@ -50,87 +50,94 @@ const LazyOrCarouselRenderer = lazy(
 );
 
 export const BlocksRenderer = ({ blocks, id }: BlocksRendererProps) => {
-  const renderItem = useCallback(({ item, index }) => {
-    if (!item) return null;
+  const renderItem = useCallback(
+    ({ item, index }: { item: any; index: number }) => {
+      if (!item) return null;
 
-    switch (item.contentTypeId) {
-      case "mlBrand":
-        return <MlBrandRenderer block={item as CMSBrand} key={index} />;
-      case "mlMedia":
-        return <MlMediaRenderer block={item as CMSMedia} key={index} />;
-      case "mlCard":
-        return <MlCardRenderer block={item as CMSCard} key={index} />;
-      case "mlQuote":
-        return <MlQuoteRenderer block={item as CMSQuote} key={index} />;
-      case "mlCardBlog":
-        return <MlCardBlogRenderer block={item as CMSCardBlog} key={index} />;
-      case "orRichText":
-        return <OrRichTextRenderer block={item as CMSRichText} key={index} />;
-      case "mlVertical":
-        return <MlVerticalRenderer block={item as CMSVertical} key={index} />;
-      case "mlVerticalTeam":
-        return (
-          <MlVerticalTeamRenderer block={item as CMSVerticalTeam} key={index} />
-        );
-      case "mlVideoPlayer":
-        return (
-          <MlVideoPlayerRenderer block={item as CMSVideoPlayer} key={index} />
-        );
-      case "orCarousel": {
-        return <LazyOrCarouselRenderer block={item as CMSCarousel} />;
+      switch (item.contentTypeId) {
+        case "mlBrand":
+          return <MlBrandRenderer block={item as CMSBrand} key={index} />;
+        case "mlMedia":
+          return <MlMediaRenderer block={item as CMSMedia} key={index} />;
+        case "mlCard":
+          return <MlCardRenderer block={item as CMSCard} key={index} />;
+        case "mlQuote":
+          return <MlQuoteRenderer block={item as CMSQuote} key={index} />;
+        case "mlCardBlog":
+          return <MlCardBlogRenderer block={item as CMSCardBlog} key={index} />;
+        case "orRichText":
+          return <OrRichTextRenderer block={item as CMSRichText} key={index} />;
+        case "mlVertical":
+          return <MlVerticalRenderer block={item as CMSVertical} key={index} />;
+        case "mlVerticalTeam":
+          return (
+            <MlVerticalTeamRenderer
+              block={item as CMSVerticalTeam}
+              key={index}
+            />
+          );
+        case "mlVideoPlayer":
+          return (
+            <MlVideoPlayerRenderer block={item as CMSVideoPlayer} key={index} />
+          );
+        case "orCarousel": {
+          return <LazyOrCarouselRenderer block={item as CMSCarousel} />;
+        }
+        case "orHeroBanner":
+          return (
+            <OrHeroBannerRenderer
+              block={item as CMSHeroBanner}
+              key={index}
+              className="w-screen"
+            />
+          );
+        case "orContainer":
+          return (
+            <OrContainerRenderer block={item as CMSContainer} key={index} />
+          );
+        case "orContentStrip":
+          return (
+            <OrContentStripRenderer
+              block={item as CMSContentStrip}
+              key={`${index}+${item.contentTypeId}`}
+            />
+          );
+        case "orListing":
+          return <OrListingRenderer block={item as CMSListing} key={index} />;
+        case "orBrandsContainer":
+          return (
+            <OrBrandsContainerRenderer
+              block={item as CMSBrandsContainer}
+              key={index}
+            />
+          );
+        case "orImageInteractiveBlock":
+          return (
+            <OrImageInteractiveBlockRenderer
+              block={item as CmsImageInteractiveBlock}
+              key={index}
+            />
+          );
+        case "orMetrics":
+          return <OrMetricsRenderer block={item as CMSMetrics} key={index} />;
+        case "orTeamSection":
+          return (
+            <OrTeamSectionRenderer block={item as CMSTeamSection} key={index} />
+          );
+        case "orImageBlock":
+          return (
+            <OrImageBlockRenderer block={item as CMSImageBlock} key={index} />
+          );
+        case "mlCollapse":
+          return <MlCollapseRenderer block={item as CMSCollapse} key={index} />;
+        default:
+          return null;
       }
-      case "orHeroBanner":
-        return (
-          <OrHeroBannerRenderer
-            block={item as CMSHeroBanner}
-            key={index}
-            className="w-screen"
-          />
-        );
-      case "orContainer":
-        return <OrContainerRenderer block={item as CMSContainer} key={index} />;
-      case "orContentStrip":
-        return (
-          <OrContentStripRenderer
-            block={item as CMSContentStrip}
-            key={`${index}+${item.contentTypeId}`}
-          />
-        );
-      case "orListing":
-        return <OrListingRenderer block={item as CMSListing} key={index} />;
-      case "orBrandsContainer":
-        return (
-          <OrBrandsContainerRenderer
-            block={item as CMSBrandsContainer}
-            key={index}
-          />
-        );
-      case "orImageInteractiveBlock":
-        return (
-          <OrImageInteractiveBlockRenderer
-            block={item as CmsImageInteractiveBlock}
-            key={index}
-          />
-        );
-      case "orMetrics":
-        return <OrMetricsRenderer block={item as CMSMetrics} key={index} />;
-      case "orTeamSection":
-        return (
-          <OrTeamSectionRenderer block={item as CMSTeamSection} key={index} />
-        );
-      case "orImageBlock":
-        return (
-          <OrImageBlockRenderer block={item as CMSImageBlock} key={index} />
-        );
-      case "mlCollapse":
-        return <MlCollapseRenderer block={item as CMSCollapse} key={index} />;
-      default:
-        return null;
-    }
-  }, []);
+    },
+    []
+  );
 
-  const keyExtractor = useCallback((item, index) => {
-    // Choose a unique key, prefer an ID from the data
+  const keyExtractor = useCallback((item: any, index: number): string => {
     return item?.id ? item.id.toString() : index.toString();
   }, []);
 

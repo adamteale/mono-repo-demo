@@ -1,0 +1,13 @@
+import { View } from "react-native";import { cva } from 'class-variance-authority'
+
+const productListingBaseClass =
+  '[&>*>article]:w-full grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:gap-12'
+
+export const productListingClasses = cva(productListingBaseClass, {
+  variants: {
+    filter: {
+      true: 'xl:grid-cols-2 xl:min-w-[41.688rem] 3xl:grid-cols-3',
+      false: '',
+    },
+  },
+})

@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   MlCardBasketProps,
   OrOrderDetailProps,
@@ -238,41 +240,43 @@ export const TmOrderDetailWrapper = ({
 
   const orderSummaryProps: OrOrderSummaryProps = {
     orderLabelArray: [
-      {
-        label: template.orderSummaryInfo?.subtotalLabel ?? "Subtotal",
-        value: basket?.totalPrice?.formatted ?? "$0.00",
-        tooltipContent: template.orderSummaryInfo?.subtotalTooltipContent,
-      },
-      {
-        label: template.orderSummaryInfo?.discountsLabel ?? "Discounts",
-        value:
-          "$" +
-          (
-            basket?.items?.reduce((acc, item) => {
-              if (item.totalOriginalPrice) {
-                acc += item.totalOriginalPrice.amount - item.totalPrice.amount;
-              }
-              return acc;
-            }, 0) ?? 0
-          ).toFixed(2),
-        tooltipContent: template.orderSummaryInfo?.discountsTooltipContent,
-        valueIndicatorColor: "positive",
-      },
-      {
-        label: template.orderSummaryInfo?.taxesLabel ?? "Taxes",
-        value: "$0.00",
-        tooltipContent: template.orderSummaryInfo?.taxesTooltipContent,
-      },
-      {
-        label: template.orderSummaryInfo?.shippingLabel ?? "Shipping",
-        value: getShippingPriceLabel(basketState, template),
-        tooltipContent: template.orderSummaryInfo?.shippingTooltipContent,
-      },
+      // {
+      //   label: template.orderSummaryInfo?.subtotalLabel ?? "Subtotal",
+      //   value: basket?.totalPrice?.formatted ?? "$0.00",
+      //   tooltipContent: template.orderSummaryInfo?.subtotalTooltipContent,
+      // },
+      // {
+      //   label: template.orderSummaryInfo?.discountsLabel ?? "Discounts",
+      //   value:
+      //     "$" +
+      //     (
+      //       basket?.items?.reduce((acc, item) => {
+      //         if (item.totalOriginalPrice) {
+      //           acc += item.totalOriginalPrice.amount - item.totalPrice.amount;
+      //         }
+      //         return acc;
+      //       }, 0) ?? 0
+      //     ).toFixed(2),
+      //   tooltipContent: template.orderSummaryInfo?.discountsTooltipContent,
+      //   valueIndicatorColor: "positive",
+      // },
+      // {
+      //   label: template.orderSummaryInfo?.taxesLabel ?? "Taxes",
+      //   value: "$0.00",
+      //   tooltipContent: template.orderSummaryInfo?.taxesTooltipContent,
+      // },
+      // {
+      //   label: template.orderSummaryInfo?.shippingLabel ?? "Shipping",
+      //   value: getShippingPriceLabel(basketState, template),
+      //   tooltipContent: template.orderSummaryInfo?.shippingTooltipContent,
+      // },
     ],
     withCart: true,
     items: basketItems,
-    totalPrice: basket?.totalPrice?.formatted || "0.00",
-    totalItems: basket?.totalItems,
+    // totalPrice: basket?.totalPrice?.formatted || "0.00",
+    // totalItems: basket?.totalItems,
+    totalPrice: "0.00",
+    totalItems: 0,
     ...template.orderSummaryLabels,
   };
 

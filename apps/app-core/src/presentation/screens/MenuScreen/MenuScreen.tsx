@@ -11,7 +11,10 @@ export const MenuScreen = ({}: MenuScreenProps) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Menu Screen</Text>
-      <AtButton onAction={onLogoutTapped} title="Log Out" />
+      <AtButton
+        onClick={onLogoutTapped}
+        children={<Text className="text-white">Logout</Text>}
+      />
     </View>
   );
 };

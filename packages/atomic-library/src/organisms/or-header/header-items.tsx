@@ -1,8 +1,9 @@
+import { View } from "react-native";
+
 import { HeaderMenuItem } from "./or-header.types";
 import { MlMenuItem } from "../../molecules";
 import { HeaderSubItems } from "./header.sub-items";
 import { menuItemClasses } from "./or-header.variants";
-import { View } from "react-native";
 
 interface HeaderItemsProps {
   menuItems?: HeaderMenuItem[];

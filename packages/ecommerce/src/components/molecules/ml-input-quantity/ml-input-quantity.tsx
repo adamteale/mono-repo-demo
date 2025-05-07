@@ -1,4 +1,6 @@
-import { SyntheticEvent, useEffect, useState } from "react";
+import React, { SyntheticEvent, useEffect, useState } from "react";
+import { View } from "react-native";
+
 import { MlInputQuantityProps } from "./ml-input-quantity.types";
 import { AtIcon } from "@mono-repo-demo/atomic-library";
 import { buttonClasses, inputClasses } from "./ml-input-quantity.variants";

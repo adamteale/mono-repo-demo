@@ -1,3 +1,5 @@
+import React from "react";
+import { View } from "react-native";
 import { OrHeroBanner } from "@mono-repo-demo/atomic-library";
 import { TmBlogArticleProps } from "./tm-blog-article.types";
 

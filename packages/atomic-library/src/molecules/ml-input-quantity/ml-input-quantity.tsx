@@ -1,3 +1,4 @@
+import { View } from "react-native";
 import { SyntheticEvent, useState } from "react";
 import { MlInputQuantityProps } from "./ml-input-quantity.types";
 import { AtIcon } from "../../atoms";

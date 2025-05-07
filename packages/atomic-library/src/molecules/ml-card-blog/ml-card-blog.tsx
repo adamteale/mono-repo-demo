@@ -1,4 +1,6 @@
 import { ReactNode } from "react";
+import { Text, View } from "react-native";
+
 import { AtLink, IconPositions } from "../../atoms";
 import { MlMedia } from "../ml-media";
 import { MlCardBlogProps } from "./ml-card-blog.types";

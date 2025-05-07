@@ -1,3 +1,3 @@
-export * from './or-search'
+import { View } from "react-native";export * from './or-search'
 export * from './or-search.types'
 export * from './results/results.types'

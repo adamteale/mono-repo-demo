@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  ScrollView,
-  Dimensions,
-  Platform,
-  ActivityIndicator,
-  View,
-  StatusBar,
-  SafeAreaView,
-} from "react-native";
+import { ActivityIndicator, SafeAreaView } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { PgPage } from "@mono-repo-demo/atomic-library";

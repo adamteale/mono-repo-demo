@@ -1,3 +1,4 @@
+import { Text, View } from "react-native";
 import { AtImage } from "../../atoms";
 import { MlQuoteProps } from "./ml-quote.types";
 import { authorNameClasses, authorRoleClasses } from "./ml-quote.variants";

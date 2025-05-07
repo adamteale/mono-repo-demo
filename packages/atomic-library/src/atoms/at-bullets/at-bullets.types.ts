@@ -1,4 +1,4 @@
-export interface AtBulletsProps {
+import { View } from "react-native";export interface AtBulletsProps {
   /** The index of the active bullet. */
   activeBulletIndex?: number
 

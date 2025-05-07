@@ -1,4 +1,4 @@
-export interface AtRadioProps {
+import { View } from "react-native";export interface AtRadioProps {
   /** An optional string that provides additional information or context about the radio button.
    * This is typically displayed below the title. */
   checked?: boolean

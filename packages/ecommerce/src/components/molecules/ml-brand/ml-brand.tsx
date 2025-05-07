@@ -1,3 +1,6 @@
+import React from "react";
+import { View } from "react-native";
+
 import { AtLink, MlMedia, MlMediaFit } from "@mono-repo-demo/atomic-library";
 import { MlBrandProps } from "./ml-brand.types";
 import { mlBrandClasses } from "./ml-brand.variants";

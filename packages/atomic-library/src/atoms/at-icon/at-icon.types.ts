@@ -1,4 +1,4 @@
-export type IconType =
+import { View } from "react-native";export type IconType =
   | 'alert'
   | 'angle-down'
   | 'angle-left'

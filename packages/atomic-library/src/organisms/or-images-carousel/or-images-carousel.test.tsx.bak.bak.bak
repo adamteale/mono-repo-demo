@@ -1,0 +1,24 @@
+import { View } from "react-native";import { describe, expect, it } from 'vitest'
+import { render } from '@testing-library/react'
+import { OrImagesCarousel } from './or-images-carousel'
+import { OrImagesCarouselProps } from './or-images-carousel.types'
+
+const defaultProps: OrImagesCarouselProps = {
+  images: [
+    {
+      image: { src: 'test.url' },
+    },
+  ],
+}
+
+describe('organisms/or-images-carousel', () => {
+  describe('when the component is created', () => {
+    it('should render respective number of images', () => {
+      const { getAllByTestId } = render(<OrImagesCarousel {...defaultProps} />)
+
+      const images = getAllByTestId('carousel-image-', { exact: false })
+
+      expect(images.length).toBe(defaultProps.images.length)
+    })
+  })
+})

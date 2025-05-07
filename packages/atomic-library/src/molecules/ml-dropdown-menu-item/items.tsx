@@ -1,3 +1,5 @@
+import { View } from "react-native";
+
 import { MlMenuItem } from "../ml-menu-item";
 import { Item } from "./ml-dropdown-menu-item.types";
 import {

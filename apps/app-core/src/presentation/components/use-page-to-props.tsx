@@ -6,29 +6,32 @@ import { HeadProps } from "@mono-repo-demo/atomic-library";
 // import { BrowserStorage } from "../types/browser-storage";
 
 import {
-  CMSBasket,
-  CMSBlogArticle,
-  CMSCatalog,
-  CMSCheckoutCompleted,
-  CMSContactUs,
+  // CMSBasket,
+  // CMSBlogArticle,
+  // CMSCatalog,
+  // CMSCheckoutCompleted,
+  // CMSContactUs,
   CMSFlex,
-  CMSLegalSupport,
-  CMSLogin,
-  CMSStepper,
+  // CMSLegalSupport,
+  // CMSLogin,
+  // CMSStepper,
 } from "@mono-repo-demo/atomic-library";
 
 import { normalizeFooter } from "./normalization/footer";
 import { useBasket } from "../context/basket/use-basket";
 import {
   SLUG_KEY,
-  getSearchUrl,
+  // getSearchUrl,
   // getStorageState,
   // setStorageState,
 } from "../utils";
 
-import { PageProps, ProductPageProps, SearchPageProps } from "./page-types";
+import {
+  PageProps,
+  //  ProductPageProps, SearchPageProps
+} from "./page-types";
 import { TmFlexWrapper } from "./template-wrappers/tm-flex-wrapper/tm-flex-wrapper";
-import { TmProductDetailWrapper } from "./template-wrappers/tm-product-detail-wrapper/tm-product-detail-wrapper";
+// import { TmProductDetailWrapper } from "./template-wrappers/tm-product-detail-wrapper/tm-product-detail-wrapper";
 // import { TmBasketWrapper } from "./template-wrappers/tm-basket-wrapper/tm-basket-wrapper";
 // import { TmStepperWrapper } from "./template-wrappers/tm-stepper-wrapper/tm-stepper-wrapper";
 // import { TmLoginWrapper } from "./template-wrappers/tm-login-wrapper/tm-login-wrapper";
@@ -37,20 +40,20 @@ import { TmProductDetailWrapper } from "./template-wrappers/tm-product-detail-wr
 // import { TmLegalSupportWrapper } from "./template-wrappers/tm-legal-support-wrapper/tm-legal-support-wrapper";
 // import { PLACEHOLDER_IMAGE_PATH } from "../utils/normalization/files/constants";
 // import { TmBlogArticleWrapper } from "./template-wrappers/tm-blog-article-wrapper/tm-blog-article-wrapper";
-import { resolveAccessToken } from "../../utils/services/customer";
+// import { resolveAccessToken } from "../../utils/services/customer";
 
 import { useNavigationContext } from "../context";
 import { normalizeHead } from "./normalization/head";
 import { normalizeHeader } from "./normalization/header";
 import { useGlobalContext } from "../context/global";
-import {
-  // TmCatalogWrapper,
-  cardRenderer,
-  useSearchBoxResults,
-  SearchState,
-  SearchContextStatus,
-  SearchQueryDto,
-} from "./search-service";
+import // TmCatalogWrapper,
+// cardRenderer,
+// useSearchBoxResults,
+// SearchState,
+// SearchContextStatus,
+// SearchQueryDto,
+"./search-service";
+import { SearchQueryDto } from "../../types";
 
 export const STICKBAR_KEY = "stick-bar";
 
@@ -177,7 +180,7 @@ export const useContentfulPageToProps = (
   pageProps: PageProps
 ): (PgPageProps & { head: HeadProps }) | null => {
   // const { state: searchState, search } = useSearchBox(resolveAccessTokenMock);
-  const results = useSearchBoxResults();
+  // const results = useSearchBoxResults();
   // const router = useNavigationContext().navigation;
   const { state, updateBasket, deleteItemFromBasket } = useBasket();
 
@@ -234,32 +237,18 @@ export const useContentfulPageToProps = (
     return slugs.some((slug) => path.startsWith(`/${SLUG_KEY[slug]}`));
   };
 
-  const searchState = {
-    status: SearchContextStatus.INITIAL,
-    isResolved: false,
-  };
   const search: (query: SearchQueryDto) => Promise<void> = async (query) => {};
 
   const props: PgPageProps & { head: HeadProps } = {
     // head: normalizeHead(pageProps, environment.baseUrl),
     head: normalizeHead(pageProps, "www.test.com"),
     header: {
-      ...normalizeHeader(
-        pageProps.fields?.header,
-        basketState,
-        {
-          ...searchState,
-          results,
-        },
-        {
-          search,
-          updateBasket,
-          deleteItemFromBasket,
-          searchOnSubmit,
-        },
-        // showResults
-        false
-      ),
+      ...normalizeHeader(pageProps.fields?.header, basketState, {
+        search,
+        updateBasket,
+        deleteItemFromBasket,
+        searchOnSubmit,
+      }),
       isStickBarHidden,
       onCloseStickbar,
       // variant: isPathStartingWithSlugs(router.currentRoute, [

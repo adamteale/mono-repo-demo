@@ -1,4 +1,4 @@
-export type MlProductCardProps = {
+import { View } from "react-native";export type MlProductCardProps = {
   availabilityLabel: string;
   imgUrl: string;
   priceLabel: string;

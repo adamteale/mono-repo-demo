@@ -1,4 +1,4 @@
-export interface AtSizeSelectorProps {
+import { View } from "react-native";export interface AtSizeSelectorProps {
   /** An optional string for applying custom CSS classes to the component, allowing for additional styling customization. */
   className?: string
 

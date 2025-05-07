@@ -103,7 +103,7 @@ export const Regular = ({
             {size && sizeLabel && (
               <View
                 className="flex flex-row gap-2 items-center leading-5 w-fit"
-                role="text"
+                accessibilityRole="text"
               >
                 <Text className="font-medium">{sizeLabel}:</Text>
                 <Text>{size}</Text>
@@ -113,13 +113,13 @@ export const Regular = ({
             {color && colorMappingClasses[color] && (
               <View
                 className="flex flex-row gap-2 items-center leading-5 w-fit"
-                role="text"
+                accessibilityRole="text"
               >
                 <Text className="font-medium">{colorLabel}:</Text>
                 <Text>{colorMappingNames[color]}</Text>
                 <View
                   className={`flex h-4 w-4 items-center rounded-full ${colorMappingClasses[color]}`}
-                  aria-hidden="true"
+                  // aria-hidden="true"
                 />
               </View>
             )}
@@ -142,7 +142,7 @@ export const Regular = ({
                 {originalPrice && (
                   <View
                     className="text-quaternary font-light line-through decoration-1"
-                    role="text"
+                    accessibilityRole="text"
                   >
                     <Text className="sr-only text-ellipsis">
                       Original price:&nbsp;
@@ -151,7 +151,7 @@ export const Regular = ({
                   </View>
                 )}
 
-                <View className="font-bold" role="text">
+                <View className="font-bold" accessibilityRole="text">
                   <Text className="sr-only text-ellipsis">
                     Current price:&nbsp;
                   </Text>

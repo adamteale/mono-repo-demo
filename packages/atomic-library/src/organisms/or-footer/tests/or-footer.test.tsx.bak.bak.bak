@@ -1,0 +1,57 @@
+import { View } from "react-native";import { describe, expect, it, vi } from 'vitest'
+import { OrFooter } from '../or-footer'
+import { fireEvent, render } from '@testing-library/react'
+import { footerBaseMock, footerMockWithMenuItemsProps, footerMockWithNewsletterProps } from './mocks/or-footer.mocks'
+import { OrFooterProps } from '../or-footer.types'
+
+describe('organisms/or-footer', () => {
+  describe('when the component is created with base props', () => {
+    it('should render correctly', () => {
+      const { getByText, getByRole, getByAltText } = render(<OrFooter {...footerBaseMock} />)
+      expect(getByRole('contentinfo')).toBeInTheDocument()
+      expect(getByText(footerBaseMock.description)).toBeInTheDocument()
+      expect(getByText(footerBaseMock.copyright)).toBeInTheDocument()
+      expect(getByAltText('footer-brand')).toBeInTheDocument()
+    })
+  })
+
+  describe('when the component is created with newsletter', () => {
+    it('should render correctly', () => {
+      const { getByText, getByRole, getByTestId } = render(<OrFooter {...footerMockWithNewsletterProps} />)
+      expect(getByRole('contentinfo')).toBeInTheDocument()
+      expect(getByTestId('footer-newsletter')).toBeInTheDocument()
+      expect(getByText(footerMockWithNewsletterProps.newsLetter?.title || '')).toBeInTheDocument()
+      expect(getByText(footerMockWithNewsletterProps.newsLetter?.description || '')).toBeInTheDocument()
+    })
+
+    it('should handle form submit button click', () => {
+      const submitHandlerMock = vi.fn()
+      const newsletterData: OrFooterProps = {
+        ...footerMockWithNewsletterProps,
+        newsLetter: { ...footerMockWithNewsletterProps.newsLetter, submitHandler: submitHandlerMock },
+      }
+      const { getByTestId } = render(<OrFooter {...newsletterData} />)
+      expect(getByTestId('footer-newsletter')).toBeInTheDocument()
+      const button = getByTestId('newsletter-button')
+      expect(button).toBeInTheDocument()
+      fireEvent.submit(button)
+      expect(submitHandlerMock).toHaveBeenCalled()
+    })
+  })
+
+  describe('when the component is created with menu items', () => {
+    it('should render correctly', () => {
+      const { getByRole, getAllByTestId, getAllByText } = render(<OrFooter {...footerMockWithMenuItemsProps} />)
+      expect(getByRole('contentinfo')).toBeInTheDocument()
+      const dropdownMenuItems = getAllByTestId('menu-item')
+      expect(dropdownMenuItems.length).toBe(footerMockWithMenuItemsProps.menuItems?.length)
+
+      footerMockWithMenuItemsProps.menuItems?.forEach((menuItemsContainer) => {
+        expect(getAllByText(menuItemsContainer.label).length).toBe(1)
+        menuItemsContainer.items.forEach((item) => {
+          expect(getAllByText(item.label).length).toBe(1)
+        })
+      })
+    })
+  })
+})

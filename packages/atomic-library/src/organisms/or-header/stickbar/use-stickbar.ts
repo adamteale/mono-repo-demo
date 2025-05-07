@@ -1,3 +1,4 @@
+import { View } from "react-native";
 import { useEffect, useRef, useState } from "react";
 
 export const useStickBar = (
@@ -5,7 +6,7 @@ export const useStickBar = (
   isStickBarHidden: boolean | undefined
 ) => {
   const [isHidden, setIsHidden] = useState(isStickBarHidden ?? true);
-  const stickBarContainerRef = useRef<View>(null);
+  const stickBarContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsHidden(!!isStickBarHidden);

@@ -1,3 +1,4 @@
+import { View } from "react-native";
 import { useCallback, useState } from "react";
 import { MlDropdown, MlDropdownDividerPosition } from "../ml-dropdown";
 import { MlCollapseProps } from "./ml-collapse.types";

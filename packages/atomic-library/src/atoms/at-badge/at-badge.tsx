@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { View } from "react-native";
 import { AtBadgeProps } from "./at-badge.types";
 
 export const AtBadge = ({

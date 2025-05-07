@@ -1,0 +1,42 @@
+import { View } from "react-native";import { cva } from 'class-variance-authority'
+import { RichTextVariant } from './or-rich-text.types'
+
+export const variantClasses = cva('w-full flex flex-col', {
+  variants: {
+    variant: {
+      [RichTextVariant.DEFAULT]: '',
+      [RichTextVariant.ERROR_PAGE]:
+        'justify-center items-center py-12 px-6 sm:px-8 lg:px-16 lg:py-16 xl:py-20 xl:px-32',
+      [RichTextVariant.HEADER_STICKY_BAR]: '',
+      [RichTextVariant.ML_VERTICAL]: '',
+      [RichTextVariant.ML_DROPDOWN]: '',
+      [RichTextVariant.TM_CHECKOUT_COMPLETED]: '!gap-1 lg:gap-1',
+      [RichTextVariant.CONTACT_US]: '',
+    },
+  },
+  defaultVariants: {
+    variant: RichTextVariant.DEFAULT,
+  },
+})
+
+export const alignmentClasses = cva(`flex flex-col gap-8 xl:gap-10`, {
+  variants: {
+    alignment: {
+      start: 'text-left',
+      center: 'text-center',
+      end: 'text-right',
+    },
+  },
+  defaultVariants: {
+    alignment: 'start',
+  },
+})
+
+/**
+ * This is just in case we have diffferent variants of the richt text
+ * where the title is rendered with different styles
+ */
+export const titleClasses = cva('text-primary text-xl xl:text-2xl font-medium leading-7 xl:leading-10 pb-10', {
+  variants: {},
+  defaultVariants: {},
+})

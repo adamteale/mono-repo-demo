@@ -1,2 +1,3 @@
-export * from './or-listing'
-export * from './or-listing.types'
+import { View } from "react-native";
+export * from "./or-listing";
+export * from "./or-listing.types";

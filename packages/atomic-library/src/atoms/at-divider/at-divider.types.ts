@@ -1,4 +1,4 @@
-export interface AtDividerProps {
+import { View } from "react-native";export interface AtDividerProps {
   /** The CSS class name for the divider component */
   className?: string
 

@@ -1,4 +1,4 @@
-export interface AtStepperItemProps {
+import { View } from "react-native";export interface AtStepperItemProps {
   /** A `boolean` that indicates whether the step is currently active. When `true`, the step is highlighted to show that it is the current step in the process. */
   isActive: boolean
 

@@ -1,4 +1,6 @@
 import { useRef, useState, SyntheticEvent, useEffect } from "react";
+import { Pressable, View } from "react-native";
+
 import { AtDivider, AtIcon } from "../../atoms";
 import {
   MlDropdownDividerPosition,
@@ -97,7 +99,7 @@ export const MlDropdown = ({
             aria-hidden="true"
           />
         </summary>
-        <View
+        <Pressable
           id="ml-dropdown-content"
           data-testid="ml-dropdown-content"
           aria-labelledby="ml-dropdown-summary"
@@ -105,7 +107,7 @@ export const MlDropdown = ({
             openDefinitive: definitiveIsOpen,
             desktopFilter: sortByDesktopFilter,
           })} ${childrenContainerClassName}`}
-          onClick={(e) => {
+          onPress={(e) => {
             e.stopPropagation();
 
             if (!closeOnActionTaken) return;
@@ -116,7 +118,7 @@ export const MlDropdown = ({
           }}
         >
           {children}
-        </View>
+        </Pressable>
       </details>
       {divider && dividerPosition === MlDropdownDividerPosition.BOTTOM && (
         <AtDivider className={dividerClassName} />

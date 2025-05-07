@@ -1,40 +1,42 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from "react";
 
 export const useMobileSearchbox = () => {
-  const [showMobileSearchbox, setShowMobileSearchbox] = useState(false)
-  const searchRef = useRef<HTMLDivElement>(null)
+  const [showMobileSearchbox, setShowMobileSearchbox] = useState(false);
+  const searchRef = useRef<HTMLDivElement>(null);
 
-  const toggleMobileSearchbox = (_event?: React.MouseEvent<HTMLButtonElement>) => {
-    setShowMobileSearchbox(!showMobileSearchbox)
-  }
+  const toggleMobileSearchbox = (
+    _event?: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    setShowMobileSearchbox(!showMobileSearchbox);
+  };
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout
+    let timeoutId: NodeJS.Timeout;
 
     if (showMobileSearchbox) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = "hidden";
       if (searchRef.current) {
-        searchRef.current.style.display = 'block'
+        searchRef.current.style.display = "block";
         timeoutId = setTimeout(() => {
-          searchRef.current!.style.transform = 'translateX(0)'
-        }, 0)
+          searchRef.current!.style.transform = "translateX(0)";
+        }, 0);
       }
     } else {
-      document.body.style.overflow = 'auto'
+      document.body.style.overflow = "auto";
       if (searchRef.current) {
-        searchRef.current.style.transform = 'translateX(110vw)'
+        searchRef.current.style.transform = "translateX(110vw)";
         timeoutId = setTimeout(() => {
-          searchRef.current!.style.display = 'none'
-        }, 500)
+          searchRef.current!.style.display = "none";
+        }, 500);
       }
     }
 
     return () => {
       if (timeoutId) {
-        clearTimeout(timeoutId)
+        clearTimeout(timeoutId);
       }
-    }
-  }, [showMobileSearchbox])
+    };
+  }, [showMobileSearchbox]);
 
-  return { showMobileSearchbox, searchRef, toggleMobileSearchbox }
-}
+  return { showMobileSearchbox, searchRef, toggleMobileSearchbox };
+};

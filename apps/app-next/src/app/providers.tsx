@@ -9,6 +9,7 @@ import { useAuth } from "@Presentation/context/AuthContext";
 import TabBar from "../presentation/components/Layout/TabBar";
 import { NextNavigationProvider } from "../presentation/navigation/NextNavigationProvider";
 import { AuthProvider } from "../presentation/context/AppProvider";
+import { NextEnvironmentProvider } from "@app-next/EnvironmentProvider";
 
 // Component that handles auth logic AND renders layout
 function AuthAwareLayout({ children }: { children: React.ReactNode }) {
@@ -61,7 +62,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     <SafeAreaProvider>
       <AuthProvider>
         <NextNavigationProvider>
-          <AuthAwareLayout>{children}</AuthAwareLayout>
+          <NextEnvironmentProvider>
+            <AuthAwareLayout>{children}</AuthAwareLayout>
+          </NextEnvironmentProvider>
         </NextNavigationProvider>
       </AuthProvider>
     </SafeAreaProvider>

@@ -1,3 +1,4 @@
+import { Text, View } from "react-native";
 import { OrContentProps } from "./content.types";
 
 export const OrContent = ({ title, children, iconLinks }: OrContentProps) => {

@@ -1,4 +1,4 @@
-export interface MlInputQuantityProps {
+import { View } from "react-native";export interface MlInputQuantityProps {
   initialValue?: number | ''
   minValue?: number
   maxValue?: number

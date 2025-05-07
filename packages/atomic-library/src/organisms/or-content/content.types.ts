@@ -1,7 +1,7 @@
-import { ReactNode } from 'react'
+import { ReactNode } from "react";
 
 export interface OrContentProps {
-  iconLinks: ReactNode
-  title: string
-  children: ReactNode
+  iconLinks: ReactNode;
+  title: string;
+  children: ReactNode;
 }

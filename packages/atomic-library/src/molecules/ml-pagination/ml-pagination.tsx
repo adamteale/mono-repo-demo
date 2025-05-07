@@ -1,3 +1,4 @@
+import { View } from "react-native";
 import { useCallback, useEffect, useState } from "react";
 import { AtButton, AtButtonVariants, AtIcon, AtPagination } from "../../atoms";
 import { MlPaginationProps } from "./ml-pagination.types";

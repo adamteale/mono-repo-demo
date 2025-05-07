@@ -1,0 +1,70 @@
+import { View } from "react-native";import { render } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
+import { OrImageBlockProps } from "./or-image-block.types";
+import { OrImageBlock } from "./or-image-block";
+
+const bodyText = "Sample body text.";
+
+const defaultProps: OrImageBlockProps = {
+  body: <Text>{bodyText}</Text>,
+  images: [
+    { imageDesktop: { src: "image-1", alt: "image-1" } },
+    { imageDesktop: { src: "image-2", alt: "image-2" } },
+    { imageDesktop: { src: "image-3", alt: "image-3" } },
+  ],
+  title: "Sample Title",
+  isInverted: false,
+  isVertical: false,
+  pretitle: "Sample Pretitle",
+  subtitle: "Sample Subtitle",
+  supportText: "Sample supporting text.",
+};
+
+describe("organisms/or-image-block", () => {
+  it("renders without crashing", () => {
+    const { getByText } = render(<OrImageBlock {...defaultProps} />);
+    expect(getByText("Sample Title")).toBeInTheDocument();
+  });
+
+  it("renders the correct number of images", () => {
+    const { getAllByRole } = render(<OrImageBlock {...defaultProps} />);
+    const images = getAllByRole("img");
+    expect(images).toHaveLength(defaultProps.images.length);
+  });
+
+  it("displays the correct title, pretitle, subtitle, and support text", () => {
+    const { getByText } = render(<OrImageBlock {...defaultProps} />);
+    expect(getByText(defaultProps.pretitle as string)).toBeInTheDocument();
+    expect(getByText(defaultProps.title)).toBeInTheDocument();
+    expect(getByText(defaultProps.subtitle as string)).toBeInTheDocument();
+    expect(getByText(defaultProps.supportText as string)).toBeInTheDocument();
+  });
+
+  it("displays body text", () => {
+    const { getByText } = render(<OrImageBlock {...defaultProps} />);
+    expect(getByText(bodyText)).toBeInTheDocument();
+  });
+
+  it("renders single image layout correctly", () => {
+    const singleImageProps: OrImageBlockProps = {
+      ...defaultProps,
+      images: [{ imageDesktop: { src: "image-1", alt: "image-1" } }],
+    };
+    const { getAllByRole } = render(<OrImageBlock {...singleImageProps} />);
+    const images = getAllByRole("img");
+    expect(images).toHaveLength(1);
+  });
+
+  it("renders double image layout correctly", () => {
+    const doubleImageProps: OrImageBlockProps = {
+      ...defaultProps,
+      images: [
+        { imageDesktop: { src: "image-1", alt: "image-1" } },
+        { imageDesktop: { src: "image-2", alt: "image-2" } },
+      ],
+    };
+    const { getAllByRole } = render(<OrImageBlock {...doubleImageProps} />);
+    const images = getAllByRole("img");
+    expect(images).toHaveLength(2);
+  });
+});

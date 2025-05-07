@@ -1,7 +1,5 @@
-import {
-  EntriesDto,
-  IGetEntriesProps,
-} from "@app-core/src/domain/contentful/types";
+import { IGetEntriesProps } from "@Domain/contentful/types";
+
 import { contentfulClient } from "../ContentfulClient";
 import { EntryCollection, EntrySkeletonType } from "contentful";
 

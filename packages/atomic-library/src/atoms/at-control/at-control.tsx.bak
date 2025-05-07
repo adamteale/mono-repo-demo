@@ -1,0 +1,53 @@
+import React from "react";
+import { View, Text, Pressable, TouchableOpacity } from "react-native";
+import { AtIcon, IconType } from "../at-icon"; // Assuming AtIcon is compatible with React Native
+import {
+  AtControlProps,
+  ControlIconProps,
+  AtControlIcon,
+  AtControlSize,
+} from "./at-control.types";
+import { controlArrow } from "./at-control.variants"; // Assuming this returns Tailwind classes
+
+interface IconProps {
+  icon: AtControlIcon;
+}
+
+const Icon = ({ icon }: IconProps) => {
+  const iconType = /^less|plus$/i.test(icon) ? icon : `angle-${icon}`;
+
+  return <AtIcon type={iconType as IconType} color="text-primary" />; // Adapt AtIcon as necessary
+};
+
+export const ControlIcon = ({
+  className = "",
+  icon = "left",
+  size = "medium",
+}: // style, // Removed as style is not directly used
+Omit<ControlIconProps, "style">) => {
+  return (
+    <View className={`${controlArrow({ size })} ${className}`}>
+      <Icon icon={icon} />
+    </View>
+  );
+};
+
+export const AtControl = ({
+  className = "",
+  size = "medium",
+  icon = "left",
+  dataTestId,
+  label,
+  onClick,
+}: AtControlProps) => {
+  return (
+    <TouchableOpacity
+      className={`${controlArrow({ size })} ${className}`}
+      onPress={onClick}
+      accessibilityLabel={label}
+      testID={dataTestId}
+    >
+      <Icon icon={icon} />
+    </TouchableOpacity>
+  );
+};

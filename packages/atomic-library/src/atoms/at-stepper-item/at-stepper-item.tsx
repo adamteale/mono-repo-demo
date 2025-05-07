@@ -1,3 +1,4 @@
+import { View, Text } from "react-native";
 import { AtStepperItemProps } from "./at-stepper-item.types";
 import {
   ringClasses,
@@ -14,7 +15,7 @@ export const AtStepperItem = ({
   return (
     <View
       className="flex items-center flex-col gap-y-4"
-      role="stepper"
+      accessibilityLabel="stepper"
       aria-current={isActive ? "step" : "false"}
     >
       <View className="flex flex-col items-center gap-y-2">

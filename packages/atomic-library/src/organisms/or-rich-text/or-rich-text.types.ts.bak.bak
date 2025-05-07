@@ -1,0 +1,70 @@
+import { View } from "react-native";import { AtLinkProps } from '../../atoms'
+
+export interface OrRichTextProps {
+  title?: string
+  titleClassName?: string
+  textAlignment?: 'center' | 'start' | 'end'
+  content: RichTextBody
+  className?: string
+  variant?: RichTextVariant
+  button?: AtLinkProps
+}
+
+export enum RichTextVariant {
+  DEFAULT = 'default',
+  ERROR_PAGE = 'error-page',
+  HEADER_STICKY_BAR = 'header-sticky-bar',
+  ML_VERTICAL = 'ml-vertical',
+  ML_DROPDOWN = 'ml-dropdown',
+  TM_CHECKOUT_COMPLETED = 'tm-checkout-completed',
+  CONTACT_US = 'contact-us',
+}
+
+export interface RichTextBody {
+  type?: string
+  data?: RichTextMetadata
+  content: Array<RichTextNode>
+}
+
+export interface RichTextNode {
+  type:
+    | 'h1'
+    | 'h2'
+    | 'h3'
+    | 'h4'
+    | 'h5'
+    | 'h6'
+    | 'paragraph'
+    | 'ordered-list'
+    | 'unordered-list'
+    | 'list-item'
+    | 'blockquote'
+    | 'image'
+    | 'link'
+    | 'table'
+    | 'table-row'
+    | 'table-cell'
+    | 'social'
+  marks?: Array<NodeMarks>
+  data?: RichTextMetadata
+  text?: string
+  content?: Array<RichTextNode> | Array<RichTextValueNode>
+}
+
+export interface RichTextValueNode {
+  type: 'text' | 'hr'
+  marks?: Array<NodeMarks>
+  data?: RichTextMetadata
+  text: string
+}
+
+export const validNodeMarks = ['bold', 'italic', 'underline', 'strikethrough', 'code'] as const
+export type NodeMarks = (typeof validNodeMarks)[number]
+
+export type RichTextMetadata = {
+  /**
+   * This could be something like in the case of a link
+   * { url: 'https://example.com', target: '_blank' }
+   */
+  [key: string]: string | boolean | number | null
+}

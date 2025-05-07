@@ -109,8 +109,8 @@ export const OrCarousel = ({
       <View
         data-testid={`${dataTestId}-items`}
         className={`relative pt-7 lg:pt-9 xl:pt-11 ${className}`}
-        onMouseEnter={() => setShowArrows(true)}
-        onMouseLeave={() => setShowArrows(false)}
+        // onMouseEnter={() => setShowArrows(true)}
+        // onMouseLeave={() => setShowArrows(false)}
         onLayout={(event) => {
           setContainerWidth(event.nativeEvent.layout.width);
         }}

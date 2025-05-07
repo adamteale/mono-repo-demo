@@ -1,4 +1,6 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react";
+import { View, Text } from "react-native";
+
 import {
   AtButtonVariants,
   AtDivider,

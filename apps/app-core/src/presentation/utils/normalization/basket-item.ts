@@ -4,6 +4,8 @@ import { getAttributeProperties } from "../product/get-attribute-properties/get-
 import { getProductUrl } from "../services";
 import Link from "next/link";
 import { normalizeBackendImage } from "./files/image";
+import { BasketItem } from "../../../types";
+import { PRODUCT_VARIATIONS_KEY } from "../../components/types";
 
 // !TODO: Add iconLink, onLinkSubmit and stockAmount properties
 export const normalizeBasketItem = ({

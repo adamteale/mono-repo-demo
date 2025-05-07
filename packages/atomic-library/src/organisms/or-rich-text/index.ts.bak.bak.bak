@@ -1,0 +1,2 @@
+import { View } from "react-native";export * from './or-rich-text'
+export * from './or-rich-text.types'

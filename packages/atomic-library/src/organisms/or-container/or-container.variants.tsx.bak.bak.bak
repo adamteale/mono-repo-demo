@@ -1,0 +1,107 @@
+import { View } from "react-native";import { cva } from 'class-variance-authority'
+import {
+  OrContainerColumn,
+  OrContainerBackgroundColor,
+  OrContainerParagraphLayout,
+  OrContainerTitleAlignment,
+} from './or-container.types'
+
+const sectionBaseClass = ''
+export const sectionClasses = cva(sectionBaseClass, {
+  variants: {
+    backgroundColor: {
+      [OrContainerBackgroundColor.PRIMARY]: 'bg-surface-primary',
+      [OrContainerBackgroundColor.SECONDARY]: 'bg-neutral-50',
+    },
+  },
+  defaultVariants: { backgroundColor: OrContainerBackgroundColor.PRIMARY },
+})
+
+const dividerBaseClass = 'container flex flex-col py-20'
+export const dividerClasses = cva(dividerBaseClass, {
+  variants: {
+    hasTitle: {
+      true: 'gap-y-8 ',
+      false: '',
+    },
+    titleAlignment: {
+      [OrContainerTitleAlignment.CENTER]: '',
+      [OrContainerTitleAlignment.START]: '',
+    },
+  },
+  compoundVariants: [
+    {
+      hasTitle: true,
+      titleAlignment: OrContainerTitleAlignment.CENTER,
+      class: 'md:gap-y-16 xl:gap-y-20',
+    },
+    {
+      hasTitle: true,
+      titleAlignment: OrContainerTitleAlignment.START,
+      class: 'md:gap-y-10 xl:gap-y-12',
+    },
+  ],
+  defaultVariants: { hasTitle: false, titleAlignment: OrContainerTitleAlignment.START },
+})
+
+const titleBaseClass = 'w-full text-primary text-xl font-bold'
+export const titleClasses = cva(titleBaseClass, {
+  variants: {
+    titleAlignment: {
+      [OrContainerTitleAlignment.CENTER]: 'md:text-2xl text-center',
+      [OrContainerTitleAlignment.START]: 'md:text-2xl text-start mb-6',
+    },
+  },
+  // No defaultVariants for "titleAlignment" to allow default behavior (Empty class).
+})
+
+const childrenContainerBaseClass = 'grid gap-y-8  py-0 sm:gap-x-6 md:gap-y-10 xl:gap-y-12'
+export const childrenContainerClasses = cva(childrenContainerBaseClass, {
+  variants: {
+    hasParagraphs: {
+      true: 'text-lg text-primary tracking-0.1 md:gap-x-10 xl:gap-x-12 xl:text-lgx xl:leading-10',
+      false: 'md:gap-x-8 xl:gap-x-12',
+    },
+    paragraphLayout: {
+      [OrContainerParagraphLayout.VERTICAL]: '',
+      [OrContainerParagraphLayout.HORIZONTAL]: '',
+    },
+    titleAlignment: {
+      [OrContainerTitleAlignment.CENTER]: '',
+      [OrContainerTitleAlignment.START]: 'lg:gap-y-10',
+    },
+    columnsMobile: {
+      [OrContainerColumn.ONE]: 'grid-cols-1',
+      [OrContainerColumn.TWO]: 'grid-cols-2',
+    },
+    columnsSmallMobile: {
+      [OrContainerColumn.ONE]: 'sm:grid-cols-1',
+      [OrContainerColumn.TWO]: 'sm:grid-cols-2',
+    },
+    columnsTablet: {
+      [OrContainerColumn.ONE]: 'md:grid-cols-1',
+      [OrContainerColumn.TWO]: 'md:grid-cols-2',
+      [OrContainerColumn.THREE]: 'md:grid-cols-3',
+    },
+    columnsDesktop: {
+      [OrContainerColumn.TWO]: 'xl:grid-cols-2',
+      [OrContainerColumn.THREE]: 'xl:grid-cols-3',
+      [OrContainerColumn.FOUR]: 'xl:grid-cols-4',
+    },
+  },
+  compoundVariants: [
+    {
+      hasParagraphs: true,
+      paragraphLayout: [OrContainerParagraphLayout.VERTICAL],
+      class: '!grid-cols-1',
+    },
+  ],
+  defaultVariants: {
+    hasParagraphs: false,
+    paragraphLayout: OrContainerParagraphLayout.VERTICAL,
+    columnsMobile: OrContainerColumn.ONE,
+    columnsSmallMobile: OrContainerColumn.TWO,
+    columnsTablet: OrContainerColumn.THREE,
+    columnsDesktop: OrContainerColumn.FOUR,
+  },
+})

@@ -1,3 +1,6 @@
+import React from "react";
+import { View, Text } from "react-native";
+
 import { AtDivider } from "@mono-repo-demo/atomic-library";
 import { MlCardCheckout } from "../../molecules";
 import { TmCheckoutCompletedProps } from "./tm-checkout-completed.types";

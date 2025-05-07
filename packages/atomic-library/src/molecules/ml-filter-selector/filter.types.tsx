@@ -1,8 +1,8 @@
-import { ListOption } from './list-filter/list-filter.types'
+import { ListOption } from "./list-filter/list-filter.types";
 
 // Base Interfaces and Types
 export interface IndexFilterHandler {
-  onClick: (index: number) => void
+  onClick: (index: number) => void;
 }
 
 export interface BaseFilter {
@@ -10,17 +10,17 @@ export interface BaseFilter {
    * Specifies the filter type, such as 'list', 'list-range', 'color', 'size', 'selector',
    * or any other filter type that may be implemented in the future.
    */
-  type: string
+  type: string;
 
   /**
    * Represents the options available for the filter.
    * The 'any' type allows flexibility to accommodate various filter structures
    * that may differ depending on the type of filter being used.
    */
-  options?: any
+  options?: any;
 }
 
-export type Filter<T extends BaseFilter> = T
+export type Filter<T extends BaseFilter> = T;
 
 /**
  * E-commerce filter definitions are kept here to avoid duplicating the component for e-commerce use cases.
@@ -31,16 +31,16 @@ export type Filter<T extends BaseFilter> = T
  * To avoid this duplication and keep a unified FilterProps for both selectors, the e-commerce-specific definitions remain here.
  */
 export enum RangeVariant {
-  PRESET = 'preset',
-  CUSTOM = 'custom',
+  PRESET = "preset",
+  CUSTOM = "custom",
 }
 
 export type RangeOption = {
-  min: number
-  max: number
-  quantity: number
-  selected: boolean
-  rangeOrigin: RangeVariant
-}
+  min: number;
+  max: number;
+  quantity: number;
+  selected: boolean;
+  rangeOrigin: RangeVariant;
+};
 
-export type FilterOption = number | ListOption | RangeOption
+export type FilterOption = number | ListOption | RangeOption;

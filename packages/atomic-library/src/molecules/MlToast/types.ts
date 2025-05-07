@@ -1,3 +1,3 @@
-export type MlToastProps = {
+import { View } from "react-native";export type MlToastProps = {
   title: string;
 };

@@ -1,16 +1,22 @@
-import { Pressable, Text } from "react-native";
-
-import { AtIcon, IconType } from "../at-icon";
+import React from "react";
+import { View, TouchableOpacity } from "react-native";
+import { AtIcon, IconType } from "../at-icon"; // Assuming AtIcon is compatible with React Native
 import {
   AtControlProps,
   ControlIconProps,
   AtControlIcon,
+  AtControlSize,
 } from "./at-control.types";
-import { controlArrow } from "./at-control.variants";
+import { controlArrow } from "./at-control.variants"; // Assuming this returns Tailwind classes
 
-const Icon = ({ icon }: { icon: AtControlIcon }) => {
+interface IconProps {
+  icon: AtControlIcon;
+}
+
+const Icon = ({ icon }: IconProps) => {
   const iconType = /^less|plus$/i.test(icon) ? icon : `angle-${icon}`;
-  return <AtIcon type={iconType as IconType} color="text-primary" />;
+
+  return <AtIcon type={iconType as IconType} color="text-primary" />; // Adapt AtIcon as necessary
 };
 
 export const ControlIcon = ({
@@ -20,9 +26,9 @@ export const ControlIcon = ({
   style,
 }: ControlIconProps) => {
   return (
-    <Text style={style} className={`${controlArrow({ size })} ${className}`}>
+    <View className={`${controlArrow({ size })} ${className}`}>
       <Icon icon={icon} />
-    </Text>
+    </View>
   );
 };
 
@@ -35,14 +41,13 @@ export const AtControl = ({
   onClick,
 }: AtControlProps) => {
   return (
-    <Pressable
+    <TouchableOpacity
       className={`${controlArrow({ size })} ${className}`}
-      accessibilityRole="button"
       onPress={onClick}
-      aria-label={label}
-      data-testid={dataTestId}
+      accessibilityLabel={label}
+      testID={dataTestId}
     >
       <Icon icon={icon} />
-    </Pressable>
+    </TouchableOpacity>
   );
 };

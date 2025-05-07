@@ -1,4 +1,4 @@
-import { SearchResult } from '../ml-search.types'
+import { SearchResult } from "../ml-search.types";
 
 export const handleSearchKeyDown = (
   event: React.KeyboardEvent,
@@ -8,70 +8,72 @@ export const handleSearchKeyDown = (
   setActiveIndex: React.Dispatch<React.SetStateAction<number>>,
   results: (string | SearchResult)[],
   handleResultSelect: (result: string | SearchResult, index: number) => void,
-  clearInput: () => void,
+  clearInput: () => void
 ) => {
-  const { key } = event
-  const maxIndex = results.length - 1
+  const { key } = event;
+  const maxIndex = results.length - 1;
 
   switch (key) {
-    case 'ArrowDown':
-      event.preventDefault()
+    case "ArrowDown":
+      event.preventDefault();
       if (!showResults) {
-        setShowResults(true)
-        setActiveIndex(0)
+        setShowResults(true);
+        setActiveIndex(0);
       } else {
-        setActiveIndex((prevIndex) => (prevIndex + 1) % results.length)
+        setActiveIndex((prevIndex) => (prevIndex + 1) % results.length);
       }
-      break
+      break;
 
-    case 'ArrowUp':
-      event.preventDefault()
+    case "ArrowUp":
+      event.preventDefault();
       if (!showResults) {
-        setShowResults(true)
-        setActiveIndex(maxIndex)
+        setShowResults(true);
+        setActiveIndex(maxIndex);
       } else {
-        setActiveIndex((prevIndex) => (prevIndex === 0 ? maxIndex : prevIndex - 1))
+        setActiveIndex((prevIndex) =>
+          prevIndex === 0 ? maxIndex : prevIndex - 1
+        );
       }
-      break
+      break;
 
-    case 'ArrowRight':
-    case 'ArrowLeft':
+    case "ArrowRight":
+    case "ArrowLeft":
       if (showResults && activeIndex >= 0) {
-        setActiveIndex(-1)
+        setActiveIndex(-1);
       }
-      break
+      break;
 
-    case 'Enter':
-      event.preventDefault()
+    case "Enter":
+      event.preventDefault();
       if (showResults && activeIndex >= 0) {
-        handleResultSelect(results[activeIndex], activeIndex)
+        handleResultSelect(results[activeIndex], activeIndex);
       }
-      setShowResults(false)
-      break
+      setShowResults(false);
+      break;
 
-    case 'Escape':
+    case "Escape":
       if (showResults) {
-        setShowResults(false)
+        setShowResults(false);
       } else {
-        clearInput()
+        clearInput();
       }
-      break
+      break;
 
-    case 'Home':
+    case "Home":
       if (showResults) {
-        event.preventDefault()
-        setActiveIndex(0)
+        event.preventDefault();
+        setActiveIndex(0);
       }
-      break
+      break;
 
-    case 'End':
+    case "End":
       if (showResults) {
-        event.preventDefault()
-        setActiveIndex(maxIndex)
+        event.preventDefault();
+        setActiveIndex(maxIndex);
       }
-      break
+      break;
 
     default:
-      break
+      break;
   }
-}
+};

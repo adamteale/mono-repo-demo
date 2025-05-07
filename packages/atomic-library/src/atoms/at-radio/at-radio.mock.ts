@@ -1,17 +1,17 @@
-import { AtRadioProps } from './at-radio.types'
+import { AtRadioProps } from "./at-radio.types";
 
 export const defaultProps: AtRadioProps = {
   onChange: () => {},
-  className: '',
+  className: "",
   checked: true,
   disabled: false,
-  dataTestId: 'at-radio',
-}
+  dataTestId: "at-radio",
+};
 
 export const mockTitle = {
-  title: 'Test Radio Title',
-}
+  title: "Test Radio Title",
+};
 
 export const mockDescription = {
-  description: 'Test Radio Description',
-}
+  description: "Test Radio Description",
+};

@@ -1,3 +1,6 @@
+import React from "react";
+import { View, Text } from "react-native";
+
 import { AtButton, AtButtonVariants } from "@mono-repo-demo/atomic-library";
 import { OrPaymentOptionsProps } from "./or-payment-options.types";
 import { PaymentOptionCard } from "./payment-option-card/payment-option-card";
@@ -27,12 +30,12 @@ export const OrPaymentOptions = ({
           />
           <AtButton
             {...paymentOption.buttonProps}
-            buttonType="submit"
+            // buttonType="submit"
             className={`
             ${paymentOption.buttonProps.className} 
             ${buttonClasses({ checked: !!paymentOption.radioProps.checked })}
             `}
-            form={paymentOption.radioProps.title}
+            // form={paymentOption.radioProps.title}
             variant={AtButtonVariants.PRIMARY}
           />
         </View>

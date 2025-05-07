@@ -1,3 +1,6 @@
+import React from "react";
+import { View, Text } from "react-native";
+
 import {
   AtButton,
   AtButtonVariants,
@@ -73,7 +76,7 @@ export const OrOrderDetail = ({
           dataTestId="placeOrder"
           {...formButton}
           variant={AtButtonVariants.PRIMARY}
-          buttonType="submit"
+          // buttonType="submit"
         />
       </form>
     </View>

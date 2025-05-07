@@ -1,4 +1,4 @@
-export const colorMappingClasses = {
+import { View } from "react-native";export const colorMappingClasses = {
   beige: 'bg-color-picker-beige',
   black: 'bg-secondary-black',
   blue: 'bg-secondary-blue',

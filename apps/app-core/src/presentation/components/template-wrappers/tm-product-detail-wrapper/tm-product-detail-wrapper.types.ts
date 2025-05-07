@@ -1,5 +1,5 @@
 import { AtLinkProps } from "@mono-repo-demo/atomic-library";
-import { Product, ProductSearchResult } from "../../../types";
+import { Product, ProductSearchResult } from "../../types";
 
 export interface TmProductDetailWrapperProps {
   product: Product;

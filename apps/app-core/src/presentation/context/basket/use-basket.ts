@@ -1,17 +1,17 @@
-import {
-  addToBasket,
-  createOrder,
-  getShippingMethods,
-  removeItemFromBasket,
-  setShippingMethod,
-  updateBasketItem,
-  updateCustomerData,
-} from "../../../utils/services/basket";
-import { BasketState } from "../../context/basket/types";
+// import {
+//   addToBasket,
+//   createOrder,
+//   getShippingMethods,
+//   removeItemFromBasket,
+//   setShippingMethod,
+//   updateBasketItem,
+//   updateCustomerData,
+// } from "../../../utils/services/basket";
+// import { BasketState } from "../../context/basket/types";
 
-import { useCallback, useContext, useState, useEffect } from "react";
-import { BasketActionTypes } from "./types";
-import { BasketContext } from ".";
+// import { useCallback, useContext, useState, useEffect } from "react";
+// import { BasketActionTypes } from "./types";
+// import { BasketContext } from ".";
 import {
   CreateOrderDto,
   CustomerDataDto,

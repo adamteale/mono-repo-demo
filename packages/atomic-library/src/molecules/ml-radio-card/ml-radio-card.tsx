@@ -1,3 +1,4 @@
+import { Text } from "react-native";
 import { AtRadio } from "../../atoms";
 import { MlRadioCardProps } from "./ml-radio-card.types";
 import { containerClasses, labelClasses } from "./ml-radio-card.variants";

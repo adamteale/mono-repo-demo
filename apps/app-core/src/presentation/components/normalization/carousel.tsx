@@ -8,7 +8,7 @@ import {
 import { useState, useEffect } from "react";
 // import { resolveAccessToken } from "../../utils/services/customer";
 // import { getProducts } from "../../services/catalog";
-import { MlProductCardRenderer } from "../component-renderers/renderers/ml-product-card.renderer";
+// import { MlProductCardRenderer } from "../component-renderers/renderers/ml-product-card.renderer";
 import { MlProductCardSkeleton } from "@components-library/ecommerce";
 // import { CMSCarousel } from "@mono-repo-demo/atomic-library";
 
@@ -29,7 +29,8 @@ export const useNormalizeCarousel = (
           iconProps: {
             type: "arrow-right",
           },
-          linkWrapper: Link,
+          // linkWrapper: Link,
+          linkWrapper: undefined,
         },
       }),
 
@@ -49,18 +50,18 @@ export const useNormalizeCarousel = (
         setProps((prev) => ({ ...prev, children: undefined }));
       } else {
         try {
-          const accessToken = await resolveAccessToken();
-          const results = await getProducts(accessToken, {
-            identifiers: ids.join(","),
-          });
-          if (results?.products?.length) {
-            setProps((prev) => ({
-              ...prev,
-              children: results.products.map((result) => (
-                <MlProductCardRenderer product={result} key={result.id} />
-              )),
-            }));
-          } else setProps((prev) => ({ ...prev, children: undefined }));
+          // const accessToken = await resolveAccessToken();
+          // const results = await getProducts(accessToken, {
+          //   identifiers: ids.join(","),
+          // });
+          // if (results?.products?.length) {
+          //   setProps((prev) => ({
+          //     ...prev,
+          //     children: results.products.map((result) => (
+          //       <MlProductCardRenderer product={result} key={result.id} />
+          //     )),
+          //   }));
+          // } else setProps((prev) => ({ ...prev, children: undefined }));
         } catch (error) {
           setProps((prev) => ({ ...prev, children: undefined }));
         }

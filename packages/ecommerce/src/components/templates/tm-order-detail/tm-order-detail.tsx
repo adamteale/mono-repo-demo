@@ -1,8 +1,14 @@
-import { OrOrderDetail } from '../../organisms'
-import { TmOrderDetailProps } from './tm-order-detail.types'
-import { TmCheckout } from '../tm-checkout'
+import React from "react";
 
-export const TmOrderDetail = ({ copyright, orderDetailProps, orderSummaryProps }: TmOrderDetailProps) => {
+import { OrOrderDetail } from "../../organisms";
+import { TmOrderDetailProps } from "./tm-order-detail.types";
+import { TmCheckout } from "../tm-checkout";
+
+export const TmOrderDetail = ({
+  copyright,
+  orderDetailProps,
+  orderSummaryProps,
+}: TmOrderDetailProps) => {
   return (
     <TmCheckout copyright={copyright} orderSummaryProps={orderSummaryProps}>
       <OrOrderDetail
@@ -11,5 +17,5 @@ export const TmOrderDetail = ({ copyright, orderDetailProps, orderSummaryProps }
         dataTestId="or-order-detail"
       />
     </TmCheckout>
-  )
-}
+  );
+};

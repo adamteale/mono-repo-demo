@@ -105,7 +105,7 @@ export const OrHeader = ({
           className={`absolute w-full top-0 right-0 transition duration-1000 ${
             !!isHidden ? "-translate-y-full" : "-translate-y-0"
           }`}
-          ref={stickBarContainerRef}
+          // ref={stickBarContainerRef}
           id="stickBarContainer"
           data-testid="stickBarContainer"
         >
@@ -120,7 +120,7 @@ export const OrHeader = ({
       {!!searchBox && !searchBox.isHidden && (
         <View
           className={searchboxContainerClasses({ showMobileSearchbox })}
-          ref={searchRef}
+          // ref={searchRef}
         >
           <View className="xl:container">
             <View className="w-full flex justify-end">
@@ -139,9 +139,9 @@ export const OrHeader = ({
 
       <View
         className={`relative transition-all duration-1000`}
-        style={{
-          marginTop: isHidden || !stickBarContent ? "0px" : getStickBarHeight(),
-        }}
+        // style={{
+        //   marginTop: isHidden || !stickBarContent ? "0px" : getStickBarHeight(),
+        // }}
       >
         {/* Top Links */}
         <View className="bg-neutral-200">

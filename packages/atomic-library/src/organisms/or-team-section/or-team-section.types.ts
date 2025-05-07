@@ -1,7 +1,7 @@
-import { MlVerticalTeamProps } from '../../molecules'
+import { MlVerticalTeamProps } from "../../molecules";
 
 export interface OrTeamSectionProps {
-  title: string
-  description: string
-  teamCards: MlVerticalTeamProps[]
+  title: string;
+  description: string;
+  teamCards: MlVerticalTeamProps[];
 }

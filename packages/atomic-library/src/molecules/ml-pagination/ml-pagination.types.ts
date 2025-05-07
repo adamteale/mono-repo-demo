@@ -1,4 +1,4 @@
-export interface MlPaginationProps {
+import { View } from "react-native";export interface MlPaginationProps {
   /** The number of pages to display at the beginning and end of the pagination. This helps users quickly navigate to the first or last few pages. */
   boundaryCount?: number
 

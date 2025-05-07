@@ -1,14 +1,18 @@
 import React from "react";
+import { View } from "react-native";
+
 import {
   AtButtonProps,
   AtButtonVariants,
   MlFormFieldType,
   OrFormControls,
+  OrFormState,
   emailValidator,
   minLenghtValidator,
 } from "@mono-repo-demo/atomic-library";
+
 import { TmLoginWrapperProps } from "./tm-login-wrapper.types";
-import { OrFormState } from "@components-library/common/src/components/organisms/or-form/use-or-form";
+
 import { TmLogin } from "@components-library/ecommerce";
 
 export const TmLoginWrapper = ({ template }: TmLoginWrapperProps) => {

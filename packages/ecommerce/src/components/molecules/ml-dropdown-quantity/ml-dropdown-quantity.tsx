@@ -36,7 +36,7 @@ export const MlDropdownQuantity = ({
   return (
     <View
       className={`min-w-35 text-lg font-medium text-primary relative ${className}`}
-      ref={dropdownRef}
+      // ref={dropdownRef}
       data-testid={dataTestId}
     >
       <button

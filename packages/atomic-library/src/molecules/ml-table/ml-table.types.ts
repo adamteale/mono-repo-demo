@@ -1,4 +1,4 @@
-export interface MlTableProps {
+import { View } from "react-native";export interface MlTableProps {
   className?: string
   columns: TableColumn[]
   data: TableRow[]

@@ -1,3 +1,4 @@
+import { Text, View } from "react-native";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import { AtTextInput } from "../../atoms";
 import { MlSearchProps, MlSearchSize, SearchResult } from "./ml-search.types";
@@ -24,7 +25,7 @@ export const MlSearch = ({
   const [selectedOption, setSelectedOption] = useState<string | SearchResult>();
   const [activeIndex, setActiveIndex] = useState(-1);
 
-  const searchRef = useRef<HTMLDivElement>(null);
+  const searchRef = useRef<View>(null);
   const listboxRef = useRef<HTMLUListElement>(null);
   useClickOutside(searchRef, () => setShowResults(false));
 
@@ -89,7 +90,7 @@ export const MlSearch = ({
         <label
           id={`search-${label}-label`}
           className="flex flex-row mb-3 text-sm text-primary line-clamp-1"
-          role="text"
+          // accessibilityRole="text"
           htmlFor={`search-${label}`}
         >
           <Text className="truncate">{label}</Text>

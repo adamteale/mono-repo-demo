@@ -1,6 +1,8 @@
+import { ReactNode, useEffect } from "react";
+import { View } from "react-native";
+
 import { AuthContext } from "@Presentation/context";
 import { useLocalStorageState } from "@Presentation/context/useLocalStorageState";
-import { ReactNode, useEffect } from "react";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isLoggedIn, setIsLoggedIn, isLoading] = useLocalStorageState();

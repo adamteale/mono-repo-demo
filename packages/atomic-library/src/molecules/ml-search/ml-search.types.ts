@@ -1,4 +1,4 @@
-export interface SearchResult {
+import { View } from "react-native";export interface SearchResult {
   value: string
   label: string
 }

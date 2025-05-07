@@ -1,6 +1,6 @@
 import { AtStickBarProps } from "./at-stick-bar.types";
 import { AtIcon } from "../at-icon";
-import { Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 
 export const AtStickBar = ({
   text,
@@ -19,13 +19,13 @@ export const AtStickBar = ({
         <View className="px-2 text-center text-secondary text-xs md:text-sm tracking-wide">
           <Text>{text}</Text>
         </View>
-        <View
+        <Pressable
           className="cursor-pointer"
-          onClick={onClose}
+          onPress={onClose}
           data-testid="close-icon"
         >
           <AtIcon type="cancel" color="secondary" size={18} />
-        </View>
+        </Pressable>
       </View>
     </View>
   );

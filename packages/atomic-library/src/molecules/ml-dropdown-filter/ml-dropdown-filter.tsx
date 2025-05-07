@@ -1,3 +1,4 @@
+import { Text } from "react-native";
 import { MlDropdown } from "../ml-dropdown/ml-dropdown";
 import { labelClasses } from "./ml-dropdown-filter.variants";
 import { MlDropdownFilterProps } from "./ml-dropdown-filter.types";

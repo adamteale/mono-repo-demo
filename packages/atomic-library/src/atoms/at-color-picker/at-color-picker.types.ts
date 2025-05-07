@@ -1,21 +1,21 @@
-import { Color } from './color-mapping'
+import { Color } from "./color-mapping";
 
 export interface AtColorPickerProps {
   /** The CSS class name for the color picker component. */
-  className?: string
+  className?: string;
 
   /** The color value for the color picker. */
-  color: Color
+  color: Color;
 
   /** Specifies whether the color picker is selected or not. */
-  isSelected?: boolean
+  isSelected?: boolean;
 
   /** Specifies whether the color picker is sold out or not. */
-  isSoldOut?: boolean
+  isSoldOut?: boolean;
 
   /** The callback function to be called when the color picker is clicked. */
-  onClick?: () => void
+  onClick?: () => void;
 
   /** The title text for the color picker. */
-  title: string
+  title: string;
 }

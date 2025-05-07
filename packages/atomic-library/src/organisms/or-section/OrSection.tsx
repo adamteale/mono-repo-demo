@@ -1,7 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-
-import { OrSectionProps } from "../OrSection";
+import { OrSectionProps } from "./types";
 
 export const OrSection = ({
   action,

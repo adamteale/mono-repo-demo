@@ -1,3 +1,4 @@
+import { View } from "react-native";
 import { useState } from "react";
 import { MlVideoPlayerProps } from "./ml-video-player.types";
 import {

@@ -1,4 +1,7 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react";
+
+import { View, Text } from "react-native";
+
 import { AtDivider } from "@mono-repo-demo/atomic-library";
 import { OrOrderSummaryProps } from "./or-order-summary.types";
 import { OrderInfo } from "./order-info";

@@ -1,6 +1,10 @@
-import { PRODUCT_VARIATIONS_KEY, ProductVariant } from "../../components/types";
-import { getAttributeProperties } from "../product/get-attribute-properties/get-attribute-properties";
-import { SLUG_KEY } from "../slug-keys";
+import {
+  Product,
+  // PRODUCT_VARIATIONS_KEY,
+  // ProductVariant,
+} from "../../components/types";
+// import { getAttributeProperties } from "../product/get-attribute-properties/get-attribute-properties";
+// import { SLUG_KEY } from "../slug-keys";
 
 export const ProductJsonLd = ({ product }: { product: Product }) => {
   return null;

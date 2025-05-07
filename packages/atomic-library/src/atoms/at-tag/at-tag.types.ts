@@ -1,4 +1,4 @@
-export interface AtTagProps {
+import { View } from "react-native";export interface AtTagProps {
   /** Additional CSS classes to apply custom styling to the tag. */
   className?: string
 

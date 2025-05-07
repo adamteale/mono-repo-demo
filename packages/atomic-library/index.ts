@@ -7,3 +7,4 @@ export * from "./src/organisms";
 export * from "./src/pages";
 export * from "./src/types";
 export * from "./src/templates";
+export * from "./src/utils";

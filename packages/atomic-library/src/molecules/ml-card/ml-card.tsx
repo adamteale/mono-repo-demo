@@ -1,3 +1,4 @@
+import { View } from "react-native";
 import { AtButtonVariants, AtLink } from "../../atoms";
 import { buttonVariants } from "../../atoms/at-button/at-button.variants";
 import { MlMedia, MlMediaFit } from "../ml-media";

@@ -1,3 +1,4 @@
+import { Text, View } from "react-native";
 import { MlMedia } from "../ml-media";
 import { MlVerticalTeamProps } from "./ml-vertical-team.types";
 

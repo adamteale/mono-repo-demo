@@ -129,7 +129,7 @@ export const MlProductCard = ({
                 <Text
                   className="text-lgx line-through leading-6 decoration-1 text-quaternary font-light"
                   data-testid="original"
-                  role="text"
+                  accessibilityRole="text"
                 >
                   <Text className="sr-only text-ellipsis">
                     Original price:&nbsp;
@@ -141,7 +141,7 @@ export const MlProductCard = ({
               <View
                 className="font-bold text-lgx text-primary"
                 data-testid="current"
-                role="text"
+                accessibilityRole="text"
               >
                 <Text className="sr-only text-ellipsis">
                   Current price:&nbsp;
@@ -158,7 +158,7 @@ export const MlProductCard = ({
           )}
         </View>
       </View>
-
+      {/* 
       {!!colors?.options?.length && (
         <MlColorPicker
           selected={colors.selected}
@@ -168,7 +168,7 @@ export const MlProductCard = ({
           options={colors.options}
           onClick={colors.onClick}
         />
-      )}
+      )} */}
 
       {addToBasketOnClick || (outOfStock && sizesLength === 0) ? (
         <AtButton

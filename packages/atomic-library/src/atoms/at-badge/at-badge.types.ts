@@ -1,4 +1,4 @@
-export interface AtBadgeProps {
+import { View } from "react-native";export interface AtBadgeProps {
   /** Additional CSS class name for the component. */
   className?: string
 

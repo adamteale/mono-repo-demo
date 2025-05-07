@@ -1,6 +1,6 @@
-import { AtColorPickerProps } from '../../at-color-picker.types'
+import { AtColorPickerProps } from "../../at-color-picker.types";
 
 export const atColorPickerProps: AtColorPickerProps = {
-  color: 'black',
-  title: 'button-title',
-}
+  color: "black",
+  title: "button-title",
+};

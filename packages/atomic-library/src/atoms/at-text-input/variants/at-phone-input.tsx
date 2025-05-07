@@ -1,3 +1,4 @@
+import { Text, View } from "react-native";
 import React from "react";
 import { AtTextInputProps } from "../at-text-input.types";
 import { AtTextInput } from "../at-text-input";

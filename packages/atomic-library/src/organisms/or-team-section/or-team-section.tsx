@@ -1,3 +1,4 @@
+import { Text, View } from "react-native";
 import { MlVerticalTeam } from "../../molecules";
 import { OrTeamSectionProps } from "./or-team-section.types";
 

@@ -1,3 +1,6 @@
+import React from "react";
+import { View, Text } from "react-native";
+
 import { TmProductDetailProps } from "./tm-product-detail.types";
 import {
   AtLink,

@@ -1,4 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+
+import { View, Text } from "react-native";
+
 import { MlMenuItem } from "@mono-repo-demo/atomic-library";
 import { HeaderMenuSubItem } from "./or-header.types";
 
@@ -50,13 +53,15 @@ export const HeaderSubItems = ({
 
   return (
     <View
-      ref={contentRef}
+      // ref={contentRef}
       className={`${containerClasses} ${subItemDesktopClasses}`}
-      style={{
-        maxHeight: `${contentHeight}rem`,
-        transitionProperty: "max-height",
-      }}
-      onTransitionEnd={handleTransitionEnd}
+      style={
+        {
+          // maxHeight: `${contentHeight}rem`,
+          // transitionProperty: "max-height",
+        }
+      }
+      // onTransitionEnd={handleTransitionEnd}
     >
       {(isActive || isAnimating || shouldRender) && !!items && (
         <View className={subItemClasses} role="menu">

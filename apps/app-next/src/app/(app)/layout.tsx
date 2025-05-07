@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 
 import { useNavigationHandler } from "@app-next/src/presentation/navigation/useNavigationHandler";
 import { useAuth } from "@Presentation/context/AuthContext";

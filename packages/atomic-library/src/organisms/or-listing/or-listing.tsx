@@ -1,3 +1,4 @@
+import { View } from "react-native";
 import { OrListingProps } from "./or-listing.types";
 import { productListingClasses } from "./or-listing.variants";
 

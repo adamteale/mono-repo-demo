@@ -17,12 +17,12 @@ import { PLACEHOLDER_IMAGE_PATH } from "../../utils/normalization/files/constant
 import { OrRichTextRenderer } from "../component-renderers/renderers/or-rich-text.renderer";
 import { AtLinkProps, CMSHeader, Target } from "@mono-repo-demo/atomic-library";
 import { PRODUCT_VARIATIONS_KEY } from "../types";
-import { SearchQueryDto } from "@app-core/src/domain/contentful/types/search-query.dto";
-import {
-  normalizeSearchResult,
-  normalizeSearchSuggestion,
-  SearchState,
-} from "@search/algolia";
+import { SearchQueryDto } from "@Domain/contentful/types/search-query.dto";
+// import {
+//   normalizeSearchResult,
+//   // normalizeSearchSuggestion,
+//   SearchState,
+// } from "@search/algolia";
 
 export const BASKET_TEXT_PLACEHOLDERS = {
   singleItemLabel: "{itemValue}",
@@ -32,7 +32,7 @@ export const BASKET_TEXT_PLACEHOLDERS = {
 export const normalizeHeader = (
   header: CMSHeader,
   basketState: BasketState,
-  searchState: SearchState,
+  // searchState: SearchState,
   {
     search,
     updateBasket,
@@ -155,35 +155,37 @@ export const normalizeHeader = (
           ),
         }
       : undefined,
-    searchBox: {
-      onSubmit: searchOnSubmit,
-      onChange: (query: any) => search({ text: query }),
-      onClearButtonClick: () => search({}),
-      placeholder: header?.searchbox?.placeholder ?? "",
-      currentQuery: searchState.query ?? "",
-      resultsTitle: header?.searchbox?.resultsTitle,
-      resultsDisplayVariant: header?.searchbox
-        ?.resultsDisplayVariant as SearchItemDisplayVariants,
-      seeMoreResultsLinkProps: {
-        href: getSearchUrl(searchState.query),
-        linkWrapper: Link,
-      },
-      seeMoreResultsLabel: header?.searchbox?.seeMoreResultsLabel,
-      totalAmountOfResults: searchState.results?.totalCount ?? 0,
-      noResultsFoundLabel: header?.searchbox?.noResultsFoundLabel,
-      suggestionsTitle: "Featured Products",
-      totalAmountOfSuggestions: searchState.results?.suggestions?.length ?? 0,
-      suggestions:
-        normalizeSearchSuggestion(
-          searchState.results?.suggestions as any,
-          SLUG_KEY.PRODUCTS,
-          PLACEHOLDER_IMAGE_PATH
-        ) ?? [],
-      suggestionsDisplayVariant: SearchItemDisplayVariants.CARD,
-      showMoreSuggestions: false,
-      results: [],
-      showResults,
-    },
+    searchBox: undefined,
+    // {
+    // onSubmit: searchOnSubmit,
+    // onChange: (query: any) => search({ text: query }),
+    // onClearButtonClick: () => search({}),
+    // placeholder: header?.searchbox?.placeholder ?? "",
+    // currentQuery: searchState.query ?? "",
+    // resultsTitle: header?.searchbox?.resultsTitle,
+    // resultsDisplayVariant: header?.searchbox
+    //   ?.resultsDisplayVariant as SearchItemDisplayVariants,
+    // seeMoreResultsLinkProps: {
+    //   href: getSearchUrl(searchState.query),
+    //   linkWrapper: Link,
+    // },
+    // seeMoreResultsLabel: header?.searchbox?.seeMoreResultsLabel,
+    // totalAmountOfResults: searchState.results?.totalCount ?? 0,
+    // noResultsFoundLabel: header?.searchbox?.noResultsFoundLabel,
+    // suggestionsTitle: "Featured Products",
+    // totalAmountOfSuggestions: searchState.results?.suggestions?.length ?? 0,
+    // suggestions:
+    //   normalizeSearchSuggestion(
+    //     searchState.results?.suggestions as any,
+    //     SLUG_KEY.PRODUCTS,
+    //     PLACEHOLDER_IMAGE_PATH
+    //   ) ?? [],
+    // suggestions: [],
+    // suggestionsDisplayVariant: SearchItemDisplayVariants.CARD,
+    // showMoreSuggestions: false,
+    // results: [],
+    // showResults,
+    // },
     menuItems: header.menuItems
       ?.map(normalizeMenuItem)
       .filter((el): el is HeaderMenuItem => !!el),

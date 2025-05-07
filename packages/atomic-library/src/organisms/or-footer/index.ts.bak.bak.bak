@@ -1,0 +1,2 @@
+import { View } from "react-native";export * from './or-footer'
+export * from './or-footer.types'

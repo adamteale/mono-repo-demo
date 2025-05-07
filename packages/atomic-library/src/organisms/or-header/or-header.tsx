@@ -1,9 +1,9 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // Import SafeAreaView
 import { View, SafeAreaView, Platform, StyleSheet } from "react-native";
 import { OrHeaderProps } from "./or-header.types";
 import { HeaderItems } from "./header-items";
-import { HamburgerMenuWrapper } from "./hamburger/hamburger-menu";
+// import { HamburgerMenuWrapper } from "./hamburger/hamburger-menu";
 import { brandContainerClasses } from "./or-header.variants";
 import { useStickBar } from "./stickbar/use-stickbar";
 import { AtDivider, AtLink, AtStickBar } from "../../atoms";
@@ -45,7 +45,7 @@ export const OrHeader = ({
           // Use style for visibility to potentially allow animation later
           style={[styles.stickBarBase, isHidden && styles.stickBarHidden]}
           className="absolute w-full top-0 left-0 right-0 z-50"
-          ref={stickBarContainerRef}
+          // ref={stickBarContainerRef}
           pointerEvents={isHidden ? "none" : "auto"}
         >
           <AtStickBar

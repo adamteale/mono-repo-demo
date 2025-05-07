@@ -1,3 +1,6 @@
+import React from "react";
+import { View, Text } from "react-native";
+
 import { AtImage, AtRadio, OrForm } from "@mono-repo-demo/atomic-library";
 import { useOrForm } from "@mono-repo-demo/atomic-library";
 import { PaymentOptionCardProps } from "./payment-option-card.types";
@@ -23,7 +26,7 @@ export const PaymentOptionCard = ({
         checked: radioProps.checked,
         isDescriptionAbsent: !radioProps.description && radioProps.checked,
       })}
-      onClick={() => !radioProps.checked && radioProps.onChange()}
+      // onClick={() => !radioProps.checked && radioProps.onChange()}
     >
       <View className="flex flex-col gap-5">
         <View

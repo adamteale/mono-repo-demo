@@ -1,4 +1,4 @@
-export interface AtPaginationProps {
+import { View } from "react-native";export interface AtPaginationProps {
   /** This optional boolean property determines whether the pagination item is disabled. When `true`, the item is non-interactive and styled accordingly to indicate it cannot be clicked */
   disabled?: boolean
 

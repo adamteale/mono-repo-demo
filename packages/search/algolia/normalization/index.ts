@@ -1,2 +1,2 @@
-export * from './search-result'
-export * from './search-suggestion'
+export * from "./search-result";
+// export * from './search-suggestion'

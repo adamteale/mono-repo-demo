@@ -1,3 +1,6 @@
+import React from "react";
+import { View } from "react-native";
+
 export const MlProductCardSkeleton = () => (
   <View
     className="rounded-2xl border animate-pulse bg-original-50"

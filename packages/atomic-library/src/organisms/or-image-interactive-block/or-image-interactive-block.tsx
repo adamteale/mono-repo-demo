@@ -1,3 +1,4 @@
+import { Text, View } from "react-native";
 import { OrImageInteractiveBlockProps } from "./or-image-interactive-block.types";
 import { MlImageInteractive } from "../../molecules";
 import { OrImagesCarousel } from "../or-images-carousel";

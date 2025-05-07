@@ -1,3 +1,6 @@
+import React from "react";
+import { View, Text } from "react-native";
+
 import { AtIcon, AtTooltip } from "@mono-repo-demo/atomic-library";
 
 interface OrderInfoProps {

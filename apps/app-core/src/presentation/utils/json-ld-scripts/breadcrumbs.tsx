@@ -1,5 +1,4 @@
 import { AtLinkProps } from "@mono-repo-demo/atomic-library";
-import { environment } from "../../config/environment";
 
 export const BreadcrumbJsonLd = ({
   breadcrumbLinks,
@@ -15,7 +14,7 @@ export const BreadcrumbJsonLd = ({
       "@type": "ListItem",
       position: idx + 1,
       item: {
-        "@id": environment.baseUrl + breadcrum.href,
+        "@id": "environment.baseUrl" + breadcrum.href,
         name: breadcrum.label,
       },
     })),

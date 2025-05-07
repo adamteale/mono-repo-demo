@@ -1,3 +1,4 @@
+import { Text, View } from "react-native";
 import { MlRadioCardSkeletonProps } from "./ml-radio-card.types";
 
 export const MlRadioCardSkeleton = ({

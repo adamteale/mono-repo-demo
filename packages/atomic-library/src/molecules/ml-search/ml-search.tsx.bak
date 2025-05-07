@@ -1,0 +1,185 @@
+import { MouseEvent, useEffect, useRef, useState } from "react";
+import { AtTextInput } from "../../atoms";
+import { MlSearchProps, MlSearchSize, SearchResult } from "./ml-search.types";
+import { useClickOutside } from "../../utils";
+import { resultClasses, resultsContainerClasses } from "./ml-search.variants";
+import { handleSearchKeyDown } from "./utils/keyboard-navigation";
+
+export const MlSearch = ({
+  placeholder,
+  label,
+  results = [],
+  maxLength,
+  fieldName,
+  className = "",
+  value = "",
+  handleChange,
+  helpText = "",
+  disabled = false,
+  error = false,
+  required,
+  size = MlSearchSize.SMALL,
+}: MlSearchProps) => {
+  const [showResults, setShowResults] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<string | SearchResult>();
+  const [activeIndex, setActiveIndex] = useState(-1);
+
+  const searchRef = useRef<HTMLDivElement>(null);
+  const listboxRef = useRef<HTMLUListElement>(null);
+  useClickOutside(searchRef, () => setShowResults(false));
+
+  const onHandleChange = (value: string) => {
+    handleChange?.(value);
+    setShowResults(true);
+    setActiveIndex(-1);
+  };
+
+  const handleResultClick = (result: string | SearchResult, index: number) => {
+    setShowResults(false);
+    let value = result;
+
+    setSelectedOption(value);
+    setActiveIndex(index);
+
+    if (typeof value === "string") {
+      handleChange?.(value);
+    } else {
+      handleChange?.(value.label, result as SearchResult);
+    }
+  };
+
+  const handleInputClick = (event: MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setShowResults(true);
+  };
+
+  const clearInput = () => {
+    handleChange?.("");
+    setSelectedOption(undefined);
+  };
+
+  const onKeyDown = (event: React.KeyboardEvent) => {
+    handleSearchKeyDown(
+      event,
+      showResults,
+      setShowResults,
+      activeIndex,
+      setActiveIndex,
+      results,
+      handleResultClick,
+      clearInput
+    );
+  };
+
+  useEffect(() => {
+    if (showResults && activeIndex !== -1 && listboxRef.current) {
+      const activeOption = listboxRef.current.children[
+        activeIndex
+      ] as HTMLElement;
+
+      if (activeOption) {
+        activeOption.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    }
+  }, [activeIndex, showResults]);
+
+  return (
+    <View className="relative" ref={searchRef}>
+      {label && (
+        <label
+          id={`search-${label}-label`}
+          className="flex flex-row mb-3 text-sm text-primary line-clamp-1"
+          accessibilityRole="text"
+          htmlFor={`search-${label}`}
+        >
+          <Text className="truncate">{label}</Text>
+          {required ? (
+            <Text className="text-feedback-error">&nbsp;*</Text>
+          ) : (
+            <Text aria-hidden>&nbsp;(optional)</Text>
+          )}
+        </label>
+      )}
+
+      <AtTextInput
+        placeholder={placeholder}
+        required={required}
+        className={`${
+          size === MlSearchSize.LARGE ? "min-h-16" : "min-h-14"
+        } ${className}`}
+        disabled={disabled}
+        value={typeof value === "string" ? value : value.label}
+        error={error}
+        handleChange={onHandleChange}
+        icon={{
+          type: "search",
+          color: "primary",
+        }}
+        maxLength={maxLength}
+        name={fieldName}
+        dataTestId={fieldName}
+        showSuccessIcon={false}
+        onClearInputClick={clearInput}
+        onKeyDown={onKeyDown}
+        onClick={(e) => handleInputClick(e)}
+        autoComplete="off"
+        role="combobox"
+        aria-label={
+          selectedOption
+            ? label
+            : `${label}, ${parseSearchResult(selectedOption) ?? placeholder}`
+        }
+        aria-expanded={showResults}
+        aria-haspopup="listbox"
+        aria-controls={`listbox-${label}`}
+        aria-activedescendant={
+          showResults && activeIndex >= 0
+            ? `search-${label}-option-${activeIndex}`
+            : undefined
+        }
+        aria-required={required}
+      />
+
+      {showResults && results.length > 0 && (
+        <View
+          data-testid={`${fieldName}-dropdown`}
+          className={resultsContainerClasses({ hasHelpText: !!helpText })}
+        >
+          <ul
+            id={`listbox-${label}`}
+            role="listbox"
+            className="flex flex-col max-h-36 overflow-y-auto ml-select-scrollbar pr-2.5"
+            ref={listboxRef}
+            aria-labelledby={`search-${label}-label`}
+            tabIndex={-1}
+          >
+            {results?.map((result, index) => (
+              <li
+                id={`search-${label}-option-${index}`}
+                key={index}
+                className={resultClasses({ active: index === activeIndex })}
+                role="option"
+                aria-selected={result === selectedOption}
+                onClick={() => handleResultClick(result, index)}
+              >
+                {parseSearchResult(result)}
+              </li>
+            ))}
+          </ul>
+        </View>
+      )}
+
+      {helpText && (
+        <Text className={`mt-1 text-sm text-tertiary`}>{helpText}</Text>
+      )}
+    </View>
+  );
+};
+
+export const parseSearchResult = (
+  result: string | SearchResult | undefined
+): string => {
+  if (!result) return "";
+
+  return typeof result === "string" ? result : result.label;
+};

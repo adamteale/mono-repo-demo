@@ -1,8 +1,8 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState } from "react";
 
-type Coordinates = { x: number; y: number }
+type Coordinates = { x: number; y: number };
 
-type PercentagePosition = { x: string; y: string }
+type PercentagePosition = { x: string; y: string };
 
 /**
  * Calculates a value for each axis between `-maxValue` and `+maxValue`,
@@ -12,75 +12,83 @@ type PercentagePosition = { x: string; y: string }
  * @param container Container boundaries
  * @param maxValue Max percentage allowed by the scaling value used in the CSS transform (e.g. 25 for 1.5, 50 for 2)
  */
-export const getZoomPositioning = (mouse: Coordinates, container?: DOMRect, maxValue = 50): PercentagePosition => {
-  if (!container) return { x: '', y: '' }
+export const getZoomPositioning = (
+  mouse: Coordinates,
+  container?: DOMRect,
+  maxValue = 50
+): PercentagePosition => {
+  if (!container) return { x: "", y: "" };
 
-  const { x: pointerX, y: pointerY } = mouse
-  const { top, left, width, height } = container
+  const { x: pointerX, y: pointerY } = mouse;
+  const { top, left, width, height } = container;
 
-  const centerX = width / 2
-  const centerY = height / 2
-  const boundPointerX = pointerX - left
-  const boundPointerY = pointerY - top
+  const centerX = width / 2;
+  const centerY = height / 2;
+  const boundPointerX = pointerX - left;
+  const boundPointerY = pointerY - top;
 
-  const x = (centerX - boundPointerX) / centerX
-  const y = (centerY - boundPointerY) / centerY
+  const x = (centerX - boundPointerX) / centerX;
+  const y = (centerY - boundPointerY) / centerY;
 
-  return { x: `${x * maxValue}%`, y: `${y * maxValue}%` }
-}
+  return { x: `${x * maxValue}%`, y: `${y * maxValue}%` };
+};
 
 export const getDeviceType = () => {
-  if (typeof window === 'undefined') return 'desktop'
+  if (typeof window === "undefined") return "desktop";
   // set to xl breakpoint (1280px)
-  return window.innerWidth < 1280 ? 'mobile' : 'desktop'
-}
+  return window.innerWidth < 1280 ? "mobile" : "desktop";
+};
 
-export const mouseOffset = 24
+export const mouseOffset = 24;
 
 export const useZoomPanning = () => {
-  const [zoomedIn, setZoomedIn] = useState(false)
-  const [visibleControl, setVisibleControl] = useState(false)
+  const [zoomedIn, setZoomedIn] = useState(false);
+  const [visibleControl, setVisibleControl] = useState(false);
 
-  const container = useRef<HTMLButtonElement>(null)
-  const [pointerPosition, setPointerPosition] = useState({ x: 0, y: 0 })
+  const container = useRef<HTMLButtonElement>(null);
+  const [pointerPosition, setPointerPosition] = useState({ x: 0, y: 0 });
   const { x: zoomShiftX, y: zoomShiftY } = getZoomPositioning(
     {
       x: pointerPosition.x,
       y: pointerPosition.y,
     },
-    container.current?.getBoundingClientRect(),
-  )
+    container.current?.getBoundingClientRect()
+  );
 
-  const device = getDeviceType()
+  const device = getDeviceType();
 
   const handleShowControl = () => {
-    if (device === 'mobile') return
+    if (device === "mobile") return;
 
-    setVisibleControl(true)
-  }
+    setVisibleControl(true);
+  };
 
   const handleHideControl = () => {
-    if (device === 'mobile') return
+    if (device === "mobile") return;
 
-    setZoomedIn(false)
-    setVisibleControl(false)
-  }
+    setZoomedIn(false);
+    setVisibleControl(false);
+  };
 
-  const handleToggleZoom = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    if (device === 'mobile') {
-      const { clientX, clientY } = event.nativeEvent
-      setPointerPosition({ x: clientX, y: clientY })
+  const handleToggleZoom = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    if (device === "mobile") {
+      const { clientX, clientY } = event.nativeEvent;
+      setPointerPosition({ x: clientX, y: clientY });
     }
-    setZoomedIn((zoom) => !zoom)
-  }
+    setZoomedIn((zoom) => !zoom);
+  };
 
-  const handleDesktopPointerPosition = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    if (device === 'mobile') return
+  const handleDesktopPointerPosition = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    if (device === "mobile") return;
 
-    const { clientX, clientY } = event.nativeEvent
+    const { clientX, clientY } = event.nativeEvent;
 
-    setPointerPosition({ x: clientX, y: clientY })
-  }
+    setPointerPosition({ x: clientX, y: clientY });
+  };
 
   return {
     handleShowControl,
@@ -93,5 +101,5 @@ export const useZoomPanning = () => {
     zoomShiftX,
     zoomShiftY,
     pointerPosition,
-  }
-}
+  };
+};

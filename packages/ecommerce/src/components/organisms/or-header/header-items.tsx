@@ -1,3 +1,6 @@
+import React from "react";
+import { View } from "react-native";
+
 import { MlMenuItem } from "@mono-repo-demo/atomic-library";
 import { HeaderMenuItem } from "./or-header.types";
 import { HeaderSubItems } from "./header.sub-items";

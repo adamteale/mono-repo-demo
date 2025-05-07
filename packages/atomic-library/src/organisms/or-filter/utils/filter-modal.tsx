@@ -1,3 +1,4 @@
+import { View } from "react-native";
 import { OrFilter, OrFilterProps, OrModal } from "../..";
 import { AtButton, AtButtonSize, AtIcon } from "../../../atoms";
 import { FilterProps } from "../../../molecules";
@@ -6,6 +7,7 @@ import {
   FilterOption,
 } from "../../../molecules/ml-filter-selector";
 import { JSX } from "react";
+import { Text } from "react-native";
 
 interface FilterModalProps<T extends BaseFilter> {
   filterModalCloseIconLabel?: string;

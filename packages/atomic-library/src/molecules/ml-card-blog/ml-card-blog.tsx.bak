@@ -1,0 +1,67 @@
+import { ReactNode } from "react";
+import { Text } from "react-native";
+
+import { AtLink, IconPositions } from "../../atoms";
+import { MlMedia } from "../ml-media";
+import { MlCardBlogProps } from "./ml-card-blog.types";
+
+const SpanWrapper = ({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className: string;
+}) => <Text className={className}>{children}</Text>;
+
+export const MlCardBlog = ({
+  author,
+  category,
+  publicationDate,
+  className = "",
+  dataTestId,
+  description,
+  image,
+  link,
+  title,
+}: MlCardBlogProps) => {
+  return (
+    <AtLink href={link.href} className="w-fit active:!font-normal">
+      <View
+        className={`w-68 xl:w-full xl:max-w-97 p-4 flex flex-col gap-5 ring-0.5 ring-stroke-secondary bg-surface-primary rounded-xl hover:ring-1.5 transition-all ${className}`}
+        data-testid={dataTestId}
+      >
+        <View className="relative">
+          {category && (
+            <Text className="absolute z-10 right-0 bottom-0 bg-surface-primary px-3 rounded-tl-tiny leading-5 text-tertiary py-0.5">
+              {category}
+            </Text>
+          )}
+          <MlMedia
+            {...image}
+            wrapperClassName="aspect-square w-[15.5rem] [&>img]:rounded-xl xl:w-full"
+          />
+        </View>
+        <View className="flex flex-col gap-4">
+          <View className="flex flex-row justify-between text-primary text-sm xl:text-base xl:leading-5">
+            <Text>{publicationDate}</Text>
+            <Text className="text-right">{author}</Text>
+          </View>
+          <Text className="text-primary font-bold text-lg xl:text-xl">
+            {title}
+          </Text>
+          <Text className="text-neutral-500 text-sm line-clamp-3 xl:text-lg xl:leading-6 ">
+            {description}
+          </Text>
+        </View>
+
+        <AtLink
+          {...link}
+          linkWrapper={SpanWrapper}
+          iconPosition={IconPositions.RIGHT}
+          iconProps={{ type: "arrow-right" }}
+          className="xl:text-lg leading-6 hover:underline w-fit"
+        />
+      </View>
+    </AtLink>
+  );
+};

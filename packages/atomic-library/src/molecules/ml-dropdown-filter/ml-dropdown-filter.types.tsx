@@ -1,21 +1,21 @@
-import React from 'react'
-import { MlDropdownProps } from '../ml-dropdown/ml-dropdown.types'
-import { BaseFilter, Filter, FilterOption } from '../ml-filter-selector'
+import React from "react";
+import { MlDropdownProps } from "../ml-dropdown/ml-dropdown.types";
+import { BaseFilter, Filter, FilterOption } from "../ml-filter-selector";
 
 // Dropdown Filter Types
 type DropdownFilterSupplementaryProps = {
   /** Indicates if there are no results */
-  noResult?: boolean
+  noResult?: boolean;
 
   /** Label to display when there are no results */
-  noResultLabel?: string
-}
+  noResultLabel?: string;
+};
 
 /**
  * Type for the handler used in dropdown filters.
  * It defines an onClick method to handle selection of a filter option.
  */
-export type DropdownFilterHandler = { onClick: (value: FilterOption) => void }
+export type DropdownFilterHandler = { onClick: (value: FilterOption) => void };
 
 /**
  * Represents a dropdown filter, extending the base properties from MlDropdownProps and Filter.
@@ -23,9 +23,12 @@ export type DropdownFilterHandler = { onClick: (value: FilterOption) => void }
  *
  * @template T - Extends the BaseFilter type to customize the filter.
  */
-export type DropdownFilter<T extends BaseFilter> = Omit<MlDropdownProps, 'children' | 'dividerClassName'> &
+export type DropdownFilter<T extends BaseFilter> = Omit<
+  MlDropdownProps,
+  "children" | "dividerClassName"
+> &
   Filter<T> &
-  DropdownFilterSupplementaryProps
+  DropdownFilterSupplementaryProps;
 
 /**
  * Represents the properties for the MlDropdownFilter component.
@@ -35,8 +38,8 @@ export type DropdownFilter<T extends BaseFilter> = Omit<MlDropdownProps, 'childr
  */
 export type MlDropdownFilterProps<T extends BaseFilter> = DropdownFilter<T> &
   DropdownFilterHandler & {
-    FilterSelector: React.ComponentType<any>
-  }
+    FilterSelector: React.ComponentType<any>;
+  };
 
 /**
  * Represents the properties for a generic Filter component.
@@ -44,4 +47,5 @@ export type MlDropdownFilterProps<T extends BaseFilter> = DropdownFilter<T> &
  *
  * @template T - Extends the BaseFilter type to customize the filter.
  */
-export type FilterProps<T extends BaseFilter> = Filter<T> & DropdownFilterHandler
+export type FilterProps<T extends BaseFilter> = Filter<T> &
+  DropdownFilterHandler;

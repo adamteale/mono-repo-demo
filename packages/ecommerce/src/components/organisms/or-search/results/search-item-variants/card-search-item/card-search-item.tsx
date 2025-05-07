@@ -1,4 +1,7 @@
+import React from "react";
 import { useMemo } from "react";
+import { View, Text } from "react-native";
+
 import { CardSearchItemProps } from "./card-search-item.types";
 import { AtImage, AtLink, AtTag } from "@mono-repo-demo/atomic-library";
 

@@ -1,4 +1,7 @@
 import React from "react";
+
+import { View } from "react-native";
+
 import { FormEvent, useEffect, useState } from "react";
 import {
   AtButton,
@@ -122,7 +125,7 @@ export const ListRangeFilter = ({
             </View>
 
             <AtButton
-              buttonType="submit"
+              // buttonType="submit"
               className="!h-12 flex-1"
               variant={AtButtonVariants.SECONDARY}
               disabled={submitDisabled}

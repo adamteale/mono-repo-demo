@@ -1,4 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
+
+import { View } from "react-native";
+
 import { OrSearchBarSize, OrSearchProps } from "./or-search.types";
 import { Results } from "./results/results";
 import { AtTextInput, useIsSmallDesktop } from "@mono-repo-demo/atomic-library";
@@ -29,7 +32,7 @@ export const OrSearch = ({
   searchBarSize = OrSearchBarSize.SMALL,
   showResults = true,
 }: OrSearchProps) => {
-  const [timerId, setTimerId] = useState<NodeJS.Timeout>();
+  // const [timerId, setTimerId] = useState<NodeJS.Timeout>();
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const { showMobileSearchbox, toggleMobileSearchbox } =
@@ -52,11 +55,11 @@ export const OrSearch = ({
     if (!currentQuery) setInputValue("");
   }, [currentQuery]);
 
-  const handleOnChangeDebounced = (value: string) => {
-    if (timerId) clearTimeout(timerId);
-    setInputValue(value);
-    setTimerId(setTimeout(() => onChange(value), 250));
-  };
+  // const handleOnChangeDebounced = (value: string) => {
+  //   if (timerId) clearTimeout(timerId);
+  //   setInputValue(value);
+  //   setTimerId(setTimeout(() => onChange(value), 250));
+  // };
 
   const handleOnClearButtonClick = () => {
     onClearButtonClick();
@@ -85,7 +88,7 @@ export const OrSearch = ({
           ref={inputRef}
           placeholder={placeholder}
           value={inputValue}
-          handleChange={handleOnChangeDebounced}
+          // handleChange={handleOnChangeDebounced}
           className={`${
             searchBarSize === OrSearchBarSize.LARGE ? "!h-16" : "!h-14"
           }`}

@@ -1,5 +1,9 @@
-import { AtIcon } from '../at-icon'
-import { AtPlayButtonColor, AtPlayButtonProps, AtPlayButtonSize } from './at-play-button.types'
+import { AtIcon } from "../at-icon";
+import {
+  AtPlayButtonColor,
+  AtPlayButtonProps,
+  AtPlayButtonSize,
+} from "./at-play-button.types";
 
 export const AtPlayButton = ({
   color = AtPlayButtonColor.SECONDARY,
@@ -14,7 +18,11 @@ export const AtPlayButton = ({
       type="button"
       onClick={onClick}
     >
-      <AtIcon type={isLoading ? 'spinner' : 'play'} color={color} size={size === AtPlayButtonSize.LARGE ? 120 : 75} />
+      <AtIcon
+        type={isLoading ? "spinner" : "play"}
+        color={color}
+        size={size === AtPlayButtonSize.LARGE ? 120 : 75}
+      />
     </button>
-  )
-}
+  );
+};

@@ -1,3 +1,4 @@
+import { View } from "react-native";
 export * from "./ml-breadcrumb";
 export * from "./ml-card-blog";
 export * from "./ml-card";
@@ -19,7 +20,6 @@ export * from "./ml-table";
 export * from "./ml-vertical-team";
 export * from "./ml-vertical";
 export * from "./ml-video";
-export * from "./MlBanner";
 export * from "./MlProductCard";
 export * from "./MlProfileCard";
 export * from "./MlTextfield";

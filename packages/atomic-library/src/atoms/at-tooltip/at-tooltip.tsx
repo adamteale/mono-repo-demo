@@ -1,3 +1,4 @@
+import { View } from "react-native";
 import { Tooltip } from "react-tooltip";
 import { AtTooltipProps } from "./at-tooltip.types";
 

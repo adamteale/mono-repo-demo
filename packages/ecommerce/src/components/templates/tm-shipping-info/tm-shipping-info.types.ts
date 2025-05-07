@@ -4,7 +4,7 @@ import {
   OrFormControls,
 } from "@mono-repo-demo/atomic-library";
 import { OrOrderSummaryProps } from "../../organisms";
-import { OrFormManager } from "@components-library/common/src/components/organisms/or-form/use-or-form";
+import { OrFormManager } from "@mono-repo-demo/atomic-library";
 
 export interface OrderShippingInfoForm {
   fields: OrderShippingInfoFormFields;

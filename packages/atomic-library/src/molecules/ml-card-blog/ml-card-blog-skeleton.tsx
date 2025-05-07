@@ -1,4 +1,4 @@
-export const MlCardBlogSkeleton = () => (
+import { View } from "react-native";export const MlCardBlogSkeleton = () => (
   <View
     className="rounded-2xl border animate-pulse bg-original-50"
     data-testid="card-blog-skeleton"

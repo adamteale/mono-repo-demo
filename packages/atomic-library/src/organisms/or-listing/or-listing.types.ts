@@ -1,7 +1,8 @@
-import { ReactNode } from 'react'
+import { View } from "react-native";
+import { ReactNode } from "react";
 
 export interface OrListingProps {
-  children?: ReactNode
-  filter?: boolean
-  dataTestId?: string
+  children?: ReactNode;
+  filter?: boolean;
+  dataTestId?: string;
 }

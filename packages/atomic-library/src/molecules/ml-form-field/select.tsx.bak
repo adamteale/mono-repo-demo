@@ -1,0 +1,185 @@
+import { useEffect, useRef, useState } from "react";
+import { AtIcon, AtTextInput } from "../../atoms";
+import { MlSelectProps, SelectOption } from "./ml-form-field.types";
+import { useClickOutside } from "../../utils";
+import {
+  inputWrapperClasses,
+  listboxClasses,
+  listboxWrapperClasses,
+  optionClasses,
+} from "./select.variants";
+import {
+  handleSelectKeyDown,
+  handleSelectCharacterInput,
+} from "./utils/keyboard-navigation";
+
+export const Select = ({
+  options,
+  label,
+  helpText = "",
+  error,
+  disabled = false,
+  className = "",
+  placeholder,
+  required,
+  dataTestId = "select",
+  handleChange,
+}: MlSelectProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<SelectOption>();
+  const [activeIndex, setActiveIndex] = useState(-1);
+
+  const selectRef = useRef<HTMLDivElement>(null);
+  const listboxRef = useRef<HTMLUListElement>(null);
+  const searchTimeoutRef = useRef<number | null>(null);
+  const [searchString, setSearchString] = useState("");
+
+  useClickOutside(selectRef, () => setIsOpen(false));
+
+  useEffect(() => {
+    const defaultOption = options?.find((option) => option.selected);
+    if (defaultOption) {
+      setSelectedOption(defaultOption);
+    }
+  }, [options]);
+
+  const handleSetValue = (option: SelectOption, index: number) => {
+    if (option.disabled) {
+      return;
+    }
+    handleChange?.(option.value);
+    setSelectedOption(option);
+    setActiveIndex(index);
+    setIsOpen(false);
+  };
+
+  const onKeyDown = (event: React.KeyboardEvent) => {
+    handleSelectKeyDown(
+      event,
+      isOpen,
+      setIsOpen,
+      activeIndex,
+      setActiveIndex,
+      options,
+      handleSetValue,
+      (key) =>
+        handleSelectCharacterInput(
+          key,
+          searchString,
+          setSearchString,
+          searchTimeoutRef,
+          options,
+          setActiveIndex
+        )
+    );
+  };
+
+  useEffect(() => {
+    if (isOpen && activeIndex !== -1 && listboxRef.current) {
+      const activeOption = listboxRef.current.children[
+        activeIndex
+      ] as HTMLElement;
+
+      if (activeOption) {
+        activeOption.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    }
+  }, [activeIndex, isOpen]);
+
+  return (
+    <View className="relative" ref={selectRef} data-testid={dataTestId}>
+      {label && (
+        <label
+          id={`select-${label}-label`}
+          className="flex flex-row mb-3 text-sm text-primary line-clamp-1"
+          accessibilityRole="text"
+          htmlFor={`select-${label}`}
+        >
+          <Text className="truncate">{label}</Text>
+          {required ? (
+            <Text className="text-feedback-error">&nbsp;*</Text>
+          ) : (
+            <Text aria-hidden>&nbsp;(optional)</Text>
+          )}
+        </label>
+      )}
+
+      <View
+        className={inputWrapperClasses({ disabled })}
+        onClick={() => setIsOpen(!isOpen)}
+        onKeyDown={onKeyDown}
+        role="combobox"
+        aria-label={`${label}, ${selectedOption?.label ?? placeholder}`}
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+        aria-controls={`listbox-${label}`}
+        aria-activedescendant={
+          isOpen && activeIndex >= 0
+            ? `select-${label}-option-${activeIndex}`
+            : undefined
+        }
+        aria-required={required}
+        tabIndex={0}
+      >
+        <AtTextInput
+          placeholder={placeholder}
+          required={required}
+          className={`${
+            disabled ? "cursor-not-allowed" : "cursor-pointer"
+          } ${className}`}
+          disabled={disabled}
+          value={selectedOption?.label ?? ""}
+          error={error}
+          handleChange={handleChange}
+          showErrorIcon={false}
+          readOnly
+          aria-hidden
+          id={`select-${label}`}
+          name={`select-${label}`}
+          tabIndex={-1}
+        />
+
+        <AtIcon
+          className="absolute top-[0.8125rem] right-3 flex items-center transition-transform"
+          type={isOpen ? "angle-up" : "angle-down"}
+          color={disabled ? "disabled-primary" : "active"}
+          size={24}
+          ariaHidden="true"
+        />
+      </View>
+
+      {isOpen && (
+        <View className={listboxWrapperClasses({ helpText: !!helpText })}>
+          <ul
+            id={`listbox-${label}`}
+            role="listbox"
+            className={listboxClasses({ scrollbar: options.length >= 6 })}
+            ref={listboxRef}
+            aria-labelledby={`select-${label}-label`}
+            tabIndex={-1}
+          >
+            {options?.map((option, index) => (
+              <li
+                id={`select-${label}-option-${index}`}
+                key={index}
+                className={optionClasses({
+                  disabled: option.disabled,
+                  active: index === activeIndex,
+                })}
+                role="option"
+                aria-selected={option === selectedOption}
+                onClick={() => handleSetValue(option, index)}
+              >
+                {option.label}
+              </li>
+            ))}
+          </ul>
+        </View>
+      )}
+
+      {helpText && (
+        <Text className={`mt-1 text-sm text-tertiary`}>{helpText}</Text>
+      )}
+    </View>
+  );
+};

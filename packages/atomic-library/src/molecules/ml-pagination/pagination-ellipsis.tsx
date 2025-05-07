@@ -1,4 +1,4 @@
-export const PaginationEllipsis = () => {
+import { View } from "react-native";export const PaginationEllipsis = () => {
   return (
     <View
       className={`

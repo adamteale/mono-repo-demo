@@ -1,4 +1,6 @@
 import { forwardRef, useEffect, useRef, useState } from "react";
+import { Text, View } from "react-native";
+
 import { AtCheckbox, AtIcon } from "../../atoms";
 import {
   ListFilterWrapperProps,

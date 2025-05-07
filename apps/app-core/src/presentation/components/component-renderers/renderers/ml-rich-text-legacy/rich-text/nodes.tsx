@@ -1,5 +1,8 @@
+import React from "react";
+import { Text } from "react-native";
+
 import { AtIcon, AtLink } from "@mono-repo-demo/atomic-library";
-import { BLOCKS, INLINES, Text } from "@contentful/rich-text-types";
+import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 import { CUSTOM_BLOCKS } from "./utils/custom-blocks";
 import { RenderNode } from "@contentful/rich-text-react-renderer";
 import Image from "next/image";
@@ -64,7 +67,10 @@ export const nodes: RenderNode = {
     return (
       <AtLink
         linkWrapper={Link}
-        label={(node.content[0] as Text).value ?? ""}
+        label={
+          (node.content[0].nodeType === "text" ? node.content[0].value : "") ??
+          ""
+        }
         href={node.data.uri}
         className="inline-flex text-primary underline"
       />

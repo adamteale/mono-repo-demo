@@ -1,0 +1,12 @@
+import { View } from "react-native";import { cva } from 'class-variance-authority'
+
+const menuItemsBaseClass = 'flex flex-col gap-12 lg:flex-row md:gap-16'
+export const menuItemsClasses = cva(menuItemsBaseClass, {
+  variants: {
+    hasNewsLetter: {
+      true: 'mt-32',
+      false: '',
+    },
+  },
+  defaultVariants: { hasNewsLetter: false },
+})

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@components-library/ecommerce": "1.15.1",
+    "@contentful/rich-text-react-renderer": "^16.0.1",
     "@mono-repo-demo/atomic-library": "1.0.0",
     "axios": "^1.8.4",
     "contentful": "^11.5.18",

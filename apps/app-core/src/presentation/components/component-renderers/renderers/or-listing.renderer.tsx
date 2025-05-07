@@ -1,3 +1,6 @@
+import React from "react";
+import { View } from "react-native";
+
 import { OrListing } from "@mono-repo-demo/atomic-library";
 import { OrListingRendererProps } from "../renderer.types";
 import { MlCardBlogRenderer } from "./ml-card-blog.renderer";

@@ -1,0 +1,46 @@
+import { View } from "react-native";import { cva } from 'class-variance-authority'
+
+//CONTACT-US VARIANT
+const textBaseClass = 'flex flex-row items-center'
+export const textClasses = cva(textBaseClass, {
+  variants: {
+    icon: {
+      true: 'text-base leading-5',
+      false: '',
+    },
+    isInList: {
+      true: '',
+      false: '',
+    },
+    partIndex: {
+      first: '',
+      notFirst: 'pt-2.25 pl-10',
+    },
+  },
+  compoundVariants: [
+    {
+      icon: false,
+      isInList: false,
+      partIndex: 'first',
+      class: 'tracking-0.1 md:leading-[2.375rem] xl:leading-10',
+    },
+  ],
+  defaultVariants: {
+    icon: false,
+    isInList: false,
+    partIndex: 'first',
+  },
+})
+
+const iconBaseClass = 'items-start'
+export const iconClasses = cva(iconBaseClass, {
+  variants: {
+    isInList: {
+      true: 'mr-4',
+      false: 'mx-1',
+    },
+  },
+  defaultVariants: {
+    isInList: false,
+  },
+})

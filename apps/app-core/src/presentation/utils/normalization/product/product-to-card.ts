@@ -1,4 +1,8 @@
-import { Product, ProductVariant, ProductSearchResult } from "../../../types";
+import {
+  Product,
+  ProductVariant,
+  ProductSearchResult,
+} from "../../../../types";
 import { AtLinkProps } from "@mono-repo-demo/atomic-library";
 import {
   InlineColorPickerProps,

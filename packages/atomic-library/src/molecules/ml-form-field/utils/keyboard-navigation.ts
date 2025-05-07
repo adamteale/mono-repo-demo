@@ -1,4 +1,5 @@
-import { SelectOption } from '../ml-form-field.types'
+import { View } from "react-native";
+import { SelectOption } from "../ml-form-field.types";
 
 export const handleSelectCharacterInput = (
   key: string,
@@ -6,27 +7,27 @@ export const handleSelectCharacterInput = (
   setSearchString: React.Dispatch<React.SetStateAction<string>>,
   searchTimeoutRef: React.RefObject<number | null>,
   options: SelectOption[],
-  setActiveIndex: React.Dispatch<React.SetStateAction<number>>,
+  setActiveIndex: React.Dispatch<React.SetStateAction<number>>
 ) => {
-  const newSearchString = searchString + key
-  setSearchString(newSearchString)
+  const newSearchString = searchString + key;
+  setSearchString(newSearchString);
 
   if (searchTimeoutRef.current) {
-    clearTimeout(searchTimeoutRef.current)
+    clearTimeout(searchTimeoutRef.current);
   }
 
-  searchTimeoutRef.current = window.setTimeout(() => {
-    setSearchString('')
-  }, 500)
+  // searchTimeoutRef.current = window.setTimeout(() => {
+  //   setSearchString('')
+  // }, 500)
 
   const searchIndex = options.findIndex((option) =>
-    option.label.toLowerCase().startsWith(newSearchString.toLowerCase()),
-  )
+    option.label.toLowerCase().startsWith(newSearchString.toLowerCase())
+  );
 
   if (searchIndex !== -1) {
-    setActiveIndex(searchIndex)
+    setActiveIndex(searchIndex);
   }
-}
+};
 
 export const handleSelectKeyDown = (
   event: React.KeyboardEvent,
@@ -36,71 +37,71 @@ export const handleSelectKeyDown = (
   setActiveIndex: React.Dispatch<React.SetStateAction<number>>,
   options: SelectOption[],
   handleSetValue: (option: SelectOption, index: number) => void,
-  handleCharacterInput: (key: string) => void,
+  handleCharacterInput: (key: string) => void
 ) => {
-  const { key, altKey } = event
-  const maxIndex = options.length - 1
+  const { key, altKey } = event;
+  const maxIndex = options.length - 1;
 
-  const openKeys = ['ArrowDown', 'ArrowUp', 'Enter', ' ']
+  const openKeys = ["ArrowDown", "ArrowUp", "Enter", " "];
   if (!isOpen && openKeys.includes(key)) {
-    event.preventDefault()
-    setIsOpen(true)
-    return
+    event.preventDefault();
+    setIsOpen(true);
+    return;
   }
 
   switch (key) {
-    case 'ArrowDown':
+    case "ArrowDown":
       if (isOpen) {
-        event.preventDefault()
-        setActiveIndex((prevIndex) => Math.min(maxIndex, prevIndex + 1))
+        event.preventDefault();
+        setActiveIndex((prevIndex) => Math.min(maxIndex, prevIndex + 1));
       }
-      break
+      break;
 
-    case 'ArrowUp':
+    case "ArrowUp":
       if (isOpen) {
-        event.preventDefault()
-        setActiveIndex((prevIndex) => Math.max(0, prevIndex - 1))
+        event.preventDefault();
+        setActiveIndex((prevIndex) => Math.max(0, prevIndex - 1));
       }
-      break
+      break;
 
-    case 'Home':
+    case "Home":
       if (isOpen) {
-        event.preventDefault()
-        setActiveIndex(0)
+        event.preventDefault();
+        setActiveIndex(0);
       }
-      break
+      break;
 
-    case 'End':
+    case "End":
       if (isOpen) {
-        event.preventDefault()
-        setActiveIndex(maxIndex)
+        event.preventDefault();
+        setActiveIndex(maxIndex);
       }
-      break
+      break;
 
-    case 'Enter':
-    case ' ':
-      event.preventDefault()
+    case "Enter":
+    case " ":
+      event.preventDefault();
       if (isOpen && activeIndex >= 0) {
-        handleSetValue(options[activeIndex], activeIndex)
+        handleSetValue(options[activeIndex], activeIndex);
       }
-      setIsOpen(false)
-      break
+      setIsOpen(false);
+      break;
 
-    case 'Escape':
-      setIsOpen(false)
-      break
+    case "Escape":
+      setIsOpen(false);
+      break;
 
-    case 'Tab':
+    case "Tab":
       if (isOpen && activeIndex >= 0) {
-        handleSetValue(options[activeIndex], activeIndex)
-        setIsOpen(false)
+        handleSetValue(options[activeIndex], activeIndex);
+        setIsOpen(false);
       }
-      break
+      break;
 
     default:
       if (key.length === 1 && !altKey) {
-        handleCharacterInput(key)
+        handleCharacterInput(key);
       }
-      break
+      break;
   }
-}
+};

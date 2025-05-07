@@ -1,3 +1,6 @@
+import React from "react";
+import { View } from "react-native";
+
 import { OrFormColumn, OrForm } from "@mono-repo-demo/atomic-library";
 import { TmShippingInfoProps } from "./tm-shipping-info.types";
 import { TmCheckout } from "../tm-checkout";

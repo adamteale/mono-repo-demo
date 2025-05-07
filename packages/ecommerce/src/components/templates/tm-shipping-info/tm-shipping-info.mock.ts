@@ -1,6 +1,6 @@
 import { AtButtonVariants } from "@mono-repo-demo/atomic-library";
 import { TmShippingInfoProps } from "./tm-shipping-info.types";
-import { OrFormManager } from "@components-library/common/src/components/organisms/or-form/use-or-form";
+import { OrFormManager } from "@mono-repo-demo/atomic-library/src/components/organisms/or-form/use-or-form";
 
 const emailValidator = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
 const phoneNumberValidator = new RegExp("^\\(\\+\\d{1,3}\\)\\s\\d{10}$");

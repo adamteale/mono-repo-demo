@@ -1,4 +1,4 @@
-/**
+import { View } from "react-native";/**
  * This is a pretty basic phone formatter
  * it was created mostly with a US/CA +1 and two digits
  * country codes in mind.
