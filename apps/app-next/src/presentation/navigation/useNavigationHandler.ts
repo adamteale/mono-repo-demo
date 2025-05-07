@@ -27,11 +27,16 @@ export const useNavigationHandler = (): NavigationService => {
     router.replace(WebPaths.login);
   }, [router]);
 
+  const navigateToRoute = (route: string) => {
+    router.push(route);
+  };
+
   return {
     currentRoute: usePathname(),
     navigateBack,
     navigateToProductDetail,
     navigateHome,
     navigateLogin,
+    navigateToRoute,
   };
 };

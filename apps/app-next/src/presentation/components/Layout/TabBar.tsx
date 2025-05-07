@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { Ionicons } from "@expo/vector-icons";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "../../../../tailwind.config";
+import { useNavigationContext } from "@Presentation/context";
 
 type IoniconName = React.ComponentProps<typeof Ionicons>["name"];
 
@@ -38,6 +39,7 @@ const fullConfig = resolveConfig(tailwindConfig);
 function TabBar() {
   const pathname = usePathname();
   const { width } = useWindowDimensions();
+  const { navigation } = useNavigationContext();
 
   // Access the breakpoint value directly from the resolved Tailwind config
   const lgBreakpoint = parseInt(fullConfig.theme.screens.lg, 10);
@@ -48,11 +50,11 @@ function TabBar() {
   return (
     <View
       className={`
-      ${isHidden ? "hidden" : "flex"} {/* Conditionally hide or show */}
+      ${isHidden ? "hidden" : "flex"} 
       flex-row
       h-[60px]
       bg-white
-      border-t border-gray-300 {/* Equivalent to #ccc */}
+      border-t border-gray-300
     `}
     >
       {tabRoutes.map((route) => {
@@ -67,7 +69,13 @@ function TabBar() {
             href={route.path}
             className="flex-1 no-underline flex items-center justify-center" // Combined styles for Link
           >
-            <Pressable className="flex-1 w-full h-full flex items-center justify-center bg-transparent border-none p-0 cursor-pointer">
+            <Pressable
+              className="flex-1 w-full h-full flex items-center justify-center bg-transparent border-none p-0 cursor-pointer"
+              onPress={() => {
+                console.log(`Navigating to ${route.path}`);
+                navigation.navigateToRoute(route.path);
+              }}
+            >
               <Ionicons name={iconName} size={iconSize} color={color} />
             </Pressable>
           </Link>

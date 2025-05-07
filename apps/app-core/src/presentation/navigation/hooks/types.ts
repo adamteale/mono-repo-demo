@@ -6,4 +6,5 @@ export interface NavigationService {
   navigateHome: () => void;
   navigateLogin: () => void;
   navigateToProductDetail: (props: ProductDetailScreenProps) => void;
+  navigateToRoute(route: string): void;
 }

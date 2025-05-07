@@ -6,7 +6,6 @@ import { useRouter, usePathname } from "next/navigation";
 import { SafeAreaProvider } from "react-native-safe-area-context"; // Keep this provider
 
 import { useAuth } from "@Presentation/context/AuthContext";
-import TabBar from "../presentation/components/Layout/TabBar";
 import { NextNavigationProvider } from "../presentation/navigation/NextNavigationProvider";
 import { AuthProvider } from "../presentation/context/AppProvider";
 import { NextEnvironmentProvider } from "@app-next/EnvironmentProvider";
@@ -43,12 +42,6 @@ function AuthAwareLayout({ children }: { children: React.ReactNode }) {
 
   if (showAppLayout) {
     return <>{children}</>;
-    return (
-      <View>
-        <View>{children}</View>
-        <TabBar />
-      </View>
-    );
   } else {
     // Render children directly for login page (or other non-app layouts)
     // This ensures LoginScreen is rendered, and SafeAreaProvider are wrapping it

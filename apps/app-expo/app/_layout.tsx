@@ -30,6 +30,7 @@ function RootLayoutNav() {
   const onNavigateToLogin = () => {
     navigation.navigateLogin();
   };
+
   useEffect(() => {
     if (!isNavigationReady) {
       return;

@@ -9,6 +9,7 @@ export const authLocalDataSourceImpl: AuthLocalDataSource = {
   getIsLoggedIn: async () => {
     if (typeof window !== "undefined") {
       const storedValue = localStorage.getItem(StorageKey.IS_LOGGED_IN);
+      console.log("Stored value from localStorage:", storedValue);
       if (storedValue) {
         try {
           const parsed = JSON.parse(storedValue) as boolean;
@@ -22,7 +23,7 @@ export const authLocalDataSourceImpl: AuthLocalDataSource = {
     return null;
   },
   setIsLoggedIn: async (isLoggedIn: boolean) => {
+    localStorage.setItem(StorageKey.IS_LOGGED_IN, JSON.stringify(isLoggedIn));
     console.log("Setting isLoggedIn to:", isLoggedIn);
-    await new Promise((resolve) => setTimeout(resolve, 500));
   },
 };

@@ -43,6 +43,7 @@ const nextConfig: NextConfig = {
     const originalExtensions = [...config.resolve.extensions];
     const preferredExtensions = [
       ".web.tsx",
+      ".next.ts",
       ".web.ts",
       ".web.jsx",
       ".web.js",

@@ -14,6 +14,7 @@ function AuthenticatedContent({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (isLoggedIn === null) return;
     if (!isLoggedIn) {
+      console.log("User is not logged in, redirecting to login...");
       navigation.navigateLogin();
     }
   }, [isLoggedIn, navigation]);
@@ -33,7 +34,9 @@ function AuthenticatedContent({ children }: { children: React.ReactNode }) {
   return (
     <View className="flex flex-col min-h-screen">
       <main className="flex-1">{children}</main>
-      <TabBar />
+      <View className="sticky bottom-0 ">
+        <TabBar />
+      </View>
     </View>
   );
 }

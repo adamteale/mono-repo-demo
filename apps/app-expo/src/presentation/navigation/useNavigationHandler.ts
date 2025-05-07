@@ -21,5 +21,8 @@ export const useNavigationHandler = (): NavigationService => {
     navigateLogin: () => {
       router.replace({ pathname: "/(auth)/login" });
     },
+    navigateToRoute: (route: string) => {
+      console.log("Navigating to route:", route);
+    },
   };
 };

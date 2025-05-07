@@ -1,33 +1,22 @@
-import { ReactNode, useEffect } from "react";
-import { View } from "react-native";
+import { ReactNode, useCallback } from "react";
 
 import { AuthContext } from "@Presentation/context";
 import { useLocalStorageState } from "@Presentation/context/useLocalStorageState";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [isLoggedIn, setIsLoggedIn, isLoading] = useLocalStorageState();
+  const [isLoggedIn, setIsLoggedIn] = useLocalStorageState();
 
-  console.log("AuthProvider: isLoggedIn:", isLoggedIn);
-  useEffect(() => {
-    console.log("AuthProvider: isLoggedIn changed:", isLoggedIn);
-  }, [isLoggedIn]);
+  const login = useCallback(() => {
+    setIsLoggedIn(true);
+  }, [setIsLoggedIn]);
 
-  if (isLoading) {
-    return <View>Loading authentication status...</View>;
-  }
-
-  const handleLogin = () => {
-    setIsLoggedIn(true).catch((err) => console.error("Login failed:", err));
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false).catch((err) => console.error("Logout failed:", err));
-  };
+  const logout = useCallback(() => {
+    console.log("Logging out...");
+    setIsLoggedIn(false);
+  }, [setIsLoggedIn]);
 
   return (
-    <AuthContext.Provider
-      value={{ isLoggedIn, login: handleLogin, logout: handleLogout }}
-    >
+    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
