@@ -17,13 +17,6 @@ export const HomeScreen = () => {
   if (props) {
     const { children, head, ...rest } = props;
     page = <PgPage {...rest}>{children}</PgPage>;
-    // page = (
-    //   <ScrollView horizontal={false} className="bg-white">
-    //     <View className="lg:max-w-[90rem] lg:mx-auto">
-    //       <PgPage {...rest}>{children}</PgPage>
-    //     </View>
-    //   </ScrollView>
-    // );
   } else {
     page = (
       <SafeAreaView className="flex-1 justify-center items-center h-full">

@@ -10,15 +10,11 @@ export const Layout = ({ header, footer, children }: LayoutProps) => {
       <View className="flex-1 bg-white">
         {/* <OrHeader {...header} /> */}
 
-        <ScrollView
-          horizontal={false}
-          className="flex-1"
-          keyboardShouldPersistTaps="handled"
-        >
-          <View className="w-full grow lg:max-w-[90rem] lg:mx-auto lg:px-0">
-            {children}
+        <View className="flex-1">
+          <View className="w-full lg:max-w-[90rem] lg:mx-auto h-full flex flex-col">
+            <View className="flex-1">{children}</View>
           </View>
-        </ScrollView>
+        </View>
 
         {footer && <OrFooter {...footer} />}
       </View>

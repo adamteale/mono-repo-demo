@@ -142,13 +142,21 @@ export const BlocksRenderer = ({ blocks, id }: BlocksRendererProps) => {
   }, []);
 
   return (
-    <FlatList
-      data={blocks || []} // Provide an empty array as a default
-      renderItem={renderItem}
-      keyExtractor={keyExtractor}
-      horizontal={false}
-      scrollEnabled={false}
-      contentContainerClassName="lg:max-w-[90rem] lg:mx-auto"
-    />
+    <View className="w-screen h-full">
+      <FlatList
+        data={blocks}
+        renderItem={(item) => {
+          return (
+            <View className="w-screen lg:max-w-[90rem]">
+              {renderItem(item)}
+            </View>
+          );
+        }}
+        keyExtractor={keyExtractor}
+        horizontal={false}
+        scrollEnabled={true}
+        className="h-screen" //important for web
+      />
+    </View>
   );
 };
