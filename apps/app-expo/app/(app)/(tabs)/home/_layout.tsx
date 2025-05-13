@@ -16,7 +16,8 @@ export default function HomeStackLayout() {
   return (
     <Stack
       screenOptions={{
-        header: () => <CustomHeader />,
+        headerShown: false,
+        // header: () => <CustomHeader />,
       }}
     >
       <Stack.Screen name={HomeRoutes.Home} />

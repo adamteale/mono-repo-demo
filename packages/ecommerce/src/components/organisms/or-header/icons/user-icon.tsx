@@ -8,7 +8,7 @@ export const UserIcon = ({ linkProps }: UserIconProps) => {
   return (
     <AtLink
       {...linkProps}
-      className="!text-icon-active !hover:text-icon-active"
+      className="!text-icon-active !hover:text-icon-active text-white"
       iconProps={{ type: "user" }}
     />
   );

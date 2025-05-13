@@ -1,0 +1,8 @@
+{
+    "name": "@monorepo-demo/tailwind-config",
+    "version": "1.0.0",
+    "main": "tailwind.config.common.js",
+    "files": [
+        "tailwind.config.common.js"
+    ]
+}

@@ -10,7 +10,7 @@ export const Page = (page: PageProps) => {
   const props = useContentfulPageToProps(page);
   const globalData = normalizeGlobalData(page.globalData);
   const selectedTheme = page?.globalData?.themeVariables;
-
+  console.log("Page", page);
   useTheme(selectedTheme); // Brings theme config from CMS
 
   // 500 page if no props are obtained for the page

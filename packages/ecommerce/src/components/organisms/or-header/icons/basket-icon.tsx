@@ -47,7 +47,7 @@ export const BasketIcon = ({
         {!showPopUpBasket && (
           <AtLink
             {...linkProps}
-            className="!text-icon-active !hover:text-icon-active"
+            className="!text-icon-active !hover:text-icon-active text-white"
             iconProps={{ type: "shopping-cart" }}
           />
         )}

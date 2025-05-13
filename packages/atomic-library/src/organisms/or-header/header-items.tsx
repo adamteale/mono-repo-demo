@@ -52,7 +52,7 @@ export const HeaderItems = ({
                 isIndexZero: idx === 0,
               })}
               label={item.label}
-              labelClassName="font-bold xl:font-normal"
+              labelClassName="xl:font-normal text-white hover:underline underline-offset-8 text-lg"
               linkProps={linkProps}
               onClick={onClick}
               showIcon={isDesktop ? false : showIcon}

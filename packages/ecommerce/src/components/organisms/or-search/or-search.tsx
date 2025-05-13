@@ -1,12 +1,29 @@
-import React, { useEffect, useRef, useState } from "react";
-
-import { View } from "react-native";
-
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
+import {
+  View,
+  Keyboard,
+  TextInput,
+  Platform,
+  useWindowDimensions,
+  TouchableOpacity,
+} from "react-native";
 import { OrSearchBarSize, OrSearchProps } from "./or-search.types";
 import { Results } from "./results/results";
-import { AtTextInput, useIsSmallDesktop } from "@mono-repo-demo/atomic-library";
-import { useMobileSearchboxContext } from "../../utils";
+import { AtTextInput } from "@mono-repo-demo/atomic-library";
+// import { useMobileSearchboxContext } from '../../utils'; // Needs RN implementation
 import { OrSearchSubmitButton } from "./or-search-submit-button";
+
+// Placeholder for RN useMobileSearchboxContext
+const useMobileSearchboxContext = () => ({
+  showMobileSearchbox: false,
+  toggleMobileSearchbox: () => {},
+});
 
 export const OrSearch = ({
   currentQuery,
@@ -32,83 +49,83 @@ export const OrSearch = ({
   searchBarSize = OrSearchBarSize.SMALL,
   showResults = true,
 }: OrSearchProps) => {
-  // const [timerId, setTimerId] = useState<NodeJS.Timeout>();
   const [inputValue, setInputValue] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<TextInput>(null);
+  const { width } = useWindowDimensions();
+
+  // Placeholder for RN useMobileSearchboxContext
   const { showMobileSearchbox, toggleMobileSearchbox } =
     useMobileSearchboxContext();
 
-  const isSmallDesktopViewport = useIsSmallDesktop();
+  // RN doesn't have a direct equivalent to isSmallDesktop
+  const isSmallDesktopViewport = width < 768; // Example breakpoint
+
   useEffect(() => {
-    // Handle update of the input value with existing currentQuery when viewport changes
-    // This is to persist the value of the input and the render of the results
-    if (currentQuery && inputValue !== currentQuery)
+    if (currentQuery && inputValue !== currentQuery) {
       setInputValue(currentQuery);
-
-    if (isSmallDesktopViewport) inputRef.current?.focus();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }
+    // Focus the input on mount if it's a small screen
+    if (isSmallDesktopViewport) {
+      inputRef.current?.focus();
+    }
   }, [isSmallDesktopViewport, currentQuery]);
 
   useEffect(() => {
-    // Handle clear refinements
-    if (!currentQuery) setInputValue("");
+    if (!currentQuery) {
+      setInputValue("");
+    }
   }, [currentQuery]);
 
-  // const handleOnChangeDebounced = (value: string) => {
-  //   if (timerId) clearTimeout(timerId);
-  //   setInputValue(value);
-  //   setTimerId(setTimeout(() => onChange(value), 250));
-  // };
-
-  const handleOnClearButtonClick = () => {
+  const handleOnClearButtonClick = useCallback(() => {
     onClearButtonClick();
     setInputValue("");
-  };
+    // Keep focus after clearing
+    inputRef.current?.focus();
+  }, [onClearButtonClick]);
 
-  const handleOnSubmit = (
-    event:
-      | React.FormEvent<HTMLFormElement>
-      | React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const handleOnSubmit = () => {
     if (inputValue === "") return;
 
-    if (showMobileSearchbox) toggleMobileSearchbox();
+    if (showMobileSearchbox) {
+      toggleMobileSearchbox();
+    }
 
     onClearButtonClick();
     setInputValue("");
+    onSubmit(inputValue); // Pass the input value to the onSubmit handler
 
-    onSubmit(event);
+    Keyboard.dismiss(); // Dismiss the keyboard after submit
   };
 
   return (
     <View className="relative">
-      <form onSubmit={handleOnSubmit}>
-        <AtTextInput
-          ref={inputRef}
-          placeholder={placeholder}
-          value={inputValue}
-          // handleChange={handleOnChangeDebounced}
-          className={`${
-            searchBarSize === OrSearchBarSize.LARGE ? "!h-16" : "!h-14"
-          }`}
-          onClearInputClick={handleOnClearButtonClick}
-          required
-          showClearButton
-          clearButtonOptions={{
-            className: "mr-11",
-            type: "cancel-circle",
-          }}
-          dataTestId={`search-input-${dataTestId}`}
+      {/* No form needed in React Native */}
+      <View className="flex-row items-center">
+        <View className="flex-1">
+          <AtTextInput
+            ref={inputRef}
+            placeholder={placeholder}
+            value={inputValue}
+            onChange={() => setInputValue} // Direct update, no debounce
+            className={`${
+              searchBarSize === OrSearchBarSize.LARGE ? "h-16" : "h-14"
+            }`}
+            onClearInputClick={handleOnClearButtonClick}
+            showClearButton={true}
+            clearButtonOptions={{
+              className: "mr-2", // Reduced margin
+              type: "cancel",
+            }}
+            onSubmit={handleOnSubmit} // Handle submit via keyboard
+          />
+        </View>
+        <OrSearchSubmitButton
+          onSubmit={handleOnSubmit}
+          searchBarSize={searchBarSize}
         />
-      </form>
+      </View>
 
-      <OrSearchSubmitButton
-        onSubmit={handleOnSubmit}
-        searchBarSize={searchBarSize}
-      />
-
-      {currentQuery && (
+      {currentQuery && showResults && (
         <Results
           query={currentQuery}
           showResults={showResults}

@@ -31,7 +31,7 @@ export const inputWrapperClasses = cva(inputWrapperBaseClass, {
 });
 
 const inputBaseClass =
-  "px-3 h-12 w-full rounded-lg text-primary placeholder:text-tertiary placeholder:text-base placeholder:leading-4";
+  "px-3 h-12 w-full rounded-lg text-primary placeholder:text-tertiary placeholder:text-base placeholder:leading-4 bg-white";
 
 export const inputClasses = cva(inputBaseClass, {
   variants: {

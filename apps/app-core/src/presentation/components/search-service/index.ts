@@ -1,2 +1,2 @@
 export * from "@search/algolia";
-// export * from "./card-renderer/algolia/card-renderer";
+export * from "./card-renderer/algolia/card-renderer";

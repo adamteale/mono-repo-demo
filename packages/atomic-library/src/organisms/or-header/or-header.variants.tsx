@@ -29,3 +29,26 @@ export const menuItemClasses = cva(menuItemBaseClass, {
   },
   defaultVariants: { isMenuOpenDesktop: false, isIndexZero: true },
 });
+
+const searchboxContainerBaseClass = `
+    transition ease-out duration-500
+    flex flex-col 2xl:hidden
+    w-full h-full
+    fixed top-0 right-0 z-50
+    bg-surface-primary
+    px-7 py-5
+    overflow-y-scroll
+`;
+
+export const searchboxContainerClasses = cva(searchboxContainerBaseClass, {
+  variants: {
+    showMobileSearchbox: {
+      true: "translate-x-0", // Show the search box: no translation
+      false: "translate-x-[110vw]", // Hide it: off-screen
+    },
+  },
+  defaultVariants: {
+    // Add a default variant to ENSURE initial visibility.
+    showMobileSearchbox: false, // Or true, depending on initial desired state
+  },
+});

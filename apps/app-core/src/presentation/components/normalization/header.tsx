@@ -32,7 +32,6 @@ export const BASKET_TEXT_PLACEHOLDERS = {
 export const normalizeHeader = (
   header: CMSHeader,
   basketState: BasketState,
-  // searchState: SearchState,
   {
     search,
     updateBasket,
@@ -155,37 +154,30 @@ export const normalizeHeader = (
           ),
         }
       : undefined,
-    searchBox: undefined,
-    // {
-    // onSubmit: searchOnSubmit,
-    // onChange: (query: any) => search({ text: query }),
-    // onClearButtonClick: () => search({}),
-    // placeholder: header?.searchbox?.placeholder ?? "",
-    // currentQuery: searchState.query ?? "",
-    // resultsTitle: header?.searchbox?.resultsTitle,
-    // resultsDisplayVariant: header?.searchbox
-    //   ?.resultsDisplayVariant as SearchItemDisplayVariants,
-    // seeMoreResultsLinkProps: {
-    //   href: getSearchUrl(searchState.query),
-    //   linkWrapper: Link,
-    // },
-    // seeMoreResultsLabel: header?.searchbox?.seeMoreResultsLabel,
-    // totalAmountOfResults: searchState.results?.totalCount ?? 0,
-    // noResultsFoundLabel: header?.searchbox?.noResultsFoundLabel,
-    // suggestionsTitle: "Featured Products",
-    // totalAmountOfSuggestions: searchState.results?.suggestions?.length ?? 0,
-    // suggestions:
-    //   normalizeSearchSuggestion(
-    //     searchState.results?.suggestions as any,
-    //     SLUG_KEY.PRODUCTS,
-    //     PLACEHOLDER_IMAGE_PATH
-    //   ) ?? [],
-    // suggestions: [],
-    // suggestionsDisplayVariant: SearchItemDisplayVariants.CARD,
-    // showMoreSuggestions: false,
-    // results: [],
-    // showResults,
-    // },
+    searchBox: {
+      onSubmit: searchOnSubmit,
+      onChange: (query: any) => search({ text: query }),
+      onClearButtonClick: () => search({}),
+      placeholder: header?.searchbox?.placeholder ?? "",
+      currentQuery: "",
+      resultsTitle: header?.searchbox?.resultsTitle,
+      resultsDisplayVariant: header?.searchbox
+        ?.resultsDisplayVariant as SearchItemDisplayVariants,
+      seeMoreResultsLinkProps: {
+        href: getSearchUrl(""),
+        linkWrapper: Link,
+      },
+      seeMoreResultsLabel: header?.searchbox?.seeMoreResultsLabel,
+      totalAmountOfResults: 0,
+      noResultsFoundLabel: header?.searchbox?.noResultsFoundLabel,
+      suggestionsTitle: "Featured Products",
+      totalAmountOfSuggestions: 0,
+      suggestions: undefined,
+      suggestionsDisplayVariant: SearchItemDisplayVariants.CARD,
+      showMoreSuggestions: false,
+      results: [],
+      showResults,
+    },
     menuItems: header.menuItems
       ?.map(normalizeMenuItem)
       .filter((el): el is HeaderMenuItem => !!el),

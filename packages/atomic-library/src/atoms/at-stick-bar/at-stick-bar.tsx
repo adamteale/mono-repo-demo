@@ -17,7 +17,7 @@ export const AtStickBar = ({
       <View className="container flex items-center justify-between">
         <View className="h-4 w-4" />
         <View className="px-2 text-center text-secondary text-xs md:text-sm tracking-wide">
-          <Text>{text}</Text>
+          <Text className="text-white">{text}</Text>
         </View>
         <Pressable
           className="cursor-pointer"

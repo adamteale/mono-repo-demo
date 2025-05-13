@@ -1,4 +1,4 @@
-import { AtLink } from "@mono-repo-demo/atomic-library";
+import { AtLink } from "../../../../../atoms";
 import { TextSearchItemProps } from "./text-search-item.types";
 
 export const TextSearchItem = ({
