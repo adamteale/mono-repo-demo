@@ -34,7 +34,7 @@ export const MlMenuItem = ({
     return showIcon && MenuItemComponent !== View // Use View instead of "span"
       ? {
           accessibilityState: { expanded: isOpen }, // RN uses accessibilityState
-          accessibilityRole: role || "button", // If there's an onClick, it's a button
+          accessibilityRole: role || ("button" as AccessibilityRole), // Ensure type compatibility
           accessible: true, // Make sure it's accessible
         }
       : {};
@@ -69,7 +69,7 @@ export const MlMenuItem = ({
           // accessibilityLabel={ICON_DATA_TEST_ID}
           color={isOpen ? "secondary" : "primary"}
           type={iconType}
-          className="transition-all"
+          className="transition-all fill-white"
         />
       )}
     </MenuItemComponent>

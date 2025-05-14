@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-const commonConfig = require('@monorepo-demo/tailwind-config');
+const commonConfig = require('@mono-repo-demo/tailwind-config');
 
 console.log("tailwind.config.js loaded")
 module.exports = {

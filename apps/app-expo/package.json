@@ -43,6 +43,7 @@
     "react-native-webview": "13.12.5"
   },
   "devDependencies": {
+    "@mono-repo-demo/tailwind-config": "1.0.0",
     "@babel/core": "^7.25.2",
     "@types/jest": "^29.5.12",
     "@types/react": "18.3.1",

@@ -8,6 +8,9 @@ module.exports = {
   presets: [require("nativewind/preset")],
   content: [
     "../../apps/app-core/src/**/*.{js,jsx,ts,tsx}",
+    "../../apps/app-expo/src/**/*.{js,jsx,ts,tsx}",
+    "../../apps/app-next/src/**/*.{js,jsx,ts,tsx}",
+    "../../packages/atomic-library/src/**/*.{js,jsx,ts,tsx}"
   ],
   theme: {
     extend: {
@@ -25,11 +28,6 @@ module.exports = {
         body: "20px"
       },
       colors: {
-        'primary': '#182958',
-        'secondary': '#yourSecondaryColor',
-        'icon-active': '#yourIconActiveColor',
-        'text-base': '#yourTextBaseColor',
-        // Include all default Tailwind colors
         transparent: 'transparent',
         current: 'currentColor',
         black: colors.black,
@@ -42,8 +40,12 @@ module.exports = {
         indigo: colors.indigo,
         purple: colors.purple,
         pink: colors.pink,
-        backgroundPrimary: "#182958",
-        backgroundSecondary: "#f0f5fe",
+        'primary': '#182958',
+        'secondary': '#yourSecondaryColor',
+        'icon-active': '#yourIconActiveColor',
+        'text-base': '#yourTextBaseColor',
+        backgroundPrimary: "#f0f5fe",
+        backgroundSecondary: "#fff",
         backgroundTertiary: "#2B3859",
         backgroundWhite: "#fff",
         buttonCtaBg: "#EE4124",
