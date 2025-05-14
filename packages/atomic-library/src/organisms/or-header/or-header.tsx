@@ -89,6 +89,8 @@ export const OrHeader = ({
           <HeaderItems
             className="hidden xl:flex flex-row items-center gap-x-6"
             menuItems={menuItems}
+            activeItem={0}
+            setActiveItem={() => console.log("active item")}
           />
 
           {/* 4. Search (Conditional Rendering - Mobile vs. Desktop) */}

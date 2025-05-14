@@ -1,206 +1,206 @@
-import { useCallback, useMemo } from "react";
-import { SearchItemDisplayVariants, ResultsProps } from "./results.types";
-import { CardSearchItem } from "./search-item-variants/card-search-item/card-search-item";
-import { AtLink } from "@mono-repo-demo/atomic-library";
-import { useMobileSearchboxContext } from "../../../utils";
-import { OrSearchItem } from "../or-search.types";
-import { TextSearchItem } from "./search-item-variants/text-search-item/text-search-item";
-import { itemsContainerClasses } from "./results.variants";
+// import { useCallback, useMemo } from "react";
+// import { SearchItemDisplayVariants, ResultsProps } from "./results.types";
+// import { CardSearchItem } from "./search-item-variants/card-search-item/card-search-item";
+// import { AtLink } from "@mono-repo-demo/atomic-library";
 
-const DEFAULT_PRICE = "$0.00";
-const MAX_DISPLAYED_ITEMS = 4;
+// import { OrSearchItem } from "../or-search.types";
+// import { TextSearchItem } from "./search-item-variants/text-search-item/text-search-item";
+// import { itemsContainerClasses } from "./results.variants";
 
-export const Results = ({
-  query,
-  noResultsFoundLabel = "We couldn't find any matches for",
-  resultsTitle,
-  results,
-  resultsDisplayVariant = SearchItemDisplayVariants.CARD,
-  totalAmountOfResults,
-  seeMoreResultsLabel = "See all results",
-  seeMoreResultsLinkProps,
-  suggestionsTitle = "Related search",
-  suggestions,
-  suggestionsDisplayVariant = SearchItemDisplayVariants.CARD,
-  totalAmountOfSuggestions,
-  seeMoreSuggestionsLabel = "See more suggestions",
-  seeMoreSuggestionsLinkProps,
-  showMoreSuggestions = true,
-  maxItemsPerSection = MAX_DISPLAYED_ITEMS,
-  dataTestId,
-  showResults = true,
-}: ResultsProps) => {
-  const hasResults = useMemo(
-    () => totalAmountOfResults !== 0,
-    [totalAmountOfResults]
-  );
-  const hasSuggestions = useMemo(
-    () => totalAmountOfSuggestions !== 0,
-    [totalAmountOfSuggestions]
-  );
+// const DEFAULT_PRICE = "$0.00";
+// const MAX_DISPLAYED_ITEMS = 4;
 
-  const { showMobileSearchbox, toggleMobileSearchbox } =
-    useMobileSearchboxContext();
+// export const Results = ({
+//   query,
+//   noResultsFoundLabel = "We couldn't find any matches for",
+//   resultsTitle,
+//   results,
+//   resultsDisplayVariant = SearchItemDisplayVariants.CARD,
+//   totalAmountOfResults,
+//   seeMoreResultsLabel = "See all results",
+//   seeMoreResultsLinkProps,
+//   suggestionsTitle = "Related search",
+//   suggestions,
+//   suggestionsDisplayVariant = SearchItemDisplayVariants.CARD,
+//   totalAmountOfSuggestions,
+//   seeMoreSuggestionsLabel = "See more suggestions",
+//   seeMoreSuggestionsLinkProps,
+//   showMoreSuggestions = true,
+//   maxItemsPerSection = MAX_DISPLAYED_ITEMS,
+//   dataTestId,
+//   showResults = true,
+// }: ResultsProps) => {
+//   const hasResults = useMemo(
+//     () => totalAmountOfResults !== 0,
+//     [totalAmountOfResults]
+//   );
+//   const hasSuggestions = useMemo(
+//     () => totalAmountOfSuggestions !== 0,
+//     [totalAmountOfSuggestions]
+//   );
 
-  const onItemClick = useCallback(() => {
-    if (showMobileSearchbox) toggleMobileSearchbox();
-  }, [showMobileSearchbox, toggleMobileSearchbox]);
+//   const { showMobileSearchbox, toggleMobileSearchbox } =
+//     useMobileSearchboxContext();
 
-  const mapItems = useCallback(
-    (
-      items: OrSearchItem[] | undefined,
-      displayVariant: SearchItemDisplayVariants
-    ) => {
-      if (!items) return [];
+//   const onItemClick = useCallback(() => {
+//     if (showMobileSearchbox) toggleMobileSearchbox();
+//   }, [showMobileSearchbox, toggleMobileSearchbox]);
 
-      return items
-        ?.map((item, index) => {
-          const {
-            link,
-            name,
-            slug,
-            price,
-            image,
-            discountPercentage,
-            description,
-            originalPrice,
-          } = item;
+//   const mapItems = useCallback(
+//     (
+//       items: OrSearchItem[] | undefined,
+//       displayVariant: SearchItemDisplayVariants
+//     ) => {
+//       if (!items) return [];
 
-          if (!name || !slug || !link) return null;
+//       return items
+//         ?.map((item, index) => {
+//           const {
+//             link,
+//             name,
+//             slug,
+//             price,
+//             image,
+//             discountPercentage,
+//             description,
+//             originalPrice,
+//           } = item;
 
-          if (displayVariant === SearchItemDisplayVariants.TEXT) {
-            return (
-              <TextSearchItem
-                key={`item-${index}-${slug}`}
-                link={link}
-                name={name}
-                onClick={onItemClick}
-              />
-            );
-          }
+//           if (!name || !slug || !link) return null;
 
-          const itemProps = {
-            link,
-            name,
-            price: price ?? DEFAULT_PRICE,
-            shortDescription: description,
-            discountPercentage,
-            originalPrice,
-            image,
-          };
+//           if (displayVariant === SearchItemDisplayVariants.TEXT) {
+//             return (
+//               <TextSearchItem
+//                 key={`item-${index}-${slug}`}
+//                 link={link}
+//                 name={name}
+//                 onClick={onItemClick}
+//               />
+//             );
+//           }
 
-          return (
-            <CardSearchItem
-              key={`item-${index}-${slug}`}
-              onClick={onItemClick}
-              {...itemProps}
-            />
-          );
-        })
-        .filter(Boolean)
-        .slice(0, maxItemsPerSection);
-    },
-    [maxItemsPerSection, onItemClick]
-  );
+//           const itemProps = {
+//             link,
+//             name,
+//             price: price ?? DEFAULT_PRICE,
+//             shortDescription: description,
+//             discountPercentage,
+//             originalPrice,
+//             image,
+//           };
 
-  const mappedResults = useMemo(
-    () => mapItems(results, resultsDisplayVariant),
-    [mapItems, results, resultsDisplayVariant]
-  );
+//           return (
+//             <CardSearchItem
+//               key={`item-${index}-${slug}`}
+//               onClick={onItemClick}
+//               {...itemProps}
+//             />
+//           );
+//         })
+//         .filter(Boolean)
+//         .slice(0, maxItemsPerSection);
+//     },
+//     [maxItemsPerSection, onItemClick]
+//   );
 
-  const mappedSuggestions = useMemo(
-    () => mapItems(suggestions, suggestionsDisplayVariant),
-    [mapItems, suggestions, suggestionsDisplayVariant]
-  );
+//   const mappedResults = useMemo(
+//     () => mapItems(results, resultsDisplayVariant),
+//     [mapItems, results, resultsDisplayVariant]
+//   );
 
-  return (
-    <div
-      className={`
-        xl:absolute xl:right-0 z-20
-        mt-2 pt-2 xl:py-6 xl:px-4
-        w-full xl:w-[28.375rem]
-        bg-surface-primary
-        rounded-lg
-        xl:shadow
-        ${showResults ? "xl:block" : "xl:hidden"}
-        `}
-      data-testid={dataTestId}
-    >
-      {hasResults && mappedResults?.length > 0 ? (
-        <>
-          {resultsTitle && (
-            <span className="block mb-4 text-primary font-bold text-lg leading-5 max-w-max">
-              {resultsTitle}
-            </span>
-          )}
+//   const mappedSuggestions = useMemo(
+//     () => mapItems(suggestions, suggestionsDisplayVariant),
+//     [mapItems, suggestions, suggestionsDisplayVariant]
+//   );
 
-          <div
-            className={`${itemsContainerClasses({
-              displayVariant: resultsDisplayVariant,
-            })}`}
-            data-testid="search-results-container"
-          >
-            {mappedResults}
-          </div>
+//   return (
+//     <div
+//       className={`
+//         xl:absolute xl:right-0 z-20
+//         mt-2 pt-2 xl:py-6 xl:px-4
+//         w-full xl:w-[28.375rem]
+//         bg-surface-primary
+//         rounded-lg
+//         xl:shadow
+//         ${showResults ? "xl:block" : "xl:hidden"}
+//         `}
+//       data-testid={dataTestId}
+//     >
+//       {hasResults && mappedResults?.length > 0 ? (
+//         <>
+//           {resultsTitle && (
+//             <span className="block mb-4 text-primary font-bold text-lg leading-5 max-w-max">
+//               {resultsTitle}
+//             </span>
+//           )}
 
-          <div className="flex flex-col items-center w-full mt-4">
-            <AtLink
-              {...seeMoreResultsLinkProps}
-              className="w-fit"
-              onClick={onItemClick}
-              dataTestId="see-more-results-link"
-            >
-              <span className="text-center font-normal text-sm leading-4 hover:underline">
-                {seeMoreResultsLabel} &#40;{totalAmountOfResults}&#41;
-              </span>
-            </AtLink>
-          </div>
-        </>
-      ) : (
-        <p
-          className={`
-          whitespace-normal truncate
-          text-base text-primary
-          leading-5 w-full`}
-        >
-          {noResultsFoundLabel}{" "}
-          <span className="font-bold">&ldquo;{query}&rdquo;</span>
-        </p>
-      )}
+//           <div
+//             className={`${itemsContainerClasses({
+//               displayVariant: resultsDisplayVariant,
+//             })}`}
+//             data-testid="search-results-container"
+//           >
+//             {mappedResults}
+//           </div>
 
-      {hasSuggestions && mappedSuggestions?.length > 0 && (
-        <div className="mt-6">
-          {suggestionsTitle && (
-            <span className="block mb-4 text-primary font-bold text-lg leading-5 max-w-max">
-              {suggestionsTitle}
-            </span>
-          )}
+//           <div className="flex flex-col items-center w-full mt-4">
+//             <AtLink
+//               {...seeMoreResultsLinkProps}
+//               className="w-fit"
+//               onClick={onItemClick}
+//               dataTestId="see-more-results-link"
+//             >
+//               <span className="text-center font-normal text-sm leading-4 hover:underline">
+//                 {seeMoreResultsLabel} &#40;{totalAmountOfResults}&#41;
+//               </span>
+//             </AtLink>
+//           </div>
+//         </>
+//       ) : (
+//         <p
+//           className={`
+//           whitespace-normal truncate
+//           text-base text-primary
+//           leading-5 w-full`}
+//         >
+//           {noResultsFoundLabel}{" "}
+//           <span className="font-bold">&ldquo;{query}&rdquo;</span>
+//         </p>
+//       )}
 
-          <div
-            className={`${itemsContainerClasses({
-              displayVariant: suggestionsDisplayVariant,
-            })}`}
-            data-testid="search-suggestions-container"
-          >
-            {mappedSuggestions}
-          </div>
+//       {hasSuggestions && mappedSuggestions?.length > 0 && (
+//         <div className="mt-6">
+//           {suggestionsTitle && (
+//             <span className="block mb-4 text-primary font-bold text-lg leading-5 max-w-max">
+//               {suggestionsTitle}
+//             </span>
+//           )}
 
-          {showMoreSuggestions && (
-            <div className="flex flex-col items-center w-full mt-4">
-              <AtLink
-                {...seeMoreSuggestionsLinkProps}
-                onClick={onItemClick}
-                className="w-fit"
-                dataTestId="see-more-suggestions-link"
-              >
-                <span className="text-center font-normal text-sm leading-4 hover:underline">
-                  {seeMoreSuggestionsLabel} &#40;{totalAmountOfSuggestions}&#41;
-                </span>
-              </AtLink>
-            </div>
-          )}
-        </div>
-      )}
-    </div>
-  );
-};
+//           <div
+//             className={`${itemsContainerClasses({
+//               displayVariant: suggestionsDisplayVariant,
+//             })}`}
+//             data-testid="search-suggestions-container"
+//           >
+//             {mappedSuggestions}
+//           </div>
+
+//           {showMoreSuggestions && (
+//             <div className="flex flex-col items-center w-full mt-4">
+//               <AtLink
+//                 {...seeMoreSuggestionsLinkProps}
+//                 onClick={onItemClick}
+//                 className="w-fit"
+//                 dataTestId="see-more-suggestions-link"
+//               >
+//                 <span className="text-center font-normal text-sm leading-4 hover:underline">
+//                   {seeMoreSuggestionsLabel} &#40;{totalAmountOfSuggestions}&#41;
+//                 </span>
+//               </AtLink>
+//             </div>
+//           )}
+//         </div>
+//       )}
+//     </div>
+//   );
+// };

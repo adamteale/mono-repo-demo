@@ -1,6 +1,6 @@
 // import { Dispatch } from 'react'
 // import { AutocompleteApi, AutocompleteCollection, AutocompleteState, BaseItem } from '@algolia/autocomplete-core'
-// import { AlgoliaHit } from '../types'
+import { AlgoliaHit } from "../types";
 
 // export enum SearchActionTypes {
 //   START_ACTION = '@start-search-action',
@@ -47,7 +47,7 @@
 //   search: (query: SearchQueryDto) => Promise<void>
 // }
 
-// export type SearchResponse = AlgoliaHit
+export type SearchResponse = AlgoliaHit;
 
 // export interface AlgoliaResponseData {
 //   results: SearchResponse[]

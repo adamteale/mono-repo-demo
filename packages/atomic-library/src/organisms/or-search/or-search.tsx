@@ -9,7 +9,7 @@ import {
 
 // --- ORIGINAL IMPORTS (ASSUMED TO BE RN COMPATIBLE) ---
 import { OrSearchBarSize, OrSearchProps } from "./or-search.types"; // Ensure types compatible
-import { Results } from "./results/results"; // Needs RN version
+// import { Results } from "./results/results"; // Needs RN version
 
 // import { useMobileSearchboxContext } from '../../utils'; // Assumed RN compatible
 import { OrSearchSubmitButton } from "./or-search-submit-button"; // Needs RN version
@@ -171,7 +171,7 @@ export const OrSearch = ({
       <View className="flex-row items-center">
         <View className="flex-1">
           <AtTextInput
-            ref={inputRef}
+            // ref={inputRef}
             placeholder={placeholder}
             value={inputValue}
             // Use onChangeText in React Native
@@ -189,13 +189,13 @@ export const OrSearch = ({
             // The `mr-11` logic needs to be applied to the clear button's container within AtTextInput
             // to make space for the submit button if they are overlaid.
             // dataTestId -> accessibilityLabel / testID
-            accessibilityLabel={`search-input-${dataTestId}`}
-            testID={`search-input-${dataTestId}`}
+            // accessibilityLabel={`search-input-${dataTestId}`}
+            dataTestId={`search-input-${dataTestId}`}
             // Handle submission via keyboard (e.g., "Go", "Search")
-            onSubmitEditing={handleTextInputSubmitEditing}
+            // onSubmitEditing={handleTextInputSubmitEditing}
             // Standard RN TextInput props (ensure AtTextInput passes them down)
-            returnKeyType="search"
-            blurOnSubmit={false}
+            // returnKeyType="search"
+            // blurOnSubmit={false}
           />
           <View style={{ position: "absolute", right: 0, top: 10 }}>
             <OrSearchSubmitButton
@@ -206,7 +206,7 @@ export const OrSearch = ({
         </View>
       </View>
 
-      {currentQuery && showResults && (
+      {/* {currentQuery && showResults && (
         <Results
           query={currentQuery}
           showResults={showResults}
@@ -226,7 +226,7 @@ export const OrSearch = ({
           totalAmountOfSuggestions={totalAmountOfSuggestions}
           dataTestId={`results-container-${dataTestId}`}
         />
-      )}
+      )} */}
     </View>
   );
 };

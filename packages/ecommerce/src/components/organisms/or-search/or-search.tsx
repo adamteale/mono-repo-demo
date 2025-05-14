@@ -92,7 +92,7 @@ export const OrSearch = ({
 
     onClearButtonClick();
     setInputValue("");
-    onSubmit(inputValue); // Pass the input value to the onSubmit handler
+    // onSubmit(inputValue); // Pass the input value to the onSubmit handler
 
     Keyboard.dismiss(); // Dismiss the keyboard after submit
   };
