@@ -35,8 +35,13 @@ export const OrHeroBanner: React.FC<OrHeroBannerProps> = ({
     contentAlignment: align,
     layoutType: layoutType,
   });
+
   return (
-    <View testID={dataTestId} className={`${containerClasses} ${className}`}>
+    <View
+      testID={dataTestId}
+      className={`${containerClasses} ${className}`}
+      data-theme="dark"
+    >
       <BannerImage variant={variant} image={image} />
 
       <BannerContent

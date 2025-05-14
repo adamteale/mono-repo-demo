@@ -7,7 +7,8 @@ import {
 } from "./or-hero-banner.types";
 
 //HERO BANNER
-const heroBannerContainerBaseClass = "flex relative bg-surface-primary w-full";
+const heroBannerContainerBaseClass =
+  "flex relative bg-surface-secondary w-full";
 export const heroBannerContainerClasses = cva(heroBannerContainerBaseClass, {
   variants: {
     variant: {

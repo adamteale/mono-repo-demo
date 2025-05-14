@@ -84,8 +84,10 @@
 
 /* Dark Mode Overrides */
 [data-theme="dark"] {
-  --color-background-primary: #0c1221;
-  --color-background-secondary: #333;
+  /* Here you would override the variables to define your dark theme colors */
+  /* For example: */
+  --color-background-primary: #0c1221; /* Darker version */
+  --color-background-secondary: #333; /* Darker version */
 
   /* Surface Colors */
   --color-surface-primary: #333333;
@@ -96,4 +98,38 @@
   --color-icon-primary: #fff;
 
   --color-brand-primary: #9996a0;
+}
+
+/* Theme Classes */
+.light-mode-backgroundPrimary {
+  @apply bg-[var(--color-background-primary)];
+}
+
+.light-mode-backgroundSecondary {
+  @apply bg-[var(--color-background-secondary)];
+}
+
+.light-mode-textPrimary {
+  @apply text-[var(--color-text-primary)];
+}
+
+.dark-mode-backgroundPrimary {
+  @apply bg-[var(--color-background-primary)];
+}
+
+.dark-mode-backgroundSecondary {
+  @apply bg-[var(--color-background-secondary)];
+}
+
+.dark-mode-textPrimary {
+  @apply text-[var(--color-text-primary)];
+}
+
+/* Add theme classes for other colors as needed */
+.light-mode-surfacePrimary {
+  @apply bg-[var(--color-surface-primary)];
+}
+
+.dark-mode-surfacePrimary {
+  @apply bg-[var(--color-surface-primary)];
 }
