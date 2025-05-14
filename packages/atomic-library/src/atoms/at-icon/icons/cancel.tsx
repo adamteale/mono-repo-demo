@@ -8,6 +8,7 @@ export const CancelIcon = ({
   dataTestId,
   ariaHidden,
 }: IconProps) => {
+  console.log("CancelIcon", className, fill);
   return (
     <Svg
       width={size}

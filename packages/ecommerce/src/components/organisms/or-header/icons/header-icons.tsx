@@ -21,13 +21,13 @@ export const HeaderIcons = ({
   basketTotalItems,
   userIconLink,
 }: HeaderIconsProps) => {
-  const basketRef = useRef<View>(null); // Ref is now for a View
+  const basketRef = useRef<HTMLDivElement>(null); // Ref is now for a View
   const [isBasketDisplayed, setBasketDisplayed] = useState(false);
   const [basketDelayHandler, setBasketDelayHandler] = useState<
     ReturnType<typeof setTimeout> | undefined
   >(undefined); // Changed type
 
-  useClickOutside(basketRef, () => setBasketDisplayed(false));
+  // useClickOutside(basketRef, () => setBasketDisplayed(false));
 
   // In RN, there's no direct mouseEnter/Leave. This logic needs to be triggered by other events (e.g., press)
   // For now, we'll just keep the state and the handleCloseBasket function
@@ -53,9 +53,9 @@ export const HeaderIcons = ({
         isBasketDisplayed={isBasketDisplayed}
         popUpBasket={popUpBasket}
         basketProductNotification={basketProductNotification}
-        // handleBasketMouseEnter={handleBasketMouseEnter} // Remove mouse events
-        // handleBasketMouseLeave={handleBasketMouseLeave}
-        onPress={handleBasketPress} // Use onPress instead
+        handleBasketMouseEnter={() => console.log("enter basket")}
+        handleBasketMouseLeave={() => console.log("leave basket")}
+        // onPress={handleBasketPress} // Use onPress instead
       />
       {userIconLink?.href && <UserIcon linkProps={userIconLink} />}
     </View>

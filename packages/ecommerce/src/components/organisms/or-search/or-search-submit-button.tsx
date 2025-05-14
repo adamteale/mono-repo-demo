@@ -1,3 +1,4 @@
+import React from "react";
 import {
   AtButton,
   AtButtonVariants,
@@ -12,18 +13,21 @@ export const OrSearchSubmitButton = ({
 }: OrSearchSubmitButtonProps) => {
   return (
     <AtButton
-      className={`absolute right-[0.3125rem] top-[0.3125rem] !rounded ${
+      className={`absolute right-[0.3125rem] top-20 !rounded ${
         searchBarSize === OrSearchBarSize.LARGE
           ? "max-w-14 max-h-14"
           : "max-w-12 max-h-12"
-      }`}
+      } `}
       variant={AtButtonVariants.PRIMARY}
       onClick={(e) =>
         onSubmit(e as React.MouseEvent<HTMLButtonElement, MouseEvent>)
       }
       disabled={disabled}
     >
-      <AtIcon color={disabled ? "primary" : "secondary"} type="search" />
+      <AtIcon
+        color={disabled ? "disabled-primary" : "secondary"}
+        type="search"
+      />
     </AtButton>
   );
 };

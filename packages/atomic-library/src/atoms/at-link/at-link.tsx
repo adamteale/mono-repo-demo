@@ -6,7 +6,7 @@ import {
   Linking,
   AccessibilityRole,
 } from "react-native";
-import { AtIcon } from "../at-icon";
+import { AtIcon, iconColors } from "../at-icon";
 import { AtLinkProps, IconPositions, OnClickProps } from "./at-link.types";
 import { buttonVariants } from "../at-button/at-button.variants";
 import { linkVariant } from "./at-link.variants";
@@ -64,7 +64,7 @@ export const AtLink = ({
             <AtIcon
               className={`${iconLeftClasses}`}
               {...iconProps}
-              color="currentColor"
+              color={iconProps.color ?? "currentColor"}
             />
           )}
           {label && (
@@ -74,7 +74,7 @@ export const AtLink = ({
             <AtIcon
               className={`${iconRightClasses}`}
               {...iconProps}
-              color="currentColor"
+              color={iconProps.color ?? "currentColor"}
             />
           )}
         </View>

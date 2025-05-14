@@ -99,26 +99,26 @@ export const OrSearch = ({
 
   return (
     <View className="relative">
-      {/* No form needed in React Native */}
       <View className="flex-row items-center">
-        <View className="flex-1">
-          <AtTextInput
-            ref={inputRef}
-            placeholder={placeholder}
-            value={inputValue}
-            onChange={() => setInputValue} // Direct update, no debounce
-            className={`${
-              searchBarSize === OrSearchBarSize.LARGE ? "h-16" : "h-14"
-            }`}
-            onClearInputClick={handleOnClearButtonClick}
-            showClearButton={true}
-            clearButtonOptions={{
-              className: "mr-2", // Reduced margin
-              type: "cancel",
-            }}
-            onSubmit={handleOnSubmit} // Handle submit via keyboard
-          />
-        </View>
+        <AtTextInput
+          ref={inputRef}
+          placeholder={placeholder}
+          value={inputValue}
+          onChange={() => setInputValue}
+          className={`${
+            searchBarSize === OrSearchBarSize.LARGE ? "h-16" : "h-1"
+          }`}
+          // className={`${
+          //   searchBarSize === OrSearchBarSize.LARGE ? "h-16" : "h-1"
+          // }`}
+          onClearInputClick={handleOnClearButtonClick}
+          showClearButton={true}
+          clearButtonOptions={{
+            className: "mr-2", // Reduced margin
+            type: "cancel",
+          }}
+          onSubmit={handleOnSubmit} // Handle submit via keyboard
+        />
         <OrSearchSubmitButton
           onSubmit={handleOnSubmit}
           searchBarSize={searchBarSize}

@@ -9,6 +9,7 @@ import { useNavigationHandler } from "@app-expo/src/presentation/navigation/useN
 import { ExpoNavigationProvider } from "@app-expo/src/presentation/navigation/ExpoNavigationProvider";
 import { AuthProvider } from "@app-expo/src/presentation/context/AuthProvider";
 import { ExpoEnvironmentProvider } from "@app-expo/ExpoEnvironmentProvider";
+import { setupNativeWindInterop } from "@atomic-library/nativewind-setup";
 
 function RootLayoutNav() {
   const { isLoggedIn } = useAuth();
@@ -57,6 +58,8 @@ function RootLayoutNav() {
 
   return <Slot />;
 }
+
+setupNativeWindInterop();
 
 export default function RootLayout() {
   return (

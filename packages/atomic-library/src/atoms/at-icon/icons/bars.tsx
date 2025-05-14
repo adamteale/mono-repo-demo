@@ -3,7 +3,7 @@ import { IconProps } from "../at-icon.types";
 
 export const BarsIcon = ({
   className,
-  fill,
+  fill = "white",
   dataTestId,
   size = 24,
   ariaHidden,
@@ -14,6 +14,7 @@ export const BarsIcon = ({
       height={size}
       viewBox="0 0 24 24"
       className={`${className} ${fill}`}
+      fill="white"
       data-testid={dataTestId}
     >
       <Path

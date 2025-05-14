@@ -16,7 +16,7 @@ export const MlMedia: React.FC<MlMediaProps> = ({
   wrapperClassName = "",
   fit = MlMediaFit.COVER,
   asBackground = false,
-  imageFormat = Platform.OS === "web" ? ImageFormat.WEBP : ImageFormat.JPG,
+  imageFormat = ImageFormat.WEBP,
 }) => {
   const [image, setImage] = useState({
     src: imageDesktop.src,

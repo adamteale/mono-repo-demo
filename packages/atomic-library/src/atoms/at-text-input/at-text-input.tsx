@@ -206,7 +206,7 @@ export const AtTextInput = forwardRef<TextInput, AtTextInputProps>(
         )}
 
         <View
-          className={wrapperClasses}
+          className={`${wrapperClasses}`}
           // onFocus={() => setIsActive(true)} // Handled via TextInput prop
           // onBlur={() => setIsActive(false)} // Handled via TextInput prop
           // ref={inputRef} // The ref is for the TextInput now, not this wrapper
@@ -215,8 +215,7 @@ export const AtTextInput = forwardRef<TextInput, AtTextInputProps>(
           <TextInput
             aria-invalid={error}
             ref={ref}
-            className={`flex-1 py-2 text-base ${textInputClassNames}`} // Using textInputClassNames here
-            style={style} // Applying passed down style
+            className={`p-5 bg-white rounded-lg text-gray-500`} // Using textInputClassNames here
             editable={isEditable}
             onChangeText={onChangeText} // RN prop for text changes
             placeholder={placeholder}
@@ -228,8 +227,8 @@ export const AtTextInput = forwardRef<TextInput, AtTextInputProps>(
             // hidePlaceholderOnFocus (RN default behavior is different)
             testID={dataTestId}
             accessibilityLabel={label || placeholder}
-            accessibilityInvalid={error}
-            {...rest} // Pass down other TextInput compatible props
+            // accessibilityInvalid={error}
+            // {...rest} // Pass down other TextInput compatible props
           />
 
           <View className="absolute inset-y-0 right-4 flex items-center">
@@ -241,7 +240,7 @@ export const AtTextInput = forwardRef<TextInput, AtTextInputProps>(
                 testID="clear-button"
                 // tabIndex has no effect in RN
               >
-                <AtIcon type={clearButtonOptions.type} />
+                <AtIcon type={clearButtonOptions.type} color="secondary" />
               </TouchableOpacity>
             )}
 
@@ -268,7 +267,7 @@ export const AtTextInput = forwardRef<TextInput, AtTextInputProps>(
             {showIcon && (
               <AtIcon
                 {...icon}
-                testID={`${icon?.type ? `${icon.type}-` : ""}custom-icon`}
+                dataTestId={`${icon?.type ? `${icon.type}-` : ""}custom-icon`}
               />
             )}
             {showCheckIcon && (
@@ -276,7 +275,7 @@ export const AtTextInput = forwardRef<TextInput, AtTextInputProps>(
                 type="check"
                 color="currentColor"
                 className="text-feedback-success"
-                testID="check-icon"
+                dataTestId="check-icon"
               />
             )}
             {showErrorIcon && (

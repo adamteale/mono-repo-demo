@@ -1,5 +1,11 @@
 import React, { useMemo } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  AccessibilityRole,
+} from "react-native";
 import { AtLink, IconType } from "../../atoms"; // Adjust path if needed
 import { AtIcon } from "../../atoms/at-icon/at-icon"; // Adjust path if needed
 import { MlMenuItemProps } from "./ml-menu-item.types"; // Adjust path if needed
@@ -34,7 +40,7 @@ export const MlMenuItem = ({
     return showIcon && MenuItemComponent !== View // Use View instead of "span"
       ? {
           accessibilityState: { expanded: isOpen }, // RN uses accessibilityState
-          accessibilityRole: role || ("button" as AccessibilityRole), // Ensure type compatibility
+          accessibilityRole: (role as AccessibilityRole) || "button", // Ensure type compatibility
           accessible: true, // Make sure it's accessible
         }
       : {};
@@ -66,8 +72,7 @@ export const MlMenuItem = ({
       {showIcon && (
         <AtIcon
           dataTestId={ICON_DATA_TEST_ID}
-          // accessibilityLabel={ICON_DATA_TEST_ID}
-          color={isOpen ? "secondary" : "primary"}
+          color="primary"
           type={iconType}
           className="transition-all fill-white"
         />

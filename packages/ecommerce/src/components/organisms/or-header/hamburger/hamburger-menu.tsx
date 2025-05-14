@@ -6,6 +6,7 @@ import {
   AtLink,
   AtLinkProps,
   MlMediaProps,
+  MlMenuItem,
   useClickOutside,
 } from "@mono-repo-demo/atomic-library";
 import { HeaderItems } from "../header-items";
@@ -39,7 +40,7 @@ export const HamburgerMenuWrapper = ({
   return (
     <View
       // ref={ref}
-      className={hamburgerMenuContainerClasses({ isMobileMenuOpen })}
+      className={`${hamburgerMenuContainerClasses({ isMobileMenuOpen })} px-6`}
     >
       <View className="flex flex-col gap-6">
         <HeaderItems
@@ -50,37 +51,36 @@ export const HamburgerMenuWrapper = ({
           className="pt-4 flex flex-col"
           handleCloseMenu={handleCloseMenu}
         />
-        <View className="py-3">
-          <View className="flex flex-col justify-start gap-6 md:gap-0 md:flex-row md:justify-end md:items-center">
-            {topLinks?.map((link, idx) => {
-              const isLast = idx === topLinks.length - 1;
-              return (
-                <React.Fragment key={`${link.label}-${idx}`}>
-                  <AtLink
-                    {...link}
-                    onClick={handleCloseMenu}
-                    className="text-white hover:text-white"
-                  />
-                  {!isLast && (
-                    <AtDivider className="border-l !border-secondary h-6 mx-3 hidden md:block" />
-                  )}
-                </React.Fragment>
-              );
-            })}
+        <View className="flex flex-col justify-start items-start gap-6 md:gap-0 md:flex-row md:justify-end md:items-center py-4">
+          {topLinks?.map((link, idx) => {
+            const isLast = idx === topLinks.length - 1;
+            return (
+              <React.Fragment key={`${link.label}-${idx}`}>
+                <AtLink
+                  {...link}
+                  onClick={handleCloseMenu}
+                  className="text-white hover:text-white"
+                  textClasses="text-white"
+                />
+                {!isLast && (
+                  <AtDivider className="border-l !border-secondary h-6 mx-3 hidden " />
+                )}
+              </React.Fragment>
+            );
+          })}
 
-            {topLinks && topLinks.length > 1 && (
-              <AtDivider className="border-l !border-secondary h-6 mx-3 hidden md:block" />
-            )}
+          {topLinks && topLinks.length > 1 && (
+            <AtDivider className="border-l !border-secondary h-6 mx-3 hidden md:block" />
+          )}
 
-            {/* TODO: Implement - language / currency selector */}
-            {/* <MlMenuItem
-              className="max-w-max !p-0 md:!pr-0 text-white"
-              size="small"
-              label="USD - English"
-              isOpen={false}
-              showIcon={true}
-            />           */}
-          </View>
+          <MlMenuItem
+            className="max-w-max !p-0 md:!pr-0 text-white py-4"
+            size="small"
+            label="USD - English"
+            isOpen={false}
+            showIcon={true}
+            labelClassName="text-white"
+          />
         </View>
       </View>
     </View>

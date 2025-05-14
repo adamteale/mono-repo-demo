@@ -8,3 +8,4 @@ export * from "./src/pages";
 export * from "./src/types";
 export * from "./src/templates";
 export * from "./src/utils";
+export { setupNativeWindInterop } from "./nativewind-setup";
