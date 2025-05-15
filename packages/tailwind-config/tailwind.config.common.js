@@ -15,12 +15,11 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        sm: "576px",
+        sm: "640px",
         md: "768px",
-        lg: "992px",
-        xl: "1024px",
-        xxl: "1300px",
-        xxxl: "1400px",
+        lg: "1024px",
+        xl: "1280px",
+        xxl: "1536px",
       },
       fontSize: {
         button: "20px",

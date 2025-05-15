@@ -2,26 +2,26 @@ import React, { lazy, useCallback } from "react";
 import { FlatList, View } from "react-native";
 
 import { BlocksRendererProps } from "./renderer.types";
-import { MlMediaRenderer } from "./renderers/ml-media.renderer";
+import { MlBrandRenderer } from "./renderers/ml-brand.renderer";
+import { MlCardBlogRenderer } from "./renderers/ml-card-blog.renderer";
 import { MlCardRenderer } from "./renderers/ml-card.renderer";
+import { MlCollapseRenderer } from "./renderers/ml-collapse.renderer";
+import { MlMediaRenderer } from "./renderers/ml-media.renderer";
+import { MlQuoteRenderer } from "./renderers/ml-quote.renderer";
 import { MlVerticalRenderer } from "./renderers/ml-vertical.renderer";
 import { MlVerticalTeamRenderer } from "./renderers/ml-vertical-team.renderer";
-import { MlQuoteRenderer } from "./renderers/ml-quote.renderer";
-import { OrContainerRenderer } from "./renderers/or-container.renderer";
-import { OrBrandsContainerRenderer } from "./renderers/or-brands-container.renderer";
-import { MlBrandRenderer } from "./renderers/ml-brand.renderer";
 import { MlVideoPlayerRenderer } from "./renderers/ml-video-player.renderer";
+import { OrBrandsContainerRenderer } from "./renderers/or-brands-container.renderer";
+import { OrContainerRenderer } from "./renderers/or-container.renderer";
 import { OrContentStripRenderer } from "./renderers/or-content-strip.renderer";
-import { OrMetricsRenderer } from "./renderers/or-metrics.renderer";
-import { OrTeamSectionRenderer } from "./renderers/or-team-section.renderer";
 import { OrHeroBannerRenderer } from "./renderers/or-hero-banner.renderer";
-import { MlCardBlogRenderer } from "./renderers/ml-card-blog.renderer";
-import { OrListingRenderer } from "./renderers/or-listing.renderer";
-import { OrRichTextRenderer } from "./renderers/or-rich-text.renderer";
-import { OrImageInteractiveBlockRenderer } from "./renderers/or-image-interactive-block.renderer";
 import { OrImageBlockRenderer } from "./renderers/or-image-block.renderer";
-import { MlCollapseRenderer } from "./renderers/ml-collapse.renderer";
-import { LazyRenderer } from "../../utils/lazy/lazy-renderer";
+import { OrImageInteractiveBlockRenderer } from "./renderers/or-image-interactive-block.renderer";
+import { OrListingRenderer } from "./renderers/or-listing.renderer";
+import { OrMetricsRenderer } from "./renderers/or-metrics.renderer";
+import { OrRichTextRenderer } from "./renderers/or-rich-text.renderer";
+import { OrTeamSectionRenderer } from "./renderers/or-team-section.renderer";
+// import { LazyRenderer } from "../../utils/lazy/lazy-renderer";
 import {
   CMSBrand,
   CMSCard,
@@ -49,9 +49,11 @@ const LazyOrCarouselRenderer = lazy(
   () => import("./renderers/or-carousel.renderer")
 );
 
-const darkModeOn = true && "dark-theme";
-
-export const BlocksRenderer = ({ blocks, id }: BlocksRendererProps) => {
+export const BlocksRenderer = ({
+  blocks,
+  id,
+  refresh,
+}: BlocksRendererProps) => {
   const renderItem = useCallback(
     ({ item, index }: { item: any; index: number }) => {
       if (!item) return null;
@@ -90,7 +92,7 @@ export const BlocksRenderer = ({ blocks, id }: BlocksRendererProps) => {
             <OrHeroBannerRenderer
               block={item as CMSHeroBanner}
               key={index}
-              className={`w-screen ${darkModeOn}`}
+              className={`w-screen ${item.theme}`}
             />
           );
         case "orContainer":
@@ -154,6 +156,10 @@ export const BlocksRenderer = ({ blocks, id }: BlocksRendererProps) => {
             </View>
           );
         }}
+        onRefresh={() => {
+          refresh?.onRefresh();
+        }}
+        refreshing={refresh?.refreshing ?? false}
         keyExtractor={keyExtractor}
         horizontal={false}
         scrollEnabled={true}

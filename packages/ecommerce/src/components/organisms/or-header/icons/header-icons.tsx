@@ -42,7 +42,7 @@ export const HeaderIcons = ({
   return (
     <View
       aria-labelledby="Courtesy Navigation"
-      className="flex flex-row gap-3 ml-3 lg:gap-6 lg:ml-6 items-center" // Added flex-row
+      className="hidden flex-row gap-3 ml-3 lg:gap-6 lg:ml-6 items-center md:flex"
     >
       {/* <FavoritesIcon linkProps={favoritesIconLink} /> */}
       <BasketIcon

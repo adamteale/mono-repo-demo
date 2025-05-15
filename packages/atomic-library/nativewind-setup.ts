@@ -2,9 +2,13 @@ import Svg from "react-native-svg";
 import { cssInterop } from "nativewind";
 
 export function setupNativeWindInterop() {
+  /*
+    This was added to help with styling svgs, but was causing the iOS app to crash when reloading a flatlist with pull to refresh
+    Interop Svg to accept className for width, height, and potentially others 
+    */
+
   console.log("Setting up NativeWind CSS Interops...");
 
-  // Interop Svg to accept className for width, height, and potentially others
   cssInterop(Svg, {
     className: {
       target: "style", // General styles

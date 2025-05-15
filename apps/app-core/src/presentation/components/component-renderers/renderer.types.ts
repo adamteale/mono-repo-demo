@@ -42,6 +42,10 @@ export interface BlocksRendererProps {
     | CMSRichText
   >;
   id?: string;
+  refresh?: {
+    onRefresh: () => void;
+    refreshing: boolean;
+  };
 }
 
 export interface RendererMethodProps<T> {

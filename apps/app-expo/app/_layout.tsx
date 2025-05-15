@@ -11,7 +11,11 @@ import { AuthProvider } from "@app-expo/src/presentation/context/AuthProvider";
 import { ExpoEnvironmentProvider } from "@app-expo/ExpoEnvironmentProvider";
 import { setupNativeWindInterop } from "@atomic-library/nativewind-setup";
 
+setupNativeWindInterop();
+
 function RootLayoutNav() {
+  console.log("----RootLayoutNav");
+
   const { isLoggedIn } = useAuth();
   const navigation = useNavigationHandler();
   const segments = useSegments();
@@ -19,47 +23,31 @@ function RootLayoutNav() {
 
   const loader = (
     <View style={styles.loadingContainer}>
-      <ActivityIndicator size="large" />
+      <ActivityIndicator size="large" color={"#182958"} />
     </View>
   );
 
   const isNavigationReady = !!navigationState?.key;
-
-  const onNavigateToHome = () => {
-    navigation.navigateHome();
-  };
-  const onNavigateToLogin = () => {
-    navigation.navigateLogin();
-  };
-
   useEffect(() => {
-    if (!isNavigationReady) {
-      return;
-    }
+    console.log("----RootLayoutNav useEffect");
 
     if (isLoggedIn === null) {
       return;
     }
     const inAuthGroup = segments[0] === "(auth)";
+    const inRoot =
+      navigation.currentRoute === "/" || navigation.currentRoute === "";
     const inAppGroup = segments[0] === "(app)";
 
-    if (isLoggedIn && !inAppGroup) {
-      onNavigateToHome();
-    } else if (!isLoggedIn && !inAuthGroup) {
-      onNavigateToLogin();
+    if (isLoggedIn && (inAuthGroup || inRoot)) {
+      navigation.navigateToHome();
+    } else if (!isLoggedIn && inAppGroup) {
+      navigation.navigateToLogin();
     }
-  }, [isLoggedIn, segments, navigation, isNavigationReady]);
-
-  // --- Render Guard ---
-  // ONLY wait for auth state to be determined (not null) before rendering Slot
-  if (isLoggedIn === null) {
-    return loader;
-  }
+  }, [isLoggedIn, segments, isNavigationReady]);
 
   return <Slot />;
 }
-
-setupNativeWindInterop();
 
 export default function RootLayout() {
   return (

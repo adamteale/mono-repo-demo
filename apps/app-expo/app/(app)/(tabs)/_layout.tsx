@@ -1,10 +1,10 @@
 import React from "react";
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { Platform, useWindowDimensions } from "react-native";
+import { Platform, useWindowDimensions, ViewStyle } from "react-native";
 
 import resolveConfig from "tailwindcss/resolveConfig";
-import tailwindConfig from "../../../tailwind.config";
+import tailwindConfig from "@mono-repo-demo/tailwind-config";
 
 enum MainTabbarRoutes {
   Cart = "cart",
@@ -21,7 +21,7 @@ export default function TabLayout() {
   const { width } = useWindowDimensions();
 
   // Access the breakpoint value directly from the resolved Tailwind config
-  const lgBreakpoint = parseInt(fullConfig.theme.screens.lg, 10); // Assuming lg is defined in pixels
+  const lgBreakpoint = parseInt(fullConfig.theme.screens.md, 10); // Assuming lg is defined in pixels
   const isLargeScreen = width >= lgBreakpoint;
 
   const isWebAndLarge = Platform.OS === "web" && isLargeScreen;
@@ -32,22 +32,24 @@ export default function TabLayout() {
     };
   };
 
+  console.log("----TabLayout");
+
   return (
     <Tabs
       screenOptions={({ route }) => ({
         headerShown: false, // Keep header shown status consistent or manage as needed
         tabBarIcon: ({ color, focused }) => {
           // Add 'focused' parameter
-          let iconName: React.ComponentProps<typeof Ionicons>["name"]; // Use correct type
+          let iconName: React.ComponentProps<typeof Ionicons>["name"];
           switch (route.name) {
             case MainTabbarRoutes.Home:
-              iconName = focused ? "home" : "home-outline"; // Use active/inactive icons
+              iconName = focused ? "home" : "home-outline";
               break;
             case MainTabbarRoutes.Cart:
-              iconName = focused ? "cart" : "cart-outline"; // Use active/inactive icons
+              iconName = focused ? "cart" : "cart-outline";
               break;
             case MainTabbarRoutes.Menu:
-              iconName = "menu"; // No distinct active state needed?
+              iconName = "menu";
               break;
             case MainTabbarRoutes.Profile:
               // Corrected icon name and added focused state
@@ -57,15 +59,14 @@ export default function TabLayout() {
               iconName = "alert-circle-outline"; // Provide a default fallback
           }
           // Ensure iconName is assigned before returning
-          if (!iconName) return null; // Or return a placeholder icon
+          if (!iconName) return null;
 
           return <Ionicons name={iconName} size={iconSize} color={color} />;
         },
-        // Use color values directly or resolve from Tailwind config if needed
-        tabBarActiveTintColor: fullConfig.theme.colors.blue[500] || "blue", // Example: Accessing blue-500
-        tabBarInactiveTintColor: fullConfig.theme.colors.gray[500] || "gray", // Example: Accessing gray-500
+        tabBarActiveTintColor: "#182958",
+        tabBarInactiveTintColor: "#888",
         tabBarShowLabel: false,
-        tabBarStyle: getTabBarStyles(),
+        tabBarStyle: getTabBarStyles() as ViewStyle,
         tabBarIconStyle: {
           // These might need to remain as inline styles if complex
           height: 40,
@@ -73,7 +74,6 @@ export default function TabLayout() {
         },
       })}
     >
-      {/* Keep headerShown consistent across screens if hiding globally */}
       <Tabs.Screen
         name={MainTabbarRoutes.Home}
         options={{ headerShown: false }}

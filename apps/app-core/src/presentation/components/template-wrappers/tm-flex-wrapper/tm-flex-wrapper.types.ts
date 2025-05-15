@@ -1,5 +1,9 @@
-import { CMSFlex } from '@cms-types/common'
+import { CMSFlex } from "@cms-types/common";
 
 export interface TmFlexWrapperProps {
-  template: CMSFlex
+  template: CMSFlex;
+  refresh?: {
+    onRefresh: () => void;
+    refreshing: boolean;
+  };
 }

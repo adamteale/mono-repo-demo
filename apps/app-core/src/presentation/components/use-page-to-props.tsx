@@ -123,6 +123,7 @@ const Template = (page: PageProps) => {
       <TmFlexWrapper
         key={page.contentTypeId}
         template={page.fields.template as CMSFlex}
+        refresh={page.refresh}
       />
     );
   // if (page.fields.template.contentTypeId === "tmStepper")
@@ -177,7 +178,11 @@ const resolveAccessTokenMock = (): Promise<string> => {
 };
 
 export const useContentfulPageToProps = (
-  pageProps: PageProps
+  pageProps: PageProps | null | undefined,
+  refresh?: {
+    onRefresh: () => void;
+    refreshing: boolean;
+  }
 ): (PgPageProps & { head: HeadProps }) | null => {
   // const { state: searchState, search } = useSearchBox(resolveAccessTokenMock);
   // const results = useSearchBoxResults();
@@ -196,6 +201,7 @@ export const useContentfulPageToProps = (
   //   updateBasket,
   //   deleteItemFromBasket,
   // } = useBasket();
+
   /**
    * Shows search results in catalog or search page
    */
@@ -228,8 +234,6 @@ export const useContentfulPageToProps = (
     // setStorageState(STICKBAR_KEY, true, BrowserStorage.SESSION_STORAGE);
   };
 
-  if (!pageProps.fields?.header || !pageProps.fields?.template) return null;
-
   const isPathStartingWithSlugs = (
     path: string,
     slugs: (keyof typeof SLUG_KEY)[]
@@ -238,6 +242,9 @@ export const useContentfulPageToProps = (
   };
 
   const search: (query: SearchQueryDto) => Promise<void> = async (query) => {};
+
+  if (!pageProps || !pageProps.fields?.header || !pageProps.fields?.template)
+    return null;
 
   const props: PgPageProps & { head: HeadProps } = {
     // head: normalizeHead(pageProps, environment.baseUrl),
@@ -260,7 +267,7 @@ export const useContentfulPageToProps = (
         console.log("arrow button clicked");
       },
     },
-    children: <Template {...pageProps} />,
+    children: <Template refresh={refresh} {...pageProps} />,
     footer: normalizeFooter(pageProps.fields.footer),
   };
 

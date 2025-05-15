@@ -116,4 +116,6 @@ export interface OrHeroBannerProps {
   showTextBackground?: boolean;
 
   containerWidth?: number;
+
+  fadeInContent?: boolean;
 }

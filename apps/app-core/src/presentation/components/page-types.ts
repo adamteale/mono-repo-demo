@@ -3,6 +3,10 @@ import { Product } from "./types";
 
 export interface PageProps extends CMSPage {
   globalData?: CMSGlobalConfig | null;
+  refresh?: {
+    onRefresh: () => void;
+    refreshing: boolean;
+  };
 }
 
 export interface ProductPageProps extends PageProps {

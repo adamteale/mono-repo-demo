@@ -15,14 +15,14 @@ function AuthenticatedContent({ children }: { children: React.ReactNode }) {
     if (isLoggedIn === null) return;
     if (!isLoggedIn) {
       console.log("User is not logged in, redirecting to login...");
-      navigation.navigateLogin();
+      navigation.navigateToLogin();
     }
   }, [isLoggedIn, navigation]);
 
   if (isLoggedIn === null) {
     return (
       <View className="flex-1 min-h-screen flex justify-center items-center">
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#182958" />
       </View>
     );
   }

@@ -8,7 +8,6 @@ export const SearchIcon = ({
   size = 24,
   ariaHidden,
 }: IconProps) => {
-  console.log("fill", fill);
   return (
     <Svg
       width={size}

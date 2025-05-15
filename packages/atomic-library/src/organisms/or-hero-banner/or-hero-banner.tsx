@@ -27,6 +27,7 @@ export const OrHeroBanner: React.FC<OrHeroBannerProps> = ({
   title,
   showDivider = true,
   tagLabel,
+  fadeInContent,
   showTextBackground = false,
   layoutType = OrHeroBannerLayoutType.FLUID,
 }) => {
@@ -35,13 +36,8 @@ export const OrHeroBanner: React.FC<OrHeroBannerProps> = ({
     contentAlignment: align,
     layoutType: layoutType,
   });
-
   return (
-    <View
-      testID={dataTestId}
-      className={`${containerClasses} ${className}`}
-      data-theme="dark"
-    >
+    <View testID={dataTestId} className={`${containerClasses} ${className}`}>
       <BannerImage variant={variant} image={image} />
 
       <BannerContent
@@ -57,6 +53,7 @@ export const OrHeroBanner: React.FC<OrHeroBannerProps> = ({
           isActive,
           showDivider,
           showTextBackground,
+          fadeInContent,
         }}
       />
       {variant === OrHeroBannerVariant.CONTENT_BANNER && (

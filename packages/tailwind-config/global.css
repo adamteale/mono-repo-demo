@@ -5,7 +5,7 @@
 .fade-in {
   opacity: 0;
   animation: fadeIn 1s ease-in-out;
-  animation-delay: 0.2s;
+  animation-delay: 0.5s;
   animation-fill-mode: forwards;
 }
 
@@ -98,7 +98,7 @@
   --color-text-quaternary: #737373;
 }
 
-.dark-theme {
+.dark {
   --color-background-primary: #0c1221;
   --color-background-secondary: #333;
 

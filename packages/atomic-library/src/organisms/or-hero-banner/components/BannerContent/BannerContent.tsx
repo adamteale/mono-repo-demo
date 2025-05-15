@@ -1,11 +1,11 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import { AtLink, AtTag } from "../../../../atoms"; // Assuming these are already adapted to React Native
+import { View, Text } from "react-native";
+import { AtLink, AtTag } from "../../../../atoms";
 import {
   OrHeroBannerProps,
   OrHeroBannerVariant,
 } from "../../or-hero-banner.types";
-import { getContentClassnames, getContainerClassnames } from "./utils"; // Adapt this as well or replace logic
+import { getContentClassnames, getContainerClassnames } from "./utils";
 
 export type BannerContentProps = Pick<
   OrHeroBannerProps,
@@ -20,6 +20,7 @@ export type BannerContentProps = Pick<
   | "tagLabel"
   | "showDivider"
   | "showTextBackground"
+  | "fadeInContent"
 >;
 
 const BannerContent: React.FC<BannerContentProps> = ({
@@ -34,6 +35,7 @@ const BannerContent: React.FC<BannerContentProps> = ({
   tagLabel,
   showDivider,
   showTextBackground,
+  fadeInContent,
 }) => {
   const containerClassnames = getContainerClassnames(variant!, align!);
   const contentClassnames = getContentClassnames(
@@ -67,14 +69,22 @@ const BannerContent: React.FC<BannerContentProps> = ({
   };
 
   return (
-    <View className={containerClassnames}>
-      <View className={contentClassnames}>
+    <View className={`${containerClassnames}`}>
+      <View
+        className={`${contentClassnames} ${
+          fadeInContent === true ? "fade-in" : ""
+        }`}
+      >
         {variant === OrHeroBannerVariant.CONTENT_BANNER && tagLabel && (
-          <AtTag
-            className="!px-4 !py-3 bg-feedback-success text-white rounded-none fade-in"
-            textClassName="!text-base text-white"
-            text={tagLabel}
-          />
+          <View className="w-fit self-start">
+            {" "}
+            {/* Or self-center, self-end */}
+            <AtTag
+              className="bg-feedback-success rounded-none"
+              textClassName="text-text-primary font-bold text-text-primary text-2xl px-4"
+              text={tagLabel}
+            />
+          </View>
         )}
 
         <View className="flex flex-col gap-6">
@@ -108,7 +118,7 @@ const BannerContent: React.FC<BannerContentProps> = ({
                   tabIndex={isActive ? 0 : -1}
                   textClasses="whitespace-nowrap font-bold text-xl text-cta-content-primary"
                   {...btn}
-                  className={`bg-[#D01D1D] rounded-lg ${
+                  className={` rounded-lg ${
                     variant === OrHeroBannerVariant.CONTENT_BANNER
                       ? "w-full md:!w-fit"
                       : "!w-fit"

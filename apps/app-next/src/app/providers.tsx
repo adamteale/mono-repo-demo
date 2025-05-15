@@ -27,7 +27,7 @@ function AuthAwareLayout({ children }: { children: React.ReactNode }) {
   if (isLoggedIn === null) {
     return (
       <View>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#182958" />
       </View>
     );
   }

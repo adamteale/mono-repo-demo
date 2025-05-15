@@ -41,8 +41,8 @@ export const OrHeader = ({
   const toggleMobileSearchbox = () => {
     setShowMobileSearchbox((prev) => !prev);
   };
-  console.log("stickBarContent", stickBarContent);
-  return (
+  re;
+  turn(
     <View className="relative bg-[#182958] px-28">
       {stickBarContent && (
         <div

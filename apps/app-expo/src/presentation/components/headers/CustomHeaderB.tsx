@@ -1,12 +1,12 @@
 import React from "react";
 import { StatusBar, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useNavigation } from "expo-router";
+// import { useNavigation } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
 export function CustomHeaderB() {
   const { top } = useSafeAreaInsets();
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
   const headerDynamicStyle = {
     height: top + 60,
@@ -22,7 +22,7 @@ export function CustomHeaderB() {
 
       <TouchableOpacity
         accessibilityRole="button"
-        onPress={navigation.goBack}
+        // onPress={navigation.goBack}
         className="p-[5px]"
       >
         <Ionicons name="arrow-back" size={40} color="white" />

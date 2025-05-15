@@ -18,24 +18,25 @@ export const OrHeroBannerRenderer = ({
   className,
 }: OrHeroBannerRendererProps) => {
   if (!block.image) return null;
-
   const {
-    variant,
+    align,
     authorName,
     authorPicture,
-    publicationDate,
     authorSectionTextColor,
-    pretitle,
-    title,
-    showDivider,
-    subtitle,
     buttons,
-    showTextBackground,
     image,
-    tagLabel,
-    align,
-    mobileAlign,
     layoutType,
+    mobileAlign,
+    pretitle,
+    publicationDate,
+    showDivider,
+    showTextBackground,
+    subtitle,
+    tagLabel,
+    fadeInContent,
+    theme,
+    title,
+    variant,
   } = block;
 
   const distribution = align as OrHeroBannerProps["align"];
@@ -82,6 +83,7 @@ export const OrHeroBannerRenderer = ({
         showDivider={showDivider}
         tagLabel={tagLabel}
         className={className}
+        fadeInContent={fadeInContent}
       />
     </View>
   );

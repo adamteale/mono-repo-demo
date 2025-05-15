@@ -38,9 +38,9 @@ export const AtLink = ({
       onClick(e, { gtmData });
     }
     if (href) {
-      Linking.openURL(href).catch((err) =>
-        console.error("Failed to open URL:", err)
-      );
+      // Linking.openURL(href).catch((err) =>
+      //   console.error("Failed to open URL:", err)
+      // );
     }
   };
 
