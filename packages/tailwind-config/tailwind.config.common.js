@@ -6,7 +6,6 @@ console.log("tailwind.config.common.js loaded")
 
 module.exports = {
   presets: [require("nativewind/preset")],
-  darkMode: 'class',
   content: [
     "../../apps/app-core/src/**/*.{js,jsx,ts,tsx}",
     "../../apps/app-expo/src/**/*.{js,jsx,ts,tsx}",

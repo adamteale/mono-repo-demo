@@ -49,6 +49,8 @@ const LazyOrCarouselRenderer = lazy(
   () => import("./renderers/or-carousel.renderer")
 );
 
+const darkModeOn = true && "dark-theme";
+
 export const BlocksRenderer = ({ blocks, id }: BlocksRendererProps) => {
   const renderItem = useCallback(
     ({ item, index }: { item: any; index: number }) => {
@@ -88,7 +90,7 @@ export const BlocksRenderer = ({ blocks, id }: BlocksRendererProps) => {
             <OrHeroBannerRenderer
               block={item as CMSHeroBanner}
               key={index}
-              className="w-screen"
+              className={`w-screen ${darkModeOn}`}
             />
           );
         case "orContainer":

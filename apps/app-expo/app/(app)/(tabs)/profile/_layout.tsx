@@ -8,7 +8,7 @@ export function CustomHeader() {
   const styles = getStyles();
   return (
     <View style={styles.customHeader}>
-      <StatusBar barStyle="light-content" backgroundColor="#000" />
+      <StatusBar barStyle="light-content" backgroundColor="#182958" />
     </View>
   );
 }

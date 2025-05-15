@@ -6,7 +6,7 @@ import { StatusBar, View } from "react-native";
 export default function LoginRoute() {
   return (
     <>
-      <StatusBar barStyle="light-content" backgroundColor="#000" />
+      <StatusBar barStyle="light-content" backgroundColor="#182958" />
       <LoginScreen />
     </>
   );

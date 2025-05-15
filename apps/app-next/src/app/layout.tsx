@@ -1,4 +1,4 @@
-import "../styles/global.css";
+import "@mono-repo-demo/tailwind-config/global.css";
 
 import React from "react";
 

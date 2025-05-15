@@ -1,4 +1,4 @@
-import "../global.css";
+import "@mono-repo-demo/tailwind-config/global.css";
 import React, { useEffect } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import { Slot, useSegments, useRootNavigationState } from "expo-router";

@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out;
+  animation-delay: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 :root {
   /* Background Colors */
   --color-background-primary: #182958;
@@ -82,15 +98,12 @@
   --color-text-quaternary: #737373;
 }
 
-/* Dark Mode Overrides */
-[data-theme="dark"] {
-  /* Here you would override the variables to define your dark theme colors */
-  /* For example: */
-  --color-background-primary: #0c1221; /* Darker version */
-  --color-background-secondary: #333; /* Darker version */
+.dark-theme {
+  --color-background-primary: #0c1221;
+  --color-background-secondary: #333;
 
   /* Surface Colors */
-  --color-surface-primary: #333333;
+  --color-surface-primary: #041c32;
   --color-surface-secondary: #444444;
   --color-surface-tertiary: #556677;
 
@@ -98,38 +111,16 @@
   --color-icon-primary: #fff;
 
   --color-brand-primary: #9996a0;
-}
 
-/* Theme Classes */
-.light-mode-backgroundPrimary {
-  @apply bg-[var(--color-background-primary)];
-}
+  /* Stroke Colors */
+  --color-stroke-primary: #3b3b3b;
+  --color-stroke-secondary: #bfdbfe;
+  --color-stroke-tertiary: #efedf3;
 
-.light-mode-backgroundSecondary {
-  @apply bg-[var(--color-background-secondary)];
-}
+  /* CTA Colors */
+  --color-cta-fill-primary: #ffffff;
+  --color-cta-content-primary: #0a0a0a;
 
-.light-mode-textPrimary {
-  @apply text-[var(--color-text-primary)];
-}
-
-.dark-mode-backgroundPrimary {
-  @apply bg-[var(--color-background-primary)];
-}
-
-.dark-mode-backgroundSecondary {
-  @apply bg-[var(--color-background-secondary)];
-}
-
-.dark-mode-textPrimary {
-  @apply text-[var(--color-text-primary)];
-}
-
-/* Add theme classes for other colors as needed */
-.light-mode-surfacePrimary {
-  @apply bg-[var(--color-surface-primary)];
-}
-
-.dark-mode-surfacePrimary {
-  @apply bg-[var(--color-surface-primary)];
+  /* Feedback Colors */
+  --color-feedback-success: #16a34a;
 }

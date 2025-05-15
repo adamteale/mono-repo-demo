@@ -21,7 +21,8 @@ export const AngleIcon = ({
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      className={`${className} ${iconDirectionClassName[direction]} ${fill}`}
+      className={`${className} ${iconDirectionClassName[direction]} `}
+      fill="white"
       data-testid={dataTestId}
       aria-hidden={ariaHidden === "true"}
     >

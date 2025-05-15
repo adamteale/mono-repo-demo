@@ -13,7 +13,7 @@ export const BarsIcon = ({
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      className={`${className} ${fill}`}
+      className={`${className} `}
       fill="white"
       data-testid={dataTestId}
     >

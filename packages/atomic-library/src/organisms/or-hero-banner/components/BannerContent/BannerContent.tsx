@@ -47,22 +47,22 @@ const BannerContent: React.FC<BannerContentProps> = ({
   const titleClasses = () => {
     switch (variant) {
       case OrHeroBannerVariant.CONTENT_BANNER:
-        return "text-3xl font-bold";
+        return "text-3xl font-bold text-text-primary";
       case OrHeroBannerVariant.IMAGE_BANNER:
-        return "text-2xl font-bold text-white";
+        return "text-2xl font-bold text-text-primary";
       default:
-        return "text-xl font-bold";
+        return "text-xl font-bold text-text-primary";
     }
   };
 
   const subtitleClasses = () => {
     switch (variant) {
       case OrHeroBannerVariant.CONTENT_BANNER:
-        return "text-lg text-gray-500";
+        return "text-lg text-gray-500 text-text-primary";
       case OrHeroBannerVariant.IMAGE_BANNER:
-        return "text-lg text-white";
+        return "text-lg text-white text-text-primary";
       default:
-        return "text-base";
+        return "text-base text-text-primary";
     }
   };
 
@@ -71,7 +71,7 @@ const BannerContent: React.FC<BannerContentProps> = ({
       <View className={contentClassnames}>
         {variant === OrHeroBannerVariant.CONTENT_BANNER && tagLabel && (
           <AtTag
-            className="!px-3 !py-2 bg-[#172554] text-white"
+            className="!px-4 !py-3 bg-feedback-success text-white rounded-none fade-in"
             textClassName="!text-base text-white"
             text={tagLabel}
           />
@@ -79,13 +79,15 @@ const BannerContent: React.FC<BannerContentProps> = ({
 
         <View className="flex flex-col gap-6">
           {variant === OrHeroBannerVariant.CONTENT_BANNER && pretitle && (
-            <Text className="mt-8 md:mt-12 xl:line-clamp-1">{pretitle}</Text>
+            <Text className="mt-8 md:mt-12 xl:line-clamp-1 text-text-primary">
+              {pretitle}
+            </Text>
           )}
 
           <Text className={titleClasses()}>{title}</Text>
 
           {variant === OrHeroBannerVariant.CONTENT_BANNER && showDivider && (
-            <View className="w-[3.75rem] border-b-2 border-blue-950" />
+            <View className="w-[3.75rem] border-b-2 border-stroke-secondary" />
           )}
 
           <Text className={subtitleClasses()}>{subtitle}</Text>
@@ -104,13 +106,13 @@ const BannerContent: React.FC<BannerContentProps> = ({
                 <AtLink
                   key={idx}
                   tabIndex={isActive ? 0 : -1}
-                  textClasses="whitespace-nowrap  text-white font-bold text-xl"
+                  textClasses="whitespace-nowrap font-bold text-xl text-cta-content-primary"
                   {...btn}
                   className={`bg-[#D01D1D] rounded-lg ${
                     variant === OrHeroBannerVariant.CONTENT_BANNER
                       ? "w-full md:!w-fit"
                       : "!w-fit"
-                  }`}
+                  } bg-cta-fill-primary`}
                 />
               ) : null
             )}

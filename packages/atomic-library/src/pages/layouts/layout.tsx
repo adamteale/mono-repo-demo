@@ -1,12 +1,11 @@
-import { ScrollView, View, SafeAreaView } from "react-native";
-import { StatusBar } from "expo-status-bar";
+import { View, SafeAreaView } from "react-native";
 
 import { OrHeader, OrFooter } from "../../organisms";
 import { LayoutProps } from "./layout.types";
 
 export const Layout = ({ header, footer, children }: LayoutProps) => {
   return (
-    <SafeAreaView className="flex-1 bg-[#172554]">
+    <SafeAreaView className="flex-1 bg-backgroundPrimary">
       <View className="flex-1 bg-white">
         <OrHeader {...header} />
 
