@@ -19,11 +19,11 @@ export const useNavigationHandler = (): NavigationService => {
     [router]
   );
 
-  const navigateHome = useCallback(() => {
+  const navigateToHome = useCallback(() => {
     router.replace(WebPaths.home);
   }, [router]);
 
-  const navigateLogin = useCallback(() => {
+  const navigateToLogin = useCallback(() => {
     router.replace(WebPaths.login);
   }, [router]);
 
@@ -35,8 +35,8 @@ export const useNavigationHandler = (): NavigationService => {
     currentRoute: usePathname(),
     navigateBack,
     navigateToProductDetail,
-    navigateHome,
-    navigateLogin,
+    navigateToHome,
+    navigateToLogin,
     navigateToRoute,
   };
 };
