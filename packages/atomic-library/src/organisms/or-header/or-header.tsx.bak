@@ -94,7 +94,7 @@ export const OrHeader = ({
                 />
                 {brand?.link && brand.image && (
                   <View className="ml-2">
-                    {" "}
+                    
                     {/* Spacing between icon and logo */}
                     <AtLink
                       {...brand.link}

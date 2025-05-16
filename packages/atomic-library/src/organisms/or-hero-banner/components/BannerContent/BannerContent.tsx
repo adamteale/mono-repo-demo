@@ -77,11 +77,10 @@ const BannerContent: React.FC<BannerContentProps> = ({
       >
         {variant === OrHeroBannerVariant.CONTENT_BANNER && tagLabel && (
           <View className="w-fit self-start">
-            {" "}
             {/* Or self-center, self-end */}
             <AtTag
               className="bg-feedback-success rounded-none"
-              textClassName="text-text-primary font-bold text-text-primary text-2xl px-4"
+              textClassName="text-text-primary font-bold text-text-secondary text-2xl px-4"
               text={tagLabel}
             />
           </View>

@@ -51,7 +51,7 @@ const LazyOrCarouselRenderer = lazy(
 
 export const BlocksRenderer = ({
   blocks,
-  id,
+  listKey,
   refresh,
 }: BlocksRendererProps) => {
   const renderItem = useCallback(
@@ -88,16 +88,23 @@ export const BlocksRenderer = ({
           return <LazyOrCarouselRenderer block={item as CMSCarousel} />;
         }
         case "orHeroBanner":
+          const className = item?.theme
+            ? `w-screen ${item.theme ?? ""}`
+            : "w-screen";
           return (
             <OrHeroBannerRenderer
               block={item as CMSHeroBanner}
               key={index}
-              className={`w-screen ${item.theme}`}
+              className={className}
             />
           );
         case "orContainer":
           return (
-            <OrContainerRenderer block={item as CMSContainer} key={index} />
+            <OrContainerRenderer
+              block={item as CMSContainer}
+              key={index}
+              listKey={listKey}
+            />
           );
         case "orContentStrip":
           return (
@@ -148,6 +155,7 @@ export const BlocksRenderer = ({
   return (
     <View className="w-screen h-full">
       <FlatList
+        key={listKey}
         data={blocks}
         renderItem={(item) => {
           return (

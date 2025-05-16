@@ -17,7 +17,7 @@ export const TmCheckoutCompletedWrapper = ({
     copyrightText,
     title,
   } = template;
-  const router = useRouter();
+  // const router = useRouter();
 
   const parsedSubtitle = subtitle
     ? subtitle.replace("{order-number}", "001")
@@ -27,7 +27,7 @@ export const TmCheckoutCompletedWrapper = ({
     ? {
         children: buttonLabel,
         onClick: () => {
-          router.push(buttonUrl ?? "/");
+          // router.push(buttonUrl ?? "/");
         },
       }
     : undefined;

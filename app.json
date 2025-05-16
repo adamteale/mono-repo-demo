@@ -1,0 +1,8 @@
+{
+  "android": {
+    "package": "com.adam.teale.monorepodemo"
+  },
+  "ios": {
+    "bundleIdentifier": "com.adam.teale.monorepodemo"
+  }
+}

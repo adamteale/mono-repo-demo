@@ -28,7 +28,6 @@
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="myapp"/>
         <data android:scheme="com.adam.teale.monorepodemo"/>
-        <data android:scheme="exp+mono-repo-demo"/>
       </intent-filter>
     </activity>
   </application>

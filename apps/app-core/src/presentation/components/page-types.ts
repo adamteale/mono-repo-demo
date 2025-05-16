@@ -7,6 +7,7 @@ export interface PageProps extends CMSPage {
     onRefresh: () => void;
     refreshing: boolean;
   };
+  listKey?: string;
 }
 
 export interface ProductPageProps extends PageProps {

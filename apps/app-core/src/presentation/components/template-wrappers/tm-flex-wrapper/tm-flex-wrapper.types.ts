@@ -6,4 +6,5 @@ export interface TmFlexWrapperProps {
     onRefresh: () => void;
     refreshing: boolean;
   };
+  listKey?: string;
 }
