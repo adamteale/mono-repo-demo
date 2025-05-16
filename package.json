@@ -11,6 +11,7 @@
   "scripts": {
     "expo:dev": "yarn workspace @mono-repo-demo/app-expo start",
     "next:dev": "yarn workspace @mono-repo-demo/app-next dev",
+    "next:build": "yarn workspace @mono-repo-demo/app-next build",
     "build": "yarn workspaces run build",
     "lint": "yarn workspaces run lint",
     "test": "yarn workspaces run test",

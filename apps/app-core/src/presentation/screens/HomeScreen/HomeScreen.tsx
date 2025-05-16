@@ -10,7 +10,7 @@ export const HomeScreen = () => {
   const { pageProps, onRefresh, refresh, listKey } = useHomeViewModel();
 
   // Call useContentfulPageToProps unconditionally
-  const props = useContentfulPageToProps(pageProps, refresh, listKey);
+  const props = useContentfulPageToProps(pageProps, listKey, refresh);
 
   let page: React.ReactNode = null;
 

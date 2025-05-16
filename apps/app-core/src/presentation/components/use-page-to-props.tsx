@@ -180,11 +180,11 @@ const resolveAccessTokenMock = (): Promise<string> => {
 
 export const useContentfulPageToProps = (
   pageProps: PageProps | null | undefined,
+  listKey: string,
   refresh?: {
     onRefresh: () => void;
     refreshing: boolean;
-  },
-  listKey: string
+  }
 ): (PgPageProps & { head: HeadProps }) | null => {
   // const { state: searchState, search } = useSearchBox(resolveAccessTokenMock);
   // const results = useSearchBoxResults();
