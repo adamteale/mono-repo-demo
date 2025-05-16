@@ -15,7 +15,9 @@
     "lint": "yarn workspaces run lint",
     "test": "yarn workspaces run test",
     "storybook": "yarn workspace @mono-repo-demo/app-storybook storybook:start",
-    "android": "expo run:android",
+    "prebuild": "yarn workspace @mono-repo-demo/app-expo prebuild",
+    "android": "yarn workspace @mono-repo-demo/app-expo android",
+    "android-release": "yarn workspace @mono-repo-demo/app-expo android-release",
     "ios": "yarn workspace @mono-repo-demo/app-expo ios",
     "ios-release": "yarn workspace @mono-repo-demo/app-expo ios-release"
   },

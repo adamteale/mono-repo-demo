@@ -5,7 +5,6 @@ import getStyles from "./styles";
 
 export function CustomHeader() {
   const styles = getStyles();
-  console.log("----CustomHeader");
 
   return (
     <View style={styles.customHeader}>

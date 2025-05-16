@@ -64,3 +64,21 @@ This project is a cross-platform application built using a **monorepo** structur
 - **Maintainability:** Organizes code logically within the monorepo, making it easier to manage, test, and scale compared to separate codebases.
 - **Consistent (but adapted) UI:** Allows for a consistent design language across platforms via the `atomic-library`, while still permitting platform-specific tweaks where necessary.
 - **Modern Development Workflow:** Utilizes current, popular frameworks and tooling for building robust applications.
+
+### Build and run*(from the project root)*
+
+`yarn`
+
+`yarn prebuild`
+
+**local dev build**
+
+`yarn ios`
+
+`yarn android`
+
+**local release build** 
+
+`yarn ios-release`
+
+`w`
