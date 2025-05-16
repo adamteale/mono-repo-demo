@@ -82,3 +82,16 @@ This project is a cross-platform application built using a **monorepo** structur
 `yarn ios-release`
 
 `yarn android-release`
+
+**Local EAS - build production release ipa and install on iOS Simulator**
+
+--- requires fastlane (brew install fastlane)
+
+`eas build -p ios --profile production-simulator --local`
+`xcrun simctl install booted <path_to_app.ipa>`
+
+**Local EAS build production release apk and install on Android Emulator**
+
+`eas build -p android --profile production-emulator --local`
+
+`adb install <path_to_app.apk>`

@@ -22,6 +22,8 @@ import { OrMetricsRenderer } from "./renderers/or-metrics.renderer";
 import { OrRichTextRenderer } from "./renderers/or-rich-text.renderer";
 import { OrTeamSectionRenderer } from "./renderers/or-team-section.renderer";
 // import { LazyRenderer } from "../../utils/lazy/lazy-renderer";
+import LazyOrCarouselRenderer from "./renderers/or-carousel.renderer";
+
 import {
   CMSBrand,
   CMSCard,
@@ -44,10 +46,6 @@ import {
   CMSImageBlock,
   CMSCollapse,
 } from "@mono-repo-demo/atomic-library";
-
-const LazyOrCarouselRenderer = lazy(
-  () => import("./renderers/or-carousel.renderer")
-);
 
 export const BlocksRenderer = ({
   blocks,

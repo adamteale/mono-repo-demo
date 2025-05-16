@@ -19,8 +19,10 @@
     "prebuild": "yarn workspace @mono-repo-demo/app-expo prebuild",
     "android": "yarn workspace @mono-repo-demo/app-expo android",
     "android-release": "yarn workspace @mono-repo-demo/app-expo android-release",
+    "android-release-emulator": "yarn workspace @mono-repo-demo/app-expo android-release-emulator",
     "ios": "yarn workspace @mono-repo-demo/app-expo ios",
-    "ios-release": "yarn workspace @mono-repo-demo/app-expo ios-release"
+    "ios-release": "yarn workspace @mono-repo-demo/app-expo ios-release",
+    "ios-release-simulator": "yarn workspace @mono-repo-demo/app-expo ios-release-simulator"
   },
   "devDependencies": {
     "@svgr/plugin-jsx": "^8.1.0",
