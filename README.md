@@ -77,8 +77,8 @@ This project is a cross-platform application built using a **monorepo** structur
 
 `yarn android`
 
-**local release build** 
+**local release build**
 
 `yarn ios-release`
 
-`w`
+`yarn android-release`
