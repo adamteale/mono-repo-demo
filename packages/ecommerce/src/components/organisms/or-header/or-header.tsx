@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Button, Text, View } from "react-native";
+import { View } from "react-native";
 
 import {
   AtLink,
@@ -25,7 +25,6 @@ import {
   searchboxContainerClasses,
 } from "./or-header.variants";
 import { useStickBar } from "./stickbar/use-stickbar";
-import SemanticView from "@mono-repo-demo/tailwind-config/semanticComponents/SemanticView";
 
 export const OrHeader = ({
   stickBarContent,
