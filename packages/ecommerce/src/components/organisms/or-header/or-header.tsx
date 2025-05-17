@@ -25,6 +25,7 @@ import {
   searchboxContainerClasses,
 } from "./or-header.variants";
 import { useStickBar } from "./stickbar/use-stickbar";
+import SemanticView from "@mono-repo-demo/tailwind-config/semanticComponents/SemanticView";
 
 export const OrHeader = ({
   stickBarContent,
@@ -63,7 +64,7 @@ export const OrHeader = ({
 
   if (variant === "compact")
     return (
-      <View className="relative">
+      <View role="heading" className="relative">
         <View className="bg-navbar-content-primary ">
           <View className="flex flex-row items-center px-6 sm:px-8 md:px-16 xl:px-32 py-6">
             {onArrowButtonClick && (
@@ -100,7 +101,7 @@ export const OrHeader = ({
       </View>
     );
   return (
-    <View className="relative bg-backgroundPrimary">
+    <View role="heading" className="relative bg-backgroundPrimary">
       <View className="relative transition-all duration-1000">
         <View
           className="hidden xl:flex w-full"
