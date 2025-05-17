@@ -163,7 +163,7 @@
 //           text-base text-primary
 //           leading-5 w-full`}
 //         >
-//           {noResultsFoundLabel}{" "}
+//           {noResultsFoundLabel}
 //           <span className="font-bold">&ldquo;{query}&rdquo;</span>
 //         </p>
 //       )}

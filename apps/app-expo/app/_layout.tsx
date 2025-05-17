@@ -14,8 +14,6 @@ import { setupNativeWindInterop } from "@atomic-library/nativewind-setup";
 setupNativeWindInterop();
 
 function RootLayoutNav() {
-  console.log("----RootLayoutNav");
-
   const { isLoggedIn } = useAuth();
   const navigation = useNavigationHandler();
   const segments = useSegments();
@@ -29,8 +27,6 @@ function RootLayoutNav() {
 
   const isNavigationReady = !!navigationState?.key;
   useEffect(() => {
-    console.log("----RootLayoutNav useEffect");
-
     if (isLoggedIn === null) {
       return;
     }

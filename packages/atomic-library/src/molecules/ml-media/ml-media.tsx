@@ -25,30 +25,30 @@ export const MlMedia: React.FC<MlMediaProps> = ({
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
 
-  useEffect(() => {
-    let selectedImage = imageDesktop;
+  // useEffect(() => {
+  //   let selectedImage = imageDesktop;
 
-    if (isMobile && imageMobile?.src) {
-      selectedImage = imageMobile;
-    } else if (isTablet && imageTablet?.src) {
-      selectedImage = imageTablet;
-    }
+  //   if (isMobile && imageMobile?.src) {
+  //     selectedImage = imageMobile;
+  //   } else if (isTablet && imageTablet?.src) {
+  //     selectedImage = imageTablet;
+  //   }
 
-    if (selectedImage.src !== image.src) {
-      setImage({
-        src: selectedImage.src,
-        alt: selectedImage.alt ?? "",
-      });
-    }
-  }, [
-    isMobile,
-    isTablet,
-    image.src,
-    image.alt,
-    imageDesktop,
-    imageMobile,
-    imageTablet,
-  ]);
+  //   if (selectedImage.src !== image.src) {
+  //     setImage({
+  //       src: selectedImage.src,
+  //       alt: selectedImage.alt ?? "",
+  //     });
+  //   }
+  // }, [
+  //   isMobile,
+  //   isTablet,
+  //   image.src,
+  //   image.alt,
+  //   imageDesktop,
+  //   imageMobile,
+  //   imageTablet,
+  // ]);
 
   if (asBackground) {
     return (

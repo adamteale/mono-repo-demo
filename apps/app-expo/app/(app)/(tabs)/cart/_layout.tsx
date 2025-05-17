@@ -13,8 +13,6 @@ export function CustomHeader() {
 }
 
 export default function AppLayout() {
-  console.log("----AppLayout");
-
   return (
     <Stack
       screenOptions={{

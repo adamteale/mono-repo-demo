@@ -64,3 +64,58 @@ This project is a cross-platform application built using a **monorepo** structur
 - **Maintainability:** Organizes code logically within the monorepo, making it easier to manage, test, and scale compared to separate codebases.
 - **Consistent (but adapted) UI:** Allows for a consistent design language across platforms via the `atomic-library`, while still permitting platform-specific tweaks where necessary.
 - **Modern Development Workflow:** Utilizes current, popular frameworks and tooling for building robust applications.
+
+### Build and run
+
+#### Expo apps
+
+- Requires a .env or .env.local file in the apps/app-expo directory.
+- Run the following commands from the monoreporoject root
+
+**Install dependencies**
+
+`yarn`
+
+`yarn prebuild` (deletes iOS + Android app directories)
+
+**Run metro + Expo Go**
+
+`yarn expo:dev`
+
+**Run metro + Expo Go + app directly**
+
+`yarn android`
+
+`yarn ios`
+
+`yarn web`
+
+**Local release builds**
+
+`yarn ios-release`
+
+`yarn android-release`
+
+**Local EAS production release build**
+
+The `.easignore` file in the mono repo allows Git to ignore the .env files for general version control but makes them available for local EAS Builds. https://docs.expo.dev/build-reference/easignore/
+
+Install fastlane:
+
+`brew install fastlane`
+
+iOS (.ipa) + Simulator
+
+`eas build -p ios --profile production-simulator --local`
+
+Install .ipa on an iOS Simulator:
+
+`xcrun simctl install booted <path_to_app.ipa>`
+
+Android (.apk) + Emulator
+
+`eas build -p android --profile production-emulator --local`
+
+Install .apk on an Android Emulator:
+
+`adb install <path_to_app.apk>`

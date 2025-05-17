@@ -22,6 +22,8 @@ import { OrMetricsRenderer } from "./renderers/or-metrics.renderer";
 import { OrRichTextRenderer } from "./renderers/or-rich-text.renderer";
 import { OrTeamSectionRenderer } from "./renderers/or-team-section.renderer";
 // import { LazyRenderer } from "../../utils/lazy/lazy-renderer";
+import LazyOrCarouselRenderer from "./renderers/or-carousel.renderer";
+
 import {
   CMSBrand,
   CMSCard,
@@ -45,13 +47,9 @@ import {
   CMSCollapse,
 } from "@mono-repo-demo/atomic-library";
 
-const LazyOrCarouselRenderer = lazy(
-  () => import("./renderers/or-carousel.renderer")
-);
-
 export const BlocksRenderer = ({
   blocks,
-  id,
+  listKey,
   refresh,
 }: BlocksRendererProps) => {
   const renderItem = useCallback(
@@ -88,16 +86,23 @@ export const BlocksRenderer = ({
           return <LazyOrCarouselRenderer block={item as CMSCarousel} />;
         }
         case "orHeroBanner":
+          const className = item?.theme
+            ? `w-screen ${item.theme ?? ""}`
+            : "w-screen";
           return (
             <OrHeroBannerRenderer
               block={item as CMSHeroBanner}
               key={index}
-              className={`w-screen ${item.theme}`}
+              className={className}
             />
           );
         case "orContainer":
           return (
-            <OrContainerRenderer block={item as CMSContainer} key={index} />
+            <OrContainerRenderer
+              block={item as CMSContainer}
+              key={index}
+              listKey={listKey}
+            />
           );
         case "orContentStrip":
           return (
@@ -148,6 +153,7 @@ export const BlocksRenderer = ({
   return (
     <View className="w-screen h-full">
       <FlatList
+        key={listKey}
         data={blocks}
         renderItem={(item) => {
           return (

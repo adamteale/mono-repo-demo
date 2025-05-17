@@ -32,6 +32,8 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# explicitly include .env.EXAMPLE
+!.env.EXAMPLE
 
 # vercel
 .vercel
@@ -41,3 +43,9 @@ yarn-error.log*
 next-env.d.ts
 
 .next
+
+*.ipa
+*.app
+*.aab
+*.apk
+*.tar.gz

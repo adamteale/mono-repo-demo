@@ -82,8 +82,8 @@ export const OrHeroBannerRenderer = ({
         mobileAlign={mobileDistribution}
         showDivider={showDivider}
         tagLabel={tagLabel}
-        className={className}
         fadeInContent={fadeInContent}
+        className={className}
       />
     </View>
   );

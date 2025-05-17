@@ -4,7 +4,10 @@ import { OrContainer, OrContainerProps } from "@mono-repo-demo/atomic-library";
 import { BlocksRenderer } from "../blocks-renderer";
 import { OrContainerRendererProps } from "../renderer.types";
 
-export const OrContainerRenderer = ({ block }: OrContainerRendererProps) => {
+export const OrContainerRenderer = ({
+  block,
+  listKey,
+}: OrContainerRendererProps) => {
   const {
     columns,
     columnsMobile,
@@ -44,7 +47,7 @@ export const OrContainerRenderer = ({ block }: OrContainerRendererProps) => {
       paragraphLayout={textOrganizaton}
       background={backgroundColor}
     >
-      <BlocksRenderer key={title} blocks={block.blocks} />
+      <BlocksRenderer key={title} blocks={block.blocks} listKey={listKey} />
     </OrContainer>
   );
 };

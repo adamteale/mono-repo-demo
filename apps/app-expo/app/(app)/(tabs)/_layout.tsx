@@ -32,8 +32,6 @@ export default function TabLayout() {
     };
   };
 
-  console.log("----TabLayout");
-
   return (
     <Tabs
       screenOptions={({ route }) => ({

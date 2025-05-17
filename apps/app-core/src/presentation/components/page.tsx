@@ -1,3 +1,4 @@
+import React from "react";
 import { useContentfulPageToProps } from "./use-page-to-props";
 import { PageProps } from "./page-types";
 import { GlobalContext } from "../context/global";
@@ -7,7 +8,7 @@ import { PgPage } from "@components-library/ecommerce";
 import { useTheme } from "../utils";
 
 export const Page = (page: PageProps) => {
-  const props = useContentfulPageToProps(page);
+  const props = useContentfulPageToProps(page, "listKey");
   const globalData = normalizeGlobalData(page.globalData);
   const selectedTheme = page?.globalData?.themeVariables;
   console.log("Page", page);

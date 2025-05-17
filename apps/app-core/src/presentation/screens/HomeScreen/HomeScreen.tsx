@@ -7,10 +7,10 @@ import { useContentfulPageToProps } from "../../components/use-page-to-props";
 import { PgPage } from "@components-library/ecommerce";
 
 export const HomeScreen = () => {
-  const { pageProps, onRefresh, refresh } = useHomeViewModel();
+  const { pageProps, onRefresh, refresh, listKey } = useHomeViewModel();
 
   // Call useContentfulPageToProps unconditionally
-  const props = useContentfulPageToProps(pageProps, refresh);
+  const props = useContentfulPageToProps(pageProps, listKey, refresh);
 
   let page: React.ReactNode = null;
 

@@ -32,7 +32,7 @@ export const TmOrderDetailWrapper = ({
   } = useBasket();
   const [checkboxActive, setCheckboxActive] = useState(false);
 
-  const router = useRouter();
+  // const router = useRouter();
 
   const { steps } = stepState;
   const { basket, isPending } = basketState;
@@ -63,7 +63,7 @@ export const TmOrderDetailWrapper = ({
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     await setBasketOrder({});
-    router.push("/checkout-completed");
+    // router.push("/checkout-completed");
   };
 
   const handleHideEmail = (email?: string, uncensoredCharacters = 4) => {

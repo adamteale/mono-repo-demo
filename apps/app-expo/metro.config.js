@@ -1,9 +1,16 @@
+
 const path = require('path');
 
 const { getDefaultConfig } = require("expo/metro-config");
 const { withNativeWind } = require('nativewind/metro');
+const {
+  wrapWithReanimatedMetroConfig,
+} = require('react-native-reanimated/metro-config');
 
-const config = getDefaultConfig(__dirname)
+const projectRoot = __dirname;
+const monorepoRoot = path.resolve(projectRoot, '../..');
+
+const config = getDefaultConfig(projectRoot);
 
 config.transformer = {
     ...config.transformer,
@@ -13,13 +20,13 @@ config.transformer = {
 config.resolver = {
     ...config.resolver,
     assetExts: config.resolver.assetExts.filter((ext) => ext !== "svg"),
-    sourceExts: [...config.resolver.sourceExts, "svg"]
+    sourceExts: [...config.resolver.sourceExts, "svg"],
+    nodeModulesPaths: [
+        path.resolve(projectRoot, 'node_modules'),
+        path.resolve(monorepoRoot, 'node_modules'),
+    ]
 };
 
-config.watchFolders = [
-    path.resolve(__dirname, './src'),
-    path.resolve(__dirname, '../app-core'),
-    path.resolve(__dirname, '../../packages'),
-]
+config.watchFolders = [monorepoRoot];
 
-module.exports = withNativeWind(config, { input: '../../packages/tailwind-config/global.css' })
+module.exports = wrapWithReanimatedMetroConfig(withNativeWind(config, { input: '../../packages/tailwind-config/global.css' }));

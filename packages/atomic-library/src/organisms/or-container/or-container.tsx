@@ -20,6 +20,7 @@ export const OrContainer = ({
   columnsSmallMobile,
   background,
   children,
+  listKey,
 }: OrContainerProps) => {
   return (
     <View className={sectionClasses({ backgroundColor: background })}>

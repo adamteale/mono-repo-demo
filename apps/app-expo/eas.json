@@ -1,21 +1,71 @@
 {
   "cli": {
-    "version": ">= 16.3.3",
+    "version": ">= 16.3.3", // Assuming this is your intended EAS CLI version constraint
     "appVersionSource": "remote"
   },
   "build": {
     "development": {
       "developmentClient": true,
       "distribution": "internal",
-      "channel": "development"
+      "channel": "development",
+      "ios": {
+        // Good practice to specify simulator for dev clients too
+        "simulator": true
+      },
+      "android": {
+        // You might want to specify emulator for Android dev clients
+        // "emulator": true
+      }
     },
     "preview": {
       "distribution": "internal",
-      "channel": "preview"
+      "channel": "preview",
+      "ios": {
+        "simulator": false
+      }
     },
     "production": {
       "autoIncrement": true,
-      "channel": "production"
+      "channel": "production",
+      "ios": {
+        "simulator": false, // Explicitly false for device builds
+        "buildConfiguration": "Release"
+      },
+      "android": {
+        "buildType": "apk", // Development clients are typically APKs for easier installation
+        "gradleCommand": ":app:assembleDebug" // For development clients, you usually want the Debug variant
+      }
+    },
+    "production-simulator": {
+      // <-- New profile for iOS Simulator Release Build
+      "distribution": "internal", // Keep as internal as it's for testing/dev
+      "channel": "production-simulator", // Optional: use a specific channel
+
+      "environment": "production",
+      "ios": {
+        "simulator": true,
+        "buildConfiguration": "Release"
+        // "autoIncrement": false,
+      }
+    },
+    "production-emulator": {
+      "distribution": "internal",
+      "channel": "production-emulator",
+      "env": {
+        "APP_ENV": "production",
+        "EMULATOR_BUILD": "true"
+      },
+      "environment": "production",
+
+      "android": {
+        // For Android, you don't specify "emulator" like iOS "simulator".
+        // Instead, you build a standard APK (or AAB) with release configurations,
+        // and that APK can be installed on an emulator.
+        "buildType": "apk", // Build an APK
+        "gradleCommand": ":app:assembleRelease", // Explicitly use the release build variant
+        "image": "latest" // Optional: use latest Android image on EAS
+        // "autoIncrement": false,         // Optional: you might not want to auto-increment
+      }
     }
   },
   "submit": {

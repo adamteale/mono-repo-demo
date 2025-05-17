@@ -41,7 +41,7 @@ export interface BlocksRendererProps {
     | CMSCollapse
     | CMSRichText
   >;
-  id?: string;
+  listKey?: string;
   refresh?: {
     onRefresh: () => void;
     refreshing: boolean;
@@ -51,6 +51,7 @@ export interface BlocksRendererProps {
 export interface RendererMethodProps<T> {
   block: T;
   className?: string;
+  listKey?: string;
 }
 
 export type OrRichTextProps = RendererMethodProps<CMSRichText>;

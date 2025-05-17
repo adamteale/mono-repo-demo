@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "appmobile.app"
-               BlueprintName = "appmobile"
-               ReferencedContainer = "container:appmobile.xcodeproj">
+               BuildableName = "Pricesmart.app"
+               BlueprintName = "Pricesmart"
+               ReferencedContainer = "container:Pricesmart.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "appmobileTests.xctest"
-               BlueprintName = "appmobileTests"
-               ReferencedContainer = "container:appmobile.xcodeproj">
+               BuildableName = "PricesmartTests.xctest"
+               BlueprintName = "PricesmartTests"
+               ReferencedContainer = "container:Pricesmart.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "appmobile.app"
-            BlueprintName = "appmobile"
-            ReferencedContainer = "container:appmobile.xcodeproj">
+            BuildableName = "Pricesmart.app"
+            BlueprintName = "Pricesmart"
+            ReferencedContainer = "container:Pricesmart.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "appmobile.app"
-            BlueprintName = "appmobile"
-            ReferencedContainer = "container:appmobile.xcodeproj">
+            BuildableName = "Pricesmart.app"
+            BlueprintName = "Pricesmart"
+            ReferencedContainer = "container:Pricesmart.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

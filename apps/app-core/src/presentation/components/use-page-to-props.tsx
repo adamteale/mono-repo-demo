@@ -124,6 +124,7 @@ const Template = (page: PageProps) => {
         key={page.contentTypeId}
         template={page.fields.template as CMSFlex}
         refresh={page.refresh}
+        listKey={page.listKey}
       />
     );
   // if (page.fields.template.contentTypeId === "tmStepper")
@@ -179,6 +180,7 @@ const resolveAccessTokenMock = (): Promise<string> => {
 
 export const useContentfulPageToProps = (
   pageProps: PageProps | null | undefined,
+  listKey: string,
   refresh?: {
     onRefresh: () => void;
     refreshing: boolean;
@@ -267,7 +269,7 @@ export const useContentfulPageToProps = (
         console.log("arrow button clicked");
       },
     },
-    children: <Template refresh={refresh} {...pageProps} />,
+    children: <Template refresh={refresh} {...pageProps} listKey={listKey} />,
     footer: normalizeFooter(pageProps.fields.footer),
   };
 

@@ -1,20 +1,26 @@
 {
   "name": "@mono-repo-demo/app-expo",
-  "main": "expo-router/entry",
+  "main": "index.js",
   "version": "1.0.0",
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
     "android": "expo run:android",
+    "android-release": "expo run:android --variant release -d",
+    "android-release-emulator": "eas build -p android --profile production-emulator --local",
     "ios": "expo run:ios",
+    "ios-release": "expo run:ios --configuration Release -d",
+    "ios-release-simulator": "eas build -p ios --profile production-simulator --local",
     "web": "expo start --web",
     "test": "jest --watchAll",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "prebuild": "npx expo prebuild"
   },
   "jest": {
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
     "@expo/vector-icons": "^14.0.2",
     "@mono-repo-demo/atomic-library": "1.0.0",
     "expo": "~52.0.46",
@@ -36,6 +42,7 @@
     "react-dom": "18.3.1",
     "react-native": "0.76.9",
     "react-native-gesture-handler": "~2.20.2",
+    "react-native-reanimated": "3.16.1",
     "react-native-safe-area-context": "4.12.0",
     "react-native-screens": "~4.4.0",
     "react-native-svg": "15.8.0",

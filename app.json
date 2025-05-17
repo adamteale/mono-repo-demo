@@ -1,0 +1,13 @@
+{
+  "android": {
+    "package": "com.adam.teale.monorepodemo"
+  },
+  "ios": {
+    "bundleIdentifier": "com.adam.teale.monorepodemo"
+  },
+  "extra": {
+    "eas": {
+      "projectId": "c341ecc2-0b28-490c-a09d-9ea72c7f75d3"
+    }
+  }
+}
