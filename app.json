@@ -1,9 +1,9 @@
 {
   "android": {
-    "package": "com.adam.teale.monorepodemo"
+    "package": "com.adamteale.monorepodemo"
   },
   "ios": {
-    "bundleIdentifier": "com.adam.teale.monorepodemo"
+    "bundleIdentifier": "com.adamteale.monorepodemo"
   },
   "extra": {
     "eas": {

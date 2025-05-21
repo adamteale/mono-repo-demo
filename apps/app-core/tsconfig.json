@@ -21,7 +21,8 @@
       "@Storage/*": ["src/data/storage/*"],
       "@Utils/*": ["src/utils/*"]
     },
-    "jsx": "react"
+    "jsx": "react",
+    "moduleSuffixes": [".ios", ".android", ".native", ""]
   },
   "include": [
     "src",

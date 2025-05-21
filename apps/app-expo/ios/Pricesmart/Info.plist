@@ -28,7 +28,7 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>myapp</string>
-          <string>com.adam.teale.monorepodemo</string>
+          <string>com.adamteale.monorepodemo</string>
         </array>
       </dict>
     </array>

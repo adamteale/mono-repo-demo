@@ -16,6 +16,7 @@ This project is a cross-platform application built using a **monorepo** structur
 2.  **`app-next` (Next.js Web App):**
 
     - The web application targeting modern browsers.
+    - Uses SWC (Rust-based platform for the Web)
     - Built with **Next.js (App Router)**, focusing on leveraging **Server-Side Rendering (SSR)** for performance and SEO.
     - Uses **Turbopack** (during development, configured via `next.config.ts`) or Webpack (if `--turbo` is omitted) as the bundler.
     - Renders shared UI components by utilizing **`react-native-web`**. This requires specific configuration in `next.config.ts` (`resolveAlias` for `react-native` and potentially others like `react-native-svg`; `transpilePackages`; `nohoist` in root `package.json`) to bridge the gap between native component expectations and web rendering.
@@ -35,6 +36,26 @@ This project is a cross-platform application built using a **monorepo** structur
     - These components are designed to be rendered correctly on both native (via React Native) and web (via React Native Web).
     - When designing components intended for web output with semantic meaning, the `role` prop should be utilized within this library (e.g., an `AtSection` component might render a `<View role="section">`).
     - Requires careful attention to the `tailwind.config.js` to ensure theme consistency and accurate `content` paths.
+
+**Platform-Specific Implementations with `.native.tsx` and `.web.tsx`:**
+
+To provide platform-specific implementations for components or modules, you can leverage the `.native.tsx` and `.web.tsx` file extensions. This allows you to write different code for native (iOS/Android) and web environments while maintaining the same module import path.
+
+- **`.native.tsx`:** Files with this extension will be used when the code is running in a React Native environment (e.g., within `app-expo`). This is useful for leveraging native APIs or components that are not available on the web. For example, you might use a `.native.tsx` file to access the device's camera or use a native UI component.
+
+- **`.web.tsx`:** Files with this extension will be used when the code is running in a web environment (e.g., within `app-next`). This is useful for leveraging web-specific APIs or components. For example, you might use a `.web.tsx` file to use a web-based mapping library.
+
+- **Platform Specificity Beyond Web/Native:** You can also create `.android.tsx` and `.ios.tsx` files for platform specific implementations within the native app.
+
+**Example:**
+
+Let's say you have a component called `MyComponent`. You can create the following files:
+
+- `MyComponent.tsx`: This file contains the common logic shared between platforms. It might import platform-specific implementations from `MyComponent.native.tsx` or `MyComponent.web.tsx`. If no platform-specific file exists, this file will be used as the default.
+
+- `MyComponent.native.tsx`: This file contains the React Native implementation of `MyComponent`. It will only be used when the code is running on iOS or Android.
+
+- `MyComponent.web.tsx`: This file contains the React Native Web implementation of `MyComponent`. It will only be used when the code is running on the web.
 
 **Key Technologies & Concepts:**
 
@@ -169,11 +190,4 @@ _(Or drag and drop the `.apk` file onto the booted emulator)_
 
 ```
 
-**Key Restorations/Corrections in "Build and run":**
-
-1.  **All your original commands and descriptions have been restored.**
-2.  **Clarified the iOS EAS Build output:** Explicitly mentioned that `eas build` for iOS simulators produces a `.tar.gz` containing the `.app` file, and it's this `.app` file you install, not an `.ipa`.
-3.  **Added drag-and-drop as an installation alternative** for both simulator `.app` and emulator `.apk` files, as it's a common user action.
-
-Everything else, including the new "Semantic HTML" section, remains as previously discussed. This version should now be complete and accurate according to your project's setup and the information you've provided.
 ```

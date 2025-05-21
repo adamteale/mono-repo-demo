@@ -1,4 +1,4 @@
-package com.adam.teale.monorepodemo
+package com.adamteale.monorepodemo
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build

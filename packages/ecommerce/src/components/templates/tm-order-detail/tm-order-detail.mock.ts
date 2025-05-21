@@ -90,7 +90,7 @@ const orderDetailProps: OrOrderDetailProps = {
     {
       title: "Email",
       link: { children: "Edit" },
-      details: [{ label: "jhon*****@adam.teale.com" }],
+      details: [{ label: "jhon*****@demo.com" }],
     },
     {
       title: "Shipping Address",

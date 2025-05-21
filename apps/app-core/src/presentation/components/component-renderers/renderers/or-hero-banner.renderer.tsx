@@ -34,7 +34,6 @@ export const OrHeroBannerRenderer = ({
     subtitle,
     tagLabel,
     fadeInContent,
-    theme,
     title,
     variant,
   } = block;

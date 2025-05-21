@@ -11,6 +11,7 @@ export default ({ config }) => {
       orientation: "portrait",
       icon: "./assets/images/icon.png",
       scheme: "myapp",
+      newArchEnabled: true,
       userInterfaceStyle: "automatic", // or "light", "dark"
       splash: {
         // Moved splash screen config under 'splash' key as per modern Expo standards
@@ -29,7 +30,7 @@ export default ({ config }) => {
       ],
       ios: {
         supportsTablet: true,
-        bundleIdentifier: "com.adam.teale.monorepodemo",
+        bundleIdentifier: "com.adamteale.monorepodemo",
         infoPlist: {
           ITSAppUsesNonExemptEncryption: false,
         },
@@ -42,7 +43,7 @@ export default ({ config }) => {
           foregroundImage: "./assets/images/adaptive-icon.png",
           backgroundColor: "#ffffff",
         },
-        package: "com.adam.teale.monorepodemo",
+        package: "com.adamteale.monorepodemo",
         // runtimeVersion: { // More specific runtimeVersion for Android if needed
         //   policy: "appVersion"
         // }
@@ -54,6 +55,7 @@ export default ({ config }) => {
       },
       plugins: [
         "expo-router",
+        "expo-font",
         // "expo-splash-screen" // The plugin itself is often not needed here anymore
         // if the config is under expo.splash.
         // However, if you have custom splash screen logic, keep it.
@@ -79,7 +81,7 @@ export default ({ config }) => {
           // EAS Build automatically adds its own 'buildProfile' etc. here too
         },
       },
-      owner: "adam.teale", // Keep if this is your Expo account username for publishing
+      owner: "adamteale", // Keep if this is your Expo account username for publishing
       // runtimeVersion: {
       //   // Modern way to manage runtimeVersion, can be string or object
       //   policy: "appVersion", // Or "sdkVersion", or a specific string "1.0.0"

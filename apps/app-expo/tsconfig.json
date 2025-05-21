@@ -11,7 +11,8 @@
       "@app-expo/*": ["./*"],
       "@app-core/*": ["../app-core/src/*"],
       "@atomic-library/*": ["../../packages/atomic-library/*"]
-    }
+    },
+    "moduleSuffixes": [".ios", ".android", ".native", ""]
   },
   "include": [
     "**/*.ts",

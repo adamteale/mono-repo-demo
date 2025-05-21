@@ -9,26 +9,20 @@ export const MenuScreen = ({}: MenuScreenProps) => {
   const { onLogoutTapped } = useMenuScreenViewModel();
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Menu Screen</Text>
-      <AtButton
-        onClick={onLogoutTapped}
-        children={<Text className="text-white">Logout</Text>}
-      />
+    <View className="flex-1 w-full bg-[#23376D] justify-center items-center p-10">
+      <View className="flex flex-col w-full sm:max-w-[576px]  gap-4">
+        <Text className="text-xl mb-5 font-bold text-white text-center ">
+          Menu Screen (Web)
+        </Text>
+        <AtButton
+          onClick={console.log("Web log event")}
+          children={<Text className="text-white">Log event (Web)</Text>}
+        />
+        <AtButton
+          onClick={onLogoutTapped}
+          children={<Text className="text-white">Logout</Text>}
+        />
+      </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-    gap: 20,
-  },
-  text: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-});

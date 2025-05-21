@@ -29,4 +29,5 @@ config.resolver = {
 
 config.watchFolders = [monorepoRoot];
 
-module.exports = wrapWithReanimatedMetroConfig(withNativeWind(config, { input: '../../packages/tailwind-config/global.css' }));
+// module.exports = wrapWithReanimatedMetroConfig(withNativeWind(config, { input: '../../packages/tailwind-config/global.css' }));
+module.exports = withNativeWind(wrapWithReanimatedMetroConfig(config), { input: '../../packages/tailwind-config/global.css' });

@@ -27,7 +27,7 @@
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="myapp"/>
-        <data android:scheme="com.adam.teale.monorepodemo"/>
+        <data android:scheme="com.adamteale.monorepodemo"/>
       </intent-filter>
     </activity>
   </application>

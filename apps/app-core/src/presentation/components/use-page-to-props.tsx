@@ -260,10 +260,6 @@ export const useContentfulPageToProps = (
       }),
       isStickBarHidden,
       onCloseStickbar,
-      // variant: isPathStartingWithSlugs(router.currentRoute, [
-      //   "CHECKOUT",
-      //   "LOGIN",
-      // ])
       variant: false ? "compact" : "default",
       onArrowButtonClick: () => {
         console.log("arrow button clicked");

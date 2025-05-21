@@ -1,16 +1,15 @@
-import React from "react";
-import { TouchableOpacity, Text, View, ActivityIndicator } from "react-native";
 import { AtIcon } from "../at-icon";
 import {
   AtButtonIconPosition,
   AtButtonActionType,
   AtButtonProps,
 } from "./at-button.types";
+import { buttonHandlers } from "./handlers";
 import { buttonVariants } from "./at-button.variants";
-
 export { AtButtonIconPosition, AtButtonActionType };
 
 export const AtButton = ({
+  target,
   actionType,
   actionValue,
   children,
@@ -18,76 +17,71 @@ export const AtButton = ({
   gtmData,
   icon,
   iconType,
-  iconPosition = AtButtonIconPosition.LEFT,
+  iconPosition,
   onClick,
   isLoading,
-  className,
+  className = "",
+  buttonType,
   disabled,
   variant,
   size,
-}: Omit<AtButtonProps, "buttonType" | "form" | "target"> & {
-  target?: string;
-}) => {
+  form,
+}: AtButtonProps) => {
   const hasIcon = !!icon || !!iconType;
+
+  const handleOnClick = onClick
+    ? (e: React.MouseEvent<HTMLButtonElement>) => {
+        console.log("Web at-button clicked");
+        onClick(e, { gtmData, actionType, actionValue });
+      }
+    : (e: React.MouseEvent<HTMLButtonElement>) => {
+        console.log("Web at-button clicked");
+
+        buttonHandlers[actionType ?? AtButtonActionType.OPEN_URL](e, {
+          actionValue,
+          target,
+        });
+      };
   const buttonClasses = className
     ? className
     : buttonVariants(size, isLoading ?? false)({ variant });
 
-  const handlePress = (e: any) => {
-    if (onClick) {
-      onClick(e, { gtmData, actionType, actionValue });
-    } else if (actionType === AtButtonActionType.OPEN_URL && actionValue) {
-      // Implement your URL opening logic here using Linking API
-      // Example: Linking.openURL(actionValue).catch((err) => console.error('An error occurred: ', err));
-      console.warn(
-        "OPEN_URL actionType is not directly handled. Implement Linking.openURL."
-      );
-    } else {
-      // Handle other action types or default behavior
-      console.warn(`Unhandled actionType: ${actionType}`);
-    }
-  };
-
   return (
-    <TouchableOpacity
+    <button
+      type={buttonType ?? "button"}
       data-testid={dataTestId}
-      onPress={handlePress}
+      onClick={handleOnClick}
       className={buttonClasses}
       disabled={disabled || isLoading}
+      form={form}
     >
-      <View className="flex-row items-center justify-center">
-        {hasIcon &&
-          !isLoading &&
-          iconPosition === AtButtonIconPosition.LEFT && (
-            <AtIcon
-              className="mr-2 text-current"
-              src={icon}
-              type={iconType}
-              size={24}
-            />
-          )}
+      <span>{children}</span>
 
-        {children}
+      {hasIcon && !isLoading && (
+        <AtIcon
+          className={
+            iconPosition === AtButtonIconPosition.LEFT
+              ? "order-first mr-2"
+              : "ml-2"
+          }
+          src={icon}
+          type={iconType}
+          color="currentColor"
+          size={24}
+        />
+      )}
 
-        {hasIcon &&
-          !isLoading &&
-          iconPosition === AtButtonIconPosition.RIGHT && (
-            <AtIcon
-              className="ml-2 text-inherit"
-              src={icon}
-              type={iconType}
-              size={24}
-            />
-          )}
-
-        {isLoading && (
-          <ActivityIndicator
-            className={`ml-2 ${
-              iconPosition === AtButtonIconPosition.LEFT ? "mr-2" : "ml-2"
-            } "text-current"`}
-          />
-        )}
-      </View>
-    </TouchableOpacity>
+      {isLoading && (
+        <AtIcon
+          className={`animate-spin ${
+            iconPosition === AtButtonIconPosition.LEFT
+              ? "order-first mr-2"
+              : "ml-2"
+          }`}
+          type="spinner"
+          color="currentColor"
+        />
+      )}
+    </button>
   );
 };

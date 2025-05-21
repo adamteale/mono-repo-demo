@@ -1,4 +1,4 @@
-package com.adam.teale.monorepodemo
+package com.adamteale.monorepodemo
 
 import android.app.Application
 import android.content.res.Configuration

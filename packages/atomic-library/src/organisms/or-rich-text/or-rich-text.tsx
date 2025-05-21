@@ -22,9 +22,9 @@ export const OrRichText = ({
         alignment: textAlignment,
       })} ${variantClasses({ variant })} ${className}`}
     >
-      {title && (
+      {title ? (
         <Text className={`${titleClasses({})} ${titleClassName}`}>{title}</Text>
-      )}
+      ) : null}
       <RichTextRenderer body={content} variant={variant} button={button} />
     </View>
   );

@@ -6,7 +6,7 @@ import {
   AtButtonProps,
   AtButtonVariants,
 } from "./at-button.types";
-import { AtButton } from "./at-button";
+import { AtButton } from "./at-button.native";
 
 export const atButtonProps: AtButtonProps = {
   children: "Button Label",

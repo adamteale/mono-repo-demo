@@ -8,7 +8,8 @@ module.exports = {
       "./app/**/*.{js,jsx,ts,tsx}",
       "./src/**/*.{js,jsx,ts,tsx}",
       "../app-core/src/**/*.{js,jsx,ts,tsx}",
-      "../../packages/atomic-library/src/**/*.{js,jsx,ts,tsx}"
+      "../../packages/atomic-library/src/**/*.{js,jsx,ts,tsx}",
+      
     ],
     presets: [commonConfig], 
     theme: {

@@ -9,7 +9,8 @@
     "strict": true,
     "jsx": "react-native",
     "baseUrl": ".",
-    "paths": {}
+    "paths": {},
+    "moduleSuffixes": [".ios", ".android", ".native", ".web", ""]
   },
   "include": [
     "src",

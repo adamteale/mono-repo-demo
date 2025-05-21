@@ -97,35 +97,33 @@ export const OrSearch = ({
     Keyboard.dismiss(); // Dismiss the keyboard after submit
   };
 
+  const textinput = (
+    <AtTextInput
+      ref={inputRef}
+      placeholder={placeholder}
+      value={inputValue}
+      onChange={() => setInputValue}
+      className={`${searchBarSize === OrSearchBarSize.LARGE ? "h-16" : "h-1"}`}
+      onClearInputClick={handleOnClearButtonClick}
+      showClearButton={true}
+      clearButtonOptions={{
+        className: "mr-2",
+        type: "cancel",
+      }}
+      onSubmit={handleOnSubmit}
+    />
+  );
   return (
     <View className="relative">
       <View className="flex-row items-center">
-        <AtTextInput
-          ref={inputRef}
-          placeholder={placeholder}
-          value={inputValue}
-          onChange={() => setInputValue}
-          className={`${
-            searchBarSize === OrSearchBarSize.LARGE ? "h-16" : "h-1"
-          }`}
-          // className={`${
-          //   searchBarSize === OrSearchBarSize.LARGE ? "h-16" : "h-1"
-          // }`}
-          onClearInputClick={handleOnClearButtonClick}
-          showClearButton={true}
-          clearButtonOptions={{
-            className: "mr-2", // Reduced margin
-            type: "cancel",
-          }}
-          onSubmit={handleOnSubmit} // Handle submit via keyboard
-        />
+        {textinput}
         <OrSearchSubmitButton
           onSubmit={handleOnSubmit}
           searchBarSize={searchBarSize}
         />
       </View>
 
-      {currentQuery && showResults && (
+      {/* {currentQuery && showResults && (
         <Results
           query={currentQuery}
           showResults={showResults}
@@ -145,7 +143,7 @@ export const OrSearch = ({
           totalAmountOfSuggestions={totalAmountOfSuggestions}
           dataTestId={`results-container-${dataTestId}`}
         />
-      )}
+      )} */}
     </View>
   );
 };

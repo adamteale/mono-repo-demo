@@ -232,7 +232,7 @@ export const AtTextInput = forwardRef<TextInput, AtTextInputProps>(
           />
 
           <View className="absolute inset-y-0 right-4 flex items-center">
-            {!!displayClearButton && (
+            {displayClearButton ? (
               <TouchableOpacity
                 accessibilityLabel="Clear input"
                 onPress={handleOnClear}
@@ -242,9 +242,9 @@ export const AtTextInput = forwardRef<TextInput, AtTextInputProps>(
               >
                 <AtIcon type={clearButtonOptions.type} color="secondary" />
               </TouchableOpacity>
-            )}
+            ) : null}
 
-            {showPasswordButton && passwordIcon && (
+            {showPasswordButton && passwordIcon ? (
               <TouchableOpacity
                 accessibilityLabel="Toggle password visibility"
                 onPress={handleOnTogglePassword}
@@ -262,39 +262,39 @@ export const AtTextInput = forwardRef<TextInput, AtTextInputProps>(
                   />
                 </View>
               </TouchableOpacity>
-            )}
+            ) : null}
 
-            {showIcon && (
+            {showIcon ? (
               <AtIcon
                 {...icon}
                 dataTestId={`${icon?.type ? `${icon.type}-` : ""}custom-icon`}
               />
-            )}
-            {showCheckIcon && (
+            ) : null}
+            {showCheckIcon ? (
               <AtIcon
                 type="check"
                 color="currentColor"
                 className="text-feedback-success"
                 dataTestId="check-icon"
               />
-            )}
-            {showErrorIcon && (
+            ) : null}
+            {showErrorIcon ? (
               <AtIcon
                 type="alert"
                 color="currentColor"
                 dataTestId="error-icon"
                 className="text-feedback-error"
               />
-            )}
+            ) : null}
           </View>
         </View>
 
-        {!error && helpText && (
+        {!error && helpText ? (
           <Text className="mt-1 text-xs text-gray-600">{helpText}</Text>
-        )}
-        {error && errorText && (
+        ) : null}
+        {error && errorText ? (
           <Text className="mt-1 text-xs text-feedback-error">{errorText}</Text>
-        )}
+        ) : null}
       </View>
     );
   }

@@ -99,6 +99,7 @@ export const OrHeader = ({
         </View>
       </View>
     );
+
   return (
     <View role="heading" className="relative bg-backgroundPrimary">
       <View className="relative transition-all duration-1000">
@@ -106,7 +107,7 @@ export const OrHeader = ({
           className="hidden xl:flex w-full"
           style={{ backgroundColor: "#1C3BA0" }}
         >
-          <View className="w-full lg:max-w-[90rem] mx-auto bg-[#fff] xl:flex xl:flex-row justify-end items-center py-3">
+          <View className="w-full lg:max-w-[90rem] mx-auto xl:flex xl:flex-row justify-end items-center py-3">
             {topLinks?.map((link, idx) => {
               const isLast = idx === topLinks.length - 1;
               return (
